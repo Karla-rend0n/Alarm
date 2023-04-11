@@ -1,21 +1,10 @@
 import React from "react";
-import {
-  Text,
-  Link,
-  HStack,
-  Center,
-  Heading,
-  Switch,
-  useColorMode,
-  NativeBaseProvider,
-  extendTheme,
-  VStack,
-  Box,
-} from "native-base";
-import NativeBaseIcon from "./components/NativeBaseIcon";
-import { Platform } from "react-native";
-
-
+import {NativeBaseProvider, extendTheme} from "native-base";
+import Login from "./components/Login";
+import Principal from "./components/Principal";
+import MainNav from "./components/AllNav/MainNav";  
+import Perfil_Editar from "./components/AllNav/Screens/Perfil_Editar";
+import Dirección_Editar from "./components/AllNav/Screens/Dirección_Editar"
 
 export default function App() {
   const theme = extendTheme({
@@ -27,11 +16,13 @@ export default function App() {
         200: '#807E82',// gris de los botones fuerte 100%
         300: '#D9D9D9', //botones de alarma y enmergencia 
         400: '#',
-        500: '#C1591F',//Neranja
-        600: '#9B1010',//Rojo Emergencia
+        500: '#E85502',//Neranja  
+        600: '#C11F1F',//Rojo Emergencia
         700: '#DDDAE0',//gris de los botones claro 70%
         800: '#1B396A',// Azul
         900: '#000000',//Negro
+        1000: '#C1591F',//borde naranja
+        1001: '#9B1010' // borde rojo
       },
       // Redefining only one shade, rest of the color will remain same.
       amber: {
@@ -43,11 +34,22 @@ export default function App() {
       initialColorMode: 'dark',
     },
   });
+
+     
+
+
   return (
     <NativeBaseProvider theme={theme}>
-      <Center alignItems="center">
-        
-      </Center>
+      {/* <Login/> */}
+      {/* <Principal/> */}
+      <MainNav/>
+      {/* <Perfil_Editar/> */}
+      {/* <Dirección_Editar/> */}
     </NativeBaseProvider>
   );
 }
+
+
+   
+
+
