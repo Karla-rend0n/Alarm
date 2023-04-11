@@ -1,62 +1,72 @@
 import React from "react";
-import { Box, Text, Heading, VStack, FormControl, Input, Link, Button, Center, Checkbox, HStack,}from 'native-base'
-import {LinearGradient} from 'expo-linear-gradient';
-import {TouchableOpacity, View, StyleSheet,} from "react-native-web";
+import { Box, Text, Heading, VStack, FormControl, Input, Link, Button, HStack, Center, Icon, Pressable}from 'native-base'
+import { MaterialIcons } from "@expo/vector-icons";
 
-const styles = StyleSheet.create({
+
+// import {LinearGradient} from 'expo-linear-gradient';
+// import {TouchableOpacity, View, StyleSheet,} from "react-native-web";
+
+// const styles = StyleSheet.create({
   
-   borderRadius: 100,
-   paddingVertical: 100,
-   marginHorizontal: 100,
-   marginVertical: 10,
-   alignItems: "Center",
-   //elevation: 1
-   alignSelf: 'Center',
-   width: '100%',
-   height:400,
-   fontWeight:'bold',
-    fontSize: "md"
+//    borderRadius: 100,
+//    paddingVertical: 100,
+//    marginHorizontal: 100,
+//    marginVertical: 10,
+//    alignItems: "Center",
+//    //elevation: 1
+//    alignSelf: 'Center',
+//    width: '100%',
+//    height:400,
+//    fontWeight:'bold',
+//     fontSize: "md"
 
-})
+// })
 
 
 export default function Login(){
     return <Center w="100%" h="100%" bg="primary.800">
-    <Box safeArea p="1" py="50" w="100%" maxW="290">
-        <Heading size="lg" fontWeight="extrabold" color="Black" _dark={{
+    <Box safeArea p="1" py="8" w="100%" maxW="350">
+        <Heading size="xl" fontWeight="800" color="black" mt="-12" _dark={{
             color: "primary.50"
-        }}>
+          }}>
             Inicio de sesión
         </Heading>
-        <Heading mt="5" color="primary.50" fontWeight="normal" size="xs" _dark={{
-        }}>
+        <Heading size="sm" fontWeight="500" color="black" mt="4" _dark={{
+            color: "primary.50"
+          }}>
             Inicia sesión con tu cuenta.
         </Heading>
 
-        <VStack space={10} mt="10">
+        <VStack space={10} mt="47">
             <FormControl>
                 <FormControl.Label _text={{
                       color: "primary.50",
-                      fontWeight: 'bold',
+                      fontWeight: '700',
+                      fontSize: 'lg'
                 }}>Email</FormControl.Label>
-                <Input mt="3" backgroundColor="primary.100"  borderWidth="2"  borderColor="primary.200" variant="rounded" placeholder="hello@gmail.com"/>               
+                <Input w={{
+
+                }}InputLeftElement={<Icon as={<MaterialIcons name="email" />} size={5} ml="3" color="primary.200" />}
+                mt="3" placeholder="hello@gmail.com" color="primary.200" fontSize="sm" fontWeight="400" backgroundColor="primary.100"  borderWidth="2"  borderColor="primary.200" variant="rounded"/>               
             </FormControl>
             
-            <FormControl >
+            <FormControl>
                 <FormControl.Label _text={{
-                    color:"primary.50",
-                    fontWeight: 'bold'
-                }}>Password</FormControl.Label>
-                <Input mt="3" type="password" backgroundColor="primary.100" borderColor="primary.200"  variant="outline" placeholder="Introduce una contraseña"/>
+                     color: "primary.50",
+                     fontWeight: '700',
+                     fontSize: 'lg'
+                }}>Contraseña</FormControl.Label>
+                <Input mt="3" placeholder=" Introduce una contraseña" color="primary.200" type="password" fontSize="sm" fontWeight="400" backgroundColor="primary.100" borderWidth="2" borderColor="primary.200"  variant="rounded" />
 
                 <Link _text={{
-                    fontSize: "xs",
-                    color: "primary.100",
-                    fontWeight: "bold"
-                }} mt="4" alignSelf={"flex-end"}>Remember ?</Link>
+                    fontSize: "lg",
+                    fontWeight: "700",
+                    color: "primary.50",
+                }} mt="2" alignSelf="flex-end"> Forget Password?
+                </Link>
             </FormControl>
 
-            <View style={styles.create}>
+            {/* <View style={styles.create}>
                 <TouchableOpacity>
                     <LinearGradient
                      start={{x:1, y:-40}}
@@ -68,29 +78,20 @@ export default function Login(){
       </LinearGradient>
       </TouchableOpacity>
 
-    </View>
+    </View> */}
 
             
   
 
-            <Button background="primary.200" mt="5"  borderColor="primary.200" _text={{
+            <Button background="primary.200" borderWidth="2" borderColor="primary.200" mt="5" rounded={10} _text={{
                 color:"primary.50",
-                fontWeight:'bold',
-                fontSize: "md"
-
+                fontWeight:"700",
+                fontSize: "lg"
             }}>
                 Inciar sesión
             </Button>
             
-
-            
-
-
-            
-
-        
-
-            <HStack mt="-7" color="primary.50" justifyContent="center" fontWeight="normal" size="xs">
+            <HStack mt="-7" color="primary.50" justifyContent="Center" fontWeight="normal">
                 <Text fontSize="sm" >
                 ¿No dispones de una cuenta? {" "}
                 </Text>
