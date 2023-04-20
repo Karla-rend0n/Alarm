@@ -1,12 +1,26 @@
 import React from "react";
-import {NativeBaseProvider, extendTheme} from "native-base";
+import {Center, NativeBaseProvider, extendTheme} from "native-base";
 import Login from "./components/Login";
 import Principal from "./components/Principal";
 import MainNav from "./components/AllNav/MainNav";  
 import Perfil_Editar from "./components/AllNav/Screens/Perfil_Editar";
 import Dirección_Editar from "./components/AllNav/Screens/Dirección_Editar"
+import NativeBaseIcon from "./components/NativeBaseIcon";
+import { Platform } from "react-native";
+import Register from "./components/AllNav/Screens/Register";
+
+import { LinearGradient } from 'expo-linear-gradient';
+import Inicio from "./components/AllNav/Screens/Inicio";
+
+
+
 
 export default function App() {
+  const config = {
+    dependencies: {
+      'linear-gradient': LinearGradient
+    }
+  };
   const theme = extendTheme({
     colors: {
       // Add new color
@@ -15,9 +29,9 @@ export default function App() {
         100: '#DDDAE0', // Gris de input 100%
         200: '#807E82',// gris de los botones fuerte 100%
         300: '#D9D9D9', //botones de alarma y enmergencia 
-        400: '#',
-        500: '#E85502',//Neranja  
-        600: '#C11F1F',//Rojo Emergencia
+        400: '#6585B8',//degradado
+        500: '#C1591F',//Naranja
+        600: '#9B1010',//Rojo Emergencia
         700: '#DDDAE0',//gris de los botones claro 70%
         800: '#1B396A',// Azul
         900: '#000000',//Negro
@@ -39,12 +53,14 @@ export default function App() {
 
 
   return (
-    <NativeBaseProvider theme={theme}>
-      {/* <Login/> */}
-      {/* <Principal/> */}
-      <MainNav/>
-      {/* <Perfil_Editar/> */}
-      {/* <Dirección_Editar/> */}
+
+    <NativeBaseProvider theme={theme} config={config}>
+      <Center>
+      {/*<Register/>*/}
+      {/*<Inicio/>*/}
+      {/*<Login/> no funciona*/}
+      <Principal/>
+      </Center>
     </NativeBaseProvider>
   );
 }
