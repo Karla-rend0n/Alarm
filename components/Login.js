@@ -90,8 +90,8 @@ export default function Login(){
             }}>
                 Inciar sesión
             </Button>
-            
-            <HStack mt="-7" color="primary.50" justifyContent="Center" fontWeight="normal">
+            j
+            <HStack mt="-7" color="primary.50" alignItems='center' fontWeight="normal">
                 <Text fontSize="sm" >
                 ¿No dispones de una cuenta? {" "}
                 </Text>

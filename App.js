@@ -10,6 +10,7 @@ import { Platform } from "react-native";
 import Register from "./components/AllNav/Screens/Register";
 
 import { LinearGradient } from 'expo-linear-gradient';
+import Inicio from "./components/AllNav/Screens/Inicio";
 
 
 
@@ -55,7 +56,10 @@ export default function App() {
 
     <NativeBaseProvider theme={theme} config={config}>
       <Center>
-      <Register/>
+      {/*<Register/>*/}
+      {/*<Inicio/>*/}
+      {/*<Login/> no funciona*/}
+      <Principal/>
       </Center>
     </NativeBaseProvider>
   );
