@@ -1,5 +1,5 @@
 import React from "react";
-import {NativeBaseProvider, extendTheme} from "native-base";
+import {Center, NativeBaseProvider, extendTheme} from "native-base";
 import Login from "./components/Login";
 import Principal from "./components/Principal";
 import MainNav from "./components/AllNav/MainNav";  
@@ -7,7 +7,7 @@ import Perfil_Editar from "./components/AllNav/Screens/Perfil_Editar";
 import Dirección_Editar from "./components/AllNav/Screens/Dirección_Editar"
 import NativeBaseIcon from "./components/NativeBaseIcon";
 import { Platform } from "react-native";
-import Register from "./components/Register";
+import Register from "./components/AllNav/Screens/Register";
 
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -54,12 +54,9 @@ export default function App() {
   return (
 
     <NativeBaseProvider theme={theme} config={config}>
-      {/* <Login/> */}
-      {/* <Principal/> */}
-      <MainNav/>
-      {/* <Perfil_Editar/> */}
-      {/* <Dirección_Editar/> */}
-
+      <Center>
+      <Register/>
+      </Center>
     </NativeBaseProvider>
   );
 }
