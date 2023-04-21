@@ -90,7 +90,7 @@ export default function Login(){
             }}>
                 Inciar sesión
             </Button>
-            j
+            
             <HStack mt="-7" color="primary.50" alignItems='center' fontWeight="normal">
                 <Text fontSize="sm" >
                 ¿No dispones de una cuenta? {" "}
