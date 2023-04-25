@@ -1,84 +1,139 @@
 import React from "react";
-import {Center, Box, Heading, Avatar, HStack,  Flex, Spacer, VStack, Input, FormControl, Button, Stack} from "native-base"
+import { Center, Box, Avatar, Icon, Input, FormControl, Button, Stack, ScrollView, Heading } from "native-base"
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 
-export default function Perfil_Editar(){
-    return <Center h="100%">
-    <VStack space={2} alignItems="center">
-    <Avatar m="1"  bg="primary.500" alignSelf="center"  size="2xl" source={{
-        uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-        }}>
+export default function Perfil() {
+    return <ScrollView w="100%" h="100%">
+        <Center h="100%">
+           
+            <Avatar   alignContent="center" size="xl" source={{
+                uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+            }}
+                marginTop='5'
+                marginBottom='1'>
+                                    
 
-        </Avatar>
+            </Avatar>
 
-    </VStack>   
 
-    <Box bg="primary.800" w="100%" h="82%" alignItems="center">
-    <Stack space={4} w="75%" maxW="350px" mx="auto" m="10">
 
-        <FormControl>
-            <FormControl.Label _text={{
-                      color: "primary.50",
-                      fontWeight: '700',
-                      fontSize: 'lg'
-                }}>Nombre</FormControl.Label>
-                <Input mt="3" placeholder="     Fátima" color="primary.200" fontSize="sm" fontWeight="400" backgroundColor="primary.100"  borderWidth="2"  borderColor="primary.200" variant="rounded"/>               
-            </FormControl>
 
-            <FormControl>
-            <FormControl.Label _text={{
-                      color: "primary.50",
-                      fontWeight: '700',
-                      fontSize: 'lg'
-                }}>Apellido</FormControl.Label>
-                <Input mt="3" placeholder="     Hernández" color="primary.200" fontSize="sm" fontWeight="400" backgroundColor="primary.100"  borderWidth="2"  borderColor="primary.200" variant="rounded"/>               
-            </FormControl>
+            <Box w="100%" h="82%" alignItems="center" bg={{
+                linearGradient: {
+                    colors: ['primary.400', 'primary.800'],
+                    start: [1, 0],
+                    end: [0, 0]
 
-            <FormControl>
-            <FormControl.Label _text={{
-                      color: "primary.50",
-                      fontWeight: '700',
-                      fontSize: 'lg'
-                }}>Tu correo</FormControl.Label>
-                <Input mt="3" placeholder="     fatima13@gmail.com" color="primary.200" fontSize="sm" fontWeight="400" backgroundColor="primary.100"  borderWidth="2"  borderColor="primary.200" variant="rounded"/>               
-            </FormControl>
-            
-            <FormControl>
-                <FormControl.Label _text={{
-                     color: "primary.50",
-                     fontWeight: '700',
-                     fontSize: 'lg'
-                }}>Contraseña</FormControl.Label>
-                <Input mt="3" placeholder="     ************" color="primary.200" type="password" fontSize="sm" fontWeight="400" backgroundColor="primary.100" borderWidth="2" borderColor="primary.200"  variant="rounded" />
-                </FormControl>
-
-                <FormControl>
-            <FormControl.Label _text={{
-                      color: "primary.50",
-                      fontWeight: '700',
-                      fontSize: 'lg'
-                }}>Teléfono</FormControl.Label>
-                <Input mt="3" placeholder="     449-567-00-98" color="primary.200" fontSize="sm" fontWeight="400" backgroundColor="primary.100"  borderWidth="2"  borderColor="primary.200" variant="rounded"/>               
-            </FormControl>
-
-            <FormControl>
-            <FormControl.Label _text={{
-                      color: "primary.50",
-                      fontWeight: '700',
-                      fontSize: 'lg'
-                }}>Edad</FormControl.Label>
-                <Input mt="3" placeholder="     25" color="primary.200" fontSize="sm" fontWeight="400" backgroundColor="primary.100"  borderWidth="2"  borderColor="primary.200" variant="rounded"/>               
-            </FormControl>
-
-            <Button background="primary.300" w="101" h="35" alignSelf="center" mt="5" rounded={25} _text={{
-                color:"primary.900",
-                fontWeight:"400",
-                fontSize: "xl"
+                }
             }}>
-                Guardar
-            </Button>
+                <Stack space={4} w="75%" maxW="350px" mx="auto" m="10">
 
-            </Stack>
-        </Box>
+                    <Button rounded='full' background="primary.300" mt="0.5" _text={{
+                        color: "primary.900",
+                        fontWeight: 'normal',
+                        fontSize: "md"
+                    }}
+                        marginLeft='2/3'>
+                        Editar
+                    </Button>
 
-    </Center>
+                    <FormControl >
+
+                        <FormControl.Label _text={{
+                            color: 'primary.50',
+                            fontWeight: 'bold'
+                        }} marginLeft={2} >
+                            Email
+                        </FormControl.Label>
+                        <Input p={2} placeholder="Email"
+                            variant="underlined"
+                            borderBottomColor='primary.100'
+                            placeholderTextColor='primary.100'
+                            InputLeftElement={<Icon as={<MaterialIcons name='email' />} size={5} ml="2" color='primary.200' />} />
+                        <FormControl.HelperText>
+
+                        </FormControl.HelperText>
+                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
+
+                    </FormControl>
+
+                    <FormControl >
+
+                        <FormControl.Label _text={{
+                            color: 'primary.50',
+                            fontWeight: 'bold'
+                        }} marginLeft={2} >
+                            Contraseña
+                        </FormControl.Label>
+                        <Input p={2} placeholder="Password"
+                            variant="underlined"
+                            borderBottomColor='primary.100'
+                            placeholderTextColor='primary.100'
+                            InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />} />
+                        <FormControl.HelperText>
+
+                        </FormControl.HelperText>
+                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
+
+                    </FormControl>
+
+                    <FormControl >
+
+                        <FormControl.Label _text={{
+                            color: 'primary.50',
+                            fontWeight: 'bold'
+                        }} marginLeft={2} >
+                            Teléfono
+                        </FormControl.Label>
+                        <Input p={2} placeholder="Phone" 
+                            variant="underlined"
+                            borderBottomColor='primary.100'
+                            placeholderTextColor='primary.100'
+                            InputLeftElement={<Icon as={<MaterialIcons name='phone' />} size={5} ml="2" color='primary.200' />} />
+                        <FormControl.HelperText>
+
+                        </FormControl.HelperText>
+                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
+
+                    </FormControl>
+
+                    <FormControl >
+
+                        <FormControl.Label _text={{
+                            color: 'primary.50',
+                            fontWeight: 'bold'
+                        }} marginLeft={2} >
+                            Edad
+                        </FormControl.Label>
+                        <Input type='number'
+                            p={2} placeholder="Age" 
+                            variant="underlined"
+                            borderBottomColor='primary.100'
+                            placeholderTextColor='primary.100'
+                            InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
+                        <FormControl.HelperText>
+
+                        </FormControl.HelperText>
+                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
+
+                    </FormControl>
+
+
+                    <Button background="primary.300" mt="5" _text={{
+                        color: "primary.900",
+                        fontWeight: "400",
+                        fontSize: "xl"
+                    }} rounded='full'>
+                        Dirección
+                    </Button>
+
+
+                </Stack>
+            </Box>
+
+        </Center>
+    </ScrollView>
+
+
+
 }

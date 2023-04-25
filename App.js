@@ -10,7 +10,7 @@ import NativeBaseIcon from "./components/NativeBaseIcon";
 import { Platform } from "react-native";
 import Register from "./components/AllNav/Screens/Register";
 import Address from "./components/AllNav/Screens/Address";
-
+import ContactsR from "./components/AllNav/Screens/ContactsR";
 import { LinearGradient } from 'expo-linear-gradient';
 import Inicio from "./components/AllNav/Screens/Inicio";
 
@@ -57,13 +57,16 @@ export default function App() {
   return (
 
     <NativeBaseProvider theme={theme} config={config}>
-      
+
+      {/*<Principal/>*/}
+      {/*<Login/>*/}
       {/*<Register/>*/}
+        <ContactsR/>
       {/*<Address/>*/}
       {/*<Inicio/>*/}
-      {/*<Login/> */}
-      {/*<Principal/>*/}
-      <Perfil/> 
+      
+      
+      {/*<Perfil/>*/}
       {/*<Perfil_Editar/> */ }
       {/*<Dirección_Editar/>*/}
      

@@ -6,7 +6,14 @@ import {Box, Button, Center, Image, VStack} from 'native-base'
 
 
 export default function Principal(){
-    return <Center w="100%" h="100%" bg="primary.800">
+    return <Center w="100%" h="100%" bg={{
+        linearGradient: {
+            colors: ['primary.400', 'primary.800'],
+            start: [1, 0],
+            end: [0, 0]
+
+        }
+    }}>
         <Box safeArea p="1" py="8" w="100%" maxW="350">
             <VStack  space={1} justifyContent="center" alignItems="center">
             <Image width = "389"  height= "138" mt="9"
