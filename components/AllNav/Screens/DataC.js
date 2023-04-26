@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Box, Center, HStack, Heading, Image, ScrollView, VStack, Text, Circle, Pressable, Button, Icon } from 'native-base';
 import {AntDesign} from '@expo/vector-icons';
 
-export default function Contacts() {
+export default function DataC() {
     return <Center w="100%" h="100%" bg={{
             linearGradient: {
                 colors: ['primary.400', 'primary.800'],
@@ -12,17 +12,10 @@ export default function Contacts() {
             }
         }}>
             <Box safeArea p="2"  w="90%" maxW="290">
-            <Heading  size="lg"  color="Black" _dark={{
-                    color: "primary.50",
-                    fontWeight: 'bold'
-                }} >
-                    Contactos
-                </Heading>
+            
 
                 <VStack space={3} >
-                <Circle size="40px" bg="primary.200" marginLeft='5/6' marginBottom='10' marginTop='5'>
-        <Icon as={<AntDesign name="plus" />} color="white" size={5} />
-      </Circle>
+                
 
                     <Box rounded="xl" >
                         <Pressable>
@@ -35,23 +28,38 @@ export default function Contacts() {
                                     scale: isPressed ? 0.96 : 1
                                 }]
                             }} p="5" rounded="8" shadow={3} borderWidth="1" borderColor="primary.200">
-                                <HStack alignItems="center">
-                                    <Image width="50" height="50"
-                                        mt="5" mb='5' ml='5' mr='5'
+                                <VStack space={3} alignItems='center'>
+                                <Image width="50" height="50"
                                         source={require('../../../assets/IconoPerfil.png')} />
+                                <HStack alignItems="center" space={10}>
+                                <Text color='primary.50' mt='1' fontWeight='bold'>
+                                        Mamá
+                                    </Text>
+                                    <Text color='primary.50' mt='1' fontWeight='bold'>
+                                        María 
+                                    </Text>
 
                                     <Text color='primary.50' mt='1' fontWeight='bold'>
-                                        María Herrera
+                                        Herrera
                                     </Text>
                                 </HStack>
+                                <Text color='primary.50' mt='1' fontWeight='bold'>
+                                    449-456-98-78
+                                    </Text>
+                                </VStack>
 
 
                             </Box>
                     
                         }}
                         </Pressable>
-                    </Box>
 
+                        <HStack mt='3/4' space={20} marginLeft='4'>
+                        <Button size='lg' bg='primary.200'>Editar</Button>
+                        <Button size='lg' bg='primary.200'>Eliminar</Button>
+                    </HStack>
+                    </Box>
+                    
                    
                 </VStack>
 

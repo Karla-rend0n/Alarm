@@ -12,6 +12,10 @@ import Register from "./components/AllNav/Screens/Register";
 import Address from "./components/AllNav/Screens/Address";
 import ContactsR from "./components/AllNav/Screens/ContactsR";
 import ViewContact from "./components/AllNav/Screens/ViewContacts";
+import Contacts from "./components/AllNav/Screens/Contacto";
+import Dirección from "./components/AllNav/Screens/Dirección";
+import DataC from "./components/AllNav/Screens/DataC";
+import Contactos_Editar from "./components/AllNav/Screens/Contactos_Editar";
 import { LinearGradient } from 'expo-linear-gradient';
 import Inicio from "./components/AllNav/Screens/Inicio";
 
@@ -64,13 +68,14 @@ export default function App() {
       {/*<Register/>*/}
       {/*<ContactsR/>*/}
       {/*<ViewContact/>*/}
-
-      <Address/>
+      {/*<Address/>*/}
       {/*<Inicio/>*/}
-      
-      
+      {/*<Contacts/> faltan detalles*/}
+      {/*<DataC/>*/}
+      {/*<Contactos_Editar/>*/}
       {/*<Perfil/>*/}
       {/*<Perfil_Editar/> */ }
+      {/*<Dirección/>*/}
       {/*<Dirección_Editar/>*/}
      
       
