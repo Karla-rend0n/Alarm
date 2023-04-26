@@ -1,0 +1,108 @@
+import * as React from 'react'
+import { Box, Center, Heading, ScrollView, VStack, FormControl, Input, Icon, HStack, Button, Circle } from 'native-base'
+import { MaterialIcons } from '@expo/vector-icons';
+
+export default function Contactos_Editar() {
+    return  <Center w="100%" h="100%" bg={{
+        linearGradient: {
+            colors: ['primary.400', 'primary.800'],
+            start: [1, 0],
+            end: [0, 0]
+
+        }
+    }}>
+
+<Box safeArea p="2" py="8" w="90%" maxW="290">
+                
+                <VStack space={3} mt={5}>
+                    <FormControl >
+
+                        <FormControl.Label _text={{
+                            color: 'primary.50',
+                            fontWeight: 'bold'
+                        }} marginLeft={2}>
+                            Parentesco
+                        </FormControl.Label>
+                        <Input p={2} placeholder="Parentesco" backgroundColor="primary.100"
+                            variant="rounded"
+                            color="primary.900"
+                            value='Madre'
+                            InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
+                        <FormControl.HelperText>
+
+                        </FormControl.HelperText>
+                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
+
+                    </FormControl>
+                    <FormControl >
+
+                        <FormControl.Label _text={{
+                            color: 'primary.50',
+                            fontWeight: 'bold'
+                        }} marginLeft={2}>
+                            Nombre
+                        </FormControl.Label>
+                        <Input p={2} placeholder="Name" backgroundColor="primary.100"
+                            variant="rounded"
+                            color="primary.900"
+                            value='María'
+                            InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
+                        <FormControl.HelperText>
+
+                        </FormControl.HelperText>
+                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
+
+                    </FormControl>
+
+
+                    <FormControl >
+
+                        <FormControl.Label _text={{
+                            color: 'primary.50',
+                            fontWeight: 'bold'
+                        }} marginLeft={2} >
+                            Apellido
+                        </FormControl.Label>
+                        <Input p={2} placeholder="Last Name" backgroundColor="primary.100"
+                            variant="rounded"
+                            color="primary.900"
+                            value='Herrera'
+                            InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
+                        <FormControl.HelperText>
+
+                        </FormControl.HelperText>
+                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
+
+                    </FormControl>
+                    <FormControl >
+
+                        <FormControl.Label _text={{
+                            color: 'primary.50',
+                            fontWeight: 'bold'
+                        }} marginLeft={2} >
+                            Teléfono
+                        </FormControl.Label>
+                        <Input p={2} placeholder="Phone" backgroundColor="primary.100"
+                            variant="rounded"
+                            color="primary.900"
+                            value='449-587-69-78'
+                            InputLeftElement={<Icon as={<MaterialIcons name='phone' />} size={5} ml="2" color='primary.200' />} />
+                        <FormControl.HelperText>
+
+                        </FormControl.HelperText>
+                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
+
+                    </FormControl>
+                        
+                        <Button size='lg' bg='primary.200'>Guardar</Button>
+                    
+
+                </VStack>
+                
+            </Box>
+
+
+    </Center>
+   
+
+}
