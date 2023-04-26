@@ -11,6 +11,7 @@ import { Platform } from "react-native";
 import Register from "./components/AllNav/Screens/Register";
 import Address from "./components/AllNav/Screens/Address";
 import ContactsR from "./components/AllNav/Screens/ContactsR";
+import ViewContact from "./components/AllNav/Screens/ViewContacts";
 import { LinearGradient } from 'expo-linear-gradient';
 import Inicio from "./components/AllNav/Screens/Inicio";
 
@@ -61,8 +62,10 @@ export default function App() {
       {/*<Principal/>*/}
       {/*<Login/>*/}
       {/*<Register/>*/}
-        <ContactsR/>
-      {/*<Address/>*/}
+      {/*<ContactsR/>*/}
+      {/*<ViewContact/>*/}
+
+      <Address/>
       {/*<Inicio/>*/}
       
       

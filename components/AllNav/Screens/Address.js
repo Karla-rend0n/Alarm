@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box, Center, Heading, VStack, FormControl, Input, Icon, ScrollView, Button, } from 'native-base'
+import { Box, Center, Heading, VStack, FormControl, Input, Icon, ScrollView, Button, Circle, HStack} from 'native-base'
 import { Ionicons, MaterialIcons, Entypo, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function Address() {
@@ -163,12 +163,22 @@ export default function Address() {
                         <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
 
                     </FormControl>
-                    
-                    <Button marginTop={15} backgroundColor='primary.200'>
-                        Registrarse
+                    <HStack space={10} marginLeft='45'>
+                    <Button marginTop={15} backgroundColor='primary.200' size='lg'>
+                        Omitir
                     </Button>
+                    <Button marginTop={15} backgroundColor='primary.200'>
+                        Finalizar
+                    </Button>
+                    </HStack>
 
                 </VStack>
+                <HStack space={3} marginLeft='110' marginTop='5'>
+                    <Circle size="10px" bg="primary.300"></Circle>
+                    <Circle size="10px" bg="primary.300"></Circle>
+                    <Circle size="10px" bg="primary.800"></Circle>
+
+                </HStack>
             </Box>
 
         </Center>

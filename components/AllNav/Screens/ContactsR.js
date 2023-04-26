@@ -3,16 +3,16 @@ import { Box, Center, Heading, ScrollView, VStack, FormControl, Input, Icon, HSt
 import { MaterialIcons } from '@expo/vector-icons';
 
 export default function ContactsR() {
-    return <ScrollView w="100%" h="100%">
-        <Center w="100%" h="100%" bg={{
-            linearGradient: {
-                colors: ['primary.400', 'primary.800'],
-                start: [1, 0],
-                end: [0, 0]
+    return  <Center w="100%" h="100%" bg={{
+        linearGradient: {
+            colors: ['primary.400', 'primary.800'],
+            start: [1, 0],
+            end: [0, 0]
 
-            }
-        }}>
-            <Box safeArea p="2" py="8" w="90%" maxW="290">
+        }
+    }}>
+
+<Box safeArea p="2" py="8" w="90%" maxW="290">
                 <Heading size="lg" fontWeight="600" color="Black" _dark={{
                     color: "primary.50",
                     fontWeight: 'bold'
@@ -111,7 +111,8 @@ export default function ContactsR() {
                 </HStack>
             </Box>
 
-        </Center>
 
-    </ScrollView>
+    </Center>
+   
+
 }
