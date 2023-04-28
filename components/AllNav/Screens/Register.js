@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Box, Center, Heading, VStack, FormControl, Input, Icon, ScrollView, Button, HStack, Text, Link, Circle} from 'native-base'
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 
-export default function Register() {
+export default function Register() {    
     return <ScrollView w="100%" h="100%">
         <Center w="100%" h="100%" bg={{
             linearGradient: {
