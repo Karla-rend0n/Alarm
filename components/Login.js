@@ -56,7 +56,7 @@ export default function Login() {
                     </FormControl>
 
 
-                    <Button background="primary.200" borderWidth="2" borderColor="primary.200" mt="5" rounded={10} _text={{
+                    <Button background="primary.200" borderWidth="2" borderColor="primary.200" mt="5" rounded={10}_text={{
                         color: "primary.50",
                         fontWeight: "700",
                         fontSize: "lg"
@@ -68,7 +68,7 @@ export default function Login() {
                         <Text fontSize="sm" >
                             ¿No dispones de una cuenta? {" "}
                         </Text>
-                        <Link _text={{
+                        <Link  _text={{
                             color: "primary.50",
                             fontWeight: "bold",
                             fontSize: "sm"
