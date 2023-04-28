@@ -157,7 +157,7 @@ export default function Perfil_Editar() {
                         fontWeight: "400",
                         fontSize: "xl"
                     }} rounded='full' marginBottom='5'>
-                        Dirección
+                        Guardar
                     </Button>
                 </Stack>
             </Box>
