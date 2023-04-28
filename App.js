@@ -20,6 +20,18 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Inicio from "./components/AllNav/Screens/Inicio";
 
 
+import PantallaNav from "./components/Layout/PantallasNav";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+
+
+
 
 
 export default function App() {
@@ -63,20 +75,32 @@ export default function App() {
 
     <NativeBaseProvider theme={theme} config={config}>
 
-      {/*<Principal/>*/}
+      <PantallaNav/>
+      {/* <Principal/> */}
       {/*<Login/>*/}
       {/*<Register/>*/}
-      {/*<ContactsR/>*/}
-      {/*<ViewContact/>*/}
-      {/*<Address/>*/}
-      {/*<Inicio/>*/}
+
+      
+      {/* <ContactsR/> */}
+      {/* <ViewContact/> */}
+      {/* <Address/> */}
+    
+
+
+      {/* <MainNav/> */}
+      {/* <Inicio/> */}
       {/*<Contacts/> faltan detalles*/}
-      {/*<DataC/>*/}
-      {/*<Contactos_Editar/>*/}
-      {/*<Perfil/>*/}
-      {/*<Perfil_Editar/> */ }
-      {/*<Dirección/>*/}
-      {/*<Dirección_Editar/>*/}
+      {/* <Contactos_Editar/> */} 
+      {/* <DataC/> */}
+      {/* <Perfil/> */}
+      {/* <Perfil_Editar/> */}
+      {/* <Dirección/> */}
+      {/* <Dirección_Editar/> */}
+
+
+
+
+      
      
       
       
