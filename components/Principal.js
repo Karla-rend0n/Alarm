@@ -1,11 +1,15 @@
 import React from "react";
 import {Box, Button, Center, Image, VStack} from 'native-base'
+import { useNavigation } from "@react-navigation/native";
+
 
 
 
 
 
 export default function Principal(){
+    const navigation = useNavigation();
+
     return <Center w="100%" h="100%" bg={{
         linearGradient: {
             colors: ['primary.400', 'primary.800'],
@@ -25,7 +29,7 @@ export default function Principal(){
             
             <VStack space={10} mt="47">
             
-            <Button background="primary.50" borderWidth="2" borderColor="primary.50" mt="15" rounded={10} _text={{
+            <Button background="primary.50" borderWidth="2" borderColor="primary.50" mt="15" rounded={10} onPress={() => {navigation.navigate("PanLogin")}}_text={{
                 color:"primary.900",
                 fontWeight:"700",
                 fontSize: "lg"
@@ -33,7 +37,7 @@ export default function Principal(){
                 Inciar sesión
             </Button>
 
-            <Button background="primary.50" borderWidth="2" borderColor="primary.50" mt="14" rounded={10} _text={{
+            <Button background="primary.50" borderWidth="2" borderColor="primary.50" mt="14" rounded={10} onPress={() => {navigation.navigate("PanRegistro")}}_text={{
                 color:"primary.900",
                 fontWeight:"700",
                 fontSize: "lg"
