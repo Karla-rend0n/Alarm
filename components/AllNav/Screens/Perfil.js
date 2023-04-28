@@ -1,8 +1,12 @@
 import React from "react";
 import { Center, Box, Avatar, Icon, Input, FormControl, Button, Stack, ScrollView, Heading, HStack, Container, Divider,Text, VStack } from "native-base"
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from "@react-navigation/native";
+
 
 export default function Perfil() {
+    const navigation = useNavigation();
+
     return <Center w='100%' h="100%" bg={{
                 linearGradient: {
                     colors: ['primary.400', 'primary.800'],
@@ -31,7 +35,7 @@ export default function Perfil() {
             <Box w="100%" h="82%" alignItems="center" >
                 <Stack space={5} w="75%" maxW="350px" mx="auto" m="10">
                     
-                    <Button rounded='full' background="primary.300" mt="0.5" _text={{
+                    <Button rounded='full' background="primary.300" mt="0.5" onPress={() => navigation.navigate("PantEditar")} _text={{
                         color: "primary.900",
                         fontWeight: 'normal',
                         fontSize: "md"
@@ -80,7 +84,7 @@ export default function Perfil() {
                     
 
 
-                    <Button background="primary.300" mt="5" _text={{
+                    <Button background="primary.300" mt="5" onPress={() => navigation.navigate("PantDirección")}_text={{
                         color: "primary.900",
                         fontWeight: "400",
                         fontSize: "xl"
