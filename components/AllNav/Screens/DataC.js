@@ -1,9 +1,13 @@
 import * as React from 'react'
 import { Box, Center, HStack, Heading, Image, ScrollView, VStack, Text, Circle, Pressable, Button, Icon } from 'native-base';
 import {AntDesign} from '@expo/vector-icons';
+import { useNavigation } from "@react-navigation/native";
+
 
 
 export default function DataC() {
+    const navigation = useNavigation();
+
     return <Center w="100%" h="100%" bg={{
             linearGradient: {
                 colors: ['primary.400', 'primary.800'],
@@ -56,7 +60,7 @@ export default function DataC() {
                         </Pressable>
 
                         <HStack mt='3/4' space={20} marginLeft='4'>
-                        <Button size='lg' bg='primary.200'>Editar</Button>
+                        <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("Editar")}}>Editar</Button>
                         <Button size='lg' bg='primary.200'>Eliminar</Button>
                     </HStack>
                     </Box>

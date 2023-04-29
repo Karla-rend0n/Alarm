@@ -1,31 +1,37 @@
 import * as React from 'react'
 import { Box, Center, HStack, Heading, Image, ScrollView, VStack, Text, Circle, Pressable, Button, Icon } from 'native-base';
 import {AntDesign} from '@expo/vector-icons';
+import { useNavigation } from "@react-navigation/native";
+
+
 
 export default function Contacts() {
+    const navigation = useNavigation();
+
     return <Center w="100%" h="100%" bg={{
             linearGradient: {
                 colors: ['primary.400', 'primary.800'],
                 start: [1, 0],
                 end: [0, 0]
-
             }
         }}>
-            <Box safeArea p="2"  w="90%" maxW="290">
-            <Heading  size="lg"  color="Black" _dark={{
+            <Box safeArea p="2" py="8" w="90%" maxW="290">
+                <Heading size="lg" fontWeight="600" color="Black" _dark={{
                     color: "primary.50",
                     fontWeight: 'bold'
                 }} >
                     Contactos
                 </Heading>
+                
+                <VStack space={6} >
+                <Button  marginLeft='5/6' mt='7' rounded  borderRadius="44" width="44" height="44" alignSelf="center" bgColor="primary.200" borderWidth="3"  borderColor="primary.200"  leftIcon={<Icon as={<AntDesign name="plus" />}/>} onPress={() => {navigation.navigate("Agregar")}}>
 
-                <VStack space={3} >
-                <Circle size="40px" bg="primary.200" marginLeft='5/6' marginBottom='10' marginTop='5'>
-        <Icon as={<AntDesign name="plus" />} color="white" size={5} />
-      </Circle>
+         </Button>
+
+         
 
                     <Box rounded="xl" >
-                        <Pressable>
+                        <Pressable onPress={() => {navigation.navigate("ViewD")}}>
                         {({
                             isHovered,
                             isPressed
@@ -40,7 +46,7 @@ export default function Contacts() {
                                         mt="5" mb='5' ml='5' mr='5'
                                         source={require('../../../assets/IconoPerfil.png')} />
 
-                                    <Text color='primary.50' mt='1' fontWeight='bold'>
+                                    <Text color='primary.50' mt='1' fontWeight='bold' >
                                         María Herrera
                                     </Text>
                                 </HStack>
@@ -52,13 +58,13 @@ export default function Contacts() {
                         </Pressable>
                     </Box>
 
-                   
+                 
                 </VStack>
 
-              
+             
+
+
             </Box>
         </Center>
-        
 
-   
 }

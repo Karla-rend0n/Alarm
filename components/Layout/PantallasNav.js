@@ -23,6 +23,9 @@ import Dirección_Editar from "../AllNav/Screens/Dirección_Editar";
 import { FontAwesome } from '@expo/vector-icons';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import Contactos_Editar from "../AllNav/Screens/Contactos_Editar";
+import DataC from "../AllNav/Screens/DataC";
+import AgregarContacto from "../AllNav/Screens/AgregarContacto";
 
 
 
@@ -32,6 +35,7 @@ const Stack = createNativeStackNavigator()
 const Rstack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator();
 const HomeStackNavigator = createNativeStackNavigator();
+const CNavigation = createNativeStackNavigator();
 
 function MyStack() {
     return (
@@ -99,7 +103,7 @@ function MyTabs() {
 
             <Tab.Screen
                 name="Agregar Contacto"
-                component={Contacts}
+                component={CScreen}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <SimpleLineIcons name="user-follow" size={24} color={color} />
@@ -129,6 +133,46 @@ function MyTabs() {
 
     );
 }
+
+function CScreen() {
+    return (
+        <CNavigation.Navigator>
+            <CNavigation.Screen
+                name="Contactos"
+                component={Contacts}
+                options={{
+                    headerShown: false
+                }} />
+                
+                <CNavigation.Screen
+                name="Editar"
+                component={Contactos_Editar}
+                options={{
+                }} />
+                
+                <CNavigation.Screen
+                name="ViewD"
+                component={DataC}
+                options={{
+                }} />
+                
+                <CNavigation.Screen
+                name="Agregar"
+                component={AgregarContacto}
+                options={{
+                }} />
+            
+           
+
+        </CNavigation.Navigator>
+    )
+}
+
+
+
+
+
+
 
 function RNavegation() {
     return (
