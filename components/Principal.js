@@ -29,7 +29,7 @@ export default function Principal(){
             
             <VStack space={10} mt="47">
             
-            <Button background="primary.50" borderWidth="2" borderColor="primary.50" mt="15" rounded={10} onPress={() => {navigation.navigate("PanLogin")}}_text={{
+            <Button background="primary.50" borderWidth="2" borderColor="primary.50" mt="15" rounded={10} onPress={() => {navigation.navigate("Login")}}_text={{
                 color:"primary.900",
                 fontWeight:"700",
                 fontSize: "lg"
@@ -37,7 +37,7 @@ export default function Principal(){
                 Inciar sesión
             </Button>
 
-            <Button background="primary.50" borderWidth="2" borderColor="primary.50" mt="14" rounded={10} onPress={() => {navigation.navigate("PanRegistro")}}_text={{
+            <Button background="primary.50" borderWidth="2" borderColor="primary.50" mt="14" rounded={10} onPress={() => {navigation.navigate("Registro")}}_text={{
                 color:"primary.900",
                 fontWeight:"700",
                 fontSize: "lg"

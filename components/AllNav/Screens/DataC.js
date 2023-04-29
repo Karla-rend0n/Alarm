@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Box, Center, HStack, Heading, Image, ScrollView, VStack, Text, Circle, Pressable, Button, Icon } from 'native-base';
 import {AntDesign} from '@expo/vector-icons';
 
+
 export default function DataC() {
     return <Center w="100%" h="100%" bg={{
             linearGradient: {

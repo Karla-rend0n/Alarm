@@ -94,7 +94,7 @@ export default function Contactos_Editar() {
 
                     </FormControl>
                         
-                        <Button size='lg' bg='primary.200'>Guardar</Button>
+                        <Button size='lg' bg='primary.200' >Guardar</Button>
                     
 
                 </VStack>
