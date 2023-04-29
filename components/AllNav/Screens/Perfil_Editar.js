@@ -1,8 +1,12 @@
 import React from "react";
 import { Center, Box, Avatar, Icon, Input, FormControl, Button, Stack, ScrollView, Heading } from "native-base"
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from "@react-navigation/native";
+
 
 export default function Perfil_Editar() {
+    const navigation = useNavigation();
+
     return <ScrollView w="100%" h="100%">
         <Center w="100%" h="100%" bg={{
             linearGradient: {
@@ -156,7 +160,8 @@ export default function Perfil_Editar() {
                         color: "primary.900",
                         fontWeight: "400",
                         fontSize: "xl"
-                    }} rounded='full' marginBottom='5'>
+                    }} rounded='full' marginBottom='5'
+                    onPress={() => navigation.navigate("Perfil")}>
                         Guardar
                     </Button>
                 </Stack>

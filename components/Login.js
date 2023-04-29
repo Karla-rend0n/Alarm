@@ -1,9 +1,12 @@
 import React from "react";
 import { Box, Text, Heading, VStack, FormControl, Input, Link, Button, HStack, Center, Icon, ScrollView, Pressable } from 'native-base'
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 
 export default function Login() {
+    const navigation = useNavigation();
+
     return <Center w="100%" h="100%" bg={{
             linearGradient: {
                 colors: ['primary.400', 'primary.800'],
@@ -56,7 +59,8 @@ export default function Login() {
                     </FormControl>
 
 
-                    <Button background="primary.200" borderWidth="2" borderColor="primary.200" mt="5" rounded={10}_text={{
+                    <Button onPress={() => {navigation.navigate("Principal")}}
+                    background="primary.200" borderWidth="2" borderColor="primary.200" mt="5" rounded={10}_text={{
                         color: "primary.50",
                         fontWeight: "700",
                         fontSize: "lg"
@@ -68,7 +72,7 @@ export default function Login() {
                         <Text fontSize="sm" >
                             ¿No dispones de una cuenta? {" "}
                         </Text>
-                        <Link  _text={{
+                        <Link onPress={() => {navigation.navigate("Registro")}}  _text={{
                             color: "primary.50",
                             fontWeight: "bold",
                             fontSize: "sm"

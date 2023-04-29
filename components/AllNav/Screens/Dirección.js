@@ -1,8 +1,12 @@
 import React from "react";
 import { Center, Box, Avatar, Icon, Input, FormControl, Button, Stack, ScrollView, Heading, HStack, Container, Divider, Text, VStack } from "native-base"
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+
 
 export default function Dirección() {
+    const navigation = useNavigation();
+
     return <ScrollView w='100%' h="100%">
         <Center w='100%' h="100%" bg={{
             linearGradient: {
@@ -108,7 +112,8 @@ export default function Dirección() {
                         color: "primary.900",
                         fontWeight: "400",
                         fontSize: "xl"
-                    }} rounded='full'>
+                    }} rounded='full'
+                    onPress={() => navigation.navigate("DireEditar")}>
                         Editar
                     </Button>
 

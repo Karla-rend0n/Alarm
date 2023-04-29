@@ -1,8 +1,10 @@
 import * as React from 'react'
 import { Box, Center, Heading, ScrollView, VStack, FormControl, Input, Icon, HStack, Button, Circle } from 'native-base'
 import { MaterialIcons } from '@expo/vector-icons';
-
+import { useNavigation } from '@react-navigation/native';
 export default function ContactsR() {
+    const navigation = useNavigation();
+
     return  <Center w="100%" h="100%" bg={{
         linearGradient: {
             colors: ['primary.400', 'primary.800'],
@@ -98,14 +100,14 @@ export default function ContactsR() {
 
                     </FormControl>
                     <HStack space={10} marginLeft='45'>
-                        <Button size='lg' bg='primary.200'>Omitir</Button>
-                        <Button size='lg' bg='primary.200'>Guardar</Button>
+                        <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("Dirección")}}>Omitir</Button>
+                        <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("ViewContact")}}>Guardar</Button>
                     </HStack>
 
                 </VStack>
                 <HStack space={3} marginLeft='110' marginTop='5'>
-                    <Circle size="10px" bg="primary.800"></Circle>
                     <Circle size="10px" bg="primary.300"></Circle>
+                    <Circle size="10px" bg="primary.800"></Circle>
                     <Circle size="10px" bg="primary.300"></Circle>
 
                 </HStack>

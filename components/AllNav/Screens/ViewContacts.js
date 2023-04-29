@@ -1,10 +1,13 @@
 import * as React from 'react'
 import { Box, Center, HStack, Heading, Image, ScrollView, VStack, Text, Circle, Pressable, Button, Icon } from 'native-base';
 import {AntDesign} from '@expo/vector-icons';
+import { useNavigation } from "@react-navigation/native";
 
 
 
 export default function ViewContact() {
+    const navigation = useNavigation();
+
     return <ScrollView w='100%' h='100%'>
         <Center w="100%" h="100%" bg={{
             linearGradient: {
@@ -56,7 +59,7 @@ export default function ViewContact() {
                         </Pressable>
                     </Box>
 
-                    <Button marginTop='255' background='primary.200' rounded='full'>
+                    <Button onPress={() => {navigation.navigate("Dirección")}}  marginTop='255' background='primary.200' rounded='full'>
                         Siguiente
                     </Button>
                 </VStack>

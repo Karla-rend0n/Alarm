@@ -1,8 +1,11 @@
 import * as React from 'react'
 import { Box, Center, Heading, VStack, FormControl, Input, Icon, ScrollView, Button, Circle, HStack} from 'native-base'
 import { Ionicons, MaterialIcons, Entypo, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from "@react-navigation/native";
 
 export default function Address() {
+    const navigation = useNavigation();
+
     return <ScrollView w="100%" h="100%">
         <Center w="100%" h="100%" bg={{
             linearGradient: {
@@ -164,10 +167,11 @@ export default function Address() {
 
                     </FormControl>
                     <HStack space={10} marginLeft='45'>
-                    <Button marginTop={15} backgroundColor='primary.200' size='lg'>
+                    <Button marginTop={15} backgroundColor='primary.200' size='lg'
+                        onPress={() => {navigation.navigate("Principal")}}>
                         Omitir
                     </Button>
-                    <Button marginTop={15} backgroundColor='primary.200'>
+                    <Button onPress={() => {navigation.navigate("Principal")}} marginTop={15} backgroundColor='primary.200'>
                         Finalizar
                     </Button>
                     </HStack>

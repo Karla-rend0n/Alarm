@@ -1,8 +1,11 @@
 import * as React from 'react'
 import { Box, Center, Heading, VStack, FormControl, Input, Icon, ScrollView, Button, HStack, Text, Link, Circle} from 'native-base'
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from "@react-navigation/native";
 
-export default function Register() {    
+export default function Register() {  
+    const navigation = useNavigation();
+
     return <ScrollView w="100%" h="100%">
         <Center w="100%" h="100%" bg={{
             linearGradient: {
@@ -138,7 +141,8 @@ export default function Register() {
 
                     </FormControl>
                     
-                    <Button marginTop={15} backgroundColor='primary.200'>
+                    <Button onPress={() => {navigation.navigate("Contacto")}}
+                    marginTop={15} backgroundColor='primary.200'>
                         Guardar
                     </Button>
                     
@@ -146,7 +150,7 @@ export default function Register() {
                         <Text fontSize="sm" >
                             ¿Ya tienes una cuenta? {" "}
                         </Text>
-                        <Link _text={{
+                        <Link onPress={() => {navigation.navigate("Login")}} _text={{
                             color: "primary.50",
                             fontWeight: "bold",
                             fontSize: "sm"
