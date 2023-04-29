@@ -2,6 +2,8 @@ import * as React from 'react'
 import { Box, Center, HStack, Heading, Image, ScrollView, VStack, Text, Circle, Pressable, Button, Icon } from 'native-base';
 import {AntDesign} from '@expo/vector-icons';
 
+
+
 export default function ViewContact() {
     return <ScrollView w='100%' h='100%'>
         <Center w="100%" h="100%" bg={{
@@ -9,7 +11,6 @@ export default function ViewContact() {
                 colors: ['primary.400', 'primary.800'],
                 start: [1, 0],
                 end: [0, 0]
-
             }
         }}>
             <Box safeArea p="2" py="8" w="90%" maxW="290">
@@ -20,10 +21,12 @@ export default function ViewContact() {
                     Contactos
                 </Heading>
                 
-                <VStack space={3} >
-                <Circle size="40px" bg="primary.200" marginLeft='5/6' marginBottom='10' marginTop='5'>
-        <Icon as={<AntDesign name="plus" />} color="white" size={5} />
-      </Circle>
+                <VStack space={6} >
+                <Button  marginLeft='5/6' mt='7' rounded  borderRadius="44" width="44" height="44" alignSelf="center" bgColor="primary.200" borderWidth="3"  borderColor="primary.200"  leftIcon={<Icon as={<AntDesign name="plus" />}/>}>
+
+         </Button>
+
+         
 
                     <Box rounded="xl" >
                         <Pressable>
