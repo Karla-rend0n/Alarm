@@ -141,14 +141,14 @@ function Contact_Screen() {
     return (
         <CNavigation.Navigator>
             <CNavigation.Screen
-                name="Contactos"
+                name="Contacts"
                 component={Contacts}
                 options={{
                     headerShown: false
                 }} />
                 
                 <CNavigation.Screen
-                name="Editar"
+                name="Edit"
                 component={Edit_Contacts}
                 options={{
                 }} />
@@ -160,7 +160,7 @@ function Contact_Screen() {
                 }} />
                 
                 <CNavigation.Screen
-                name="Agregar"
+                name="Add_C"
                 component={AddContact}
                 options={{
                 }} />

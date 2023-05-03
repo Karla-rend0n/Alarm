@@ -25,7 +25,7 @@ export default function ViewContact() {
                 </Heading>
                 
                 <VStack space={6} >
-                <Button  marginLeft='5/6' mt='7' rounded  borderRadius="44" width="44" height="44" alignSelf="center" bgColor="primary.200" borderWidth="3"  borderColor="primary.200"  leftIcon={<Icon as={<AntDesign name="plus" />}/>} onPress={() => {navigation.navigate("Contacto")}}>
+                <Button  marginLeft='5/6' mt='7' rounded  borderRadius="44" width="44" height="44" alignSelf="center" bgColor="primary.200" borderWidth="3"  borderColor="primary.200"  leftIcon={<Icon as={<AntDesign name="plus" />}/>} onPress={() => {navigation.navigate("Contact_R")}}>
 
          </Button>
 
@@ -59,7 +59,7 @@ export default function ViewContact() {
                         </Pressable>
                     </Box>
 
-                    <Button onPress={() => {navigation.navigate("Dirección")}}  marginTop='255' background='primary.200' rounded='full'>
+                    <Button onPress={() => {navigation.navigate("Address_R")}}  marginTop='255' background='primary.200' rounded='full'>
                         Siguiente
                     </Button>
                 </VStack>

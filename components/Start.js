@@ -37,7 +37,7 @@ export default function Home(){
                 Inciar sesión
             </Button>
 
-            <Button background="primary.50" borderWidth="2" borderColor="primary.50" mt="14" rounded={10} onPress={() => {navigation.navigate("Registro")}}_text={{
+            <Button background="primary.50" borderWidth="2" borderColor="primary.50" mt="14" rounded={10} onPress={() => {navigation.navigate("Register")}}_text={{
                 color:"primary.900",
                 fontWeight:"700",
                 fontSize: "lg"

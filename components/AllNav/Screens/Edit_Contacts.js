@@ -98,7 +98,7 @@ export default function Edit_Contacts() {
 
                     </FormControl>
                         
-                        <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("Contactos")}}>Guardar</Button>
+                        <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("Contacts")}}>Guardar</Button>
                     
 
                 </VStack>

@@ -161,7 +161,7 @@ export default function Profile_Edit() {
                         fontWeight: "400",
                         fontSize: "xl"
                     }} rounded='full' marginBottom='5'
-                    onPress={() => navigation.navigate("Perfil")}>
+                    onPress={() => navigation.navigate("Profile")}>
                         Guardar
                     </Button>
                 </Stack>

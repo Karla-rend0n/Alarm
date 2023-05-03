@@ -168,10 +168,10 @@ export default function Address_R() {
                     </FormControl>
                     <HStack space={10} marginLeft='45'>
                     <Button marginTop={15} backgroundColor='primary.200' size='lg'
-                        onPress={() => {navigation.navigate("Principal")}}>
+                        onPress={() => {navigation.navigate("Home")}}>
                         Omitir
                     </Button>
-                    <Button onPress={() => {navigation.navigate("Principal")}} marginTop={15} backgroundColor='primary.200'>
+                    <Button onPress={() => {navigation.navigate("Home")}} marginTop={15} backgroundColor='primary.200'>
                         Finalizar
                     </Button>
                     </HStack>

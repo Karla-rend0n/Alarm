@@ -101,7 +101,7 @@ export default function AddContact() {
                         <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
 
                     </FormControl>
-                        <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("Contactos")}}>Guardar</Button>
+                        <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("Contact")}}>Guardar</Button>
 
                 </VStack>
             </Box>

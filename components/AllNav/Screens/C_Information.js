@@ -60,7 +60,7 @@ export default function C_Information() {
                         </Pressable>
 
                         <HStack mt='3/4' space={20} marginLeft='4'>
-                        <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("Editar")}}>Editar</Button>
+                        <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("Edit")}}>Editar</Button>
                         <Button size='lg' bg='primary.200'>Eliminar</Button>
                     </HStack>
                     </Box>

@@ -59,7 +59,7 @@ export default function Login() {
                     </FormControl>
 
 
-                    <Button onPress={() => {navigation.navigate("Principal")}}
+                    <Button onPress={() => {navigation.navigate("Home")}}
                     background="primary.200" borderWidth="2" borderColor="primary.200" mt="5" rounded={10}_text={{
                         color: "primary.50",
                         fontWeight: "700",
@@ -72,7 +72,7 @@ export default function Login() {
                         <Text fontSize="sm" >
                             ¿No dispones de una cuenta? {" "}
                         </Text>
-                        <Link onPress={() => {navigation.navigate("Registro")}}  _text={{
+                        <Link onPress={() => {navigation.navigate("Register")}}  _text={{
                             color: "primary.50",
                             fontWeight: "bold",
                             fontSize: "sm"

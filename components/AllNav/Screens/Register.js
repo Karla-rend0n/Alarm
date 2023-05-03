@@ -141,7 +141,7 @@ export default function Register() {
 
                     </FormControl>
                     
-                    <Button onPress={() => {navigation.navigate("Contacto")}}
+                    <Button onPress={() => {navigation.navigate("Contact_R")}}
                     marginTop={15} backgroundColor='primary.200'>
                         Guardar
                     </Button>

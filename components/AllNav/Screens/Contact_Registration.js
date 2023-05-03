@@ -101,7 +101,7 @@ export default function Contact_Registration() {
 
                     </FormControl>
                     <HStack space={10} marginLeft='45'>
-                        <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("Dirección")}}>Omitir</Button>
+                        <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("Address_R")}}>Omitir</Button>
                         <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("ViewContact")}}>Guardar</Button>
                     </HStack>
 
