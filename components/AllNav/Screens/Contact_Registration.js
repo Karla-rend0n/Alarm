@@ -3,8 +3,7 @@ import { Box, Center, Heading, ScrollView, VStack, FormControl, Input, Icon, HSt
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
-
-export default function ContactsR() {
+export default function Contact_Registration() {
     const navigation = useNavigation();
 
     return  <Center w="100%" h="100%" bg={{
@@ -101,9 +100,18 @@ export default function ContactsR() {
                         <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
 
                     </FormControl>
-                        <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("Contactos")}}>Guardar</Button>
+                    <HStack space={10} marginLeft='45'>
+                        <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("Dirección")}}>Omitir</Button>
+                        <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("ViewContact")}}>Guardar</Button>
+                    </HStack>
 
                 </VStack>
+                <HStack space={3} marginLeft='110' marginTop='5'>
+                    <Circle size="10px" bg="primary.300"></Circle>
+                    <Circle size="10px" bg="primary.800"></Circle>
+                    <Circle size="10px" bg="primary.300"></Circle>
+
+                </HStack>
             </Box>
 
 

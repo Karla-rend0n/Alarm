@@ -4,28 +4,31 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 
-import Principal from "../Principal";
+import Start from "../Start";
 import Login from "../Login";
 
 import Register from "../AllNav/Screens/Register";
-import ContactsR from "../AllNav/Screens/ContactsR";
+import Contact_Registration from "../AllNav/Screens/Contact_Registration";
 import ViewContact from "../AllNav/Screens/ViewContacts";
-import Address from "../AllNav/Screens/Address";
+import Address_R from "../AllNav/Screens/Address_R";
 
-import Inicio from "../AllNav/Screens/Inicio";
-import Contacts from "../AllNav/Screens/Contacto";
+import Home from "../AllNav/Screens/Home";
+import Contacts from "../AllNav/Screens/Contacts";
+import AddContact from "../AllNav/Screens/AddContact";
+import Edit_Contacts from "../AllNav/Screens/Edit_Contacts";
+import C_Information from "../AllNav/Screens/C_Information";
 
-import Perfil from "../AllNav/Screens/Perfil";
-import Perfil_Editar from "../AllNav/Screens/Perfil_Editar";
-import Dirección from "../AllNav/Screens/Dirección";
-import Dirección_Editar from "../AllNav/Screens/Dirección_Editar";
+import Profile from "../AllNav/Screens/Profile";
+import Profile_Edit from "../AllNav/Screens/Profile_Edit";
+import Address  from "../AllNav/Screens/Address";
+import Address_Edit from "../AllNav/Screens/Address_Edit";
 
 import { FontAwesome } from '@expo/vector-icons';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import Contactos_Editar from "../AllNav/Screens/Contactos_Editar";
-import DataC from "../AllNav/Screens/DataC";
-import AgregarContacto from "../AllNav/Screens/AgregarContacto";
+
+
+
 
 
 
@@ -34,63 +37,63 @@ import AgregarContacto from "../AllNav/Screens/AgregarContacto";
 const Stack = createNativeStackNavigator()
 const Rstack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator();
-const HomeStackNavigator = createNativeStackNavigator();
+const ProfileStackNavigator = createNativeStackNavigator();
 const CNavigation = createNativeStackNavigator();
 
-function MyStack() {
+function ProfileStack() {
     return (
-        <HomeStackNavigator.Navigator>
-            <HomeStackNavigator.Screen
-                name="Perfil"
-                component={Perfil}
+        <ProfileStackNavigator.Navigator>
+            <ProfileStackNavigator.Screen
+                name="Profile"
+                component={Profile}
                 options={{
                     headerShown: false
                 }}
             />
 
-            <HomeStackNavigator.Screen
-                name="Editar"
-                component={Perfil_Editar}
+            <ProfileStackNavigator.Screen
+                name="Edit_P"
+                component={Profile_Edit}
                 options={{
                     headerBackTitleVisible: false,
                     headerTransparent: true
                 }}
             />
 
-            <HomeStackNavigator.Screen
-                name="Dirección"
-                component={Dirección}
+            <ProfileStackNavigator.Screen
+                name="Address"
+                component={Address}
                 options={{
                     headerBackTitleVisible: true,
                     headerTransparent: true
                 }}
             />
 
-            <HomeStackNavigator.Screen
-                name="DireEditar"
-                component={Dirección_Editar}
+            <ProfileStackNavigator.Screen
+                name="Address_Edit"
+                component={Address_Edit}
                 options={{
                     headerBackTitleVisible: false,
                     headerTransparent: true
                 }}
             />
 
-        </HomeStackNavigator.Navigator>
+        </ProfileStackNavigator.Navigator>
 
     )
 }
 
-function MyTabs() {
+function HomeTabs() {
     return (
         <Tab.Navigator
-            initialRouteName="Inicio"
+            initialRouteName="Home"
             screenOptions={{
                 tabBarActiveTintColor: "purple",
             }}
         >
             <Tab.Screen
-                name="Inicio"
-                component={Inicio}
+                name="Home"
+                component={Home}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <FontAwesome name="home" size={27} color={color} />
@@ -103,7 +106,7 @@ function MyTabs() {
 
             <Tab.Screen
                 name="Agregar Contacto"
-                component={CScreen}
+                component={Contact_Screen}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <SimpleLineIcons name="user-follow" size={24} color={color} />
@@ -116,8 +119,8 @@ function MyTabs() {
 
 
             <Tab.Screen
-                name="Perfil"
-                component={MyStack}
+                name="Profile"
+                component={ProfileStack}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <Ionicons name="person-circle-sharp" size={29} color={color} />
@@ -134,7 +137,7 @@ function MyTabs() {
     );
 }
 
-function CScreen() {
+function Contact_Screen() {
     return (
         <CNavigation.Navigator>
             <CNavigation.Screen
@@ -146,19 +149,19 @@ function CScreen() {
                 
                 <CNavigation.Screen
                 name="Editar"
-                component={Contactos_Editar}
+                component={Edit_Contacts}
                 options={{
                 }} />
                 
                 <CNavigation.Screen
                 name="ViewD"
-                component={DataC}
+                component={C_Information}
                 options={{
                 }} />
                 
                 <CNavigation.Screen
                 name="Agregar"
-                component={AgregarContacto}
+                component={AddContact}
                 options={{
                 }} />
             
@@ -174,18 +177,18 @@ function CScreen() {
 
 
 
-function RNavegation() {
+function R_Navegation() {
     return (
         <Rstack.Navigator>
             <Rstack.Screen
-                name="Registro"
+                name="Register"
                 component={Register}
                 options={{
                     headerShown: false
                 }} />
             <Rstack.Screen
-                name="Contacto"
-                component={ContactsR}
+                name="Contact_R"
+                component={Contact_Registration}
                 options={{
                     headerTransparent: true
                 }} />
@@ -196,15 +199,15 @@ function RNavegation() {
                     headerTransparent: true
                 }} />
             <Rstack.Screen
-                name="Dirección"
-                component={Address}
+                name="Address_R"
+                component={Address_R}
                 options={{
 
                     headerTransparent: true
                 }} />
             <Rstack.Screen
-                name="Principal"
-                component={MyTabs}
+                name="Home"
+                component={HomeTabs}
                 options={{
                     headerShown: false
                 }} />
@@ -214,13 +217,13 @@ function RNavegation() {
     )
 }
 
-export default function PantallaNav() {
+export default function Navigate() {
 
     return (
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen
-                    name="Inicio" component={Principal}
+                    name="Start" component={Start}
                     options={{
                         headerShown: false,
 
@@ -235,7 +238,7 @@ export default function PantallaNav() {
                     }}
                 />
                 <Stack.Screen
-                    name="Principal" component={MyTabs}
+                    name="Home" component={HomeTabs}
                     options={{
                         headerShown: false
                     }}
@@ -243,7 +246,7 @@ export default function PantallaNav() {
 
 
                 <Stack.Screen
-                    name="Registro" component={RNavegation}
+                    name="Register" component={R_Navegation}
                     options={{
 
                         headerShown: false

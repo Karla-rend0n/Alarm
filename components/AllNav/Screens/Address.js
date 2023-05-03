@@ -1,13 +1,14 @@
-import * as React from 'react'
-import { Box, Center, Heading, VStack, FormControl, Input, Icon, ScrollView, Button, Circle, HStack} from 'native-base'
-import { Ionicons, MaterialIcons, Entypo, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
-import { useNavigation } from "@react-navigation/native";
+import React from "react";
+import { Center, Box, Avatar, Icon, Input, FormControl, Button, Stack, ScrollView, Heading, HStack, Container, Divider, Text, VStack } from "native-base"
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+
 
 export default function Address() {
     const navigation = useNavigation();
 
-    return <ScrollView w="100%" h="100%">
-        <Center w="100%" h="100%" bg={{
+    return <ScrollView w='100%' h="100%">
+        <Center w='100%' h="100%" bg={{
             linearGradient: {
                 colors: ['primary.400', 'primary.800'],
                 start: [1, 0],
@@ -16,175 +17,112 @@ export default function Address() {
             }
         }}>
 
-            <Box safeArea p="2" py="8" w="90%" maxW="290" >
-
+            <Box background='primary.50' w="100%" alignItems='center'>
                 <Heading size="lg" fontWeight="600" color="Black" _dark={{
-                    color: "primary.50"
-                }} >
+                    color: "primary.900",
+                    fontWeight: 'bold'
+                }} marginTop='50'
+                    marginBottom='50'>
                     Dirección
                 </Heading>
-                <Heading mt="1" color="primary.50" fontWeight='medium' size='xs'>
-                    Completa los siguientes campos.
-                </Heading>
+            </Box>
 
-                <VStack space={3} mt={5}>
-                    <FormControl >
 
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold'
-                        }} marginLeft={2}>
+            <Box w="100%" h="82%" alignItems="center" >
+                <Stack space={5} w="75%" maxW="350px" mx="auto" m="10">
+
+                    <VStack space={3}>
+                        <Heading fontWeight='bold' fontSize='md'>
                             Dirección
-                        </FormControl.Label>
-                        <Input p={2} placeholder="Address" backgroundColor="primary.100"
-                            variant="rounded"
-                            InputLeftElement={<Icon as={<FontAwesome name='address-book-o' />} size={5} ml="2" color='primary.200' />} />
-                        <FormControl.HelperText>
+                        </Heading>
+                        <Text fontWeight='normal' fontSize='md' mx={10}>
+                            Av. Adolfo
+                        </Text>
+                        <Divider mx={1} background='primary.50' />
+                    </VStack>
 
-                        </FormControl.HelperText>
-                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
-
-                    </FormControl>
-
-                    <FormControl >
-
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold'
-                        }} marginLeft={2} >
+                    <VStack space={3}>
+                        <Heading fontWeight='bold' fontSize='md'>
                             Calle
-                        </FormControl.Label>
-                        <Input p={2} placeholder="Street" backgroundColor="primary.100"
-                            variant="rounded"
-                            InputLeftElement={<Icon as={<Entypo name='address' />} size={5} ml="2" color='primary.200' />} />
-                        <FormControl.HelperText>
+                        </Heading>
+                        <Text fontWeight='normal' fontSize='md' mx={10}>
+                            Los pinos
+                        </Text>
+                        <Divider mx={1} background='primary.50' />
+                    </VStack>
+                    <VStack space={3}>
+                        <Heading fontWeight='bold' fontSize='md'>
+                            Número exterior
+                        </Heading>
+                        <Text fontWeight='normal' fontSize='md' mx={10}>
+                            34
+                        </Text>
+                        <Divider mx={1} background='primary.50' />
+                    </VStack>
+                    <VStack space={3}>
+                        <Heading fontWeight='bold' fontSize='md'>
+                            Número interior
+                        </Heading>
+                        <Text fontWeight='normal' fontSize='md' mx={10}>
+                            5
+                        </Text>
+                        <Divider mx={1} background='primary.50' />
+                    </VStack>
+                    <VStack space={3}>
+                        <Heading fontWeight='bold' fontSize='md'>
+                        Colonia
+                        </Heading>
+                        <Text fontWeight='normal' fontSize='md' mx={10}>
+                        Industrial
+                        </Text>
+                        <Divider mx={1} background='primary.50' />
+                    </VStack>
+                    <VStack space={3}>
+                        <Heading fontWeight='bold' fontSize='md'>
+                        Código Postal
+                        </Heading>
+                        <Text fontWeight='normal' fontSize='md' mx={10}>
+                        58794
+                        </Text>
+                        <Divider mx={1} background='primary.50' />
+                    </VStack>
+                    <VStack space={3}>
+                        <Heading fontWeight='bold' fontSize='md'>
+                        Estado
+                        </Heading>
+                        <Text fontWeight='normal' fontSize='md' mx={10}>
+                        Aguascalientes
+                        </Text>
+                        <Divider mx={1} background='primary.50' />
+                    </VStack>
+                    <VStack space={3}>
+                        <Heading fontWeight='bold' fontSize='md'>
+                        Municipio 
+                        </Heading>
+                        <Text fontWeight='normal' fontSize='md' mx={10}>
+                        Aguascalientes
+                        </Text>
+                        <Divider mx={1} background='primary.50' />
+                    </VStack>
 
-                        </FormControl.HelperText>
-                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
 
-                    </FormControl>
-                    <FormControl >
 
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold'
-                        }} marginLeft={2} >
-                            Numero Exterior
-                        </FormControl.Label>
-                        <Input type='number'
-                            p={2} placeholder="717" backgroundColor="primary.100"
-                            variant="rounded"
-                            InputLeftElement={<Icon as={<MaterialCommunityIcons name='home-group' />} size={5} ml="2" color='primary.200' />} />
-                        <FormControl.HelperText>
 
-                        </FormControl.HelperText>
-                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
-
-                    </FormControl>
-                    <FormControl >
-
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold'
-                        }} marginLeft={2} >
-                            Numero Interior
-                        </FormControl.Label>
-                        <Input p={2} placeholder="5B" backgroundColor="primary.100"
-                            variant="rounded"
-                            InputLeftElement={<Icon as={<MaterialCommunityIcons name='home-import-outline' />} size={5} ml="2" color='primary.200' />} />
-                        <FormControl.HelperText>
-
-                        </FormControl.HelperText>
-                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
-
-                    </FormControl>
-                    <FormControl >
-
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold'
-                        }} marginLeft={2} >
-                            Colonia
-                        </FormControl.Label>
-                        <Input p={2} placeholder="Col" backgroundColor="primary.100"
-                            variant="rounded"
-                            InputLeftElement={<Icon as={<MaterialCommunityIcons name='home-group' />} size={5} ml="2" color='primary.200' />} />
-                        <FormControl.HelperText>
-
-                        </FormControl.HelperText>
-                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
-
-                    </FormControl>
-                    <FormControl >
-
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold'
-                        }}marginLeft={2} >
-                            Codigo Postal
-                        </FormControl.Label>
-                        <Input p={2} placeholder="Password" backgroundColor="primary.100"
-                            variant="rounded"
-                            InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />} />
-                        <FormControl.HelperText>
-
-                        </FormControl.HelperText>
-                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
-
-                    </FormControl>
-                    <FormControl >
-
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold'
-                        }}marginLeft={2} >
-                            Contraseña
-                        </FormControl.Label>
-                        <Input p={2} placeholder="Password" backgroundColor="primary.100"
-                            variant="rounded"
-                            InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />} />
-                        <FormControl.HelperText>
-
-                        </FormControl.HelperText>
-                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
-
-                    </FormControl>
-                    <FormControl >
-
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold'
-                        }}marginLeft={2} >
-                            Contraseña
-                        </FormControl.Label>
-                        <Input p={2} placeholder="Password" backgroundColor="primary.100"
-                            variant="rounded"
-                            InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />} />
-                        <FormControl.HelperText>
-
-                        </FormControl.HelperText>
-                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
-
-                    </FormControl>
-                    <HStack space={10} marginLeft='45'>
-                    <Button marginTop={15} backgroundColor='primary.200' size='lg'
-                        onPress={() => {navigation.navigate("Principal")}}>
-                        Omitir
+                    <Button background="primary.300" mt="5" _text={{
+                        color: "primary.900",
+                        fontWeight: "400",
+                        fontSize: "xl"
+                    }} rounded='full'
+                    onPress={() => navigation.navigate("Address_Edit")}>
+                        Editar
                     </Button>
-                    <Button onPress={() => {navigation.navigate("Principal")}} marginTop={15} backgroundColor='primary.200'>
-                        Finalizar
-                    </Button>
-                    </HStack>
 
-                </VStack>
-                <HStack space={3} marginLeft='110' marginTop='5'>
-                    <Circle size="10px" bg="primary.300"></Circle>
-                    <Circle size="10px" bg="primary.300"></Circle>
-                    <Circle size="10px" bg="primary.800"></Circle>
 
-                </HStack>
+                </Stack>
             </Box>
 
         </Center>
+
     </ScrollView>
+
 }

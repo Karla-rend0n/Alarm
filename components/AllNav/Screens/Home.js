@@ -2,7 +2,7 @@ import React from "react";
 import {Center, Box, Heading, Button, Text, TouchableOpacity} from "native-base"
 
 
-export default function Inicio(){
+export default function Start(){
     const showMessage = () => Alert.alert('Button clicked !');
 
     return (

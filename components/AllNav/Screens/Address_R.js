@@ -1,10 +1,11 @@
 import * as React from 'react'
 import { Box, Center, Heading, VStack, FormControl, Input, Icon, ScrollView, Button, Circle, HStack} from 'native-base'
 import { Ionicons, MaterialIcons, Entypo, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
-export default function Dirección_Editar() {
+export default function Address_R() {
     const navigation = useNavigation();
+
     return <ScrollView w="100%" h="100%">
         <Center w="100%" h="100%" bg={{
             linearGradient: {
@@ -14,20 +15,19 @@ export default function Dirección_Editar() {
 
             }
         }}>
-            <Box background='primary.50'  w="100%" alignItems='center'>
-            <Heading  size="lg" fontWeight="600" color="Black" _dark={{
-                    color: "primary.900",
-                    fontWeight:'bold'
-                }} marginTop='50'
-                marginBottom='50'>
-                    Dirección
-                </Heading>
-            </Box>
 
             <Box safeArea p="2" py="8" w="90%" maxW="290" >
 
+                <Heading size="lg" fontWeight="600" color="Black" _dark={{
+                    color: "primary.50"
+                }} >
+                    Dirección
+                </Heading>
+                <Heading mt="1" color="primary.50" fontWeight='medium' size='xs'>
+                    Completa los siguientes campos.
+                </Heading>
 
-                <VStack space={3}>
+                <VStack space={3} mt={5}>
                     <FormControl >
 
                         <FormControl.Label _text={{
@@ -166,16 +166,23 @@ export default function Dirección_Editar() {
                         <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
 
                     </FormControl>
-                
-                    <Button onPress={() => {navigation.navigate("Dirección")}}
-                     marginTop={15} backgroundColor='primary.200' size='lg'>
-                        Guardar
+                    <HStack space={10} marginLeft='45'>
+                    <Button marginTop={15} backgroundColor='primary.200' size='lg'
+                        onPress={() => {navigation.navigate("Principal")}}>
+                        Omitir
                     </Button>
-                    
-                    
+                    <Button onPress={() => {navigation.navigate("Principal")}} marginTop={15} backgroundColor='primary.200'>
+                        Finalizar
+                    </Button>
+                    </HStack>
 
                 </VStack>
-                
+                <HStack space={3} marginLeft='110' marginTop='5'>
+                    <Circle size="10px" bg="primary.300"></Circle>
+                    <Circle size="10px" bg="primary.300"></Circle>
+                    <Circle size="10px" bg="primary.800"></Circle>
+
+                </HStack>
             </Box>
 
         </Center>

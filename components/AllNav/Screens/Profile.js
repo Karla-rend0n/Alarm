@@ -4,7 +4,7 @@ import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 
 
-export default function Perfil() {
+export default function Profile() {
     const navigation = useNavigation();
 
     return <Center w='100%' h="100%" bg={{
@@ -35,7 +35,7 @@ export default function Perfil() {
             <Box w="100%" h="82%" alignItems="center" >
                 <Stack space={5} w="75%" maxW="350px" mx="auto" m="10">
                     
-                    <Button rounded='full' background="primary.300" mt="0.5" onPress={() => navigation.navigate("Editar")} _text={{
+                    <Button rounded='full' background="primary.300" mt="0.5" onPress={() => navigation.navigate("Edit_P")} _text={{
                         color: "primary.900",
                         fontWeight: 'normal',
                         fontSize: "md"
@@ -84,7 +84,7 @@ export default function Perfil() {
                     
 
 
-                    <Button background="primary.300" mt="5" onPress={() => navigation.navigate("Dirección")}_text={{
+                    <Button background="primary.300" mt="5" onPress={() => navigation.navigate("Address")}_text={{
                         color: "primary.900",
                         fontWeight: "400",
                         fontSize: "xl"

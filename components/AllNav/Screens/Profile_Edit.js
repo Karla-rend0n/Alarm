@@ -4,7 +4,7 @@ import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 
 
-export default function Perfil_Editar() {
+export default function Profile_Edit() {
     const navigation = useNavigation();
 
     return <ScrollView w="100%" h="100%">

@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 
 
 
-export default function Principal(){
+export default function Home(){
     const navigation = useNavigation();
 
     return <Center w="100%" h="100%" bg={{

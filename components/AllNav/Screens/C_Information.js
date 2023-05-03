@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 
 
 
-export default function DataC() {
+export default function C_Information() {
     const navigation = useNavigation();
 
     return <Center w="100%" h="100%" bg={{
