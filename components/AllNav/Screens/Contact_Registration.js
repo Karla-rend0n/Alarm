@@ -100,16 +100,29 @@ export default function Contact_Registration() {
                         <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
 
                     </FormControl>
+
+
                     <HStack space={10} marginLeft='45'>
-                        <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("Address_R")}}>Omitir</Button>
-                        <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("ViewContact")}}>Guardar</Button>
+                    <Button marginTop={15} backgroundColor='primary.200' size='lg' borderWidth="2" borderColor="primary.200"
+                        onPress={() => {navigation.navigate("Address_R")}}>
+                        Omitir
+                    </Button>
+                    <Button marginTop={15} backgroundColor='primary.200' size='lg' borderWidth="2" borderColor="primary.200"
+                    onPress={() => {navigation.navigate("ViewContact")}} >
+                        Finalizar
+                    </Button>
                     </HStack>
+
+                    {/* <HStack space={10} marginLeft='45'>
+                        <Button size='lg' bg='primary.200' borderWidth="2" borderColor="primary.200" onPress={() => {navigation.navigate("Address_R")}}>Omitir</Button>
+                        <Button size='lg' bg='primary.200' borderWidth="2" borderColor="primary.200" onPress={() => {navigation.navigate("ViewContact")}}>Guardar</Button>
+                    </HStack> */}
 
                 </VStack>
                 <HStack space={3} marginLeft='110' marginTop='5'>
-                    <Circle size="10px" bg="primary.300"></Circle>
-                    <Circle size="10px" bg="primary.800"></Circle>
-                    <Circle size="10px" bg="primary.300"></Circle>
+                    <Circle size="10px" bg="primary.200"></Circle>
+                    <Circle size="10px" bg="primary.50"></Circle>
+                    <Circle size="10px" bg="primary.200"></Circle>
 
                 </HStack>
             </Box>

@@ -167,20 +167,21 @@ export default function Address_R() {
 
                     </FormControl>
                     <HStack space={10} marginLeft='45'>
-                    <Button marginTop={15} backgroundColor='primary.200' size='lg'
+                    <Button marginTop={15} backgroundColor='primary.200' size='lg' borderWidth="2" borderColor="primary.200"
                         onPress={() => {navigation.navigate("Home")}}>
                         Omitir
                     </Button>
-                    <Button onPress={() => {navigation.navigate("Home")}} marginTop={15} backgroundColor='primary.200'>
+                    <Button marginTop={15} backgroundColor='primary.200' size='lg' borderWidth="2" borderColor="primary.200"
+                    onPress={() => {navigation.navigate("Home")}} >
                         Finalizar
                     </Button>
                     </HStack>
 
                 </VStack>
                 <HStack space={3} marginLeft='110' marginTop='5'>
-                    <Circle size="10px" bg="primary.300"></Circle>
-                    <Circle size="10px" bg="primary.300"></Circle>
-                    <Circle size="10px" bg="primary.800"></Circle>
+                    <Circle size="10px" bg="primary.200"></Circle>
+                    <Circle size="10px" bg="primary.200"></Circle>
+                    <Circle size="10px" bg="primary.50"></Circle>
 
                 </HStack>
             </Box>

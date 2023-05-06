@@ -19,11 +19,11 @@ export default function App() {
         100: '#DDDAE0', // Gris de input 100%
         200: '#807E82',// gris de los botones fuerte 100%
         300: '#D9D9D9', //botones de alarma y enmergencia 
-        400: '#6585B8',//degradado
+        400: '#621132',//Tinto 
         500: '#C1591F',//Naranja
         600: '#9B1010',//Rojo Emergencia
         700: '#DDDAE0',//gris de los botones claro 70%
-        800: '#1B396A',// Azul
+        800: '#63110E',// Tinto degradado
         900: '#000000',//Negro
         1000: '#C1591F',//borde naranja
         1001: '#9B1010' // borde rojo

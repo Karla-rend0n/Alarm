@@ -36,17 +36,17 @@ export default function Contacts() {
                             isHovered,
                             isPressed
                         }) => {
-                            return <Box bg={isPressed ? "primary.100" : isHovered ? "primary.100" : "primary.200"} style={{
+                            return <Box bg={isPressed ? "primary.100" : isHovered ? "primary.100" : "primary.300"} style={{
                                 transform: [{
                                     scale: isPressed ? 0.96 : 1
                                 }]
-                            }} p="5" rounded="8" shadow={3} borderWidth="1" borderColor="primary.200">
+                            }} p="5" rounded="8" shadow={3} borderWidth="3" borderColor="primary.200">
                                 <HStack alignItems="center">
                                     <Image width="50" height="50"
                                         mt="5" mb='5' ml='5' mr='5'
                                         source={require('../../../assets/IconoPerfil.png')} />
 
-                                    <Text color='primary.50' mt='1' fontWeight='bold' >
+                                    <Text color='primary.900' mt='1' fontWeight='bold' >
                                         María Herrera
                                     </Text>
                                 </HStack>

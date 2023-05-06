@@ -168,7 +168,7 @@ export default function Address_Edit() {
                     </FormControl>
                 
                     <Button onPress={() => {navigation.navigate("Address")}}
-                     marginTop={15} backgroundColor='primary.200' size='lg'>
+                     marginTop={15} backgroundColor='primary.200' size='lg' borderWidth="2" borderColor="primary.200" rounded={10}>
                         Guardar
                     </Button>
                     

@@ -1,11 +1,12 @@
 import React from "react";
-import {Center, Box, Heading, Button, Text, TouchableOpacity} from "native-base"
+import {Center, Box, Heading, Button, Text, TouchableOpacity, ScrollView} from "native-base"
 
 
 export default function Start(){
     const showMessage = () => Alert.alert('Button clicked !');
 
     return (
+        <ScrollView w="100%" h="100%">
 
         <Center w="100%" h="100%" bg={{
             linearGradient: {
@@ -44,22 +45,12 @@ export default function Start(){
 
         </Button>
 
-
-    
     </Button>
     
-      
-
-
-
-
-
-
-        
-
         </Box>
 
 </Center>
+</ScrollView>
    
     );
 }

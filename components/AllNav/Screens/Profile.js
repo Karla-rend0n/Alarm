@@ -7,7 +7,8 @@ import { useNavigation } from "@react-navigation/native";
 export default function Profile() {
     const navigation = useNavigation();
 
-    return <Center w='100%' h="100%" bg={{
+    return <ScrollView w="100%" h="100%">
+    <Center w='100%' h="100%" bg={{
                 linearGradient: {
                     colors: ['primary.400', 'primary.800'],
                     start: [1, 0],
@@ -97,6 +98,7 @@ export default function Profile() {
             </Box>
 
         </Center>
+        </ScrollView>
    
 
 

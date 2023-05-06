@@ -37,17 +37,17 @@ export default function ViewContact() {
                             isHovered,
                             isPressed
                         }) => {
-                            return <Box bg={isPressed ? "primary.100" : isHovered ? "primary.100" : "primary.200"} style={{
+                            return <Box bg={isPressed ? "primary.100" : isHovered ? "primary.100" : "primary.300"} style={{
                                 transform: [{
                                     scale: isPressed ? 0.96 : 1
                                 }]
-                            }} p="5" rounded="8" shadow={3} borderWidth="1" borderColor="primary.200">
+                            }} p="5" rounded="8" shadow={3} borderWidth="3" borderColor="primary.200">
                                 <HStack alignItems="center">
                                     <Image width="50" height="50"
                                         mt="5" mb='5' ml='5' mr='5'
                                         source={require('../../../assets/IconoPerfil.png')} />
 
-                                    <Text color='primary.50' mt='1' fontWeight='bold'>
+                                    <Text color='primary.900' mt='3' fontWeight='bold'>
                                         María Herrera
                                     </Text>
                                 </HStack>
@@ -59,15 +59,16 @@ export default function ViewContact() {
                         </Pressable>
                     </Box>
 
-                    <Button onPress={() => {navigation.navigate("Address_R")}}  marginTop='255' background='primary.200' rounded='full'>
+                    <Button marginTop='255' background='primary.200' rounded='full' size='lg' borderWidth="2" borderColor="primary.200"
+                    onPress={() => {navigation.navigate("Address_R")}}>
                         Siguiente
                     </Button>
                 </VStack>
 
                 <HStack space={3} marginLeft='110' marginTop='5'>
-                    <Circle size="10px" bg="primary.300"></Circle>
-                    <Circle size="10px" bg="primary.800"></Circle>
-                    <Circle size="10px" bg="primary.300"></Circle>
+                    <Circle size="10px" bg="primary.200"></Circle>
+                    <Circle size="10px" bg="primary.50"></Circle>
+                    <Circle size="10px" bg="primary.200"></Circle>
 
                 </HStack>
 

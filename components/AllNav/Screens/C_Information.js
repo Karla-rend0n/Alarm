@@ -28,27 +28,27 @@ export default function C_Information() {
                             isHovered,
                             isPressed
                         }) => {
-                            return <Box bg={isPressed ? "primary.100" : isHovered ? "primary.100" : "primary.200"} style={{
+                            return <Box bg={isPressed ? "primary.100" : isHovered ? "primary.100" : "primary.300"} style={{
                                 transform: [{
                                     scale: isPressed ? 0.96 : 1
                                 }]
-                            }} p="5" rounded="8" shadow={3} borderWidth="1" borderColor="primary.200">
+                            }} p="5" rounded="8" shadow={3} borderWidth="3" borderColor="primary.200">
                                 <VStack space={3} alignItems='center'>
                                 <Image width="50" height="50"
                                         source={require('../../../assets/IconoPerfil.png')} />
                                 <HStack alignItems="center" space={10}>
-                                <Text color='primary.50' mt='1' fontWeight='bold'>
+                                <Text color='primary.900' mt='1' fontWeight='bold'>
                                         Mamá
                                     </Text>
-                                    <Text color='primary.50' mt='1' fontWeight='bold'>
+                                    <Text color='primary.900' mt='1' fontWeight='bold'>
                                         María 
                                     </Text>
 
-                                    <Text color='primary.50' mt='1' fontWeight='bold'>
+                                    <Text color='primary.900' mt='1' fontWeight='bold'>
                                         Herrera
                                     </Text>
                                 </HStack>
-                                <Text color='primary.50' mt='1' fontWeight='bold'>
+                                <Text color='primary.900' mt='1' fontWeight='bold'>
                                     449-456-98-78
                                     </Text>
                                 </VStack>
@@ -58,11 +58,19 @@ export default function C_Information() {
                     
                         }}
                         </Pressable>
-
+                        
                         <HStack mt='3/4' space={20} marginLeft='4'>
+                    <Button backgroundColor='primary.200' size='lg' borderWidth="2" borderColor="primary.200"
+                        onPress={() => {navigation.navigate("Edit")}}>
+                        Editar
+                    </Button>
+                    <Button backgroundColor='primary.200' size='lg' borderWidth="2" borderColor="primary.200">Eliminar</Button>
+                    </HStack>
+
+                        {/* <HStack mt='3/4' space={20} marginLeft='4'>
                         <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("Edit")}}>Editar</Button>
                         <Button size='lg' bg='primary.200'>Eliminar</Button>
-                    </HStack>
+                    </HStack> */}
                     </Box>
                     
                    

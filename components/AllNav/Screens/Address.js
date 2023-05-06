@@ -17,7 +17,7 @@ export default function Address() {
             }
         }}>
 
-            <Box background='primary.50' w="100%" alignItems='center'>
+            <Box background='primary.50'  w="100%" alignItems='center'>
                 <Heading size="lg" fontWeight="600" color="Black" _dark={{
                     color: "primary.900",
                     fontWeight: 'bold'
@@ -28,7 +28,7 @@ export default function Address() {
             </Box>
 
 
-            <Box w="100%" h="82%" alignItems="center" >
+            <Box w="100%" p="2" py="8" alignItems="center" >
                 <Stack space={5} w="75%" maxW="350px" mx="auto" m="10">
 
                     <VStack space={3}>

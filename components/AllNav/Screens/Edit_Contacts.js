@@ -97,8 +97,14 @@ export default function Edit_Contacts() {
                         <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
 
                     </FormControl>
+
+                    <Button mt= '5' size='lg' marginTop={15} backgroundColor='primary.200' borderWidth="2" borderColor="primary.200" rounded={10}
+                    onPress={() => {navigation.navigate("Contacts")}}>
+                        Guardar
+                    </Button>
                         
-                        <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("Contacts")}}>Guardar</Button>
+                        {/* <Button mt= '5' size='lg' bg='primary.200' borderWidth="2" borderColor="primary.200"
+                        onPress={() => {navigation.navigate("Contacts")}}>Guardar</Button> */}
                     
 
                 </VStack>

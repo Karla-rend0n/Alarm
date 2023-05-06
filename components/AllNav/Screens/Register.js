@@ -141,8 +141,8 @@ export default function Register() {
 
                     </FormControl>
                     
-                    <Button onPress={() => {navigation.navigate("Contact_R")}}
-                    marginTop={15} backgroundColor='primary.200'>
+                    <Button  marginTop={15} backgroundColor='primary.200' borderWidth="2" borderColor="primary.200" mt="5" size='lg' rounded={10}
+                    onPress={() => {navigation.navigate("Contact_R")}}>
                         Guardar
                     </Button>
                     
@@ -160,9 +160,9 @@ export default function Register() {
                     </HStack>
                 </VStack>
                 <HStack space={3} marginLeft='110' marginTop='5'>
-                    <Circle size="10px" bg="primary.800"></Circle>
-                    <Circle size="10px" bg="primary.300"></Circle>
-                    <Circle size="10px" bg="primary.300"></Circle>
+                    <Circle size="10px" bg="primary.50"></Circle>
+                    <Circle size="10px" bg="primary.200"></Circle>
+                    <Circle size="10px" bg="primary.200"></Circle>
 
                 </HStack>
             </Box>
