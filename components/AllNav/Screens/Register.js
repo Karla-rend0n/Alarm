@@ -1,10 +1,51 @@
 import * as React from 'react'
-import { Box, Center, Heading, VStack, FormControl, Input, Icon, ScrollView, Button, HStack, Text, Link, Circle} from 'native-base'
+import { Box, Center, Heading, VStack, FormControl, Input, Icon, ScrollView, Button, HStack, Text, Link, Circle } from 'native-base'
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 
-export default function Register() {  
+
+export default function Register() {
     const navigation = useNavigation();
+    const [formData, setFormData] = React.useState({})
+    const [errors, setErrors] = React.useState({})
+    var emailVal = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
+    var namVal= /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
+
+    
+
+
+    const validate = () => {
+        let isValid=true;
+        setErrors({})
+        if (!emailVal.test(formData.email)) {
+            console.log('no valida')
+          setErrors({...errors, email: 'is not valid' });
+          isValid=false
+        } else {
+          setErrors({});
+          console.log('good', formData)
+          isValid=true
+        }
+
+        if(formData.name===undefined){
+            setErrors({...errors, name: 'Name is required'})
+            isValid=false
+        }else if (formData.name.length < 3) {
+            setErrors({ ...errors,
+              name: 'Name is too short'
+            });
+            isValid= false
+          }else if(!namVal.test(formData.name)){
+            setErrors({...errors, name:'Name is invalid'})
+            isValid= false
+          }
+        return isValid
+      };
+
+    
+
+
+const submit = () => { validate() ? navigation.navigate("Contact_R")  : console.log('bad', formData) }
 
     return <ScrollView w="100%" h="100%">
         <Center w="100%" h="100%" bg={{
@@ -44,7 +85,7 @@ export default function Register() {
                         <FormControl.HelperText>
 
                         </FormControl.HelperText>
-                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
+                        <FormControl.ErrorsMessage>Something is wrong.</FormControl.ErrorsMessage>
 
                     </FormControl>
 
@@ -63,7 +104,7 @@ export default function Register() {
                         <FormControl.HelperText>
 
                         </FormControl.HelperText>
-                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
+                        <FormControl.ErrorsMessage>Something is wrong.</FormControl.ErrorsMessage>
 
                     </FormControl>
                     <FormControl >
@@ -82,7 +123,7 @@ export default function Register() {
                         <FormControl.HelperText>
 
                         </FormControl.HelperText>
-                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
+                        <FormControl.ErrorsMessage>Something is wrong.</FormControl.ErrorsMessage>
 
                     </FormControl>
                     <FormControl >
@@ -100,8 +141,28 @@ export default function Register() {
                         <FormControl.HelperText>
 
                         </FormControl.HelperText>
-                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
+                        <FormControl.ErrorsMessage>Something is wrong.</FormControl.ErrorsMessage>
 
+                    </FormControl>
+                    <FormControl isRequired isInvalid={'email' in errors}>
+                        <FormControl.Label _text={{
+                            color: 'primary.50',
+                            fontWeight: 'bold'
+                        }} marginLeft={2} >
+                            Email
+                        </FormControl.Label>
+                        <Input p={2} placeholder="Email" backgroundColor="primary.100" 
+                            variant="rounded"
+                            color="primary.900"
+                            InputLeftElement={<Icon as={<MaterialIcons name='email' />} size={5} ml="2" color='primary.200' />} 
+                            //type='email'
+                            onChangeText={value=>setFormData({...formData, email: value})}
+                            />
+                        
+                        {'email' in errors ?<FormControl.ErrorsMessage >{errors.email}</FormControl.ErrorsMessage>:<FormControl.HelperText>
+                            Ingresa un correo valido
+                        </FormControl.HelperText>
+                        }
                     </FormControl>
                     <FormControl >
 
@@ -109,24 +170,6 @@ export default function Register() {
                             color: 'primary.50',
                             fontWeight: 'bold'
                         }} marginLeft={2} >
-                            Email
-                        </FormControl.Label>
-                        <Input p={2} placeholder="Email" backgroundColor="primary.100"
-                            variant="rounded"
-                            color="primary.900"
-                            InputLeftElement={<Icon as={<MaterialIcons name='email' />} size={5} ml="2" color='primary.200' />} />
-                        <FormControl.HelperText>
-
-                        </FormControl.HelperText>
-                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
-
-                    </FormControl>
-                    <FormControl >
-
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold'
-                        }}marginLeft={2} >
                             Contraseña
                         </FormControl.Label>
                         <Input p={2} placeholder="Password" backgroundColor="primary.100"
@@ -137,20 +180,20 @@ export default function Register() {
                         <FormControl.HelperText>
 
                         </FormControl.HelperText>
-                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
+                        <FormControl.ErrorsMessage>Something is wrong.</FormControl.ErrorsMessage>
 
                     </FormControl>
-                    
-                    <Button  marginTop={15} backgroundColor='primary.200' borderWidth="2" borderColor="primary.200" mt="5" size='lg' rounded={10}
-                    onPress={() => {navigation.navigate("Contact_R")}}>
+
+                    <Button marginTop={15} backgroundColor='primary.200' borderWidth="2" borderColor="primary.200" mt="5" size='lg' rounded={10}
+                        onPress={submit} >
                         Guardar
                     </Button>
-                    
+
                     <HStack color="primary.50" marginLeft='5' fontWeight="normal">
                         <Text fontSize="sm" >
                             ¿Ya tienes una cuenta? {" "}
                         </Text>
-                        <Link onPress={() => {navigation.navigate("Login")}} _text={{
+                        <Link onPress={() => { navigation.navigate("Login") }} _text={{
                             color: "primary.50",
                             fontWeight: "bold",
                             fontSize: "sm"
