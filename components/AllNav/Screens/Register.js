@@ -9,43 +9,52 @@ export default function Register() {
     const [formData, setFormData] = React.useState({})
     const [errors, setErrors] = React.useState({})
     var emailVal = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
-    var namVal= /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
+    var namVal = /^[A-Za-z]+$/i
 
-    
+
 
 
     const validate = () => {
-        let isValid=true;
+        let isValid = true;
         setErrors({})
         if (!emailVal.test(formData.email)) {
             console.log('no valida')
-          setErrors({...errors, email: 'is not valid' });
-          isValid=false
+            setErrors({ ...errors, email: 'is not valid' });
+            isValid = false
         } else {
-          setErrors({});
-          console.log('good', formData)
-          isValid=true
+            setErrors({});
+            console.log('good', formData)
+            isValid = true
         }
 
-        if(formData.name===undefined){
-            setErrors({...errors, name: 'Name is required'})
-            isValid=false
-        }else if (formData.name.length < 3) {
-            setErrors({ ...errors,
-              name: 'Name is too short'
-            });
-            isValid= false
-          }else if(!namVal.test(formData.name)){
-            setErrors({...errors, name:'Name is invalid'})
-            isValid= false
-          }
+        if (formData.name === undefined) {
+            setErrors({ ...errors, name: 'Name is required' })
+            isValid = false
+        } else{
+            if (formData.name.length <= 3) {
+                setErrors({
+                    ...errors,
+                    name: 'Name is too short'
+                });
+                isValid = false
+                console.log('valida')
+        }else{
+            if(!namVal.test(formData.name))
+            {
+                setErrors({
+                    ...errors,
+                    name: 'ingrese letras'
+                })
+            }
+        }
+    }
         return isValid
-      };
-
-    
+    };
 
 
-const submit = () => { validate() ? navigation.navigate("Contact_R")  : console.log('bad', formData) }
+
+
+    const submit = () => { validate() ? console.log('good', formData) : console.log('bad', formData) }
 
     return <ScrollView w="100%" h="100%">
         <Center w="100%" h="100%" bg={{
@@ -70,7 +79,7 @@ const submit = () => { validate() ? navigation.navigate("Contact_R")  : console.
                 </Heading>
 
                 <VStack space={3} mt={5}>
-                    <FormControl >
+                    <FormControl isRequired isInvalid={'name' in errors} >
 
                         <FormControl.Label _text={{
                             color: 'primary.50',
@@ -81,12 +90,13 @@ const submit = () => { validate() ? navigation.navigate("Contact_R")  : console.
                         <Input p={2} placeholder="Name" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            onChangeText={value => setFormData({ ...formData, name: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
-                        <FormControl.HelperText>
+
+                        {'name' in errors ? <FormControl.ErrorMessage>{errors.name}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
                         </FormControl.HelperText>
-                        <FormControl.ErrorsMessage>Something is wrong.</FormControl.ErrorsMessage>
-
+                        }
                     </FormControl>
 
                     <FormControl >
@@ -104,7 +114,7 @@ const submit = () => { validate() ? navigation.navigate("Contact_R")  : console.
                         <FormControl.HelperText>
 
                         </FormControl.HelperText>
-                        <FormControl.ErrorsMessage>Something is wrong.</FormControl.ErrorsMessage>
+                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
 
                     </FormControl>
                     <FormControl >
@@ -123,7 +133,7 @@ const submit = () => { validate() ? navigation.navigate("Contact_R")  : console.
                         <FormControl.HelperText>
 
                         </FormControl.HelperText>
-                        <FormControl.ErrorsMessage>Something is wrong.</FormControl.ErrorsMessage>
+                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
 
                     </FormControl>
                     <FormControl >
@@ -141,7 +151,7 @@ const submit = () => { validate() ? navigation.navigate("Contact_R")  : console.
                         <FormControl.HelperText>
 
                         </FormControl.HelperText>
-                        <FormControl.ErrorsMessage>Something is wrong.</FormControl.ErrorsMessage>
+                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
 
                     </FormControl>
                     <FormControl isRequired isInvalid={'email' in errors}>
@@ -151,15 +161,15 @@ const submit = () => { validate() ? navigation.navigate("Contact_R")  : console.
                         }} marginLeft={2} >
                             Email
                         </FormControl.Label>
-                        <Input p={2} placeholder="Email" backgroundColor="primary.100" 
+                        <Input p={2} placeholder="Email" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
-                            InputLeftElement={<Icon as={<MaterialIcons name='email' />} size={5} ml="2" color='primary.200' />} 
+                            InputLeftElement={<Icon as={<MaterialIcons name='email' />} size={5} ml="2" color='primary.200' />}
                             //type='email'
-                            onChangeText={value=>setFormData({...formData, email: value})}
-                            />
-                        
-                        {'email' in errors ?<FormControl.ErrorsMessage >{errors.email}</FormControl.ErrorsMessage>:<FormControl.HelperText>
+                            onChangeText={value => setFormData({ ...formData, email: value })}
+                        />
+
+                        {'email' in errors ? <FormControl.ErrorMessage >{errors.email}</FormControl.ErrorMessage> : <FormControl.HelperText>
                             Ingresa un correo valido
                         </FormControl.HelperText>
                         }
@@ -180,7 +190,7 @@ const submit = () => { validate() ? navigation.navigate("Contact_R")  : console.
                         <FormControl.HelperText>
 
                         </FormControl.HelperText>
-                        <FormControl.ErrorsMessage>Something is wrong.</FormControl.ErrorsMessage>
+                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
 
                     </FormControl>
 
