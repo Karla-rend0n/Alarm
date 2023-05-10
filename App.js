@@ -22,7 +22,7 @@ export default function App() {
         400: '#621132',//Tinto 
         500: '#C1591F',//Naranja
         600: '#9B1010',//Rojo Emergencia
-        700: '#DDDAE0',//gris de los botones claro 70%
+        700: '#BD8A3E',//Dorado
         800: '#63110E',// Tinto degradado
         900: '#000000',//Negro
         1000: '#C1591F',//borde naranja

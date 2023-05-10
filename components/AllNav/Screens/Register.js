@@ -8,8 +8,12 @@ export default function Register() {
     const navigation = useNavigation();
     const [formData, setFormData] = React.useState({})
     const [errors, setErrors] = React.useState({})
+    const [errorEmail, setErrorsEmail] = React.useState({})
+    const [errorLastname, setErrorLastname] = React.useState({})
+    const [errorAge, setErrorAge] = React.useState({})
     var emailVal = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
     var namVal = /^[A-Za-z]+$/i
+    var number = /^\d+$/
 
 
 
@@ -17,20 +21,17 @@ export default function Register() {
     const validate = () => {
         let isValid = true;
         setErrors({})
+        setErrorsEmail({})
         if (!emailVal.test(formData.email)) {
             console.log('no valida')
-            setErrors({ ...errors, email: 'is not valid' });
+            setErrorsEmail({ ...errorEmail, email: 'is not valid' });
             isValid = false
-        } else {
-            setErrors({});
-            console.log('good', formData)
-            isValid = true
         }
 
         if (formData.name === undefined) {
             setErrors({ ...errors, name: 'Name is required' })
             isValid = false
-        } else{
+        } else {
             if (formData.name.length <= 3) {
                 setErrors({
                     ...errors,
@@ -38,16 +39,40 @@ export default function Register() {
                 });
                 isValid = false
                 console.log('valida')
-        }else{
-            if(!namVal.test(formData.name))
-            {
-                setErrors({
-                    ...errors,
-                    name: 'ingrese letras'
-                })
+            } else {
+                if (!namVal.test(formData.name)) {
+                    setErrors({
+                        ...errors,
+                        name: 'ingrese letras'
+                    })
+                }
             }
         }
-    }
+        if (formData.lastName === undefined) {
+            setErrorLastname({ ...errorLastname, lastName: 'Last Name is required' })
+            isValid = false
+        } else {
+            if (formData.lastName.length <= 3) {
+                setErrorLastname({
+                    ...errorLastname,
+                    lastName: 'Last Name is too short'
+                })
+                console.log('valida')
+            } else {
+                if (!namVal.test(formData.lastName)) {
+                    setErrorLastname({
+                        ...errorLastname,
+                        lastName: 'Ingrese letras'
+                    })
+                }
+            }
+            
+        }
+        if (!number.test(formData.age)) {
+            
+            setErrorAge({ ...errorAge, age: 'Solo ingrese números' });
+            isValid = false
+        }
         return isValid
     };
 
@@ -90,16 +115,17 @@ export default function Register() {
                         <Input p={2} placeholder="Name" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            selectionColor='primary.700'
                             onChangeText={value => setFormData({ ...formData, name: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
 
-                        {'name' in errors ? <FormControl.ErrorMessage>{errors.name}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                        {'name' in errors ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errors.name}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
                         </FormControl.HelperText>
                         }
                     </FormControl>
 
-                    <FormControl >
+                    <FormControl isRequired isInvalid={'lastName' in errorLastname} >
 
                         <FormControl.Label _text={{
                             color: 'primary.50',
@@ -110,14 +136,15 @@ export default function Register() {
                         <Input p={2} placeholder="Last Name" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            onChangeText={value => setFormData({ ...formData, lastName: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
-                        <FormControl.HelperText>
+                        {'lastName' in errorLastname ? <FormControl.ErrorMessage>{errorLastname.lastName}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
                         </FormControl.HelperText>
-                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
+                        }
 
                     </FormControl>
-                    <FormControl >
+                    <FormControl isRequired isInvalid={'age' in errorAge} >
 
                         <FormControl.Label _text={{
                             color: 'primary.50',
@@ -129,11 +156,13 @@ export default function Register() {
                             p={2} placeholder="Age" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            keyboardType='numeric'
+                            onChangeText={value => setFormData({ ...formData, age: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
-                        <FormControl.HelperText>
+                        {'age' in errorAge ? <FormControl.ErrorMessage>{errorAge.age}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
                         </FormControl.HelperText>
-                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
+                        }
 
                     </FormControl>
                     <FormControl >
@@ -154,7 +183,7 @@ export default function Register() {
                         <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
 
                     </FormControl>
-                    <FormControl isRequired isInvalid={'email' in errors}>
+                    <FormControl isRequired isInvalid={'email' in errorEmail}>
                         <FormControl.Label _text={{
                             color: 'primary.50',
                             fontWeight: 'bold'
@@ -169,8 +198,8 @@ export default function Register() {
                             onChangeText={value => setFormData({ ...formData, email: value })}
                         />
 
-                        {'email' in errors ? <FormControl.ErrorMessage >{errors.email}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                            Ingresa un correo valido
+                        {'email' in errorEmail ? <FormControl.ErrorMessage  >{errorEmail.email}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                            Ingresa un correo electronico
                         </FormControl.HelperText>
                         }
                     </FormControl>
