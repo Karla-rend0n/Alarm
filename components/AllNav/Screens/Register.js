@@ -11,9 +11,11 @@ export default function Register() {
     const [errorEmail, setErrorsEmail] = React.useState({})
     const [errorLastname, setErrorLastname] = React.useState({})
     const [errorAge, setErrorAge] = React.useState({})
+    const [errorPass, setErrorPass] = React.useState({})
     var emailVal = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
-    var namVal = /^[A-Za-z]+$/i
-    var number = /^\d+$/
+    var namVal = /^[A-Za-z]+$/i;
+    //var number = /?=.\\d/;
+    var pattern = new RegExp("^(?=.[a-z])(?=.[A-Z])(?=.\\d)(?=.[-+_!@#$%^&*.,?]).+$")
 
 
 
@@ -22,6 +24,7 @@ export default function Register() {
         let isValid = true;
         setErrors({})
         setErrorsEmail({})
+        setErrorPass({})
         if (!emailVal.test(formData.email)) {
             console.log('no valida')
             setErrorsEmail({ ...errorEmail, email: 'is not valid' });
@@ -66,12 +69,22 @@ export default function Register() {
                     })
                 }
             }
-            
+
         }
         if (!number.test(formData.age)) {
-            
+
             setErrorAge({ ...errorAge, age: 'Solo ingrese números' });
             isValid = false
+        }
+        if (!formData.pass || formData.pass.length < 8 ) {
+            setErrorPass({ ...errorPass, pass: 'Password is required' })
+            isValid = false
+        }else if (!pattern.test(formData.pass)) {
+            console.log('pass ', formData.pass)
+            setErrors({ ...errors,
+              pass: 'is not valid'
+            });
+            isValid=false
         }
         return isValid
     };
@@ -115,7 +128,7 @@ export default function Register() {
                         <Input p={2} placeholder="Name" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
-                            selectionColor='primary.700'
+
                             onChangeText={value => setFormData({ ...formData, name: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
 
@@ -156,7 +169,7 @@ export default function Register() {
                             p={2} placeholder="Age" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
-                            keyboardType='numeric'
+                            focusOutlineColor='primary.700'
                             onChangeText={value => setFormData({ ...formData, age: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
                         {'age' in errorAge ? <FormControl.ErrorMessage>{errorAge.age}</FormControl.ErrorMessage> : <FormControl.HelperText>
@@ -203,7 +216,7 @@ export default function Register() {
                         </FormControl.HelperText>
                         }
                     </FormControl>
-                    <FormControl >
+                    <FormControl isRequired isInvalid={'pass' in errorPass}>
 
                         <FormControl.Label _text={{
                             color: 'primary.50',
@@ -215,11 +228,12 @@ export default function Register() {
                             variant="rounded"
                             color="primary.900"
                             type='password'
+                            onChangeText={value => setFormData({ ...formData, pass: value })}
                             InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />} />
-                        <FormControl.HelperText>
+                             
+                        {'pass' in errorPass ? <FormControl.ErrorMessage>{errorPass.pass}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
-                        </FormControl.HelperText>
-                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
+                        </FormControl.HelperText>}
 
                     </FormControl>
 
