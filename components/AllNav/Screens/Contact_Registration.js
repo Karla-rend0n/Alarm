@@ -5,6 +5,107 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function Contact_Registration() {
     const navigation = useNavigation();
+    const [formData, setFormData] = React.useState({})
+    const [errors, setErrors] = React.useState({})
+    const [errorkinship, setErrorkinship] = React.useState({})
+    const [errorLastname, setErrorLastname] = React.useState({})
+    const [errorPhone, setErrorPhone]=React.useState({})
+    var namVal = /^[A-Za-z]+$/i;
+    var number = /^[0-9]+$/i
+
+
+
+
+    const validate = () => {
+        let isValid = true;
+        setErrorkinship({})
+        setErrors({})
+        setErrorPhone({})
+        setErrorLastname({})
+
+        if (formData.kinship === undefined) {
+            setErrorkinship({ ...errorkinship, kinship: 'kinship is required' })
+            isValid = false
+        } else {
+            if (formData.kinship.length <= 3) {
+                setErrorkinship({
+                    ...errorkinship,
+                    kinship: 'kinship Name is too short'
+                })
+                console.log('valida')
+            } else {
+                if (!namVal.test(formData.kinship)) {
+                    setErrorkinship({
+                        ...errorkinship,
+                        kinship: 'Ingrese letras'
+                    })
+                }
+            }
+
+        }
+
+        if (formData.name === undefined) {
+            setErrors({ ...errors, name: 'Name is required' })
+            isValid = false
+        } else {
+            if (formData.name.length <= 3) {
+                setErrors({
+                    ...errors,
+                    name: 'Name is too short'
+                });
+                isValid = false
+                console.log('valida')
+            } else {
+                if (!namVal.test(formData.name)) {
+                    setErrors({
+                        ...errors,
+                        name: 'ingrese letras'
+                    })
+                }
+            }
+        }
+
+
+        if (formData.lastName === undefined) {
+            setErrorLastname({ ...errorLastname, lastName: 'Last Name is required' })
+            isValid = false
+        } else {
+            if (formData.lastName.length <= 3) {
+                setErrorLastname({
+                    ...errorLastname,
+                    lastName: 'Last Name is too short'
+                })
+                console.log('valida')
+            } else {
+                if (!namVal.test(formData.lastName)) {
+                    setErrorLastname({
+                        ...errorLastname,
+                        lastName: 'Ingrese letras'
+                    })
+                }
+            }
+
+        }
+        
+       
+        if(formData.phone === undefined){
+            setErrorPhone({...errorPhone, phone:'Phone is required'})
+            isValid=false
+        }else if(!number.test(formData.phone)){
+            setErrorPhone({...errorPhone, phone:'Only numbers'})
+            isValid=false
+        }else if(formData.phone<9){
+            setErrorPhone({...errorPhone, phone:'I need 10 digits'})
+            isValid=false
+        }
+        
+        return isValid
+    };
+
+
+
+
+    const submit = () => { validate() ? console.log('good', formData) : console.log('bad', formData) }
 
     return  <Center w="100%" h="100%" bg={{
         linearGradient: {
@@ -26,7 +127,7 @@ export default function Contact_Registration() {
                     Completa los siguientes campos.
                 </Heading>
                 <VStack space={3} mt={5}>
-                    <FormControl >
+                    <FormControl isRequired isInvalid={'kinship' in errorkinship} >
 
                         <FormControl.Label _text={{
                             color: 'primary.50',
@@ -37,14 +138,15 @@ export default function Contact_Registration() {
                         <Input p={2} placeholder="Parentesco" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            onChangeText={value => setFormData({ ...formData, kinship: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
-                        <FormControl.HelperText>
 
-                        </FormControl.HelperText>
-                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
+{'kinship' in errorkinship ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorkinship.kinship}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
+</FormControl.HelperText>
+}
                     </FormControl>
-                    <FormControl >
+                    <FormControl isRequired isInvalid={'name' in errors}>
 
                         <FormControl.Label _text={{
                             color: 'primary.50',
@@ -55,16 +157,17 @@ export default function Contact_Registration() {
                         <Input p={2} placeholder="Name" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            onChangeText={value => setFormData({ ...formData, name: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
-                        <FormControl.HelperText>
+                            {'name' in errors ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errors.name}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
-                        </FormControl.HelperText>
-                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
+</FormControl.HelperText>
+}
 
                     </FormControl>
 
 
-                    <FormControl >
+                    <FormControl isRequired isInvalid={'lastName' in errorLastname}>
 
                         <FormControl.Label _text={{
                             color: 'primary.50',
@@ -75,14 +178,15 @@ export default function Contact_Registration() {
                         <Input p={2} placeholder="Last Name" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            onChangeText={value => setFormData({ ...formData, lastName: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
-                        <FormControl.HelperText>
+                            {'lastName' in errorLastname ? <FormControl.ErrorMessage>{errorLastname.lastName}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
-                        </FormControl.HelperText>
-                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
+</FormControl.HelperText>
+}
 
                     </FormControl>
-                    <FormControl >
+                    <FormControl isRequired isInvalid={'phone'in errorPhone}>
 
                         <FormControl.Label _text={{
                             color: 'primary.50',
@@ -93,11 +197,11 @@ export default function Contact_Registration() {
                         <Input p={2} placeholder="Phone" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            onChangeText={value => setFormData({ ...formData, phone: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='phone' />} size={5} ml="2" color='primary.200' />} />
-                        <FormControl.HelperText>
+                             {'phone' in errorPhone?<FormControl.ErrorMessage>{errorPhone.phone}</FormControl.ErrorMessage>:<FormControl.HelperText>
 
-                        </FormControl.HelperText>
-                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
+</FormControl.HelperText>}
 
                     </FormControl>
 
@@ -108,7 +212,9 @@ export default function Contact_Registration() {
                         Omitir
                     </Button>
                     <Button marginTop={15} backgroundColor='primary.200' size='lg' borderWidth="2" borderColor="primary.200"
-                    onPress={() => {navigation.navigate("ViewContact")}} >
+                    // onPress={() => {navigation.navigate("ViewContact")}} >
+                        onPress={submit}>
+
                         Finalizar
                     </Button>
                     </HStack>

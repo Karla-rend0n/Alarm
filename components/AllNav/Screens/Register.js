@@ -152,7 +152,6 @@ export default function Register() {
                         <Input p={2} placeholder="Name" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
-
                             onChangeText={value => setFormData({ ...formData, name: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
 
@@ -213,6 +212,7 @@ export default function Register() {
                         <Input p={2} placeholder="Phone" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            onChangeText={value => setFormData({ ...formData, phone: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='phone' />} size={5} ml="2" color='primary.200' />} />
                          {'phone' in errorPhone?<FormControl.ErrorMessage>{errorPhone.phone}</FormControl.ErrorMessage>:<FormControl.HelperText>
 
@@ -262,7 +262,8 @@ export default function Register() {
                     </FormControl>
 
                     <Button marginTop={15} backgroundColor='primary.200' borderWidth="2" borderColor="primary.200" mt="5" size='lg' rounded={10}
-                        onPress={submit} >
+                        onPress={() => {navigation.navigate("Contact_R")}}>
+                        {/* onPress={submit}> */}
                         Guardar
                     </Button>
 
