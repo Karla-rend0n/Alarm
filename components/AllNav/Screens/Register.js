@@ -12,9 +12,10 @@ export default function Register() {
     const [errorLastname, setErrorLastname] = React.useState({})
     const [errorAge, setErrorAge] = React.useState({})
     const [errorPass, setErrorPass] = React.useState({})
+    const [errorPhone, setErrorPhone]=React.useState({})
     var emailVal = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
     var namVal = /^[A-Za-z]+$/i;
-    //var number = /?=.\\d/;
+    var number = /^[0-9]+$/i
     var pattern = new RegExp("^(?=.[a-z])(?=.[A-Z])(?=.\\d)(?=.[-+_!@#$%^&*.,?]).+$")
 
 
@@ -25,11 +26,18 @@ export default function Register() {
         setErrors({})
         setErrorsEmail({})
         setErrorPass({})
+        setErrorAge({})
+        setErrorPhone({})
+        if(formData.email === undefined){
+            setErrorsEmail({ ...errorEmail, email: 'El email es requerido' });
+            isValid = false
+        }else{
         if (!emailVal.test(formData.email)) {
-            console.log('no valida')
+            
             setErrorsEmail({ ...errorEmail, email: 'is not valid' });
             isValid = false
         }
+    }
 
         if (formData.name === undefined) {
             setErrors({ ...errors, name: 'Name is required' })
@@ -71,16 +79,32 @@ export default function Register() {
             }
 
         }
-        if (!number.test(formData.age)) {
+        if(formData.age === undefined){
+            setErrorAge({ ...errorAge, age: 'Age is required' });
+            isValid = false
+        }else if (!number.test(formData.age)) {
 
             setErrorAge({ ...errorAge, age: 'Solo ingrese números' });
             isValid = false
+        }else if(formData.age<2 ){
+            setErrorAge({ ...errorAge, age: 'Tiene que ser mayor' });
+            isValid = false
+        }
+        if(formData.phone === undefined){
+            setErrorPhone({...errorPhone, phone:'Phone is required'})
+            isValid=false
+        }else if(!number.test(formData.phone)){
+            setErrorPhone({...errorPhone, phone:'Only numbers'})
+            isValid=false
+        }else if(formData.phone<9){
+            setErrorPhone({...errorPhone, phone:'I need 10 digits'})
+            isValid=false
         }
         if (!formData.pass || formData.pass.length < 8 ) {
             setErrorPass({ ...errorPass, pass: 'Password is required' })
             isValid = false
         }else if (!pattern.test(formData.pass)) {
-            console.log('pass ', formData.pass)
+            
             setErrors({ ...errors,
               pass: 'is not valid'
             });
@@ -178,7 +202,7 @@ export default function Register() {
                         }
 
                     </FormControl>
-                    <FormControl >
+                    <FormControl isRequired isInvalid={'phone'in errorPhone}>
 
                         <FormControl.Label _text={{
                             color: 'primary.50',
@@ -190,10 +214,10 @@ export default function Register() {
                             variant="rounded"
                             color="primary.900"
                             InputLeftElement={<Icon as={<MaterialIcons name='phone' />} size={5} ml="2" color='primary.200' />} />
-                        <FormControl.HelperText>
+                         {'phone' in errorPhone?<FormControl.ErrorMessage>{errorPhone.phone}</FormControl.ErrorMessage>:<FormControl.HelperText>
 
-                        </FormControl.HelperText>
-                        <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
+                        </FormControl.HelperText>}
+                       
 
                     </FormControl>
                     <FormControl isRequired isInvalid={'email' in errorEmail}>
