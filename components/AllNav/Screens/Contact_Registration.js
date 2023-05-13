@@ -135,9 +135,10 @@ export default function Contact_Registration() {
                         }} marginLeft={2}>
                             Parentesco
                         </FormControl.Label>
-                        <Input p={2} placeholder="Parentesco" backgroundColor="primary.100"
+                        <Input p={2} placeholder="Esposo" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            fontWeight="bold"
                             onChangeText={value => setFormData({ ...formData, kinship: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
 
@@ -154,9 +155,10 @@ export default function Contact_Registration() {
                         }} marginLeft={2}>
                             Nombre
                         </FormControl.Label>
-                        <Input p={2} placeholder="Name" backgroundColor="primary.100"
+                        <Input p={2} placeholder="Sofía" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            fontWeight="bold"
                             onChangeText={value => setFormData({ ...formData, name: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
                             {'name' in errors ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errors.name}</FormControl.ErrorMessage> : <FormControl.HelperText>
@@ -175,12 +177,13 @@ export default function Contact_Registration() {
                         }} marginLeft={2} >
                             Apellido
                         </FormControl.Label>
-                        <Input p={2} placeholder="Last Name" backgroundColor="primary.100"
+                        <Input p={2} placeholder="Hernández" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            fontWeight="bold"
                             onChangeText={value => setFormData({ ...formData, lastName: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
-                            {'lastName' in errorLastname ? <FormControl.ErrorMessage>{errorLastname.lastName}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                            {'lastName' in errorLastname ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorLastname.lastName}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
 </FormControl.HelperText>
 }
@@ -194,12 +197,13 @@ export default function Contact_Registration() {
                         }} marginLeft={2} >
                             Teléfono
                         </FormControl.Label>
-                        <Input p={2} placeholder="Phone" backgroundColor="primary.100"
+                        <Input p={2} placeholder="449-748-22-00" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            fontWeight="bold"
                             onChangeText={value => setFormData({ ...formData, phone: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='phone' />} size={5} ml="2" color='primary.200' />} />
-                             {'phone' in errorPhone?<FormControl.ErrorMessage>{errorPhone.phone}</FormControl.ErrorMessage>:<FormControl.HelperText>
+                             {'phone' in errorPhone?<FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPhone.phone}</FormControl.ErrorMessage>:<FormControl.HelperText>
 
 </FormControl.HelperText>}
 

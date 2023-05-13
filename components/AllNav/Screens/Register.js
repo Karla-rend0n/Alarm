@@ -118,6 +118,8 @@ export default function Register() {
 
     const submit = () => { validate() ? console.log('good', formData) : console.log('bad', formData) }
 
+ 
+
     return <ScrollView w="100%" h="100%">
         <Center w="100%" h="100%" bg={{
             linearGradient: {
@@ -149,9 +151,10 @@ export default function Register() {
                         }} marginLeft={2}>
                             Nombre
                         </FormControl.Label>
-                        <Input p={2} placeholder="Name" backgroundColor="primary.100"
+                        <Input p={2} placeholder="Sofía" backgroundColor="primary.100" 
                             variant="rounded"
                             color="primary.900"
+                            fontWeight="bold"
                             onChangeText={value => setFormData({ ...formData, name: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
 
@@ -169,12 +172,13 @@ export default function Register() {
                         }} marginLeft={2} >
                             Apellido
                         </FormControl.Label>
-                        <Input p={2} placeholder="Last Name" backgroundColor="primary.100"
+                        <Input p={2} placeholder="Hernández" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            fontWeight="bold"
                             onChangeText={value => setFormData({ ...formData, lastName: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
-                        {'lastName' in errorLastname ? <FormControl.ErrorMessage>{errorLastname.lastName}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                        {'lastName' in errorLastname ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorLastname.lastName}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
                         </FormControl.HelperText>
                         }
@@ -189,13 +193,13 @@ export default function Register() {
                             Edad
                         </FormControl.Label>
                         <Input type='number'
-                            p={2} placeholder="Age" backgroundColor="primary.100"
+                            p={2} placeholder="18" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
-                            focusOutlineColor='primary.700'
+                            fontWeight="bold"
                             onChangeText={value => setFormData({ ...formData, age: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
-                        {'age' in errorAge ? <FormControl.ErrorMessage>{errorAge.age}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                        {'age' in errorAge ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorAge.age}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
                         </FormControl.HelperText>
                         }
@@ -209,12 +213,13 @@ export default function Register() {
                         }} marginLeft={2} >
                             Teléfono
                         </FormControl.Label>
-                        <Input p={2} placeholder="Phone" backgroundColor="primary.100"
+                        <Input p={2} placeholder="449-748-22-00" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            fontWeight="bold"
                             onChangeText={value => setFormData({ ...formData, phone: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='phone' />} size={5} ml="2" color='primary.200' />} />
-                         {'phone' in errorPhone?<FormControl.ErrorMessage>{errorPhone.phone}</FormControl.ErrorMessage>:<FormControl.HelperText>
+                         {'phone' in errorPhone?<FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPhone.phone}</FormControl.ErrorMessage>:<FormControl.HelperText>
 
                         </FormControl.HelperText>}
                        
@@ -227,15 +232,16 @@ export default function Register() {
                         }} marginLeft={2} >
                             Email
                         </FormControl.Label>
-                        <Input p={2} placeholder="Email" backgroundColor="primary.100"
+                        <Input p={2} placeholder="Hello@gmail.com" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            fontWeight="bold"
                             InputLeftElement={<Icon as={<MaterialIcons name='email' />} size={5} ml="2" color='primary.200' />}
                             //type='email'
                             onChangeText={value => setFormData({ ...formData, email: value })}
                         />
 
-                        {'email' in errorEmail ? <FormControl.ErrorMessage  >{errorEmail.email}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                        {'email' in errorEmail ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorEmail.email}</FormControl.ErrorMessage> : <FormControl.HelperText>
                             Ingresa un correo electronico
                         </FormControl.HelperText>
                         }
@@ -248,14 +254,15 @@ export default function Register() {
                         }} marginLeft={2} >
                             Contraseña
                         </FormControl.Label>
-                        <Input p={2} placeholder="Password" backgroundColor="primary.100"
+                        <Input p={2} placeholder="Introduce una contraseña" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            fontWeight="bold"
                             type='password'
                             onChangeText={value => setFormData({ ...formData, pass: value })}
                             InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />} />
                              
-                        {'pass' in errorPass ? <FormControl.ErrorMessage>{errorPass.pass}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                        {'pass' in errorPass ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPass.pass}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
                         </FormControl.HelperText>}
 
@@ -263,7 +270,7 @@ export default function Register() {
 
                     <Button marginTop={15} backgroundColor='primary.200' borderWidth="2" borderColor="primary.200" mt="5" size='lg' rounded={10}
                         onPress={() => {navigation.navigate("Contact_R")}}>
-                        {/* onPress={submit}> */}
+                        {/* // onPress={submit}> */}
                         Guardar
                     </Button>
 

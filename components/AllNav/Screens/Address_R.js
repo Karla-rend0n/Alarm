@@ -217,12 +217,13 @@ export default function Address_R() {
                         }} marginLeft={2}>
                             Dirección
                         </FormControl.Label>
-                        <Input p={2} placeholder="Address" backgroundColor="primary.100"
+                        <Input p={2} placeholder="Álvaro Obregón, Colonia Aguascalientes Centro, C.P. 20078" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            fontWeight="bold"
                             onChangeText={value => setFormData({ ...formData, Address: value })}
                             InputLeftElement={<Icon as={<FontAwesome name='address-book-o' />} size={5} ml="2" color='primary.200' />} />
-                            {'Address' in errorAddress ? <FormControl.ErrorMessage>{errorAddress.Address}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                            {'Address' in errorAddress ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorAddress.Address}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
 </FormControl.HelperText>
 }
@@ -236,12 +237,13 @@ export default function Address_R() {
                         }} marginLeft={2} >
                             Calle
                         </FormControl.Label>
-                        <Input p={2} placeholder="Street" backgroundColor="primary.100"
+                        <Input p={2} placeholder="Rayón" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            fontWeight="bold"
                             onChangeText={value => setFormData({ ...formData, Street: value })}
                             InputLeftElement={<Icon as={<Entypo name='address' />} size={5} ml="2" color='primary.200' />} />
-{'Street' in errorStreet ? <FormControl.ErrorMessage>{errorStreet.Street}</FormControl.ErrorMessage> : <FormControl.HelperText>
+{'Street' in errorStreet ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorStreet.Street}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
 </FormControl.HelperText>
 }
@@ -259,9 +261,10 @@ export default function Address_R() {
                             p={2} placeholder="717" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            fontWeight="bold"
                             onChangeText={value => setFormData({ ...formData, NumE: value })}
                             InputLeftElement={<Icon as={<MaterialCommunityIcons name='home-group' />} size={5} ml="2" color='primary.200' />} />
-                        {'NumE' in errorNumE ? <FormControl.ErrorMessage>{errorNumE.NumE}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                        {'NumE' in errorNumE ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorNumE.NumE}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
 </FormControl.HelperText>
 }
@@ -275,12 +278,13 @@ export default function Address_R() {
                         }} marginLeft={2} >
                             Numero Interior
                         </FormControl.Label>
-                        <Input p={2} placeholder="5B" backgroundColor="primary.100"
+                        <Input p={2} placeholder="58" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            fontWeight="bold"
                             onChangeText={value => setFormData({ ...formData, NumI: value })}
                             InputLeftElement={<Icon as={<MaterialCommunityIcons name='home-import-outline' />} size={5} ml="2" color='primary.200' />} />
-                       {'NumI' in errorNumI ? <FormControl.ErrorMessage>{errorNumI.NumI}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                       {'NumI' in errorNumI ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorNumI.NumI}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
 </FormControl.HelperText>
 }
@@ -294,12 +298,13 @@ export default function Address_R() {
                         }} marginLeft={2} >
                             Colonia
                         </FormControl.Label>
-                        <Input p={2} placeholder="Bulevar" backgroundColor="primary.100"
+                        <Input p={2} placeholder="Las Flores" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            fontWeight="bold"
                             onChangeText={value => setFormData({ ...formData, cologne: value })}
                             InputLeftElement={<Icon as={<MaterialCommunityIcons name='home-group' />} size={5} ml="2" color='primary.200' />} />
-                       {'cologne' in errorcologne ? <FormControl.ErrorMessage>{errorcologne.cologne}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                       {'cologne' in errorcologne ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorcologne.cologne}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
 </FormControl.HelperText>
 }
@@ -313,12 +318,13 @@ export default function Address_R() {
                         }}marginLeft={2} >
                             Codigo Postal
                         </FormControl.Label>
-                        <Input p={2} placeholder="Password" backgroundColor="primary.100"
+                        <Input p={2} placeholder="30804" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            fontWeight="bold"
                             onChangeText={value => setFormData({ ...formData, CP: value })}
-                            InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />} />
-                       {'CP' in errorCP ? <FormControl.ErrorMessage>{errorCP.CP}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                            InputLeftElement={<Icon as={<Entypo name='location' />} size={5} ml="2" color='primary.200' />} />
+                       {'CP' in errorCP ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorCP.CP}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
 </FormControl.HelperText>
 }
@@ -335,9 +341,10 @@ export default function Address_R() {
                         <Input p={2} placeholder="Aguascalientes" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            fontWeight="bold"
                             onChangeText={value => setFormData({ ...formData, state: value })}
-                            InputLeftElement={<Icon as={<Ionicons name='mdi mdi-city' />} size={5} ml="2" color='primary.200' />} />
-                       {'state' in errorstate ? <FormControl.ErrorMessage>{errorstate.state}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                            InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" color='primary.200' />} />
+                       {'state' in errorstate ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorstate.state}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
 </FormControl.HelperText>
 }
@@ -351,12 +358,13 @@ export default function Address_R() {
                         }}marginLeft={2} >
                             Municipio
                         </FormControl.Label>
-                        <Input p={2} placeholder="Calvillo" backgroundColor="primary.100"
+                        <Input p={2} placeholder="Aguascalientes" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
+                            fontWeight="bold"
                             onChangeText={value => setFormData({ ...formData, municipality: value })}
-                            InputLeftElement={<Icon as={<Ionicons name='city' />} size={5} ml="2" color='primary.200' />} />
-                        {'municipality' in errormunicipality ? <FormControl.ErrorMessage>{errormunicipality.municipality}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                            InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" color='primary.200' />} />
+                        {'municipality' in errormunicipality ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errormunicipality.municipality}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
 </FormControl.HelperText>
 }

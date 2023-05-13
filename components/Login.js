@@ -79,9 +79,10 @@ export default function Login() {
 
                         }} InputLeftElement={<Icon as={<MaterialIcons name="email" />} size={5} ml="3" color="primary.200" />}
                         onChangeText={value => setFormData({ ...formData, email: value })}
-                            mt="3" placeholder="hello@gmail.com" color="primary.200" fontSize="sm" fontWeight="400" backgroundColor="primary.100" borderWidth="2" borderColor="primary.200" variant="rounded" />
+                            mt="3" placeholder="hello@gmail.com" color="primary.900" 
+                            fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />  
                             
-                            {'email' in errorEmail ? <FormControl.ErrorMessage  >{errorEmail.email}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                            {'email' in errorEmail ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorEmail.email}</FormControl.ErrorMessage> : <FormControl.HelperText>
                             Ingresa un correo electronico
                         </FormControl.HelperText>
                         }
@@ -94,14 +95,13 @@ export default function Login() {
                             fontWeight: '700',
                             fontSize: 'lg'
                         }}>Contraseña</FormControl.Label>
-                        <Input mt="3" placeholder=" Introduce una contraseña" color="primary.200" type="password"
+                        <Input mt="3" placeholder=" Introduce una contraseña" color="primary.900" type="password"
                         onChangeText={value => setFormData({ ...formData, pass: value })}
 
-                            fontSize="sm" fontWeight="400" backgroundColor="primary.100" borderWidth="2"
-                            borderColor="primary.200" variant="rounded"
+                            fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded"
                             InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />} />
                             
-                            {'pass' in errorPass ? <FormControl.ErrorMessage>{errorPass.pass}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                            {'pass' in errorPass ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPass.pass}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
                         </FormControl.HelperText>}
 
@@ -145,4 +145,5 @@ export default function Login() {
     
 }
 
+//borderWidth="2" borderColor="primary.200"
 

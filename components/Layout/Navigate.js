@@ -88,8 +88,11 @@ function HomeTabs() {
         <Tab.Navigator
             initialRouteName="Home"
             screenOptions={{
-                tabBarActiveTintColor: "purple",
+                tabBarActiveTintColor: "#31607D",
             }}
+
+            //#31607D
+            //#527F9B
         >
             <Tab.Screen
                 name="Home"
@@ -109,7 +112,7 @@ function HomeTabs() {
                 component={Contact_Screen}
                 options={{
                     tabBarIcon: ({ color }) => (
-                        <SimpleLineIcons name="user-follow" size={24} color={color} />
+                        <Ionicons name="person-add" size={24} color={color} />
                     ),
                     headerShown: false
 

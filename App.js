@@ -22,11 +22,12 @@ export default function App() {
         400: '#621132',//Tinto 
         500: '#C1591F',//Naranja
         600: '#9B1010',//Rojo Emergencia
-        700: '#BD8A3E',//Dorado
+        700: '#fdfc8b',//Dorado
         800: '#63110E',// Tinto degradado
         900: '#000000',//Negro
         1000: '#C1591F',//borde naranja
         1001: '#9B1010' // borde rojo
+        //f9db5c
       },
       // Redefining only one shade, rest of the color will remain same.
       amber: {

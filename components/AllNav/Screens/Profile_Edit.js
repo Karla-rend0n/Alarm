@@ -150,7 +150,7 @@ export default function Profile_Edit() {
                         }} marginLeft={2}>
                             Nombre
                         </FormControl.Label>
-                        <Input p={2} placeholder="Name"
+                        <Input p={2} placeholder="Sofía"
                             variant="underlined"
                             borderBottomColor='primary.100'
                             placeholderTextColor='primary.100'
@@ -170,13 +170,13 @@ export default function Profile_Edit() {
                         }} marginLeft={2} >
                             Apellido
                         </FormControl.Label>
-                        <Input p={2} placeholder="Last Name"
+                        <Input p={2} placeholder="Hernández"
                             variant="underlined"
                             borderBottomColor='primary.100'
                             placeholderTextColor='primary.100'
                             onChangeText={value => setFormData({ ...formData, lastName: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
-                       {'lastName' in errorLastname ? <FormControl.ErrorMessage>{errorLastname.lastName}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                       {'lastName' in errorLastname ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorLastname.lastName}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
 </FormControl.HelperText>
 }
@@ -192,13 +192,13 @@ export default function Profile_Edit() {
                         }} marginLeft={2} >
                             Email
                         </FormControl.Label>
-                        <Input p={2} placeholder="Email"
+                        <Input p={2} placeholder="Hello@gmail.com"
                             variant="underlined"
                             borderBottomColor='primary.100'
                             placeholderTextColor='primary.100'
                             onChangeText={value => setFormData({ ...formData, email: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='email' />} size={5} ml="2" color='primary.200' />} />
-                       {'email' in errorEmail ? <FormControl.ErrorMessage  >{errorEmail.email}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                       {'email' in errorEmail ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorEmail.email}</FormControl.ErrorMessage> : <FormControl.HelperText>
                             Ingresa un correo electronico
                         </FormControl.HelperText>
                         }
@@ -213,14 +213,14 @@ export default function Profile_Edit() {
                         }} marginLeft={2} >
                             Contraseña
                         </FormControl.Label>
-                        <Input p={2} placeholder="Password"
+                        <Input p={2} placeholder="Introduce una contraseña"
                             variant="underlined"
                             borderBottomColor='primary.100'
                             placeholderTextColor='primary.100'
                             type='password'
                             onChangeText={value => setFormData({ ...formData, pass: value })}
                             InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />} />
-                            {'pass' in errorPass ? <FormControl.ErrorMessage>{errorPass.pass}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                            {'pass' in errorPass ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPass.pass}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
 </FormControl.HelperText>}
 
@@ -234,13 +234,13 @@ export default function Profile_Edit() {
                         }} marginLeft={2} >
                             Teléfono
                         </FormControl.Label>
-                        <Input p={2} placeholder="Phone"
+                        <Input p={2} placeholder="449-748-22-00"
                             variant="underlined"
                             borderBottomColor='primary.100'
                             placeholderTextColor='primary.100'
                             onChangeText={value => setFormData({ ...formData, phone: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='phone' />} size={5} ml="2" color='primary.200' />} />
-                        {'phone' in errorPhone?<FormControl.ErrorMessage>{errorPhone.phone}</FormControl.ErrorMessage>:<FormControl.HelperText>
+                        {'phone' in errorPhone?<FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPhone.phone}</FormControl.ErrorMessage>:<FormControl.HelperText>
 
 </FormControl.HelperText>}
                     </FormControl>
@@ -254,13 +254,13 @@ export default function Profile_Edit() {
                             Edad
                         </FormControl.Label>
                         <Input type='number'
-                            p={2} placeholder="Age"
+                            p={2} placeholder="18"
                             variant="underlined"
                             borderBottomColor='primary.100'
                             placeholderTextColor='primary.100'
                             onChangeText={value => setFormData({ ...formData, age: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
-                       {'age' in errorAge ? <FormControl.ErrorMessage>{errorAge.age}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                       {'age' in errorAge ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorAge.age}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
 </FormControl.HelperText>
 }
