@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Box, Center, HStack, Heading, Image, ScrollView, VStack, Text, Circle, Pressable, Button, Icon } from 'native-base';
-import {AntDesign} from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 
 
@@ -9,29 +9,29 @@ export default function Contacts() {
     const navigation = useNavigation();
 
     return <Center w="100%" h="100%" bg={{
-            linearGradient: {
-                colors: ['primary.400', 'primary.800'],
-                start: [1, 0],
-                end: [0, 0]
-            }
-        }}>
-            <Box safeArea p="2" py="8" w="90%" maxW="290">
-                <Heading size="lg" fontWeight="600" color="Black" _dark={{
-                    color: "primary.50",
-                    fontWeight: 'bold'
-                }} >
-                    Contactos
-                </Heading>
-                
-                <VStack space={6} >
-                <Button  marginLeft='5/6' mt='7' rounded  borderRadius="44" width="44" height="44" alignSelf="center" bgColor="primary.200" borderWidth="3"  borderColor="primary.200"  leftIcon={<Icon as={<AntDesign name="plus" />}/>} onPress={() => {navigation.navigate("Add_C")}}>
+        linearGradient: {
+            colors: ['primary.400', 'primary.800'],
+            start: [1, 0],
+            end: [0, 0]
+        }
+    }}>
+        <Box safeArea p="2" py="8" w="90%" maxW="290">
+            <Heading size="lg" fontWeight="600" color="Black" _dark={{
+                color: "primary.50",
+                fontWeight: 'bold'
+            }} >
+                Contactos
+            </Heading>
 
-         </Button>
+            <VStack space={6} >
+                <Button marginLeft='5/6' mt='7' rounded borderRadius="44" width="44" height="44" alignSelf="center" bgColor="primary.200" borderWidth="3" borderColor="primary.200" leftIcon={<Icon as={<AntDesign name="plus" />} />} onPress={() => { navigation.navigate("Add_C") }}>
 
-         
+                </Button>
 
-                    <Box rounded="xl" >
-                        <Pressable onPress={() => {navigation.navigate("ViewD")}}>
+
+
+                <Box rounded="xl" >
+                    <Pressable onPress={() => { navigation.navigate("ViewD") }}>
                         {({
                             isHovered,
                             isPressed
@@ -53,18 +53,18 @@ export default function Contacts() {
 
 
                             </Box>
-                    
+
                         }}
-                        </Pressable>
-                    </Box>
-
-                 
-                </VStack>
-
-             
+                    </Pressable>
+                </Box>
 
 
-            </Box>
-        </Center>
+            </VStack>
+
+
+
+
+        </Box>
+    </Center>
 
 }

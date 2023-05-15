@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box, Center, Heading, VStack, FormControl, Input, Icon, ScrollView, Button, Circle, HStack} from 'native-base'
+import { Box, Center, Heading, VStack, FormControl, Input, Icon, ScrollView, Button, Circle, HStack } from 'native-base'
 import { Ionicons, MaterialIcons, Entypo, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
@@ -13,7 +13,7 @@ export default function Address_Edit() {
     const [errorNumE, setErrorNumE] = React.useState({})
     const [errorNumI, setErrorNumI] = React.useState({})
     const [errorcologne, setErrorcologne] = React.useState({})
-    const [errorCP, setErrorCP]=React.useState({})
+    const [errorCP, setErrorCP] = React.useState({})
     const [errorstate, setErrorstate] = React.useState({})
     const [errormunicipality, setErrormunicipality] = React.useState({})
 
@@ -33,8 +33,8 @@ export default function Address_Edit() {
         setErrorCP({})
         setErrorstate({})
         setErrormunicipality({})
-    
-        
+
+
         if (formData.Address === undefined) {
             setErrorAddress({ ...errorAddress, Address: 'Address is required' })
             isValid = false
@@ -78,26 +78,26 @@ export default function Address_Edit() {
 
         }
 
-        if(formData.NumE === undefined){
+        if (formData.NumE === undefined) {
             setErrorNumE({ ...errorNumE, NumE: 'NumE is required' });
             isValid = false
-        }else if (!number.test(formData.NumE)) {
+        } else if (!number.test(formData.NumE)) {
 
             setErrorNumE({ ...errorNumE, NumE: 'Solo ingrese números' });
             isValid = false
-        }else if(formData.NumE<2 ){
+        } else if (formData.NumE < 2) {
             setErrorNumE({ ...errorNumE, NumE: 'Tienen que ser 5 dígitos' });
             isValid = false
         }
 
-        if(formData.NumI === undefined){
+        if (formData.NumI === undefined) {
             setErrorNumI({ ...errorNumI, NumI: 'NumI is required' });
             isValid = false
-        }else if (!number.test(formData.NumI)) {
+        } else if (!number.test(formData.NumI)) {
 
             setErrorNumI({ ...errorNumI, NumI: 'Solo ingrese números' });
             isValid = false
-        }else if(formData.NumI<2 ){
+        } else if (formData.NumI < 2) {
             setErrorNumI({ ...errorNumI, NumI: 'Tienen que ser 5 dígitos' });
             isValid = false
         }
@@ -124,15 +124,15 @@ export default function Address_Edit() {
 
         }
 
-        
-        if(formData.CP === undefined){
+
+        if (formData.CP === undefined) {
             setErrorCP({ ...errorCP, CP: 'CP is required' });
             isValid = false
-        }else if (!number.test(formData.CP)) {
+        } else if (!number.test(formData.CP)) {
 
             setErrorCP({ ...errorCP, CP: 'Solo ingrese números' });
             isValid = false
-        }else if(formData.CP<2 ){
+        } else if (formData.CP < 2) {
             setErrorCP({ ...errorCP, CP: 'Tienen que ser 5 dígitos' });
             isValid = false
         }
@@ -197,12 +197,12 @@ export default function Address_Edit() {
 
             }
         }}>
-            <Box background='primary.50'  w="100%" alignItems='center'>
-            <Heading  size="lg" fontWeight="600" color="Black" _dark={{
+            <Box background='primary.50' w="100%" alignItems='center'>
+                <Heading size="lg" fontWeight="600" color="Black" _dark={{
                     color: "primary.900",
-                    fontWeight:'bold'
+                    fontWeight: 'bold'
                 }} marginTop='50'
-                marginBottom='50'>
+                    marginBottom='50'>
                     Dirección
                 </Heading>
             </Box>
@@ -225,10 +225,10 @@ export default function Address_Edit() {
                             fontWeight="bold"
                             onChangeText={value => setFormData({ ...formData, Address: value })}
                             InputLeftElement={<Icon as={<FontAwesome name='address-book-o' />} size={5} ml="2" color='primary.200' />} />
-                       {'Address' in errorAddress ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorAddress.Address}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                        {'Address' in errorAddress ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorAddress.Address}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
-</FormControl.HelperText>
-}
+                        </FormControl.HelperText>
+                        }
 
                     </FormControl>
 
@@ -248,8 +248,8 @@ export default function Address_Edit() {
                             InputLeftElement={<Icon as={<Entypo name='address' />} size={5} ml="2" color='primary.200' />} />
                         {'Street' in errorStreet ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorStreet.Street}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
-</FormControl.HelperText>
-}
+                        </FormControl.HelperText>
+                        }
 
                     </FormControl>
                     <FormControl isRequired isInvalid={'NumE' in errorNumE}>
@@ -267,10 +267,10 @@ export default function Address_Edit() {
                             fontWeight="bold"
                             onChangeText={value => setFormData({ ...formData, NumE: value })}
                             InputLeftElement={<Icon as={<MaterialCommunityIcons name='home-group' />} size={5} ml="2" color='primary.200' />} />
- {'NumE' in errorNumE ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorNumE.NumE}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                        {'NumE' in errorNumE ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorNumE.NumE}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
-</FormControl.HelperText>
-}
+                        </FormControl.HelperText>
+                        }
                     </FormControl>
                     <FormControl isRequired isInvalid={'NumI' in errorNumI}>
 
@@ -286,10 +286,10 @@ export default function Address_Edit() {
                             fontWeight="bold"
                             onChangeText={value => setFormData({ ...formData, NumI: value })}
                             InputLeftElement={<Icon as={<MaterialCommunityIcons name='home-import-outline' />} size={5} ml="2" color='primary.200' />} />
-                         {'NumI' in errorNumI ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorNumI.NumI}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                        {'NumI' in errorNumI ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorNumI.NumI}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
-</FormControl.HelperText>
-}
+                        </FormControl.HelperText>
+                        }
 
                     </FormControl>
                     <FormControl isRequired isInvalid={'cologne' in errorcologne}>
@@ -308,8 +308,8 @@ export default function Address_Edit() {
                             InputLeftElement={<Icon as={<MaterialCommunityIcons name='home-group' />} size={5} ml="2" color='primary.200' />} />
                         {'cologne' in errorcologne ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorcologne.cologne}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
-</FormControl.HelperText>
-}
+                        </FormControl.HelperText>
+                        }
 
 
                     </FormControl>
@@ -318,7 +318,7 @@ export default function Address_Edit() {
                         <FormControl.Label _text={{
                             color: 'primary.50',
                             fontWeight: 'bold'
-                        }}marginLeft={2} >
+                        }} marginLeft={2} >
                             Codigo Postal
                         </FormControl.Label>
                         <Input p={2} placeholder="30804" backgroundColor="primary.100"
@@ -327,10 +327,10 @@ export default function Address_Edit() {
                             fontWeight="bold"
                             onChangeText={value => setFormData({ ...formData, CP: value })}
                             InputLeftElement={<Icon as={<Entypo name='location' />} size={5} ml="2" color='primary.200' />} />
-                         {'CP' in errorCP ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorCP.CP}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                        {'CP' in errorCP ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorCP.CP}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
-</FormControl.HelperText>
-}
+                        </FormControl.HelperText>
+                        }
 
                     </FormControl>
                     <FormControl isRequired isInvalid={'state' in errorstate}>
@@ -338,8 +338,8 @@ export default function Address_Edit() {
                         <FormControl.Label _text={{
                             color: 'primary.50',
                             fontWeight: 'bold'
-                        }}marginLeft={2} >
-                             Estado
+                        }} marginLeft={2} >
+                            Estado
                         </FormControl.Label>
                         <Input p={2} placeholder="Aguascalientes" backgroundColor="primary.100"
                             variant="rounded"
@@ -347,10 +347,10 @@ export default function Address_Edit() {
                             fontWeight="bold"
                             onChangeText={value => setFormData({ ...formData, state: value })}
                             InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" color='primary.200' />} />
-                          {'state' in errorstate ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorstate.state}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                        {'state' in errorstate ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorstate.state}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
-</FormControl.HelperText>
-}
+                        </FormControl.HelperText>
+                        }
                     </FormControl>
 
 
@@ -359,7 +359,7 @@ export default function Address_Edit() {
                         <FormControl.Label _text={{
                             color: 'primary.50',
                             fontWeight: 'bold'
-                        }}marginLeft={2} >
+                        }} marginLeft={2} >
                             Municipio
                         </FormControl.Label>
                         <Input p={2} placeholder="Aguascalientes" backgroundColor="primary.100"
@@ -370,21 +370,21 @@ export default function Address_Edit() {
                             InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" color='primary.200' />} />
                         {'municipality' in errormunicipality ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errormunicipality.municipality}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
-</FormControl.HelperText>
-}
+                        </FormControl.HelperText>
+                        }
 
                     </FormControl>
-                
+
                     <Button onPress={submit}
-                    // onPress={() => {navigation.navigate("Address")}}
-                     marginTop={15} backgroundColor='primary.200' size='lg' borderWidth="2" borderColor="primary.200" rounded={10}>
+                        // onPress={() => {navigation.navigate("Address")}}
+                        marginTop={15} backgroundColor='primary.200' size='lg' borderWidth="2" borderColor="primary.200" rounded={10}>
                         Guardar
                     </Button>
-                    
-                    
+
+
 
                 </VStack>
-                
+
             </Box>
 
         </Center>

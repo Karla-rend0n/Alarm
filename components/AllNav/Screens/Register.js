@@ -12,7 +12,7 @@ export default function Register() {
     const [errorLastname, setErrorLastname] = React.useState({})
     const [errorAge, setErrorAge] = React.useState({})
     const [errorPass, setErrorPass] = React.useState({})
-    const [errorPhone, setErrorPhone]=React.useState({})
+    const [errorPhone, setErrorPhone] = React.useState({})
     var emailVal = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
     var namVal = /^[A-Za-z]+$/i;
     var number = /^[0-9]+$/i
@@ -28,16 +28,16 @@ export default function Register() {
         setErrorPass({})
         setErrorAge({})
         setErrorPhone({})
-        if(formData.email === undefined){
+        if (formData.email === undefined) {
             setErrorsEmail({ ...errorEmail, email: 'El email es requerido' });
             isValid = false
-        }else{
-        if (!emailVal.test(formData.email)) {
-            
-            setErrorsEmail({ ...errorEmail, email: 'is not valid' });
-            isValid = false
+        } else {
+            if (!emailVal.test(formData.email)) {
+
+                setErrorsEmail({ ...errorEmail, email: 'is not valid' });
+                isValid = false
+            }
         }
-    }
 
         if (formData.name === undefined) {
             setErrors({ ...errors, name: 'Name is required' })
@@ -79,36 +79,37 @@ export default function Register() {
             }
 
         }
-        if(formData.age === undefined){
+        if (formData.age === undefined) {
             setErrorAge({ ...errorAge, age: 'Age is required' });
             isValid = false
-        }else if (!number.test(formData.age)) {
+        } else if (!number.test(formData.age)) {
 
             setErrorAge({ ...errorAge, age: 'Solo ingrese números' });
             isValid = false
-        }else if(formData.age<2 ){
+        } else if (formData.age < 2) {
             setErrorAge({ ...errorAge, age: 'Tiene que ser mayor' });
             isValid = false
         }
-        if(formData.phone === undefined){
-            setErrorPhone({...errorPhone, phone:'Phone is required'})
-            isValid=false
-        }else if(!number.test(formData.phone)){
-            setErrorPhone({...errorPhone, phone:'Only numbers'})
-            isValid=false
-        }else if(formData.phone<9){
-            setErrorPhone({...errorPhone, phone:'I need 10 digits'})
-            isValid=false
+        if (formData.phone === undefined) {
+            setErrorPhone({ ...errorPhone, phone: 'Phone is required' })
+            isValid = false
+        } else if (!number.test(formData.phone)) {
+            setErrorPhone({ ...errorPhone, phone: 'Only numbers' })
+            isValid = false
+        } else if (formData.phone < 9) {
+            setErrorPhone({ ...errorPhone, phone: 'I need 10 digits' })
+            isValid = false
         }
-        if (!formData.pass || formData.pass.length < 8 ) {
+        if (!formData.pass || formData.pass.length < 8) {
             setErrorPass({ ...errorPass, pass: 'Password is required' })
             isValid = false
-        }else if (!pattern.test(formData.pass)) {
-            
-            setErrors({ ...errors,
-              pass: 'is not valid'
+        } else if (!pattern.test(formData.pass)) {
+
+            setErrors({
+                ...errors,
+                pass: 'is not valid'
             });
-            isValid=false
+            isValid = false
         }
         return isValid
     };
@@ -118,7 +119,7 @@ export default function Register() {
 
     const submit = () => { validate() ? console.log('good', formData) : console.log('bad', formData) }
 
- 
+
 
     return <ScrollView w="100%" h="100%">
         <Center w="100%" h="100%" bg={{
@@ -151,7 +152,7 @@ export default function Register() {
                         }} marginLeft={2}>
                             Nombre
                         </FormControl.Label>
-                        <Input p={2} placeholder="Sofía" backgroundColor="primary.100" 
+                        <Input p={2} placeholder="Sofía" backgroundColor="primary.100"
                             variant="rounded"
                             color="primary.900"
                             fontWeight="bold"
@@ -205,7 +206,7 @@ export default function Register() {
                         }
 
                     </FormControl>
-                    <FormControl isRequired isInvalid={'phone'in errorPhone}>
+                    <FormControl isRequired isInvalid={'phone' in errorPhone}>
 
                         <FormControl.Label _text={{
                             color: 'primary.50',
@@ -219,10 +220,10 @@ export default function Register() {
                             fontWeight="bold"
                             onChangeText={value => setFormData({ ...formData, phone: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='phone' />} size={5} ml="2" color='primary.200' />} />
-                         {'phone' in errorPhone?<FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPhone.phone}</FormControl.ErrorMessage>:<FormControl.HelperText>
+                        {'phone' in errorPhone ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPhone.phone}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
                         </FormControl.HelperText>}
-                       
+
 
                     </FormControl>
                     <FormControl isRequired isInvalid={'email' in errorEmail}>
@@ -261,7 +262,7 @@ export default function Register() {
                             type='password'
                             onChangeText={value => setFormData({ ...formData, pass: value })}
                             InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />} />
-                             
+
                         {'pass' in errorPass ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPass.pass}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
                         </FormControl.HelperText>}
@@ -269,7 +270,7 @@ export default function Register() {
                     </FormControl>
 
                     <Button marginTop={15} backgroundColor='primary.200' borderWidth="2" borderColor="primary.200" mt="5" size='lg' rounded={10}
-                        onPress={() => {navigation.navigate("Contact_R")}}>
+                        onPress={() => { navigation.navigate("Contact_R") }}>
                         {/* // onPress={submit}> */}
                         Guardar
                     </Button>

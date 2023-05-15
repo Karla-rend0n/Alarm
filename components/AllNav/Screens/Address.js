@@ -17,7 +17,7 @@ export default function Address() {
             }
         }}>
 
-            <Box background='primary.50'  w="100%" alignItems='center'>
+            <Box background='primary.50' w="100%" alignItems='center'>
                 <Heading size="lg" fontWeight="600" color="Black" _dark={{
                     color: "primary.900",
                     fontWeight: 'bold'
@@ -70,37 +70,37 @@ export default function Address() {
                     </VStack>
                     <VStack space={3}>
                         <Heading fontWeight='bold' fontSize='md'>
-                        Colonia
+                            Colonia
                         </Heading>
                         <Text fontWeight='normal' fontSize='md' mx={10}>
-                        Industrial
+                            Industrial
                         </Text>
                         <Divider mx={1} background='primary.50' />
                     </VStack>
                     <VStack space={3}>
                         <Heading fontWeight='bold' fontSize='md'>
-                        Código Postal
+                            Código Postal
                         </Heading>
                         <Text fontWeight='normal' fontSize='md' mx={10}>
-                        58794
+                            58794
                         </Text>
                         <Divider mx={1} background='primary.50' />
                     </VStack>
                     <VStack space={3}>
                         <Heading fontWeight='bold' fontSize='md'>
-                        Estado
+                            Estado
                         </Heading>
                         <Text fontWeight='normal' fontSize='md' mx={10}>
-                        Aguascalientes
+                            Aguascalientes
                         </Text>
                         <Divider mx={1} background='primary.50' />
                     </VStack>
                     <VStack space={3}>
                         <Heading fontWeight='bold' fontSize='md'>
-                        Municipio 
+                            Municipio
                         </Heading>
                         <Text fontWeight='normal' fontSize='md' mx={10}>
-                        Aguascalientes
+                            Aguascalientes
                         </Text>
                         <Divider mx={1} background='primary.50' />
                     </VStack>
@@ -113,7 +113,7 @@ export default function Address() {
                         fontWeight: "400",
                         fontSize: "xl"
                     }} rounded='full'
-                    onPress={() => navigation.navigate("Address_Edit")}>
+                        onPress={() => navigation.navigate("Address_Edit")}>
                         Editar
                     </Button>
 

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Box, Center, HStack, Heading, Image, ScrollView, VStack, Text, Circle, Pressable, Button, Icon } from 'native-base';
-import {AntDesign} from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 
 
@@ -23,44 +23,44 @@ export default function ViewContact() {
                 }} >
                     Contactos
                 </Heading>
-                
+
                 <VStack space={6} >
-                <Button  marginLeft='5/6' mt='7' rounded  borderRadius="44" width="44" height="44" alignSelf="center" bgColor="primary.200" borderWidth="3"  borderColor="primary.200"  leftIcon={<Icon as={<AntDesign name="plus" />}/>} onPress={() => {navigation.navigate("Contact_R")}}>
+                    <Button marginLeft='5/6' mt='7' rounded borderRadius="44" width="44" height="44" alignSelf="center" bgColor="primary.200" borderWidth="3" borderColor="primary.200" leftIcon={<Icon as={<AntDesign name="plus" />} />} onPress={() => { navigation.navigate("Contact_R") }}>
 
-         </Button>
+                    </Button>
 
-         
+
 
                     <Box rounded="xl" >
                         <Pressable>
-                        {({
-                            isHovered,
-                            isPressed
-                        }) => {
-                            return <Box bg={isPressed ? "primary.100" : isHovered ? "primary.100" : "primary.300"} style={{
-                                transform: [{
-                                    scale: isPressed ? 0.96 : 1
-                                }]
-                            }} p="5" rounded="8" shadow={3} borderWidth="3" borderColor="primary.200">
-                                <HStack alignItems="center">
-                                    <Image width="50" height="50"
-                                        mt="5" mb='5' ml='5' mr='5'
-                                        source={require('../../../assets/IconoPerfil.png')} />
+                            {({
+                                isHovered,
+                                isPressed
+                            }) => {
+                                return <Box bg={isPressed ? "primary.100" : isHovered ? "primary.100" : "primary.300"} style={{
+                                    transform: [{
+                                        scale: isPressed ? 0.96 : 1
+                                    }]
+                                }} p="5" rounded="8" shadow={3} borderWidth="3" borderColor="primary.200">
+                                    <HStack alignItems="center">
+                                        <Image width="50" height="50"
+                                            mt="5" mb='5' ml='5' mr='5'
+                                            source={require('../../../assets/IconoPerfil.png')} />
 
-                                    <Text color='primary.900' mt='3' fontWeight='bold'>
-                                        María Herrera
-                                    </Text>
-                                </HStack>
+                                        <Text color='primary.900' mt='3' fontWeight='bold'>
+                                            María Herrera
+                                        </Text>
+                                    </HStack>
 
 
-                            </Box>
-                    
-                        }}
+                                </Box>
+
+                            }}
                         </Pressable>
                     </Box>
 
                     <Button marginTop='255' background='primary.200' rounded='full' size='lg' borderWidth="2" borderColor="primary.200"
-                    onPress={() => {navigation.navigate("Address_R")}}>
+                        onPress={() => { navigation.navigate("Address_R") }}>
                         Siguiente
                     </Button>
                 </VStack>

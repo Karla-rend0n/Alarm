@@ -20,7 +20,7 @@ import C_Information from "../AllNav/Screens/C_Information";
 
 import Profile from "../AllNav/Screens/Profile";
 import Profile_Edit from "../AllNav/Screens/Profile_Edit";
-import Address  from "../AllNav/Screens/Address";
+import Address from "../AllNav/Screens/Address";
 import Address_Edit from "../AllNav/Screens/Address_Edit";
 
 import { FontAwesome } from '@expo/vector-icons';
@@ -91,8 +91,8 @@ function HomeTabs() {
                 tabBarActiveTintColor: "#31607D",
             }}
 
-            //#31607D
-            //#527F9B
+        //#31607D
+        //#527F9B
         >
             <Tab.Screen
                 name="Home"
@@ -149,26 +149,26 @@ function Contact_Screen() {
                 options={{
                     headerShown: false
                 }} />
-                
-                <CNavigation.Screen
+
+            <CNavigation.Screen
                 name="Edit"
                 component={Edit_Contacts}
                 options={{
                 }} />
-                
-                <CNavigation.Screen
+
+            <CNavigation.Screen
                 name="ViewD"
                 component={C_Information}
                 options={{
                 }} />
-                
-                <CNavigation.Screen
+
+            <CNavigation.Screen
                 name="Add_C"
                 component={AddContact}
                 options={{
                 }} />
-            
-           
+
+
 
         </CNavigation.Navigator>
     )
