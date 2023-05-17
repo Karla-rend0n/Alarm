@@ -1,9 +1,22 @@
 import React from "react";
-import { Center, Box, Heading, Button, Text, TouchableOpacity, ScrollView } from "native-base"
+import { Center, Box, Heading, Button, Text, TouchableOpacity, ScrollView, useState } from "native-base"
 
 
 export default function Start() {
     const showMessage = () => Alert.alert('Button clicked !');
+
+    const [disabled, setDisabled] = React.useState(false);
+
+    const handleClick = () => {
+        setDisabled(true);
+
+        // Habilitar el botón después de 1 segundo
+        setTimeout(() => {
+            setDisabled(false);
+            console.log("esto es un mensaje")
+
+        }, 3000);
+    }
 
     return (
         <ScrollView w="100%" h="100%">
@@ -39,8 +52,8 @@ export default function Start() {
                     </Heading>
 
 
-                    <Button mt='5' rounded borderRadius="200" width="200" height="200" alignSelf="center" bgColor="primary.300" borderWidth="3" borderColor="primary.900">
-                        <Button rounded borderRadius="170" width="170" height="170" alignSelf="center" bgColor="primary.600" borderWidth="4" borderColor="primary.1001">
+                    <Button mt='5' rounded borderRadius="200" width="200" height="200" alignSelf="center" bgColor="primary.300" borderWidth="3" borderColor="primary.900" disabled={disabled} onPress={handleClick}>
+                        <Button rounded borderRadius="170" width="170" height="170" alignSelf="center" bgColor="primary.600" borderWidth="4" borderColor="primary.1001" disabled={disabled} onPress={handleClick}>
                             <Text alignSelf="center" fontWeight="700">Emergencia</Text>
 
                         </Button>
@@ -54,3 +67,4 @@ export default function Start() {
 
     );
 }
+

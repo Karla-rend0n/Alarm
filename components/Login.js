@@ -118,8 +118,8 @@ export default function Login() {
 
 
                 <Button
-                    onPress={submit}
-                    // onPress={() => {navigation.navigate("Home")}}
+                    // onPress={submit}
+                    onPress={() => { navigation.navigate("Home") }}
                     background="primary.200" borderWidth="2" borderColor="primary.200" mt="5" rounded={10} _text={{
                         color: "primary.50",
                         fontWeight: "700",

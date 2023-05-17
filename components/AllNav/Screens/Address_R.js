@@ -193,6 +193,11 @@ export default function Address_R() {
 
     const cancelRef = React.useRef(null);
 
+    const handleCloseOpen = () => {
+        setIsOpen(false);
+        navigation.navigate("Login");
+    }
+
 
     return <ScrollView w="100%" h="100%">
         <Center w="100%" h="100%" bg={{
@@ -377,45 +382,43 @@ export default function Address_R() {
                         }
 
                     </FormControl>
-                    <HStack space={10} marginLeft='45'>
-                        <Button marginTop={15} backgroundColor='primary.200' size='lg' borderWidth="2" borderColor="primary.200"
+                    {/* <HStack space={10} marginLeft='45'> */}
+
+                    {/* <Button marginTop={15} backgroundColor='primary.200' size='lg' borderWidth="2" borderColor="primary.200"
                             // onPress={() => { navigation.navigate("Home") }}>
                             onPress={submit}>
 
                             Omitir
-                        </Button>
+                        </Button> */}
 
 
+                    {/* </HStack> */}
 
 
-                        <Button onPress={() => setIsOpen(!isOpen)} marginTop={15} backgroundColor='primary.200' size='lg' borderWidth="2" borderColor="primary.200">
-                            {/* // onPress={() => {navigation.navigate("Home")}} >
+                    <Button onPress={() => setIsOpen(!isOpen)} marginTop={15} backgroundColor='primary.200' rounded={10} size='lg' borderWidth="2" borderColor="primary.200">
+                        {/* // onPress={() => {navigation.navigate("Home")}} >
                         // onPress={submit}> */}
 
-                            Finalizar
-                        </Button>
-
-                        <AlertDialog leastDestructiveRef={cancelRef} isOpen={isOpen} onClose={onClose}>
-                            <AlertDialog.Content>
-                                <AlertDialog.CloseButton />
-                                <AlertDialog.Header>Felicidades</AlertDialog.Header>
-                                <AlertDialog.Body>
-                                    Tus datos se registraron correctamente, da clic en el botón para iniciar sesión.
-                                </AlertDialog.Body>
-                                <AlertDialog.Footer>
-                                    <Button.Group space={2}>
-                                        <Button colorScheme="danger" onPress={() => { navigation.navigate("Login") }} >
-                                            Iniciar Sesión
-                                        </Button>
-                                    </Button.Group>
-                                </AlertDialog.Footer>
-                            </AlertDialog.Content>
-                        </AlertDialog>
+                        Finalizar
+                    </Button>
 
 
-
-
-                    </HStack>
+                    <AlertDialog leastDestructiveRef={cancelRef} isOpen={isOpen} onClose={onClose}>
+                        <AlertDialog.Content>
+                            <AlertDialog.CloseButton />
+                            <AlertDialog.Header>Felicidades</AlertDialog.Header>
+                            <AlertDialog.Body>
+                                Tus datos se registraron correctamente, da clic en el botón para iniciar sesión.
+                            </AlertDialog.Body>
+                            <AlertDialog.Footer>
+                                <Button.Group space={2}>
+                                    <Button colorScheme="danger" onPress={handleCloseOpen}>
+                                        Iniciar Sesión
+                                    </Button>
+                                </Button.Group>
+                            </AlertDialog.Footer>
+                        </AlertDialog.Content>
+                    </AlertDialog>
 
                 </VStack>
                 <HStack space={3} marginLeft='110' marginTop='5'>
