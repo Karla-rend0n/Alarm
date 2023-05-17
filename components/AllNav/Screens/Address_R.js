@@ -1,10 +1,30 @@
 import * as React from 'react'
-import { Box, Center, Heading, VStack, FormControl, Input, Icon, ScrollView, Button, Circle, HStack} from 'native-base'
+import { Box, Center, CheckIcon, Circle, Heading, VStack, FormControl, Input, Icon,
+    Select, ScrollView, Button, HStack, WarningOutlineIcon} from 'native-base'
 import { Ionicons, MaterialIcons, Entypo, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
+import axios from 'axios';
+
 
 export default function Address_R() {
     const navigation = useNavigation();
+    const [formData, setData] = React.useState({})
+    const [errors, setErrors] = React.useState({})
+    const [jsonZipCode, setJsonZipCode] = React.useState({})
+    const [neighborhood, setNeighborhood] = React.useState("")
+
+    const get_zip_code = async() =>{
+        try{
+            let url = 'http://127.0.0.1:8000/zip_code/' + formData.zip_code + '/get_zip_code/'
+            const response = await fetch(url)
+              setJsonZipCode( await response.json())
+              console.log('json', jsonZipCode)
+              return jsonZipCode
+            } catch (error) {
+              console.error(error);
+            }
+        }
+    
 
     return <ScrollView w="100%" h="100%">
         <Center w="100%" h="100%" bg={{
@@ -98,8 +118,8 @@ export default function Address_R() {
                         <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
 
                     </FormControl>
+                    { JSON.stringify(jsonZipCode) === '{}' ?
                     <FormControl >
-
                         <FormControl.Label _text={{
                             color: 'primary.50',
                             fontWeight: 'bold'
@@ -113,10 +133,29 @@ export default function Address_R() {
 
                         </FormControl.HelperText>
                         <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
-
                     </FormControl>
-                    <FormControl >
-
+                    :
+                    <FormControl w="3/4" maxW="300" isRequired isInvalid={neighborhood === "" }>
+                        <FormControl.Label>Seleciona la Colonia</FormControl.Label>
+                        <Select selectedValue={neighborhood} minWidth="200" accessibilityLabel="Choose Service" placeholder="Selecciona la Colonia" 
+                            _selectedItem={{bg: "teal.600", endIcon: <CheckIcon size={5} />}} 
+                            mt="1" 
+                            onValueChange={itemValue => setNeighborhood(itemValue)} color="black">
+                            {jsonZipCode.map( (ngbh) =>
+                                <Select.Item label={ngbh.neighborhood} value={ngbh.neighborhood} />
+                            
+                            )}
+                        
+                            </Select>
+                            {neighborhood === "" ? <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
+                                                    Por favor seleciona la colonia
+                                                </FormControl.ErrorMessage> :
+                                                ""
+                                                }
+                    </FormControl>   
+                    }
+                   
+                    <FormControl>
                         <FormControl.Label _text={{
                             color: 'primary.50',
                             fontWeight: 'bold'
@@ -125,15 +164,19 @@ export default function Address_R() {
                         </FormControl.Label>
                         <Input p={2} placeholder="Password" backgroundColor="primary.100"
                             variant="rounded"
-                            InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />} />
+                            InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />} 
+                            onChangeText={ value => setData({ ...formData, zip_code : value})}
+                            onBlur={get_zip_code} 
+                            />
                         <FormControl.HelperText>
 
                         </FormControl.HelperText>
                         <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage>
 
                     </FormControl>
-                    <FormControl >
 
+
+                    <FormControl >
                         <FormControl.Label _text={{
                             color: 'primary.50',
                             fontWeight: 'bold'
