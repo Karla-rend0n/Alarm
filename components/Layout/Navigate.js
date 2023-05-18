@@ -88,7 +88,7 @@ function HomeTabs() {
         <Tab.Navigator
             initialRouteName="Home"
             screenOptions={{
-                tabBarActiveTintColor: "#31607D",
+                tabBarActiveTintColor: "#BD8A3E",
             }}
 
         //#31607D

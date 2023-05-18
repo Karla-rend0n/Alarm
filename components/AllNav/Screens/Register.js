@@ -100,6 +100,7 @@ export default function Register() {
             setErrorPhone({ ...errorPhone, phone: 'I need 10 digits' })
             isValid = false
         }
+
         if (!formData.pass || formData.pass.length < 8) {
             setErrorPass({ ...errorPass, pass: 'Password is required' })
             isValid = false
@@ -270,8 +271,8 @@ export default function Register() {
                     </FormControl>
 
                     <Button marginTop={15} backgroundColor='primary.200' borderWidth="2" borderColor="primary.200" mt="5" size='lg' rounded={10}
-                        // onPress={() => { navigation.navigate("Contact_R") }}>
-                        onPress={submit}>
+                        onPress={() => { navigation.navigate("Contact_R") }}>
+                        {/* onPress={submit}> */}
                         Guardar
                     </Button>
 

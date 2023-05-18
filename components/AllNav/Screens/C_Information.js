@@ -116,7 +116,6 @@ export default function C_Information() {
             </HStack>
 
             <AlertDialog
-              backgroundColor="primary.400"
               leastDestructiveRef={cancelRef}
               isOpen={isOpen}
               onClose={onClose}
