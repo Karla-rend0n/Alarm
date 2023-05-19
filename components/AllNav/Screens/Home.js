@@ -5,18 +5,45 @@ import { Center, Box, Heading, Button, Text, TouchableOpacity, ScrollView, useSt
 export default function Start() {
     const showMessage = () => Alert.alert('Button clicked !');
 
-    const [disabled, setDisabled] = React.useState(false);
+    const [estadoBoton, setEstadoBoton] = React.useState('Apagado');
+    const [tiempoInicioPresionado, setTiempoInicioPresionado] = React.useState(0);
 
-    const handleClick = () => {
-        setDisabled(true);
+    const handlePressIn = () => {
+        setTiempoInicioPresionado(Date.now());
+    };
 
-        // Habilitar el botón después de 1 segundo
-        setTimeout(() => {
-            setDisabled(false);
-            console.log("esto es un mensaje")
+    const handlePressOut = () => {
+        const tiempoFinPresionado = Date.now();
+        const duracionPresionado = tiempoFinPresionado - tiempoInicioPresionado;
 
-        }, 3000);
-    }
+        if (duracionPresionado >= 2000 && estadoBoton === 'Apagado') {
+            setEstadoBoton('Encendido');
+        } else if (duracionPresionado >= 0 && estadoBoton === 'Encendido') {
+            setEstadoBoton('Apagado');
+        }
+    };
+
+
+    const [estadoBotonE, setEstadoBotonE] = React.useState('Apagado');
+    const [tiempoInicioPresionadoE, setTiempoInicioPresionadoE] = React.useState(0);
+
+    const handlePressInicio = () => {
+        setTiempoInicioPresionadoE(Date.now());
+    };
+
+    const handlePressApagado = () => {
+        const tiempoFinPresionado = Date.now();
+        const duracionPresionado = tiempoFinPresionado - tiempoInicioPresionadoE;
+
+        if (duracionPresionado >= 2000 && estadoBotonE === 'Apagado') {
+            setEstadoBotonE('Encendido');
+        } else if (duracionPresionado >= 0 && estadoBotonE === 'Encendido') {
+            setEstadoBotonE('Apagado');
+        }
+    };
+
+
+
 
     return (
         <ScrollView w="100%" h="100%">
@@ -40,8 +67,10 @@ export default function Start() {
                         Si vez algo sospechoso presiona el botón.
                     </Heading>
 
-                    <Button mt='5' rounded borderRadius="200" width="200" height="200" alignSelf="center" bgColor="primary.300" borderWidth="3" borderColor="primary.900">
-                        <Button rounded borderRadius="170" width="170" height="170" alignSelf="center" bgColor="primary.500" borderWidth="4" borderColor="primary.1000">
+                    <Button mt='5' rounded borderRadius="200" width="200" height="200" alignSelf="center" bgColor="primary.300" borderWidth="3" borderColor="primary.900" onPressIn={handlePressIn} onPressOut={handlePressOut}>
+                        <Button rounded borderRadius="170" width="170" height="170" alignSelf="center" bgColor="primary.500" borderWidth="4" borderColor="primary.1000" onPressIn={handlePressIn} onPressOut={handlePressOut}>
+                            <Text>{estadoBoton}</Text>
+
                             <Text alignSelf="center" fontWeight="700">Alarma</Text>
 
                         </Button>
@@ -52,8 +81,10 @@ export default function Start() {
                     </Heading>
 
 
-                    <Button mt='5' rounded borderRadius="200" width="200" height="200" alignSelf="center" bgColor="primary.300" borderWidth="3" borderColor="primary.900" disabled={disabled} onPress={handleClick}>
-                        <Button rounded borderRadius="170" width="170" height="170" alignSelf="center" bgColor="primary.600" borderWidth="4" borderColor="primary.1001" disabled={disabled} onPress={handleClick}>
+                    <Button mt='5' rounded borderRadius="200" width="200" height="200" alignSelf="center" bgColor="primary.300" borderWidth="3" borderColor="primary.900" onPressIn={handlePressInicio} onPressOut={handlePressApagado}>
+                        <Button rounded borderRadius="170" width="170" height="170" alignSelf="center" bgColor="primary.600" borderWidth="4" borderColor="primary.1001" onPressIn={handlePressInicio} onPressOut={handlePressApagado}>
+                            <Text>{estadoBotonE}</Text>
+
                             <Text alignSelf="center" fontWeight="700">Emergencia</Text>
 
                         </Button>

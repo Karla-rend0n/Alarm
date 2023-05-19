@@ -269,8 +269,8 @@ export default function Register() {
                     </FormControl>
 
                     <Button marginTop={15} backgroundColor='primary.200' borderWidth="2" borderColor="primary.200" mt="5" size='lg' rounded={10}
-                        // onPress={() => { navigation.navigate("Contact_R") }}>
-                        onPress={submit}>
+                        onPress={() => { navigation.navigate("Contact_R") }}>
+                        {/* onPress={submit}> */}
                         Guardar
                     </Button>
 
