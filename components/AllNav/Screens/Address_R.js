@@ -44,15 +44,7 @@ export default function Address_R() {
                     Address: 'La dirección es muy corta'
                 })
                 console.log('valida')
-            } else {
-                if (!namVal.test(formData.Address)) {
-                    setErrorAddress({
-                        ...errorAddress,
-                        Address: 'Ingrese letras'
-                    })
-                }
             }
-
         }
 
 
@@ -229,7 +221,7 @@ export default function Address_R() {
                             onChangeText={value => setFormData({ ...formData, Address: value })}
                             InputLeftElement={<Icon as={<FontAwesome name='address-book-o' />} size={5} ml="2" color='primary.200' />} />
                         {'Address' in errorAddress ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorAddress.Address}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                            Ingrese su dirección
+                            Ingrese su dirección: Calle, Número y colonia
                         </FormControl.HelperText>
                         }
                     </FormControl>
