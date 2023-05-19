@@ -163,7 +163,7 @@ function Contact_Screen() {
                 }} />
 
             <CNavigation.Screen
-                name="Add_C"
+                name="Añadir Contacto"
                 component={AddContact}
                 options={{
                 }} />

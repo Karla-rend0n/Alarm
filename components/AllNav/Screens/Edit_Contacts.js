@@ -13,101 +13,94 @@ export default function Edit_Contacts() {
     const [errorLastname, setErrorLastname] = React.useState({})
     const [errorPhone, setErrorPhone] = React.useState({})
     var namVal = /^[A-Za-z]+$/i;
-    var number = /^[0-9]+$/i
+    var number = /^\+?(52\s?)?1?\d{3}\s?\d{3}\s?\d{4}$/
 
 
 
 
     const validate = () => {
         let isValid = true;
-        setErrorkinship({})
-        setErrors({})
-        setErrorPhone({})
-        setErrorLastname({})
-
+        setErrorkinship({});
+        setErrors({});
+        setErrorPhone({});
+        setErrorLastname({});
+    
         if (formData.kinship === undefined) {
-            setErrorkinship({ ...errorkinship, kinship: 'kinship is required' })
-            isValid = false
+          setErrorkinship({ ...errorkinship, kinship: "El parentesco es necesario" });
+          isValid = false;
         } else {
-            if (formData.kinship.length <= 3) {
-                setErrorkinship({
-                    ...errorkinship,
-                    kinship: 'kinship Name is too short'
-                })
-                console.log('valida')
-            } else {
-                if (!namVal.test(formData.kinship)) {
-                    setErrorkinship({
-                        ...errorkinship,
-                        kinship: 'Ingrese letras'
-                    })
-                }
+          if (formData.kinship.length <= 3) {
+            setErrorkinship({
+              ...errorkinship,
+              kinship: "El parentesco es muy corto",
+            });
+            console.log("valida");
+          } else {
+            if (!namVal.test(formData.kinship)) {
+              setErrorkinship({
+                ...errorkinship,
+                kinship: "Ingrese solo letras",
+              });
             }
-
+          }
         }
-
+    
         if (formData.name === undefined) {
-            setErrors({ ...errors, name: 'Name is required' })
-            isValid = false
+          setErrors({ ...errors, name: 'El nombre es requerido' });
+          isValid = false;
         } else {
-            if (formData.name.length <= 3) {
-                setErrors({
-                    ...errors,
-                    name: 'Name is too short'
-                });
-                isValid = false
-                console.log('valida')
-            } else {
-                if (!namVal.test(formData.name)) {
-                    setErrors({
-                        ...errors,
-                        name: 'ingrese letras'
-                    })
-                }
+          if (formData.name.length <= 3) {
+            setErrors({
+              ...errors,
+              name: "El nombre es muy corto",
+            });
+            isValid = false;
+            console.log("valida");
+          } else {
+            if (!namVal.test(formData.name)) {
+              setErrors({
+                ...errors,
+                name: "Ingrese solo letras",
+              });
             }
+          }
         }
-
-
+    
         if (formData.lastName === undefined) {
-            setErrorLastname({ ...errorLastname, lastName: 'Last Name is required' })
-            isValid = false
+          setErrorLastname({ ...errorLastname, lastName: "El apellido es requerido" });
+          isValid = false;
         } else {
-            if (formData.lastName.length <= 3) {
-                setErrorLastname({
-                    ...errorLastname,
-                    lastName: 'Last Name is too short'
-                })
-                console.log('valida')
-            } else {
-                if (!namVal.test(formData.lastName)) {
-                    setErrorLastname({
-                        ...errorLastname,
-                        lastName: 'Ingrese letras'
-                    })
-                }
+          if (formData.lastName.length <= 3) {
+            setErrorLastname({
+              ...errorLastname,
+              lastName: "El apellido es muy corto",
+            });
+            console.log("valida");
+          } else {
+            if (!namVal.test(formData.lastName)) {
+              setErrorLastname({
+                ...errorLastname,
+                lastName: "Ingrese solo letras",
+              });
             }
-
+          }
         }
-
-
+    
         if (formData.phone === undefined) {
-            setErrorPhone({ ...errorPhone, phone: 'Phone is required' })
-            isValid = false
+          setErrorPhone({ ...errorPhone, phone: "El telefono es requerido" });
+          isValid = false;
         } else if (!number.test(formData.phone)) {
-            setErrorPhone({ ...errorPhone, phone: 'Only numbers' })
-            isValid = false
-        } else if (formData.phone < 9) {
-            setErrorPhone({ ...errorPhone, phone: 'I need 10 digits' })
-            isValid = false
-        }
-
-        return isValid
-    };
+          setErrorPhone({ ...errorPhone, phone: "Solo necesito 10 digitos" });
+          isValid = false;
+        } 
+    
+        return isValid;
+      };
 
 
 
 
-    const submit = () => { validate() ? console.log('good', formData) : console.log('bad', formData) }
+    const submit = () => { validate() ? navigation.navigate("Contacts") : console.log('bad', formData) }
 
     return <Center w="100%" h="100%" bg={{
         linearGradient: {
@@ -129,7 +122,7 @@ export default function Edit_Contacts() {
                     }} marginLeft={2}>
                         Parentesco
                     </FormControl.Label>
-                    <Input p={2} placeholder="Parentesco" backgroundColor="primary.100"
+                    <Input p={2} placeholder="Ingrese el parentesco" backgroundColor="primary.100"
                         variant="rounded"
                         color="primary.900"
                         fontWeight="bold"
@@ -138,7 +131,7 @@ export default function Edit_Contacts() {
                         InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
 
                     {'kinship' in errorkinship ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorkinship.kinship}</FormControl.ErrorMessage> : <FormControl.HelperText>
-
+                    Ingrese que tipo de relacion tiene con la persona
                     </FormControl.HelperText>
                     }
 
@@ -151,7 +144,7 @@ export default function Edit_Contacts() {
                     }} marginLeft={2}>
                         Nombre
                     </FormControl.Label>
-                    <Input p={2} placeholder="Name" backgroundColor="primary.100"
+                    <Input p={2} placeholder="Ingrese su nombre" backgroundColor="primary.100"
                         variant="rounded"
                         color="primary.900"
                         fontWeight="bold"
@@ -159,7 +152,8 @@ export default function Edit_Contacts() {
                         onChangeText={value => setFormData({ ...formData, name: value })}
                         InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
                     {'name' in errors ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errors.name}</FormControl.ErrorMessage> : <FormControl.HelperText>
-
+                    
+                    Ingrese su nombre
                     </FormControl.HelperText>
                     }
 
@@ -174,7 +168,7 @@ export default function Edit_Contacts() {
                     }} marginLeft={2} >
                         Apellido
                     </FormControl.Label>
-                    <Input p={2} placeholder="Last Name" backgroundColor="primary.100"
+                    <Input p={2} placeholder="Ingrese su apellido" backgroundColor="primary.100"
                         variant="rounded"
                         color="primary.900"
                         fontWeight="bold"
@@ -182,7 +176,7 @@ export default function Edit_Contacts() {
                         onChangeText={value => setFormData({ ...formData, lastName: value })}
                         InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
                     {'lastName' in errorLastname ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorLastname.lastName}</FormControl.ErrorMessage> : <FormControl.HelperText>
-
+                    Solo ingrese sus apellidos
                     </FormControl.HelperText>
                     }
 
@@ -195,22 +189,21 @@ export default function Edit_Contacts() {
                     }} marginLeft={2} >
                         Teléfono
                     </FormControl.Label>
-                    <Input p={2} placeholder="Phone" backgroundColor="primary.100"
+                    <Input p={2} placeholder="Ingrese su número" backgroundColor="primary.100"
                         variant="rounded"
                         color="primary.900"
                         fontWeight="bold"
-                        value='449-587-69-78'
+                        value='4495876978'
                         onChangeText={value => setFormData({ ...formData, phone: value })}
                         InputLeftElement={<Icon as={<MaterialIcons name='phone' />} size={5} ml="2" color='primary.200' />} />
                     {'phone' in errorPhone ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPhone.phone}</FormControl.ErrorMessage> : <FormControl.HelperText>
-
+                    Ingrese su número de teléfono sin guiones ni espacios
                     </FormControl.HelperText>}
 
                 </FormControl>
 
                 <Button mt='5' size='lg' marginTop={15} backgroundColor='primary.200' borderWidth="2" borderColor="primary.200" rounded={10}
-                    onPress={() => { navigation.navigate("Contacts") }}>
-                    {/* onPress={submit}> */}
+                   onPress={submit}> 
                     Guardar
                 </Button>
 

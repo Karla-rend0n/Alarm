@@ -24,7 +24,7 @@ export default function Contacts() {
             </Heading>
 
             <VStack space={6} >
-                <Button marginLeft='5/6' mt='7' rounded borderRadius="44" width="44" height="44" alignSelf="center" bgColor="primary.200" borderWidth="3" borderColor="primary.200" leftIcon={<Icon as={<AntDesign name="plus" />} />} onPress={() => { navigation.navigate("Add_C") }}>
+                <Button marginLeft='5/6' mt='7' rounded borderRadius="44" width="44" height="44" alignSelf="center" bgColor="primary.200" borderWidth="3" borderColor="primary.200" leftIcon={<Icon as={<AntDesign name="plus" />} />} onPress={() => { navigation.navigate("Añadir Contacto") }}>
 
                 </Button>
 

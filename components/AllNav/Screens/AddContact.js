@@ -23,7 +23,7 @@ export default function AddContact() {
   const [errorLastname, setErrorLastname] = React.useState({});
   const [errorPhone, setErrorPhone] = React.useState({});
   var namVal = /^[A-Za-z]+$/i;
-  var number = /^[0-9]+$/i;
+  var number = /^\+?(52\s?)?1?\d{3}\s?\d{3}\s?\d{4}$/
 
   const validate = () => {
     let isValid = true;
@@ -33,33 +33,33 @@ export default function AddContact() {
     setErrorLastname({});
 
     if (formData.kinship === undefined) {
-      setErrorkinship({ ...errorkinship, kinship: "kinship is required" });
+      setErrorkinship({ ...errorkinship, kinship: "El parentesco es necesario" });
       isValid = false;
     } else {
       if (formData.kinship.length <= 3) {
         setErrorkinship({
           ...errorkinship,
-          kinship: "kinship Name is too short",
+          kinship: "El parentesco es muy corto",
         });
         console.log("valida");
       } else {
         if (!namVal.test(formData.kinship)) {
           setErrorkinship({
             ...errorkinship,
-            kinship: "Ingrese letras",
+            kinship: "Ingrese solo letras",
           });
         }
       }
     }
 
     if (formData.name === undefined) {
-      setErrors({ ...errors, name: "Name is required" });
+      setErrors({ ...errors, name: 'El nombre es requerido' });
       isValid = false;
     } else {
       if (formData.name.length <= 3) {
         setErrors({
           ...errors,
-          name: "Name is too short",
+          name: "El nombre es muy corto",
         });
         isValid = false;
         console.log("valida");
@@ -67,48 +67,45 @@ export default function AddContact() {
         if (!namVal.test(formData.name)) {
           setErrors({
             ...errors,
-            name: "ingrese letras",
+            name: "Ingrese solo letras",
           });
         }
       }
     }
 
     if (formData.lastName === undefined) {
-      setErrorLastname({ ...errorLastname, lastName: "Last Name is required" });
+      setErrorLastname({ ...errorLastname, lastName: "El apellido es requerido" });
       isValid = false;
     } else {
       if (formData.lastName.length <= 3) {
         setErrorLastname({
           ...errorLastname,
-          lastName: "Last Name is too short",
+          lastName: "El apellido es muy corto",
         });
         console.log("valida");
       } else {
         if (!namVal.test(formData.lastName)) {
           setErrorLastname({
             ...errorLastname,
-            lastName: "Ingrese letras",
+            lastName: "Ingrese solo letras",
           });
         }
       }
     }
 
     if (formData.phone === undefined) {
-      setErrorPhone({ ...errorPhone, phone: "Phone is required" });
+      setErrorPhone({ ...errorPhone, phone: "El telefono es requerido" });
       isValid = false;
     } else if (!number.test(formData.phone)) {
-      setErrorPhone({ ...errorPhone, phone: "Only numbers" });
+      setErrorPhone({ ...errorPhone, phone: "Solo necesito 10 digitos" });
       isValid = false;
-    } else if (formData.phone < 9) {
-      setErrorPhone({ ...errorPhone, phone: "I need 10 digits" });
-      isValid = false;
-    }
+    } 
 
     return isValid;
   };
 
   const submit = () => {
-    validate() ? console.log("good", formData) : console.log("bad", formData);
+    validate() ? navigation.navigate("Contacts") : console.log("bad", formData);
   };
 
   return (
@@ -124,17 +121,7 @@ export default function AddContact() {
       }}
     >
       <Box safeArea p="2" py="8" w="90%" maxW="290">
-        <Heading
-          size="lg"
-          fontWeight="600"
-          color="Black"
-          _dark={{
-            color: "primary.50",
-            fontWeight: "bold",
-          }}
-        >
-          Añadir Contactos
-        </Heading>
+       
         <Heading mt="1" color="primary.50" fontWeight="medium" size="xs">
           Completa los siguientes campos.
         </Heading>
@@ -151,7 +138,7 @@ export default function AddContact() {
             </FormControl.Label>
             <Input
               p={2}
-              placeholder="Esposo"
+              placeholder="Ingrese el parentesco"
               backgroundColor="primary.100"
               variant="rounded"
               color="primary.900"
@@ -173,7 +160,7 @@ export default function AddContact() {
                 {errorkinship.kinship}
               </FormControl.ErrorMessage>
             ) : (
-              <FormControl.HelperText></FormControl.HelperText>
+              <FormControl.HelperText>Ingrese que tipo de relacion tiene con la persona</FormControl.HelperText>
             )}
           </FormControl>
           <FormControl isRequired isInvalid={"name" in errors}>
@@ -188,7 +175,7 @@ export default function AddContact() {
             </FormControl.Label>
             <Input
               p={2}
-              placeholder="Sofía"
+              placeholder="Ingrese su nombre"
               backgroundColor="primary.100"
               variant="rounded"
               color="primary.900"
@@ -210,7 +197,7 @@ export default function AddContact() {
                 {errors.name}
               </FormControl.ErrorMessage>
             ) : (
-              <FormControl.HelperText></FormControl.HelperText>
+              <FormControl.HelperText>Ingrese su nombre</FormControl.HelperText>
             )}
           </FormControl>
 
@@ -226,7 +213,7 @@ export default function AddContact() {
             </FormControl.Label>
             <Input
               p={2}
-              placeholder="Hernández"
+              placeholder="Ingrese su apellido"
               backgroundColor="primary.100"
               variant="rounded"
               color="primary.900"
@@ -248,7 +235,7 @@ export default function AddContact() {
                 {errorLastname.lastName}
               </FormControl.ErrorMessage>
             ) : (
-              <FormControl.HelperText></FormControl.HelperText>
+              <FormControl.HelperText>Solo ingrese sus apellidos</FormControl.HelperText>
             )}
           </FormControl>
 
@@ -264,7 +251,7 @@ export default function AddContact() {
             </FormControl.Label>
             <Input
               p={2}
-              placeholder="449-748-22-00"
+              placeholder="Ingrese su número"
               backgroundColor="primary.100"
               variant="rounded"
               color="primary.900"
@@ -286,7 +273,7 @@ export default function AddContact() {
                 {errorPhone.phone}
               </FormControl.ErrorMessage>
             ) : (
-              <FormControl.HelperText></FormControl.HelperText>
+              <FormControl.HelperText>Ingrese su número de teléfono</FormControl.HelperText>
             )}
           </FormControl>
           <Button

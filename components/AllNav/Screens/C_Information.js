@@ -22,7 +22,9 @@ export default function C_Information() {
 
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const onClose = () => setIsOpen(false);
+  const onClose = () => {setIsOpen(false);
+    navigation.navigate("Contacts")
+  }
 
   const cancelRef = React.useRef(null);
 

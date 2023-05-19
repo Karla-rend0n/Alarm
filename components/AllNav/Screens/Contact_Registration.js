@@ -261,7 +261,7 @@ export default function Contact_Registration() {
             </FormControl.Label>
             <Input
               p={2}
-              placeholder="Ingrese su numero"
+              placeholder="Ingrese su número"
               backgroundColor="primary.100"
               variant="rounded"
               color="primary.900"
