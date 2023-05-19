@@ -23,7 +23,7 @@ export default function Contact_Registration() {
   const [errorLastname, setErrorLastname] = React.useState({});
   const [errorPhone, setErrorPhone] = React.useState({});
   var namVal = /^[A-Za-z]+$/i;
-  var number = /^[0-9]+$/i;
+  var number = /^\+?(52\s?)?1?\d{3}\s?\d{3}\s?\d{4}$/
 
   const validate = () => {
     let isValid = true;
@@ -33,33 +33,33 @@ export default function Contact_Registration() {
     setErrorLastname({});
 
     if (formData.kinship === undefined) {
-      setErrorkinship({ ...errorkinship, kinship: "kinship is required" });
+      setErrorkinship({ ...errorkinship, kinship: "El parentesco es necesario" });
       isValid = false;
     } else {
       if (formData.kinship.length <= 3) {
         setErrorkinship({
           ...errorkinship,
-          kinship: "kinship Name is too short",
+          kinship: "El parentesco es muy corto",
         });
         console.log("valida");
       } else {
         if (!namVal.test(formData.kinship)) {
           setErrorkinship({
             ...errorkinship,
-            kinship: "Ingrese letras",
+            kinship: "Ingrese solo letras",
           });
         }
       }
     }
 
     if (formData.name === undefined) {
-      setErrors({ ...errors, name: "Name is required" });
+      setErrors({ ...errors, name: 'El nombre es requerido' });
       isValid = false;
     } else {
       if (formData.name.length <= 3) {
         setErrors({
           ...errors,
-          name: "Name is too short",
+          name: "El nombre es muy corto",
         });
         isValid = false;
         console.log("valida");
@@ -67,40 +67,40 @@ export default function Contact_Registration() {
         if (!namVal.test(formData.name)) {
           setErrors({
             ...errors,
-            name: "ingrese letras",
+            name: "Ingrese solo letras",
           });
         }
       }
     }
 
     if (formData.lastName === undefined) {
-      setErrorLastname({ ...errorLastname, lastName: "Last Name is required" });
+      setErrorLastname({ ...errorLastname, lastName: "El apellido es requerido" });
       isValid = false;
     } else {
       if (formData.lastName.length <= 3) {
         setErrorLastname({
           ...errorLastname,
-          lastName: "Last Name is too short",
+          lastName: "El apellido es muy corto",
         });
         console.log("valida");
       } else {
         if (!namVal.test(formData.lastName)) {
           setErrorLastname({
             ...errorLastname,
-            lastName: "Ingrese letras",
+            lastName: "Ingrese solo letras",
           });
         }
       }
     }
 
     if (formData.phone === undefined) {
-      setErrorPhone({ ...errorPhone, phone: "Phone is required" });
+      setErrorPhone({ ...errorPhone, phone: "El telefono es requerido" });
       isValid = false;
     } else if (!number.test(formData.phone)) {
-      setErrorPhone({ ...errorPhone, phone: "Only numbers" });
+      setErrorPhone({ ...errorPhone, phone: "Solo numeros" });
       isValid = false;
     } else if (formData.phone < 9) {
-      setErrorPhone({ ...errorPhone, phone: "I need 10 digits" });
+      setErrorPhone({ ...errorPhone, phone: "Solo necesito 10 digitos" });
       isValid = false;
     }
 
@@ -108,7 +108,7 @@ export default function Contact_Registration() {
   };
 
   const submit = () => {
-    validate() ? console.log("good", formData) : console.log("bad", formData);
+    validate() ? navigation.navigate("ViewContact") : console.log("bad", formData);
   };
 
   return (
@@ -151,7 +151,7 @@ export default function Contact_Registration() {
             </FormControl.Label>
             <Input
               p={2}
-              placeholder="Esposo"
+              placeholder="Ingrese el parentesco"
               backgroundColor="primary.100"
               variant="rounded"
               color="primary.900"
@@ -174,7 +174,7 @@ export default function Contact_Registration() {
                 {errorkinship.kinship}
               </FormControl.ErrorMessage>
             ) : (
-              <FormControl.HelperText></FormControl.HelperText>
+              <FormControl.HelperText>Ingrese que tipo de relacion tiene con la persona</FormControl.HelperText>
             )}
           </FormControl>
           <FormControl isRequired isInvalid={"name" in errors}>
@@ -189,7 +189,7 @@ export default function Contact_Registration() {
             </FormControl.Label>
             <Input
               p={2}
-              placeholder="Sofía"
+              placeholder="Ingrese su nombre"
               backgroundColor="primary.100"
               variant="rounded"
               color="primary.900"
@@ -211,7 +211,7 @@ export default function Contact_Registration() {
                 {errors.name}
               </FormControl.ErrorMessage>
             ) : (
-              <FormControl.HelperText></FormControl.HelperText>
+              <FormControl.HelperText>Ingrese su nombre</FormControl.HelperText>
             )}
           </FormControl>
 
@@ -227,7 +227,7 @@ export default function Contact_Registration() {
             </FormControl.Label>
             <Input
               p={2}
-              placeholder="Hernández"
+              placeholder="Ingrese su apellido"
               backgroundColor="primary.100"
               variant="rounded"
               color="primary.900"
@@ -245,11 +245,11 @@ export default function Contact_Registration() {
               }
             />
             {"lastName" in errorLastname ? (
-              <FormControl.ErrorMessage _text={{ color: "primary.700" }}>
+              <FormControl.ErrorMessage  _text={{ color: "primary.700" }}>
                 {errorLastname.lastName}
               </FormControl.ErrorMessage>
             ) : (
-              <FormControl.HelperText></FormControl.HelperText>
+              <FormControl.HelperText>Solo ingrese sus apellidos</FormControl.HelperText>
             )}
           </FormControl>
           <FormControl isRequired isInvalid={"phone" in errorPhone}>
@@ -264,7 +264,7 @@ export default function Contact_Registration() {
             </FormControl.Label>
             <Input
               p={2}
-              placeholder="449-748-22-00"
+              placeholder="Ingrese su numero"
               backgroundColor="primary.100"
               variant="rounded"
               color="primary.900"
@@ -286,7 +286,7 @@ export default function Contact_Registration() {
                 {errorPhone.phone}
               </FormControl.ErrorMessage>
             ) : (
-              <FormControl.HelperText></FormControl.HelperText>
+              <FormControl.HelperText>Ingrese su número de teléfono</FormControl.HelperText>
             )}
           </FormControl>
 
