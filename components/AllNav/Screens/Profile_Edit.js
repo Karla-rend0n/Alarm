@@ -2,6 +2,8 @@ import React from "react";
 import { Center, Box, Avatar, Icon, Input, FormControl, Button, Stack, ScrollView, Heading } from "native-base"
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
+import validator from 'validator';
+
 
 
 export default function Profile_Edit() {
@@ -16,9 +18,7 @@ export default function Profile_Edit() {
     var emailVal = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
     var namVal = /^[A-Za-z]+$/i;
     var number = /^[0-9]+$/i
-    var pattern = new RegExp("^(?=.[a-z])(?=.[A-Z])(?=.\\d)(?=.[-+_!@#$%^&*.,?]).+$")
-
-
+    var phoneNum = /^\+?(52\s?)?1?\d{3}\s?\d{3}\s?\d{4}$/;
 
 
     const validate = () => {
@@ -28,25 +28,28 @@ export default function Profile_Edit() {
         setErrorPass({})
         setErrorAge({})
         setErrorPhone({})
+        setErrorLastname({})
+
+
         if (formData.email === undefined) {
             setErrorsEmail({ ...errorEmail, email: 'El email es requerido' });
             isValid = false
         } else {
             if (!emailVal.test(formData.email)) {
 
-                setErrorsEmail({ ...errorEmail, email: 'is not valid' });
+                setErrorsEmail({ ...errorEmail, email: 'No es valido' });
                 isValid = false
             }
         }
 
         if (formData.name === undefined) {
-            setErrors({ ...errors, name: 'Name is required' })
+            setErrors({ ...errors, name: 'El nombre es requerido' })
             isValid = false
         } else {
-            if (formData.name.length <= 3) {
+            if (formData.name.length < 3) {
                 setErrors({
                     ...errors,
-                    name: 'Name is too short'
+                    name: 'El nombre es muy corto'
                 });
                 isValid = false
                 console.log('valida')
@@ -60,13 +63,13 @@ export default function Profile_Edit() {
             }
         }
         if (formData.lastName === undefined) {
-            setErrorLastname({ ...errorLastname, lastName: 'Last Name is required' })
+            setErrorLastname({ ...errorLastname, lastName: 'Los Apellidos son requeridos' })
             isValid = false
         } else {
             if (formData.lastName.length <= 3) {
                 setErrorLastname({
                     ...errorLastname,
-                    lastName: 'Last Name is too short'
+                    lastName: 'El apellido es muy corto'
                 })
                 console.log('valida')
             } else {
@@ -80,41 +83,42 @@ export default function Profile_Edit() {
 
         }
         if (formData.age === undefined) {
-            setErrorAge({ ...errorAge, age: 'Age is required' });
+            setErrorAge({ ...errorAge, age: 'La edad es requerida' });
             isValid = false
         } else if (!number.test(formData.age)) {
 
             setErrorAge({ ...errorAge, age: 'Solo ingrese números' });
             isValid = false
-        } else if (formData.age < 2) {
-            setErrorAge({ ...errorAge, age: 'Tiene que ser mayor' });
+        } else if (formData.age.length > 2) {
+            setErrorAge({ ...errorAge, age: 'Tiene que ser solo dos digitos' });
+            isValid = false
+        } else if (parseInt(formData.age) <= 16) {
+            setErrorAge({ ...errorAge, age: 'Tiene que ser mayor de 16 años' });
             isValid = false
         }
         if (formData.phone === undefined) {
-            setErrorPhone({ ...errorPhone, phone: 'Phone is required' })
+            setErrorPhone({ ...errorPhone, phone: 'El telefono es requerido' })
             isValid = false
-        } else if (!number.test(formData.phone)) {
-            setErrorPhone({ ...errorPhone, phone: 'Only numbers' })
-            isValid = false
-        } else if (formData.phone < 9) {
-            setErrorPhone({ ...errorPhone, phone: 'I need 10 digits' })
+        } else if (!phoneNum.test(formData.phone)) {
+            setErrorPhone({ ...errorPhone, phone: 'El numero necesita ser de 10 digitos' })
             isValid = false
         }
-        if (!formData.pass || formData.pass.length < 8) {
-            setErrorPass({ ...errorPass, pass: 'Password is required' })
+        if (formData.pass === undefined) {
+            setErrorPass({ ...errorPass, pass: 'La contraseña es requerida' })
             isValid = false
-        } else if (!pattern.test(formData.pass)) {
+        } else if (!validator.isStrongPassword(formData.pass)) {
+            setErrorPass({ ...errorPass, pass: 'La contraseña no es lo suficientemente segura' })
 
-            setErrors({
-                ...errors,
-                pass: 'is not valid'
-            });
-            isValid = false
         }
         return isValid
     };
 
-    const submit = () => { validate() ? console.log('good', formData) : console.log('bad', formData) }
+
+
+
+    const submit = () => { validate() ? navigation.navigate("Profile") : console.log('bad', formData) }
+
+
 
 
     return <ScrollView w="100%" h="100%">
@@ -151,14 +155,15 @@ export default function Profile_Edit() {
                         }} marginLeft={2}>
                             Nombre
                         </FormControl.Label>
-                        <Input p={2} placeholder="Sofía"
+                        <Input p={2} placeholder="Ingrese su nombre"
                             variant="underlined"
                             borderBottomColor='primary.100'
                             placeholderTextColor='primary.100'
                             onChangeText={value => setFormData({ ...formData, name: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
-                        {'name' in errors ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errors.name}</FormControl.ErrorMessage> : <FormControl.HelperText>
 
+                        {'name' in errors ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errors.name}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                            Ingrese su nombre sin apellidos
                         </FormControl.HelperText>
                         }
                     </FormControl>
@@ -171,17 +176,16 @@ export default function Profile_Edit() {
                         }} marginLeft={2} >
                             Apellido
                         </FormControl.Label>
-                        <Input p={2} placeholder="Hernández"
+                        <Input p={2} placeholder="Ingrese su apellido"
                             variant="underlined"
                             borderBottomColor='primary.100'
                             placeholderTextColor='primary.100'
                             onChangeText={value => setFormData({ ...formData, lastName: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
                         {'lastName' in errorLastname ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorLastname.lastName}</FormControl.ErrorMessage> : <FormControl.HelperText>
-
+                            Ingrese solos sus apellidos
                         </FormControl.HelperText>
                         }
-
                     </FormControl>
 
 
@@ -193,14 +197,15 @@ export default function Profile_Edit() {
                         }} marginLeft={2} >
                             Email
                         </FormControl.Label>
-                        <Input p={2} placeholder="Hello@gmail.com"
+                        <Input p={2} placeholder="Correo electrónico"
                             variant="underlined"
                             borderBottomColor='primary.100'
                             placeholderTextColor='primary.100'
                             onChangeText={value => setFormData({ ...formData, email: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='email' />} size={5} ml="2" color='primary.200' />} />
+
                         {'email' in errorEmail ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorEmail.email}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                            Ingresa un correo electronico
+                            Ingresa un correo electrónico
                         </FormControl.HelperText>
                         }
 
@@ -214,7 +219,7 @@ export default function Profile_Edit() {
                         }} marginLeft={2} >
                             Contraseña
                         </FormControl.Label>
-                        <Input p={2} placeholder="Introduce una contraseña"
+                        <Input p={2} placeholder="Contraseña"
                             variant="underlined"
                             borderBottomColor='primary.100'
                             placeholderTextColor='primary.100'
@@ -222,7 +227,7 @@ export default function Profile_Edit() {
                             onChangeText={value => setFormData({ ...formData, pass: value })}
                             InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />} />
                         {'pass' in errorPass ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPass.pass}</FormControl.ErrorMessage> : <FormControl.HelperText>
-
+                            Ingrese letras MAYÚSCULAS o minúsculas, números y caracteres
                         </FormControl.HelperText>}
 
                     </FormControl>
@@ -235,14 +240,14 @@ export default function Profile_Edit() {
                         }} marginLeft={2} >
                             Teléfono
                         </FormControl.Label>
-                        <Input p={2} placeholder="449-748-22-00"
+                        <Input p={2} placeholder="+52"
                             variant="underlined"
                             borderBottomColor='primary.100'
                             placeholderTextColor='primary.100'
                             onChangeText={value => setFormData({ ...formData, phone: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='phone' />} size={5} ml="2" color='primary.200' />} />
                         {'phone' in errorPhone ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPhone.phone}</FormControl.ErrorMessage> : <FormControl.HelperText>
-
+                            Ingrese su número de teléfono
                         </FormControl.HelperText>}
                     </FormControl>
 
@@ -255,17 +260,16 @@ export default function Profile_Edit() {
                             Edad
                         </FormControl.Label>
                         <Input type='number'
-                            p={2} placeholder="18"
+                            p={2} placeholder="Ingrese su edad"
                             variant="underlined"
                             borderBottomColor='primary.100'
                             placeholderTextColor='primary.100'
                             onChangeText={value => setFormData({ ...formData, age: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />} />
                         {'age' in errorAge ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorAge.age}</FormControl.ErrorMessage> : <FormControl.HelperText>
-
+                            Ingrese su edad
                         </FormControl.HelperText>
                         }
-
                     </FormControl>
 
 

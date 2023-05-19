@@ -81,7 +81,7 @@ export default function Address_R() {
             isValid = false
         }
 
-         if (formData.NumI < 2) {
+        if (formData.NumI < 2) {
             setErrorNumI({ ...errorNumI, NumI: 'Tienen que ser más de 2 dígitos' });
             isValid = false
         }
@@ -180,7 +180,7 @@ export default function Address_R() {
 
     const handleCloseOpen = () => {
         setIsOpen(false);
-         navigation.navigate("Login") 
+        navigation.navigate("Login")
     }
 
 
@@ -241,7 +241,7 @@ export default function Address_R() {
                             onChangeText={value => setFormData({ ...formData, Street: value })}
                             InputLeftElement={<Icon as={<Entypo name='address' />} size={5} ml="2" color='primary.200' />} />
                         {'Street' in errorStreet ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorStreet.Street}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                        Ingrese su calle
+                            Ingrese su calle
                         </FormControl.HelperText>
                         }
 
@@ -322,7 +322,7 @@ export default function Address_R() {
                             onChangeText={value => setFormData({ ...formData, CP: value })}
                             InputLeftElement={<Icon as={<Entypo name='location' />} size={5} ml="2" color='primary.200' />} />
                         {'CP' in errorCP ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorCP.CP}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                        Ingrese el Código postal
+                            Ingrese el Código postal
                         </FormControl.HelperText>
                         }
 

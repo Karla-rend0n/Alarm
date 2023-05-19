@@ -17,8 +17,8 @@ export default function Register() {
     var emailVal = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
     var namVal = /^[A-Za-z]+$/i;
     var number = /^[0-9]+$/i
-    var phoneNum= /^\+?(52\s?)?1?\d{3}\s?\d{3}\s?\d{4}$/;
-   
+    var phoneNum = /^\+?(52\s?)?1?\d{3}\s?\d{3}\s?\d{4}$/;
+
 
     const validate = () => {
         let isValid = true;
@@ -27,7 +27,9 @@ export default function Register() {
         setErrorPass({})
         setErrorAge({})
         setErrorPhone({})
-       
+        setErrorLastname({})
+
+
         if (formData.email === undefined) {
             setErrorsEmail({ ...errorEmail, email: 'El email es requerido' });
             isValid = false
@@ -86,10 +88,10 @@ export default function Register() {
 
             setErrorAge({ ...errorAge, age: 'Solo ingrese números' });
             isValid = false
-        } else if (formData.age.length>2) {
+        } else if (formData.age.length > 2) {
             setErrorAge({ ...errorAge, age: 'Tiene que ser solo dos digitos' });
             isValid = false
-        }else if (parseInt(formData.age)<=16){
+        } else if (parseInt(formData.age) <= 16) {
             setErrorAge({ ...errorAge, age: 'Tiene que ser mayor de 16 años' });
             isValid = false
         }
@@ -99,13 +101,13 @@ export default function Register() {
         } else if (!phoneNum.test(formData.phone)) {
             setErrorPhone({ ...errorPhone, phone: 'El numero necesita ser de 10 digitos' })
             isValid = false
-        } 
-        if (formData.pass===undefined) {
+        }
+        if (formData.pass === undefined) {
             setErrorPass({ ...errorPass, pass: 'La contraseña es requerida' })
             isValid = false
-        } else if (!validator.isStrongPassword(formData.pass)){
-            setErrorPass({...errorPass, pass: 'La contraseña no es lo suficientemente segura'})
-            
+        } else if (!validator.isStrongPassword(formData.pass)) {
+            setErrorPass({ ...errorPass, pass: 'La contraseña no es lo suficientemente segura' })
+
         }
         return isValid
     };
@@ -217,7 +219,7 @@ export default function Register() {
                             onChangeText={value => setFormData({ ...formData, phone: value })}
                             InputLeftElement={<Icon as={<MaterialIcons name='phone' />} size={5} ml="2" color='primary.200' />} />
                         {'phone' in errorPhone ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPhone.phone}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                            Ingrese su número de teléfono 
+                            Ingrese su número de teléfono
                         </FormControl.HelperText>}
 
 
@@ -260,13 +262,14 @@ export default function Register() {
                             InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />} />
 
                         {'pass' in errorPass ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPass.pass}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                        Ingrese letras MAYÚSCULAS o minúsculas, números y caracteres 
+                            Ingrese letras MAYÚSCULAS o minúsculas, números y caracteres
                         </FormControl.HelperText>}
 
                     </FormControl>
 
                     <Button marginTop={15} backgroundColor='primary.200' borderWidth="2" borderColor="primary.200" mt="5" size='lg' rounded={10}
-                       onPress={submit}> 
+                        onPress={submit}>
+
                         Guardar
                     </Button>
 
