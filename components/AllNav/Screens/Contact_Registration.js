@@ -97,12 +97,9 @@ export default function Contact_Registration() {
       setErrorPhone({ ...errorPhone, phone: "El telefono es requerido" });
       isValid = false;
     } else if (!number.test(formData.phone)) {
-      setErrorPhone({ ...errorPhone, phone: "Solo numeros" });
-      isValid = false;
-    } else if (formData.phone < 9) {
       setErrorPhone({ ...errorPhone, phone: "Solo necesito 10 digitos" });
       isValid = false;
-    }
+    } 
 
     return isValid;
   };
@@ -312,7 +309,7 @@ export default function Contact_Registration() {
               // onPress={() => {navigation.navigate("ViewContact")}} >
               onPress={submit}
             >
-              Finalizar
+              Agregar
             </Button>
           </HStack>
 

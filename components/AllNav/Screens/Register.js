@@ -97,12 +97,9 @@ export default function Register() {
             setErrorPhone({ ...errorPhone, phone: 'El telefono es requerido' })
             isValid = false
         } else if (!phoneNum.test(formData.phone)) {
-            setErrorPhone({ ...errorPhone, phone: 'Solo numeros' })
-            isValid = false
-        } else if (formData.phone.length < 9) {
             setErrorPhone({ ...errorPhone, phone: 'El numero necesita ser de 10 digitos' })
             isValid = false
-        }
+        } 
         if (formData.pass===undefined) {
             setErrorPass({ ...errorPass, pass: 'La contraseña es requerida' })
             isValid = false
@@ -263,14 +260,13 @@ export default function Register() {
                             InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />} />
 
                         {'pass' in errorPass ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPass.pass}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                        Introduce una contraseña
+                        Ingrese letras MAYÚSCULAS o minúsculas, números y caracteres 
                         </FormControl.HelperText>}
 
                     </FormControl>
 
                     <Button marginTop={15} backgroundColor='primary.200' borderWidth="2" borderColor="primary.200" mt="5" size='lg' rounded={10}
-                        onPress={() => { navigation.navigate("Contact_R") }}>
-                        {/* onPress={submit}> */}
+                       onPress={submit}> 
                         Guardar
                     </Button>
 
