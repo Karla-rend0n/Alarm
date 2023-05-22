@@ -70,15 +70,6 @@ export default function Address() {
                     </VStack>
                     <VStack space={3}>
                         <Heading fontWeight='bold' fontSize='md'>
-                            Colonia
-                        </Heading>
-                        <Text fontWeight='normal' fontSize='md' mx={10}>
-                            Industrial
-                        </Text>
-                        <Divider mx={1} background='primary.50' />
-                    </VStack>
-                    <VStack space={3}>
-                        <Heading fontWeight='bold' fontSize='md'>
                             Código Postal
                         </Heading>
                         <Text fontWeight='normal' fontSize='md' mx={10}>
@@ -86,6 +77,16 @@ export default function Address() {
                         </Text>
                         <Divider mx={1} background='primary.50' />
                     </VStack>
+                    <VStack space={3}>
+                        <Heading fontWeight='bold' fontSize='md'>
+                            Colonia
+                        </Heading>
+                        <Text fontWeight='normal' fontSize='md' mx={10}>
+                            Industrial
+                        </Text>
+                        <Divider mx={1} background='primary.50' />
+                    </VStack>
+                  
                     <VStack space={3}>
                         <Heading fontWeight='bold' fontSize='md'>
                             Estado

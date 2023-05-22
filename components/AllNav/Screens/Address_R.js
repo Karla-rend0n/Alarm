@@ -287,26 +287,7 @@ export default function Address_R() {
                         }
 
                     </FormControl>
-                    <FormControl isRequired isInvalid={'cologne' in errorcologne} >
 
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold'
-                        }} marginLeft={2} >
-                            Colonia
-                        </FormControl.Label>
-                        <Input p={2} placeholder="Seleccione su colonia" backgroundColor="primary.100"
-                            variant="rounded"
-                            color="primary.900"
-                            fontWeight="bold"
-                            onChangeText={value => setFormData({ ...formData, cologne: value })}
-                            InputLeftElement={<Icon as={<MaterialCommunityIcons name='home-group' />} size={5} ml="2" color='primary.200' />} />
-                        {'cologne' in errorcologne ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorcologne.cologne}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                            Ingrese su colonia
-                        </FormControl.HelperText>
-                        }
-
-                    </FormControl>
                     <FormControl isRequired isInvalid={'CP' in errorCP} >
 
                         <FormControl.Label _text={{
@@ -327,7 +308,33 @@ export default function Address_R() {
                         }
 
                     </FormControl>
-                    <FormControl isRequired isInvalid={'state' in errorstate} >
+                    <FormControl isRequired isInvalid={'cologne' in errorcologne}>
+
+                        <FormControl.Label _text={{
+                            color: 'primary.50',
+                            fontWeight: 'bold'
+                        }} marginLeft={2} >
+                            Colonia
+                        </FormControl.Label>
+                        <Select selectedValue={formData.state} minWidth="200" placeholder="Seleccione su estado" backgroundColor="primary.100"
+                            color="primary.900"
+                            fontWeight="bold" InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" color='primary.200' />}
+                            onValueChange={itemValue => setFormData({ ...formData, state: itemValue })}>
+                            <Select.Item label="colonia 1" value="col1" />
+                            <Select.Item label="colonia 2" value="col2" />
+                            <Select.Item label="colonia 3" value="col3" />
+
+                        </Select>
+                        
+                        {'cologne' in errorcologne ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorcologne.cologne}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                            Ingrese su colonia
+                        </FormControl.HelperText>
+                        }
+
+
+                    </FormControl>
+
+                    <FormControl isRequired isInvalid={'state' in errorstate}>
 
                         <FormControl.Label _text={{
                             color: 'primary.50',
@@ -335,19 +342,23 @@ export default function Address_R() {
                         }} marginLeft={2} >
                             Estado
                         </FormControl.Label>
-                        <Input p={2} placeholder="Seleccione su estado" backgroundColor="primary.100"
-                            variant="rounded"
+                        <Select selectedValue={formData.state} minWidth="200" placeholder="Seleccione su estado" backgroundColor="primary.100"
                             color="primary.900"
-                            fontWeight="bold"
-                            onChangeText={value => setFormData({ ...formData, state: value })}
-                            InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" color='primary.200' />} />
+                            fontWeight="bold" InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" color='primary.200' />}
+                            onValueChange={itemValue => setFormData({ ...formData, state: itemValue })}>
+                            <Select.Item label="Aguascalientes" value="Ags" />
+                            <Select.Item label="Zacatecas" value="Zac" />
+                            <Select.Item label="Jalisco" value="Jalisco" />
+
+                        </Select>
                         {'state' in errorstate ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorstate.state}</FormControl.ErrorMessage> : <FormControl.HelperText>
                             Ingrese su estado
                         </FormControl.HelperText>
                         }
-
                     </FormControl>
-                    <FormControl isRequired isInvalid={'municipality' in errormunicipality} >
+
+
+                    <FormControl isRequired isInvalid={'municipality' in errormunicipality}>
 
                         <FormControl.Label _text={{
                             color: 'primary.50',
@@ -355,12 +366,22 @@ export default function Address_R() {
                         }} marginLeft={2} >
                             Municipio
                         </FormControl.Label>
-                        <Input p={2} placeholder="Ingrese su municipio" backgroundColor="primary.100"
-                            variant="rounded"
+                        <Select selectedValue={formData.municipality} minWidth="200" placeholder="Seleccione su Municipio" backgroundColor="primary.100"
                             color="primary.900"
-                            fontWeight="bold"
-                            onChangeText={value => setFormData({ ...formData, municipality: value })}
-                            InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" color='primary.200' />} />
+                            fontWeight="bold" InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" color='primary.200' />}
+                            onValueChange={itemValue => setFormData({ ...formData, municipality: itemValue })}>
+                            <Select.Item label="Aguascalientes" value="Aguascalientes" />
+                            <Select.Item label="Asientos" value="Asientos" />
+                            <Select.Item label="Calvillo" value="Calvillo" />
+                            <Select.Item label="Cosío" value="Cosío" />
+                            <Select.Item label="Jesús María" value="Jesús María" />
+                            <Select.Item label="Pabellón de Arteaga" value="Pabellón de Arteaga" />
+                            <Select.Item label="Rincón de Romos" value="Rincón de Romos" />
+                            <Select.Item label="San José de Gracia" value="San José de Gracia" />
+                            <Select.Item label="Tepezalá" value="Tepezalá" />
+                            <Select.Item label="El Llano" value="El Llano" />
+                            <Select.Item label="San Francisco de los Romo" value="San Francisco de los Romo" />
+                        </Select>
                         {'municipality' in errormunicipality ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errormunicipality.municipality}</FormControl.ErrorMessage> : <FormControl.HelperText>
                             Ingrese su municipio
                         </FormControl.HelperText>
