@@ -94,23 +94,7 @@ export default function Address_Edit() {
         if (formData.cologne === undefined) {
             setErrorcologne({ ...errorcologne, cologne: 'La colonia es requerida' })
             isValid = false
-        } else {
-            if (formData.cologne.length <= 3) {
-                setErrorcologne({
-                    ...errorcologne,
-                    cologne: 'El nombre de la colonia es muy corta'
-                })
-                console.log('valida')
-            } else {
-                if (!namVal.test(formData.cologne)) {
-                    setErrorcologne({
-                        ...errorcologne,
-                        lastName: 'Ingrese solo letras'
-                    })
-                }
-            }
-
-        }
+        } 
 
 
         if (formData.CP === undefined) {
@@ -134,23 +118,7 @@ export default function Address_Edit() {
         if (formData.municipality === undefined) {
             setErrormunicipality({ ...errormunicipality, municipality: 'El municipio es requerido' })
             isValid = false
-        } else {
-            if (formData.municipality.length <= 3) {
-                setErrormunicipality({
-                    ...errormunicipality,
-                    municipality: 'El nombre del municipio es muy corto'
-                })
-                console.log('valida')
-            } else {
-                if (!namVal.test(formData.municipality)) {
-                    setErrormunicipality({
-                        ...errormunicipality,
-                        municipality: 'Ingrese solo letras'
-                    })
-                }
-            }
-
-        }
+        } 
         return isValid
     };
 
