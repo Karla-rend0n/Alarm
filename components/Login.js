@@ -38,11 +38,15 @@ export default function Login() {
             isValid = false
         } else if (!validator.isStrongPassword(formData.pass)) {
             setErrorPass({ ...errorPass, pass: 'La contraseña no es lo suficientemente segura' })
+            isValid = false
 
+        }else if(formData.pass.length<8){
+            setErrorPass({ ...errorPass, pass: 'La contraseña es muy pequeña' })
+            isValid = false
         }
+
         return isValid
     };
-
 
 
 

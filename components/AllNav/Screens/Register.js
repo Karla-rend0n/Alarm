@@ -14,7 +14,7 @@ export default function Register() {
     const [errorAge, setErrorAge] = React.useState({})
     const [errorPass, setErrorPass] = React.useState({})
     const [errorPhone, setErrorPhone] = React.useState({})
-    var emailVal = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
+    var emailVal = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     var namVal = /^[A-Za-z]+$/i;
     var number = /^[0-9]+$/i
     var phoneNum = /^\+?(52\s?)?1?\d{3}\s?\d{3}\s?\d{4}$/;
@@ -107,8 +107,13 @@ export default function Register() {
             isValid = false
         } else if (!validator.isStrongPassword(formData.pass)) {
             setErrorPass({ ...errorPass, pass: 'La contraseña no es lo suficientemente segura' })
+            isValid = false
 
+        }else if(formData.pass.length<8){
+            setErrorPass({ ...errorPass, pass: 'La contraseña es muy pequeña' })
+            isValid = false
         }
+
         return isValid
     };
 
