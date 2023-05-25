@@ -266,10 +266,10 @@ export default function Address_Edit() {
                         }} marginLeft={2} >
                             Colonia
                         </FormControl.Label>
-                        <Select selectedValue={formData.state} minWidth="200"  placeholder="Seleccione su estado" backgroundColor="primary.100"
+                        <Select selectedValue={formData.cologne} minWidth="200"  placeholder="Seleccione su colonia" backgroundColor="primary.100"
                             color="primary.900"
                             fontWeight="bold"  InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" color='primary.200' />}
-                            onValueChange={itemValue => setFormData({...formData, state: itemValue})}>
+                            onValueChange={itemValue => setFormData({...formData, cologne: itemValue})}>
                             <Select.Item label="colonia 1" value="col1" />
                             <Select.Item label="colonia 2" value="col2" />
                             <Select.Item label="colonia 3" value="col3" />
@@ -296,7 +296,7 @@ export default function Address_Edit() {
                             fontWeight="bold"  InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" color='primary.200' />}
                             onValueChange={itemValue => setFormData({...formData, state: itemValue})}>
                             <Select.Item label="Aguascalientes" value="Ags" />
-                            <Select.Item label="Zacatecas" value="Zac" />
+                            <Select.Item label="Zacatecas" value="Zacatecas" />
                             <Select.Item label="Jalisco" value="Jalisco" />
 
                         </Select>

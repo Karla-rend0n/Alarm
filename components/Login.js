@@ -13,7 +13,7 @@ export default function Login() {
     const [errors, setErrors] = React.useState({})
     const [errorEmail, setErrorsEmail] = React.useState({})
     const [errorPass, setErrorPass] = React.useState({})
-    var emailVal = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
+    var emailVal = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
 
 
