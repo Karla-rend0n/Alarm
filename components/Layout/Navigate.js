@@ -23,6 +23,8 @@ import Profile_Edit from "../AllNav/Screens/Profile_Edit";
 import Address from "../AllNav/Screens/Address";
 import Address_Edit from "../AllNav/Screens/Address_Edit";
 
+import ViewProfile from "../AllNav/Screens/ViewProfile";
+
 import { FontAwesome } from '@expo/vector-icons';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
@@ -72,6 +74,15 @@ function ProfileStack() {
             <ProfileStackNavigator.Screen
                 name="Address_Edit"
                 component={Address_Edit}
+                options={{
+                    headerBackTitleVisible: false,
+                    headerTransparent: true
+                }}
+            />
+
+            <ProfileStackNavigator.Screen
+                name="ViewProfile"
+                component={ViewProfile}
                 options={{
                     headerBackTitleVisible: false,
                     headerTransparent: true

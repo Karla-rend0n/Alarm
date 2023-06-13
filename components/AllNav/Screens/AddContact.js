@@ -99,7 +99,7 @@ export default function AddContact() {
     } else if (!number.test(formData.phone)) {
       setErrorPhone({ ...errorPhone, phone: "Solo necesito 10 digitos" });
       isValid = false;
-    } 
+    }
 
     return isValid;
   };
@@ -120,11 +120,19 @@ export default function AddContact() {
         },
       }}
     >
-      <Box safeArea p="2" py="8" w="90%" maxW="290">
-       
-        <Heading mt="1" color="primary.50" fontWeight="medium" size="xs">
+      <Box safeArea p="2" py="8" w="100%" h="100%" maxW="290">
+
+        <Heading mt="1" size="sm" fontWeight="600" color="Black" _dark={{
+          color: "primary.50",
+          fontWeight: 'bold'
+        }} >
           Completa los siguientes campos.
+
         </Heading>
+
+        {/* <Heading mt="1" color="primary.50" fontWeight="lg" size="xs">
+          Completa los siguientes campos.
+        </Heading> */}
         <VStack space={3} mt={5}>
           <FormControl isRequired isInvalid={"kinship" in errorkinship}>
             <FormControl.Label
@@ -293,6 +301,6 @@ export default function AddContact() {
           {/* <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("Contact")}}>Guardar</Button> */}
         </VStack>
       </Box>
-    </Center>
+    </Center >
   );
 }

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box, Center, Heading, VStack, FormControl, Input, Icon, ScrollView, Button, Circle, HStack, Select } from 'native-base'
+import { Box, Center, Heading, VStack, FormControl, Input, Icon, ScrollView, Button, Circle, HStack, Select, Flex, Stack } from 'native-base'
 import { Ionicons, MaterialIcons, Entypo, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import validator from 'validator';
@@ -9,7 +9,7 @@ export default function Address_Edit() {
 
     const navigation = useNavigation();
     const [formData, setFormData] = React.useState({})
-    const [stateValue, setStateValue]=React.useState("")
+    const [stateValue, setStateValue] = React.useState("")
     const [errorAddress, setErrorAddress] = React.useState({})
     const [errorStreet, setErrorStreet] = React.useState({})
     const [errorNumE, setErrorNumE] = React.useState({})
@@ -94,7 +94,7 @@ export default function Address_Edit() {
         if (formData.cologne === undefined) {
             setErrorcologne({ ...errorcologne, cologne: 'La colonia es requerida' })
             isValid = false
-        } 
+        }
 
 
         if (formData.CP === undefined) {
@@ -113,12 +113,12 @@ export default function Address_Edit() {
         if (formData.state === undefined) {
             setErrorstate({ ...errorstate, state: 'El estado es requerido' })
             isValid = false
-        } 
+        }
 
         if (formData.municipality === undefined) {
             setErrormunicipality({ ...errormunicipality, municipality: 'El municipio es requerido' })
             isValid = false
-        } 
+        }
         return isValid
     };
 
@@ -138,15 +138,9 @@ export default function Address_Edit() {
 
 
     return <ScrollView w="100%" h="100%">
-        <Center w="100%" h="100%" bg={{
-            linearGradient: {
-                colors: ['primary.400', 'primary.800'],
-                start: [1, 0],
-                end: [0, 0]
+        <Box background='primary.50' w="100%" alignItems='center'>
+            <Flex direction="row" alignItems="center" marginTop='10' marginBottom='1'>
 
-            }
-        }}>
-            <Box background='primary.50' w="100%" alignItems='center'>
                 <Heading size="lg" fontWeight="600" color="Black" _dark={{
                     color: "primary.900",
                     fontWeight: 'bold'
@@ -154,10 +148,21 @@ export default function Address_Edit() {
                     marginBottom='50'>
                     Dirección
                 </Heading>
-            </Box>
+            </Flex>
 
-            <Box safeArea p="2" py="8" w="90%" maxW="290" >
+        </Box>
 
+
+        <Box w="100%" h="85%" alignItems="center" bg={{
+            linearGradient: {
+                colors: ['primary.400', 'primary.800'],
+                start: [1, 0],
+                end: [0, 0]
+
+            }
+        }}>
+
+            <Stack space={8} w="75%" maxW="350px" mx="auto" m="10">
 
                 <VStack space={3}>
                     <FormControl isRequired isInvalid={'Address' in errorAddress} >
@@ -266,10 +271,10 @@ export default function Address_Edit() {
                         }} marginLeft={2} >
                             Colonia
                         </FormControl.Label>
-                        <Select selectedValue={formData.cologne} minWidth="200"  placeholder="Seleccione su colonia" backgroundColor="primary.100"
+                        <Select selectedValue={formData.cologne} minWidth="200" placeholder="Seleccione su colonia" backgroundColor="primary.100"
                             color="primary.900"
-                            fontWeight="bold"  InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" color='primary.200' />}
-                            onValueChange={itemValue => setFormData({...formData, cologne: itemValue})}>
+                            fontWeight="bold" InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" color='primary.200' />}
+                            onValueChange={itemValue => setFormData({ ...formData, cologne: itemValue })}>
                             <Select.Item label="colonia 1" value="col1" />
                             <Select.Item label="colonia 2" value="col2" />
                             <Select.Item label="colonia 3" value="col3" />
@@ -282,7 +287,7 @@ export default function Address_Edit() {
 
 
                     </FormControl>
-                    
+
                     <FormControl isRequired isInvalid={'state' in errorstate}>
 
                         <FormControl.Label _text={{
@@ -291,10 +296,10 @@ export default function Address_Edit() {
                         }} marginLeft={2} >
                             Estado
                         </FormControl.Label>
-                        <Select selectedValue={formData.state} minWidth="200"  placeholder="Seleccione su estado" backgroundColor="primary.100"
+                        <Select selectedValue={formData.state} minWidth="200" placeholder="Seleccione su estado" backgroundColor="primary.100"
                             color="primary.900"
-                            fontWeight="bold"  InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" color='primary.200' />}
-                            onValueChange={itemValue => setFormData({...formData, state: itemValue})}>
+                            fontWeight="bold" InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" color='primary.200' />}
+                            onValueChange={itemValue => setFormData({ ...formData, state: itemValue })}>
                             <Select.Item label="Aguascalientes" value="Ags" />
                             <Select.Item label="Zacatecas" value="Zacatecas" />
                             <Select.Item label="Jalisco" value="Jalisco" />
@@ -315,10 +320,10 @@ export default function Address_Edit() {
                         }} marginLeft={2} >
                             Municipio
                         </FormControl.Label>
-                        <Select selectedValue={formData.municipality} minWidth="200"  placeholder="Seleccione su Municipio" backgroundColor="primary.100"
+                        <Select selectedValue={formData.municipality} minWidth="200" placeholder="Seleccione su Municipio" backgroundColor="primary.100"
                             color="primary.900"
-                            fontWeight="bold"  InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" color='primary.200' />}
-                            onValueChange={itemValue => setFormData({...formData, municipality: itemValue})}>
+                            fontWeight="bold" InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" color='primary.200' />}
+                            onValueChange={itemValue => setFormData({ ...formData, municipality: itemValue })}>
                             <Select.Item label="Aguascalientes" value="Aguascalientes" />
                             <Select.Item label="Asientos" value="Asientos" />
                             <Select.Item label="Calvillo" value="Calvillo" />
@@ -346,11 +351,12 @@ export default function Address_Edit() {
                     </Button>
 
 
-
                 </VStack>
+            </Stack>
 
-            </Box>
+        </Box>
 
-        </Center>
+
     </ScrollView>
+
 }

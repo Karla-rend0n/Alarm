@@ -109,7 +109,7 @@ export default function Register() {
             setErrorPass({ ...errorPass, pass: 'La contraseña no es lo suficientemente segura' })
             isValid = false
 
-        }else if(formData.pass.length<8){
+        } else if (formData.pass.length < 8) {
             setErrorPass({ ...errorPass, pass: 'La contraseña es muy pequeña' })
             isValid = false
         }

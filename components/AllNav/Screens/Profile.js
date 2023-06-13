@@ -1,107 +1,125 @@
-import React from "react";
-import { Center, Box, Avatar, Icon, Input, FormControl, Button, Stack, ScrollView, Heading, HStack, Container, Divider, Text, VStack } from "native-base"
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import * as React from 'react'
+import { Box, Center, HStack, Heading, Image, ScrollView, VStack, Text, Circle, Pressable, Button, Icon, Stack, AlertDialog } from 'native-base';
+import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
+
 
 
 export default function Profile() {
     const navigation = useNavigation();
-
-    return <ScrollView w="100%" h="100%">
-        <Center w='100%' h="100%" bg={{
-            linearGradient: {
-                colors: ['primary.400', 'primary.800'],
-                start: [1, 0],
-                end: [0, 0]
-
-            }
-        }}>
-
-            <Box background="primary.50" h='18%' w="100%" alignItems='center'>
-                <HStack space={5}>
-                    <Avatar size="xl" source={{
-                        uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                    }}
-                        marginTop='10'>
+    const [formData, setFormData] = React.useState({})
 
 
-                    </Avatar>
-                    <Heading color='primary.900' marginTop='60'>
-                        Fatima Herrera
-                    </Heading>
-                </HStack>
-            </Box>
+    const validate = () => {
+        let isValid = true;
+
+        return isValid
+    };
 
 
-            <Box w="100%" h="82%" alignItems="center" >
-                <Stack space={5} w="75%" maxW="350px" mx="auto" m="10">
+    const submit = () => { validate() ? setIsOpen(!isOpen) : console.log('bad', formData) }
 
-                    <Button rounded='full' background="primary.300" mt="0.5" onPress={() => navigation.navigate("Edit_P")} _text={{
-                        color: "primary.900",
-                        fontWeight: 'normal',
-                        fontSize: "md"
-                    }}
-                        marginLeft='2/3'>
-                        Editar
-                    </Button>
-                    <VStack space={3}>
-                        <Heading fontWeight='bold' fontSize='md'>
-                            Tu correo
-                        </Heading>
-                        <Text fontWeight='normal' fontSize='md' mx={10}>
-                            fatima13@gmail.com
-                        </Text>
-                        <Divider mx={1} background='primary.50' />
-                    </VStack>
+    const [isOpen, setIsOpen] = React.useState(false);
 
-                    <VStack space={3}>
-                        <Heading fontWeight='bold' fontSize='md'>
-                            Contraseña
-                        </Heading>
-                        <Text fontWeight='normal' fontSize='md' mx={10}>
-                            **********
-                        </Text>
-                        <Divider mx={1} background='primary.50' />
-                    </VStack>
-                    <VStack space={3}>
-                        <Heading fontWeight='bold' fontSize='md'>
-                            Teléfono
-                        </Heading>
-                        <Text fontWeight='normal' fontSize='md' mx={10}>
-                            449-567-0098
-                        </Text>
-                        <Divider mx={1} background='primary.50' />
-                    </VStack>
-                    <VStack space={3}>
-                        <Heading fontWeight='bold' fontSize='md'>
-                            Edad
-                        </Heading>
-                        <Text fontWeight='normal' fontSize='md' mx={10}>
-                            25
-                        </Text>
-                        <Divider mx={1} background='primary.50' />
-                    </VStack>
+    const onClose = () => setIsOpen(false);
+
+    const cancelRef = React.useRef(null);
+
+    const handleCloseOpen = () => {
+        setIsOpen(false);
+        navigation.navigate("Start")
+    }
+
+    return <Center w="100%" h="100%" bg={{
+        linearGradient: {
+            colors: ['primary.400', 'primary.800'],
+            start: [1, 0],
+            end: [0, 0]
+        }
+    }}>
+        <Box safeArea p="2" py="8" w="90%" maxW="290">
+            <Heading size="lg" color="Black" _dark={{
+                color: "primary.50",
+                fontWeight: 'bold'
+            }} >
+                Menú
+            </Heading>
+
+            <VStack space={3} mt={5}>
+
+
+                <Button background="primary.300" mt="6" borderWidth="3" borderColor="primary.200" onPress={() => navigation.navigate("ViewProfile")} _text={{
+                    color: "primary.900",
+                    fontWeight: "700",
+                    fontSize: "lg"
+                }} rounded='full'>
+                    Ver Perfil
+                </Button>
+
+
+                <Button background="primary.300" mt="6" borderWidth="3" borderColor="primary.200" onPress={() => navigation.navigate("Edit_P")} _text={{
+                    color: "primary.900",
+                    fontWeight: "700",
+                    fontSize: "lg"
+                }} rounded='full'>
+                    Editar Perfil
+                </Button>
 
 
 
+                <Button background="primary.300" mt="6" borderWidth="3" borderColor="primary.200" onPress={() => navigation.navigate("Address")} _text={{
+                    color: "primary.900",
+                    fontWeight: "700",
+                    fontSize: "lg"
+                }} rounded='full'>
+                    Ver Dirección
+                </Button>
 
-                    <Button background="primary.300" mt="5" onPress={() => navigation.navigate("Address")} _text={{
-                        color: "primary.900",
-                        fontWeight: "400",
-                        fontSize: "xl"
-                    }} rounded='full'>
-                        Dirección
-                    </Button>
-
-
-                </Stack>
-            </Box>
-
-        </Center>
-    </ScrollView>
-
-
-
-}
+                <Button background="primary.300" mt="6" borderWidth="3" borderColor="primary.200" onPress={submit} _text={{
+                    color: "primary.900",
+                    fontWeight: "700",
+                    fontSize: "lg"
+                }} rounded='full'>
+                    Cerrar Sesión
+                </Button>
 
 
+
+                <AlertDialog
+                    leastDestructiveRef={cancelRef}
+                    isOpen={isOpen}
+                    onClose={onClose}
+                >
+                    <AlertDialog.Content>
+                        <AlertDialog.CloseButton />
+                        <AlertDialog.Header>Cerrar Sesión</AlertDialog.Header>
+                        <AlertDialog.Body>
+                            ¿Estás seguro de que quieres cerrar la sesión?
+                        </AlertDialog.Body>
+                        <AlertDialog.Footer>
+                            <Button.Group space={2}>
+                                <Button
+                                    variant="unstyled"
+                                    colorScheme="coolGray"
+                                    onPress={onClose}
+                                    ref={cancelRef}
+                                >
+                                    Cancelar
+                                </Button>
+                                <Button colorScheme="danger" onPress={handleCloseOpen}>
+                                    Salir
+                                </Button>
+                            </Button.Group>
+                        </AlertDialog.Footer>
+                    </AlertDialog.Content>
+                </AlertDialog>
+
+
+
+
+            </VStack>
+
+        </Box>
+    </Center>
+
+};

@@ -90,7 +90,7 @@ export default function Address_R() {
         if (formData.cologne === undefined) {
             setErrorcologne({ ...errorcologne, cologne: 'La colonia es requerida' })
             isValid = false
-        } 
+        }
 
 
         if (formData.CP === undefined) {
@@ -109,12 +109,12 @@ export default function Address_R() {
         if (formData.state === undefined) {
             setErrorstate({ ...errorstate, state: 'El estado es requerido' })
             isValid = false
-        } 
+        }
 
         if (formData.municipality === undefined) {
             setErrormunicipality({ ...errormunicipality, municipality: 'El municipio es requerido' })
             isValid = false
-        } 
+        }
         return isValid
     };
 
@@ -277,7 +277,7 @@ export default function Address_R() {
                             <Select.Item label="colonia 3" value="col3" />
 
                         </Select>
-                        
+
                         {'cologne' in errorcologne ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorcologne.cologne}</FormControl.ErrorMessage> : <FormControl.HelperText>
                             Ingrese su colonia
                         </FormControl.HelperText>

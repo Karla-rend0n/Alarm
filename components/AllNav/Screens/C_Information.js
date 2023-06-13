@@ -20,13 +20,37 @@ import { useNavigation } from "@react-navigation/native";
 export default function C_Information() {
   const navigation = useNavigation();
 
+  const [formData, setFormData] = React.useState({})
+
+
+  const validate = () => {
+    let isValid = true;
+
+    return isValid
+  };
+
+
+  const submit = () => { validate() ? setIsOpen(!isOpen) : console.log('bad', formData) }
+
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const onClose = () => {setIsOpen(false);
+  const onClose = () => setIsOpen(false);
+
+  const cancelRef = React.useRef(null);
+
+  const handleCloseOpen = () => {
+    setIsOpen(false);
     navigation.navigate("Contacts")
   }
 
-  const cancelRef = React.useRef(null);
+
+
+
+
+
+
+
+
 
   return (
     <Center
@@ -138,7 +162,7 @@ export default function C_Information() {
                     >
                       Cancelar
                     </Button>
-                    <Button colorScheme="danger" onPress={onClose}>
+                    <Button colorScheme="danger" onPress={handleCloseOpen}>
                       Eliminar
                     </Button>
                   </Button.Group>
