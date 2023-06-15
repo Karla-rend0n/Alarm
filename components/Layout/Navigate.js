@@ -125,7 +125,9 @@ function HomeTabs() {
                     tabBarIcon: ({ color }) => (
                         <Ionicons name="person-add" size={24} color={color} />
                     ),
-                    headerShown: false
+                    headerShown: false,
+                    unmountOnBlur: true,
+
 
 
                 }}
@@ -139,7 +141,8 @@ function HomeTabs() {
                     tabBarIcon: ({ color }) => (
                         <Ionicons name="person-circle-sharp" size={29} color={color} />
                     ),
-                    headerShown: false
+                    headerShown: false,
+                    unmountOnBlur: true,
 
                 }}
             />
