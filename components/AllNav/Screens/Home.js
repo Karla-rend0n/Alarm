@@ -1,5 +1,6 @@
 import React from "react";
 import { Center, Box, Heading, Button, Text, TouchableOpacity, ScrollView, useState } from "native-base"
+import { Linking } from "react-native"
 
 
 export default function Start() {
@@ -12,13 +13,33 @@ export default function Start() {
         setTiempoInicioPresionado(Date.now());
     };
 
+    const sendRequest = (button) => {
+        console.log('Hola','http://192.168.1.200/?status='+button)
+        fetch('http://192.168.1.200/?status='+button)
+              .then(response => response.json())
+              .then(json => {
+                console.log('Hola', json)
+              })
+              .catch(error => {
+                console.error(error);
+              });
+    };
+
     const handlePressOut = () => {
         const tiempoFinPresionado = Date.now();
         const duracionPresionado = tiempoFinPresionado - tiempoInicioPresionado;
 
         if (duracionPresionado >= 2000 && estadoBoton === 'Apagado') {
+            sendRequest('onE')
             setEstadoBoton('Encendido');
+            let url = 'whatsapp://send?phone=4494563761&text=Hola';
+                    Linking.openURL(url).then(() => {
+                         console.log('WhatasApp Opened');
+                    }).catch(() => {
+                         alert('Make Sure whatsapp is installed on your device');
+                    });
         } else if (duracionPresionado >= 0 && estadoBoton === 'Encendido') {
+            sendRequest('offE')
             setEstadoBoton('Apagado');
         }
     };
@@ -36,8 +57,10 @@ export default function Start() {
         const duracionPresionado = tiempoFinPresionado - tiempoInicioPresionadoE;
 
         if (duracionPresionado >= 2000 && estadoBotonE === 'Apagado') {
+            sendRequest('onA')
             setEstadoBotonE('Encendido');
         } else if (duracionPresionado >= 0 && estadoBotonE === 'Encendido') {
+            sendRequest('offA')
             setEstadoBotonE('Apagado');
         }
     };
