@@ -40,7 +40,7 @@ export default function Login() {
             setErrorPass({ ...errorPass, pass: 'La contraseña no es lo suficientemente segura' })
             isValid = false
 
-        }else if(formData.pass.length<8){
+        } else if (formData.pass.length < 8) {
             setErrorPass({ ...errorPass, pass: 'La contraseña es muy pequeña' })
             isValid = false
         }
@@ -53,96 +53,100 @@ export default function Login() {
 
     const submit = () => { validate() ? navigation.navigate("Home") : console.log('bad', formData) }
 
-    return <Center w="100%" h="100%" bg={{
-        linearGradient: {
-            colors: ['primary.400', 'primary.800'],
-            start: [1, 0],
-            end: [0, 0]
+    return <ScrollView w="100%" h="100%">
 
-        }
-    }}>
-        <Box safeArea p="2" py="8" w="90%" maxW="290">
-            <Heading size="lg" color="Black" _dark={{
-                color: "primary.50",
-                fontWeight: 'bold'
-            }} >
-                Inicio de sesión
-            </Heading>
-            <Heading mt="1" color="primary.50" fontWeight='medium' size='xs'>
-                Inicia sesión con tu cuenta.
-            </Heading>
+        <Center w="100%" h="300%" bg={{
+            linearGradient: {
+                colors: ['primary.400', 'primary.800'],
+                start: [1, 0],
+                end: [0, 0]
 
-            <VStack space={3} mt={5}>
-                <FormControl isRequired isInvalid={'email' in errorEmail}>
-                    <FormControl.Label _text={{
-                        color: "primary.50",
-                        fontWeight: '700',
-                        fontSize: 'lg'
-                    }}>Email</FormControl.Label>
-                    <Input w={{
+            }
+        }}>
+            <Box safeArea p="2" py="8" w="100%" h="91%" maxW="350px">
+                <Heading size="xl" color="Black" _dark={{
+                    color: "primary.50",
+                    fontWeight: 'bold'
+                }} >
+                    Inicio de sesión
+                </Heading>
+                <Heading mt="3" color="primary.50" fontWeight='medium' size='xs'>
+                    Inicia sesión con tu cuenta.
+                </Heading>
 
-                    }} InputLeftElement={<Icon as={<MaterialIcons name="email" />} size={5} ml="3" color="primary.200" />}
-                        onChangeText={value => setFormData({ ...formData, email: value })}
-                        mt="3" placeholder="Correo electrónico" color="primary.900"
-                        fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
+                <VStack space={6} mt={8}>
+                    <FormControl isRequired isInvalid={'email' in errorEmail}>
+                        <FormControl.Label _text={{
+                            color: "primary.50",
+                            fontWeight: '700',
+                            fontSize: 'lg'
+                        }}>Email</FormControl.Label>
+                        <Input w={{
 
-                    {'email' in errorEmail ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorEmail.email}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                        Ingresa un correo electronico
-                    </FormControl.HelperText>
-                    }
+                        }} InputLeftElement={<Icon as={<MaterialIcons name="email" />} size={5} ml="3" color="primary.200" />}
+                            onChangeText={value => setFormData({ ...formData, email: value })}
+                            mt="3" placeholder="Correo electrónico" color="primary.900"
+                            fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
 
-                </FormControl>
+                        {'email' in errorEmail ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorEmail.email}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                            Ingresa un correo electronico
+                        </FormControl.HelperText>
+                        }
 
-                <FormControl isRequired isInvalid={'pass' in errorPass}>
-                    <FormControl.Label _text={{
-                        color: "primary.50",
-                        fontWeight: '700',
-                        fontSize: 'lg'
-                    }}>Contraseña</FormControl.Label>
-                    <Input mt="3" placeholder="Contraseña" color="primary.900" type="password"
-                        onChangeText={value => setFormData({ ...formData, pass: value })}
+                    </FormControl>
 
-                        fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded"
-                        InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />} />
-                    {'pass' in errorPass ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPass.pass}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                        Ingrese letras MAYÚSCULAS o minúsculas, números y caracteres
-                    </FormControl.HelperText>}
+                    <FormControl isRequired isInvalid={'pass' in errorPass}>
+                        <FormControl.Label _text={{
+                            color: "primary.50",
+                            fontWeight: '700',
+                            fontSize: 'lg'
+                        }}>Contraseña</FormControl.Label>
+                        <Input mt="3" placeholder="Contraseña" color="primary.900" type="password"
+                            onChangeText={value => setFormData({ ...formData, pass: value })}
 
-
-
-                    <Link _text={{
-                        fontSize: "sm",
-                        fontWeight: "700",
-                        color: "primary.50",
-                    }} mt="2" alignSelf="flex-end"> Forget Password?
-                    </Link>
-                </FormControl>
+                            fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded"
+                            InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />} />
+                        {'pass' in errorPass ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPass.pass}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                            Ingrese letras MAYÚSCULAS o minúsculas, números y caracteres
+                        </FormControl.HelperText>}
 
 
-                <Button
-                    background="primary.200" borderWidth="2" borderColor="primary.200" mt="5" rounded={10} _text={{
-                        color: "primary.50",
-                        fontWeight: "700",
-                        fontSize: "lg"
-                    }} onPress={submit}>
-                    Inciar sesión
-                </Button>
 
-                <HStack color="primary.50" alignItems='center' fontWeight="normal">
-                    <Text fontSize="sm" >
-                        ¿No dispones de una cuenta? {" "}
-                    </Text>
-                    <Link onPress={() => { navigation.navigate("Register") }} _text={{
-                        color: "primary.50",
-                        fontWeight: "bold",
-                        fontSize: "sm"
-                    }} href="#">
-                        Registrate.
-                    </Link>
-                </HStack>
-            </VStack>
-        </Box>
-    </Center>
+
+                        <Link _text={{
+                            fontSize: "sm",
+                            fontWeight: "700",
+                            color: "primary.50",
+                        }} mt="4" alignSelf="flex-end"> Forget Password?
+                        </Link>
+                    </FormControl>
+
+
+                    <Button
+                        background="primary.200" borderWidth="2" borderColor="primary.200" mt="5" rounded={10} _text={{
+                            color: "primary.50",
+                            fontWeight: "700",
+                            fontSize: "lg"
+                        }} onPress={submit}>
+                        Inciar sesión
+                    </Button>
+
+                    <HStack color="primary.50" alignItems='center' alignSelf={'Center'} fontWeight="normal">
+                        <Text fontSize="sm" >
+                            ¿No dispones de una cuenta? {" "}
+                        </Text>
+                        <Link onPress={() => { navigation.navigate("Register") }} _text={{
+                            color: "primary.50",
+                            fontWeight: "bold",
+                            fontSize: "sm"
+                        }} href="#">
+                            Registrate.
+                        </Link>
+                    </HStack>
+                </VStack>
+            </Box>
+        </Center>
+    </ScrollView>
 
 }
 

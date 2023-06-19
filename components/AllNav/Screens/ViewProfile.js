@@ -23,7 +23,7 @@ export default function ViewProfile() {
             </Flex>
         </Box>
 
-        <Box w="100%" h="100%" alignItems="center" bg={{
+        <Center w="100%" h="180%" alignItems="center" bg={{
             linearGradient: {
                 colors: ['primary.400', 'primary.800'],
                 start: [1, 0],
@@ -33,10 +33,10 @@ export default function ViewProfile() {
         }}>
 
 
-            <Stack space={8} w="75%" maxW="350px" mx="auto" m="10">
+            <Box safeArea p="2" py="8" w="100%" h="100%" maxW="350px">
 
-                <VStack space={3}>
-                    <Heading fontWeight='bold' fontSize='md'>
+                <VStack space={4} mt="8">
+                    <Heading fontWeight='bold' fontSize='lg'>
                         Tu correo
                     </Heading>
                     <Text fontWeight='normal' fontSize='md' mx={10}>
@@ -45,8 +45,8 @@ export default function ViewProfile() {
                     <Divider mx={1} background='primary.50' />
                 </VStack>
 
-                <VStack space={3}>
-                    <Heading fontWeight='bold' fontSize='md'>
+                <VStack space={4}>
+                    <Heading fontWeight='bold' fontSize='lg' mt="8">
                         Contraseña
                     </Heading>
                     <Text fontWeight='normal' fontSize='md' mx={10}>
@@ -54,8 +54,8 @@ export default function ViewProfile() {
                     </Text>
                     <Divider mx={1} background='primary.50' />
                 </VStack>
-                <VStack space={3}>
-                    <Heading fontWeight='bold' fontSize='md'>
+                <VStack space={4}>
+                    <Heading fontWeight='bold' fontSize='lg' mt="8">
                         Teléfono
                     </Heading>
                     <Text fontWeight='normal' fontSize='md' mx={10}>
@@ -63,8 +63,8 @@ export default function ViewProfile() {
                     </Text>
                     <Divider mx={1} background='primary.50' />
                 </VStack>
-                <VStack space={3}>
-                    <Heading fontWeight='bold' fontSize='md'>
+                <VStack space={4}>
+                    <Heading fontWeight='bold' fontSize='lg' mt="8">
                         Edad
                     </Heading>
                     <Text fontWeight='normal' fontSize='md' mx={10}>
@@ -73,9 +73,9 @@ export default function ViewProfile() {
                     <Divider mx={1} background='primary.50' />
                 </VStack>
 
-            </Stack>
+            </Box>
+        </Center>
 
-        </Box>
 
     </ScrollView>
 

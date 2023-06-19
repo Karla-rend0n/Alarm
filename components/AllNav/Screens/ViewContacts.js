@@ -9,22 +9,22 @@ export default function ViewContact() {
     const navigation = useNavigation();
 
     return <ScrollView w='100%' h='100%'>
-        <Center w="100%" h="100%" bg={{
+        <Center w="100%" h="210%" bg={{
             linearGradient: {
                 colors: ['primary.400', 'primary.800'],
                 start: [1, 0],
                 end: [0, 0]
             }
         }}>
-            <Box safeArea p="2" py="8" w="90%" maxW="290">
-                <Heading size="lg" fontWeight="600" color="Black" _dark={{
+            <Box safeArea p="2" py="8" w="100%" h="90%" maxW="350px" >
+                <Heading size="xl" fontWeight="600" color="Black" _dark={{
                     color: "primary.50",
                     fontWeight: 'bold'
                 }} >
                     Contactos
                 </Heading>
 
-                <VStack space={6} >
+                <VStack space={6} mt={8} >
                     <Button marginLeft='5/6' mt='7' rounded borderRadius="44" width="44" height="44" alignSelf="center" bgColor="primary.200" borderWidth="3" borderColor="primary.200" leftIcon={<Icon as={<AntDesign name="plus" />} />} onPress={() => { navigation.navigate("Contact_R") }}>
 
                     </Button>
@@ -59,13 +59,19 @@ export default function ViewContact() {
                         </Pressable>
                     </Box>
 
-                    <Button marginTop='255' background='primary.200' rounded='full' size='lg' borderWidth="2" borderColor="primary.200"
-                        onPress={() => { navigation.navigate("Address_R") }}>
+                    <Button
+                        background="primary.200" borderWidth="2" borderColor="primary.200" mt="8" rounded={10} _text={{
+                            color: "primary.50",
+                            fontWeight: "700",
+                            fontSize: "lg"
+                        }} onPress={() => { navigation.navigate("Address_R") }}>
                         Siguiente
+
                     </Button>
                 </VStack>
 
-                <HStack space={3} marginLeft='110' marginTop='5'>
+
+                <HStack space={3} marginTop="8" alignSelf="center">
                     <Circle size="10px" bg="primary.200"></Circle>
                     <Circle size="10px" bg="primary.50"></Circle>
                     <Circle size="10px" bg="primary.200"></Circle>

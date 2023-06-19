@@ -1,5 +1,5 @@
 import React from "react";
-import { Center, Box, Heading, Button, Text, TouchableOpacity, ScrollView, useState, Flex, Stack } from "native-base"
+import { Center, Box, Heading, Button, Text, TouchableOpacity, ScrollView, useState, Flex, Stack, VStack } from "native-base"
 
 
 export default function Start() {
@@ -46,67 +46,68 @@ export default function Start() {
 
 
     return (
+        <ScrollView w="100%" h="100%">
 
+            <Center w="100%" h="154%" bg={{
+                linearGradient: {
+                    colors: ['primary.400', 'primary.800'],
+                    start: [1, 0],
+                    end: [0, 0]
 
-        <Center alignContent='center' w="100%" h="100%" bg={{
-            linearGradient: {
-                colors: ['primary.400', 'primary.800'],
-                start: [1, 0],
-                end: [0, 0]
+                }
+            }}>
+                <Box safeArea p="2" py="8" w="100%" h="94%" maxW="350px" >
 
-            }
-        }}>
-
-
-            <Stack space={2} w="75%" maxW="350px" mx="auto">
-
-                <Flex alignItems="center" >
-                    <Heading size="lg" color="Black" _dark={{
+                    <Heading size="xl" color="Black" _dark={{
                         color: "primary.50",
                         fontWeight: 'bold'
-                    }}>
+                    }} >
                         Botón de emergencia
                     </Heading>
-                </Flex>
-                <Flex direction="row" alignItems="center" >
 
-                    <Heading mt="5" color="primary.50" fontWeight='medium' size='xs' >
+
+
+
+                    <Heading mt="10" color="primary.50" fontWeight='medium' size='md' >
                         Si vez algo sospechoso presiona el botón.
                     </Heading>
-                </Flex>
+
+                    <VStack space={10} mt={10}>
 
 
+                        <Button mt='3' rounded borderRadius="200" width="200" height="200" alignSelf="center" bgColor="primary.300" borderWidth="3" borderColor="primary.900" onPressIn={handlePressIn} onPressOut={handlePressOut}>
+                            <Button rounded borderRadius="170" width="170" height="170" alignSelf="center" bgColor="primary.500" borderWidth="4" borderColor="primary.1000" onPressIn={handlePressIn} onPressOut={handlePressOut}>
+                                <Text alignSelf="center">{estadoBoton}</Text>
 
-                <Button mt='5' rounded borderRadius="200" width="200" height="200" alignSelf="center" bgColor="primary.300" borderWidth="3" borderColor="primary.900" onPressIn={handlePressIn} onPressOut={handlePressOut}>
-                    <Button rounded borderRadius="170" width="170" height="170" alignSelf="center" bgColor="primary.500" borderWidth="4" borderColor="primary.1000" onPressIn={handlePressIn} onPressOut={handlePressOut}>
-                        <Text alignSelf="center">{estadoBoton}</Text>
+                                <Text alignSelf="center" fontWeight="700">Alarma</Text>
 
-                        <Text alignSelf="center" fontWeight="700">Alarma</Text>
+                            </Button>
+                        </Button>
 
-                    </Button>
-                </Button>
+                        <Flex direction="row" alignItems="center" >
 
-                <Flex direction="row" alignItems="center" >
+                            <Heading mt="10" color="primary.50" fontWeight='medium' size='md' >
+                                En caso de emergencia presione el botón.
+                            </Heading>
+                        </Flex>
 
-                    <Heading mt="9" color="primary.50" fontWeight='medium' size='xs' >
-                        En caso de emergencia presione el botón.
-                    </Heading>
-                </Flex>
+                        <Button mt='3' rounded borderRadius="200" width="200" height="200" alignSelf="center" bgColor="primary.300" borderWidth="3" borderColor="primary.900" onPressIn={handlePressInicio} onPressOut={handlePressApagado}>
+                            <Button rounded borderRadius="170" width="170" height="170" alignSelf="center" bgColor="primary.600" borderWidth="4" borderColor="primary.1001" onPressIn={handlePressInicio} onPressOut={handlePressApagado}>
+                                <Text alignSelf="center">{estadoBotonE}</Text>
 
-                <Button mt='5' rounded borderRadius="200" width="200" height="200" alignSelf="center" bgColor="primary.300" borderWidth="3" borderColor="primary.900" onPressIn={handlePressInicio} onPressOut={handlePressApagado}>
-                    <Button rounded borderRadius="170" width="170" height="170" alignSelf="center" bgColor="primary.600" borderWidth="4" borderColor="primary.1001" onPressIn={handlePressInicio} onPressOut={handlePressApagado}>
-                        <Text alignSelf="center">{estadoBotonE}</Text>
+                                <Text alignSelf="center" fontWeight="700">Emergencia</Text>
 
-                        <Text alignSelf="center" fontWeight="700">Emergencia</Text>
+                            </Button>
 
-                    </Button>
+                        </Button>
 
-                </Button>
+                    </VStack>
 
-            </Stack>
+                </Box>
 
 
-        </Center>
+            </Center>
+        </ScrollView>
 
     );
 }

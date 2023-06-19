@@ -109,182 +109,167 @@ export default function AddContact() {
   };
 
   return (
-    <Center
-      w="100%"
-      h="100%"
-      bg={{
-        linearGradient: {
-          colors: ["primary.400", "primary.800"],
-          start: [1, 0],
-          end: [0, 0],
-        },
-      }}
-    >
-      <Box safeArea p="2" py="8" w="100%" h="100%" maxW="290">
+    <ScrollView w="100%" h="100%">
 
-        <Heading mt="1" size="sm" fontWeight="600" color="Black" _dark={{
-          color: "primary.50",
-          fontWeight: 'bold'
-        }} >
-          Completa los siguientes campos.
+      <Center
+        w="100%"
+        h="180%"
+        bg={{
+          linearGradient: {
+            colors: ["primary.400", "primary.800"],
+            start: [1, 0],
+            end: [0, 0],
+          },
+        }}
+      >
+        <Box safeArea p="2" py="8" w="100%" h="92%" maxW="350px" >
 
-        </Heading>
+          <Heading mt="1" size="xl" fontWeight="600" color="Black" _dark={{
+            color: "primary.50",
+            fontWeight: 'bold'
+          }} >
+            Completa los siguientes campos.
 
-        {/* <Heading mt="1" color="primary.50" fontWeight="lg" size="xs">
+          </Heading>
+
+          {/* <Heading mt="1" color="primary.50" fontWeight="lg" size="xs">
           Completa los siguientes campos.
         </Heading> */}
-        <VStack space={3} mt={5}>
-          <FormControl isRequired isInvalid={"kinship" in errorkinship}>
-            <FormControl.Label
-              _text={{
-                color: "primary.50",
-                fontWeight: "bold",
-              }}
-              marginLeft={2}
-            >
-              Parentesco
-            </FormControl.Label>
-            <Input
-              p={2}
-              placeholder="Ingrese el parentesco"
-              backgroundColor="primary.100"
-              variant="rounded"
-              color="primary.900"
-              fontWeight="bold"
-              onChangeText={(value) =>
-                setFormData({ ...formData, kinship: value })
-              }
-              InputLeftElement={
-                <Icon
-                  as={<MaterialIcons name="person" />}
-                  size={5}
-                  ml="2"
-                  color="primary.200"
-                />
-              }
-            />
-            {"kinship" in errorkinship ? (
-              <FormControl.ErrorMessage _text={{ color: "primary.700" }}>
-                {errorkinship.kinship}
-              </FormControl.ErrorMessage>
-            ) : (
-              <FormControl.HelperText>Ingrese que tipo de relacion tiene con la persona</FormControl.HelperText>
-            )}
-          </FormControl>
-          <FormControl isRequired isInvalid={"name" in errors}>
-            <FormControl.Label
-              _text={{
-                color: "primary.50",
-                fontWeight: "bold",
-              }}
-              marginLeft={2}
-            >
-              Nombre
-            </FormControl.Label>
-            <Input
-              p={2}
-              placeholder="Ingrese su nombre"
-              backgroundColor="primary.100"
-              variant="rounded"
-              color="primary.900"
-              fontWeight="bold"
-              onChangeText={(value) =>
-                setFormData({ ...formData, name: value })
-              }
-              InputLeftElement={
-                <Icon
-                  as={<MaterialIcons name="person" />}
-                  size={5}
-                  ml="2"
-                  color="primary.200"
-                />
-              }
-            />
-            {"name" in errors ? (
-              <FormControl.ErrorMessage _text={{ color: "primary.700" }}>
-                {errors.name}
-              </FormControl.ErrorMessage>
-            ) : (
-              <FormControl.HelperText>Ingrese su nombre</FormControl.HelperText>
-            )}
-          </FormControl>
+          <VStack space={6} mt={8}>
+            <FormControl isRequired isInvalid={"kinship" in errorkinship}>
+              <FormControl.Label
+                _text={{
+                  color: "primary.50",
+                  fontWeight: "bold",
+                  fontSize: 'lg'
 
-          <FormControl isRequired isInvalid={"lastName" in errorLastname}>
-            <FormControl.Label
-              _text={{
-                color: "primary.50",
-                fontWeight: "bold",
-              }}
-              marginLeft={2}
-            >
-              Apellido
-            </FormControl.Label>
-            <Input
-              p={2}
-              placeholder="Ingrese su apellido"
-              backgroundColor="primary.100"
-              variant="rounded"
-              color="primary.900"
-              fontWeight="bold"
-              onChangeText={(value) =>
-                setFormData({ ...formData, lastName: value })
-              }
-              InputLeftElement={
-                <Icon
-                  as={<MaterialIcons name="person" />}
-                  size={5}
-                  ml="2"
-                  color="primary.200"
-                />
-              }
-            />
-            {"lastName" in errorLastname ? (
-              <FormControl.ErrorMessage _text={{ color: "primary.700" }}>
-                {errorLastname.lastName}
-              </FormControl.ErrorMessage>
-            ) : (
-              <FormControl.HelperText>Solo ingrese sus apellidos</FormControl.HelperText>
-            )}
-          </FormControl>
+                }}
+              >
+                Parentesco
+              </FormControl.Label>
 
-          <FormControl isRequired isInvalid={"phone" in errorPhone}>
-            <FormControl.Label
-              _text={{
+              <Input w={{
+
+              }} InputLeftElement={<Icon as={<MaterialIcons name="person" />} size={5} ml="3" color="primary.200" />}
+
+                onChangeText={(value) => setFormData({ ...formData, kinship: value })}
+                mt="3" placeholder="Ingrese el parentesco" color="primary.900"
+                fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
+
+              {"kinship" in errorkinship ? (
+                <FormControl.ErrorMessage _text={{ color: "primary.700" }}>
+                  {errorkinship.kinship}
+                </FormControl.ErrorMessage>
+              ) : (
+                <FormControl.HelperText>Ingrese que tipo de relacion tiene con la persona</FormControl.HelperText>
+              )}
+            </FormControl>
+
+
+
+
+            <FormControl isRequired isInvalid={"name" in errors}>
+              <FormControl.Label
+                _text={{
+                  color: "primary.50",
+                  fontWeight: "bold",
+                  fontSize: 'lg'
+
+                }}
+              >
+                Nombre
+              </FormControl.Label>
+              <Input w={{
+
+              }} InputLeftElement={<Icon as={<MaterialIcons name="person" />} size={5} ml="2" color="primary.200" />}
+                onChangeText={(value) => setFormData({ ...formData, name: value })}
+                mt="3" placeholder="Ingrese su nombre" color="primary.900"
+                fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
+
+              {"name" in errors ? (
+                <FormControl.ErrorMessage _text={{ color: "primary.700" }}>
+                  {errors.name}
+                </FormControl.ErrorMessage>
+              ) : (
+                <FormControl.HelperText>Ingrese su nombre</FormControl.HelperText>
+              )}
+            </FormControl>
+
+
+            <FormControl isRequired isInvalid={"lastName" in errorLastname}>
+              <FormControl.Label
+                _text={{
+                  color: "primary.50",
+                  fontWeight: "bold",
+                  fontSize: 'lg'
+
+                }}
+              >
+                Apellido
+              </FormControl.Label>
+
+              <Input w={{
+
+              }} InputLeftElement={<Icon as={<MaterialIcons name="person" />} size={5} ml="2" color="primary.200" />}
+                onChangeText={(value) => setFormData({ ...formData, lastName: value })}
+                mt="3" placeholder="Ingrese su apellido" color="primary.900"
+                fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
+
+              {"lastName" in errorLastname ? (
+                <FormControl.ErrorMessage _text={{ color: "primary.700" }}>
+                  {errorLastname.lastName}
+                </FormControl.ErrorMessage>
+              ) : (
+                <FormControl.HelperText>Solo ingrese sus apellidos</FormControl.HelperText>
+              )}
+            </FormControl>
+
+
+
+
+
+
+            <FormControl isRequired isInvalid={"phone" in errorPhone}>
+              <FormControl.Label
+                _text={{
+                  color: "primary.50",
+                  fontWeight: "bold",
+                  fontSize: 'lg'
+
+                }}
+              >
+                Teléfono
+              </FormControl.Label>
+
+              <Input w={{
+
+              }} InputLeftElement={<Icon as={<MaterialIcons name="phone" />} size={5} ml="2" color="primary.200" />}
+                onChangeText={(value) => setFormData({ ...formData, phone: value })}
+                mt="3" placeholder="+52" color="primary.900"
+                fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
+
+              {"phone" in errorPhone ? (
+                <FormControl.ErrorMessage _text={{ color: "primary.700" }}>
+                  {errorPhone.phone}
+                </FormControl.ErrorMessage>
+              ) : (
+                <FormControl.HelperText>Ingrese su número de teléfono</FormControl.HelperText>
+              )}
+            </FormControl>
+
+            <Button
+              background="primary.200" borderWidth="2" borderColor="primary.200" mt="5" rounded={10} _text={{
                 color: "primary.50",
-                fontWeight: "bold",
-              }}
-              marginLeft={2}
-            >
-              Teléfono
-            </FormControl.Label>
-            <Input
-              p={2}
-              placeholder="Ingrese su número"
-              backgroundColor="primary.100"
-              variant="rounded"
-              color="primary.900"
-              fontWeight="bold"
-              onChangeText={(value) =>
-                setFormData({ ...formData, phone: value })
-              }
-              InputLeftElement={
-                <Icon
-                  as={<MaterialIcons name="phone" />}
-                  size={5}
-                  ml="2"
-                  color="primary.200"
-                />
-              }
-            />
-            {"phone" in errorPhone ? (
-              <FormControl.ErrorMessage _text={{ color: "primary.700" }}>
-                {errorPhone.phone}
-              </FormControl.ErrorMessage>
-            ) : (
-              <FormControl.HelperText>Ingrese su número de teléfono</FormControl.HelperText>
-            )}
-          </FormControl>
-          <Button
+                fontWeight: "700",
+                fontSize: "lg"
+              }} onPress={submit}>
+              Guardar
+            </Button>
+
+
+
+
+            {/* <Button
             mt="5"
             size="lg"
             marginTop={15}
@@ -296,11 +281,13 @@ export default function AddContact() {
             onPress={submit}
           >
             Guardar
-          </Button>
+          </Button> */}
 
-          {/* <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("Contact")}}>Guardar</Button> */}
-        </VStack>
-      </Box>
-    </Center >
+            {/* <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("Contact")}}>Guardar</Button> */}
+          </VStack>
+        </Box>
+      </Center >
+    </ScrollView>
+
   );
 }
