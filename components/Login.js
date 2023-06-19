@@ -13,7 +13,7 @@ export default function Login() {
     const [errors, setErrors] = React.useState({})
     const [errorEmail, setErrorsEmail] = React.useState({})
     const [errorPass, setErrorPass] = React.useState({})
-    var emailVal = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
+    var emailVal = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
 
 
@@ -38,11 +38,15 @@ export default function Login() {
             isValid = false
         } else if (!validator.isStrongPassword(formData.pass)) {
             setErrorPass({ ...errorPass, pass: 'La contraseña no es lo suficientemente segura' })
+            isValid = false
 
+        }else if(formData.pass.length<8){
+            setErrorPass({ ...errorPass, pass: 'La contraseña es muy pequeña' })
+            isValid = false
         }
+
         return isValid
     };
-
 
 
 

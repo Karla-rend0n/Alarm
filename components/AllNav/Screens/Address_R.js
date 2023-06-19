@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box, Center, Heading, VStack, FormControl, Input, Icon, Select, ScrollView, Button, Circle, HStack, AlertDialog } from 'native-base'
+import { Box, Center, Heading, VStack, FormControl, Input, Icon, Select, ScrollView, Button, Circle, HStack, AlertDialog, Select } from 'native-base'
 import { Ionicons, MaterialIcons, Entypo, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 
@@ -102,23 +102,7 @@ export default function Address_R() {
         if (formData.cologne === undefined) {
             setErrorcologne({ ...errorcologne, cologne: 'La colonia es requerida' })
             isValid = false
-        } else {
-            if (formData.cologne.length <= 3) {
-                setErrorcologne({
-                    ...errorcologne,
-                    cologne: 'El nombre de la colonia es muy corta'
-                })
-                console.log('valida')
-            } else {
-                if (!namVal.test(formData.cologne)) {
-                    setErrorcologne({
-                        ...errorcologne,
-                        lastName: 'Ingrese solo letras'
-                    })
-                }
-            }
-
-        }
+        } 
 
 
         if (formData.CP === undefined) {
@@ -137,44 +121,12 @@ export default function Address_R() {
         if (formData.state === undefined) {
             setErrorstate({ ...errorstate, state: 'El estado es requerido' })
             isValid = false
-        } else {
-            if (formData.state.length <= 3) {
-                setErrorstate({
-                    ...errorstate,
-                    state: 'El nombre del estado es muy corto'
-                })
-                console.log('valida')
-            } else {
-                if (!namVal.test(formData.state)) {
-                    setErrorstate({
-                        ...errorstate,
-                        state: 'Ingrese solo letras'
-                    })
-                }
-            }
-
-        }
+        } 
 
         if (formData.municipality === undefined) {
             setErrormunicipality({ ...errormunicipality, municipality: 'El municipio es requerido' })
             isValid = false
-        } else {
-            if (formData.municipality.length <= 3) {
-                setErrormunicipality({
-                    ...errormunicipality,
-                    municipality: 'El nombre del municipio es muy corto'
-                })
-                console.log('valida')
-            } else {
-                if (!namVal.test(formData.municipality)) {
-                    setErrormunicipality({
-                        ...errormunicipality,
-                        municipality: 'Ingrese solo letras'
-                    })
-                }
-            }
-
-        }
+        } 
         return isValid
     };
 
@@ -329,6 +281,7 @@ export default function Address_R() {
                         }} marginLeft={2} >
                             Colonia
                         </FormControl.Label>
+                        <Select selectedValue={formData.cologne} minWidth="200" placeholder="Seleccione su colonia" backgroundColor="primary.100"
                         <Select selectedValue={formData.cologne} minWidth="200" placeholder="Seleccione su colonia" backgroundColor="primary.100"
                             color="primary.900"
                             fontWeight="bold" InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" color='primary.200' />}
