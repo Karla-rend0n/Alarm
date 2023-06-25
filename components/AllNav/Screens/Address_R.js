@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box, Center, Heading, VStack, FormControl, Input, Icon, Select, ScrollView, Button, Circle, HStack, AlertDialog, Select } from 'native-base'
+import { Box, Center, Heading, VStack, FormControl, Input, Icon, Select, ScrollView, Button, Circle, HStack, AlertDialog } from 'native-base'
 import { Ionicons, MaterialIcons, Entypo, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 
@@ -18,18 +18,18 @@ export default function Address_R() {
     const [jsonZipCode, setJsonZipCode] = React.useState({})
 
 
-    const get_zip_code = async() =>{
-        try{
+    const get_zip_code = async () => {
+        try {
             let url = 'https://api-alarm.cadsita.net/zip_code/' + formData.zip_code + '/get_zip_code/'
             console.log('url', url)
             const response = await fetch(url)
-              setJsonZipCode( await response.json())
-              console.log('json', jsonZipCode)
-              return jsonZipCode
-            } catch (error) {
-              console.error(error);
-            }
+            setJsonZipCode(await response.json())
+            console.log('json', jsonZipCode)
+            return jsonZipCode
+        } catch (error) {
+            console.error(error);
         }
+    }
 
     var namVal = /^[A-Za-z]+$/i;
     var number = /^[0-9]+$/i
@@ -102,7 +102,7 @@ export default function Address_R() {
         if (formData.cologne === undefined) {
             setErrorcologne({ ...errorcologne, cologne: 'La colonia es requerida' })
             isValid = false
-        } 
+        }
 
 
         if (formData.CP === undefined) {
@@ -121,12 +121,12 @@ export default function Address_R() {
         if (formData.state === undefined) {
             setErrorstate({ ...errorstate, state: 'El estado es requerido' })
             isValid = false
-        } 
+        }
 
         if (formData.municipality === undefined) {
             setErrormunicipality({ ...errormunicipality, municipality: 'El municipio es requerido' })
             isValid = false
-        } 
+        }
         return isValid
     };
 
@@ -265,7 +265,7 @@ export default function Address_R() {
                             color="primary.900"
                             fontWeight="bold"
                             onChangeText={value => setFormData({ ...formData, zip_code: value })}
-                            InputLeftElement={<Icon as={<Entypo name='location' />} size={5} ml="2" color='primary.200' />} 
+                            InputLeftElement={<Icon as={<Entypo name='location' />} size={5} ml="2" color='primary.200' />}
                             onBlur={get_zip_code} />
                         {'CP' in errorCP ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorCP.CP}</FormControl.ErrorMessage> : <FormControl.HelperText>
                             Ingrese el Código postal
@@ -282,19 +282,18 @@ export default function Address_R() {
                             Colonia
                         </FormControl.Label>
                         <Select selectedValue={formData.cologne} minWidth="200" placeholder="Seleccione su colonia" backgroundColor="primary.100"
-                        <Select selectedValue={formData.cologne} minWidth="200" placeholder="Seleccione su colonia" backgroundColor="primary.100"
                             color="primary.900"
                             fontWeight="bold" InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" color='primary.200' />}
                             onValueChange={itemValue => setFormData({ ...formData, cologne: itemValue })}>
-                            { JSON.stringify(jsonZipCode) === '{}' ?
+                            {JSON.stringify(jsonZipCode) === '{}' ?
                                 <Select.Item label="" value="" />
                                 :
                                 jsonZipCode.map((ngbh) =>
-                                    <Select.Item label={ngbh.neighborhood} value={ngbh.neighborhood}/>
+                                    <Select.Item label={ngbh.neighborhood} value={ngbh.neighborhood} />
                                 )
                             }
                         </Select>
-                        
+
                         {'cologne' in errorcologne ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorcologne.cologne}</FormControl.ErrorMessage> : <FormControl.HelperText>
                             Ingrese su colonia
                         </FormControl.HelperText>
