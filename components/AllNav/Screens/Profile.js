@@ -42,7 +42,7 @@ export default function Profile() {
                 color: "primary.50",
                 fontWeight: 'bold'
             }} >
-                Menú
+                Configuración
             </Heading>
 
             <VStack space={3} mt={5}>
