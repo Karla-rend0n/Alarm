@@ -15,10 +15,23 @@ export default function Address_R() {
     const [errorCP, setErrorCP] = React.useState({})
     const [errorstate, setErrorstate] = React.useState({})
     const [errormunicipality, setErrormunicipality] = React.useState({})
+    const [jsonZipCode, setJsonZipCode] = React.useState({})
+
+    const get_zip_code = async () => {
+        try {
+            let url = 'https://api-alarm.cadsita.net/zip_code/' + formData.zip_code + '/get_zip_code/'
+            console.log('url', url)
+            const response = await fetch(url)
+            setJsonZipCode(await response.json())
+            console.log('json', jsonZipCode)
+            return jsonZipCode
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     var namVal = /^[A-Za-z]+$/i;
     var number = /^[0-9]+$/i
-
 
 
 
@@ -275,10 +288,10 @@ export default function Address_R() {
                         <Input w={{
 
                         }} InputLeftElement={<Icon as={<Entypo name='location' />} size={5} ml="2" color='primary.200' />}
-                            onChangeText={value => setFormData({ ...formData, CP: value })}
+                            onChangeText={value => setFormData({ ...formData, zip_code: value })}
                             mt="3" placeholder="Ingrese el Código postal" color="primary.900"
-                            fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
-
+                            fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded"
+                            onBlur={get_zip_code} />
                         {'CP' in errorCP ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorCP.CP}</FormControl.ErrorMessage> : <FormControl.HelperText>
                             Ingrese el Código postal
                         </FormControl.HelperText>
@@ -304,9 +317,14 @@ export default function Address_R() {
                             color="primary.900"
                             fontWeight="bold" InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" mt="3" color='primary.200' />}
                             onValueChange={itemValue => setFormData({ ...formData, cologne: itemValue })}>
-                            <Select.Item label="colonia 1" value="col1" />
-                            <Select.Item label="colonia 2" value="col2" />
-                            <Select.Item label="colonia 3" value="col3" />
+
+                            {JSON.stringify(jsonZipCode) === '{}' ?
+                                <Select.Item label="" value="" />
+                                :
+                                jsonZipCode.map((ngbh) =>
+                                    <Select.Item label={ngbh.neighborhood} value={ngbh.neighborhood} />
+                                )
+                            }
 
                         </Select>
                         {'cologne' in errorcologne ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorcologne.cologne}</FormControl.ErrorMessage> : <FormControl.HelperText>
@@ -316,6 +334,8 @@ export default function Address_R() {
 
 
                     </FormControl>
+
+
 
                     <FormControl isRequired isInvalid={'state' in errorstate}>
 
