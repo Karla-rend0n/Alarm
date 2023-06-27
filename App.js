@@ -4,6 +4,7 @@ import { Center, NativeBaseProvider, extendTheme } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 
 import Navigate from "./components/Layout/Navigate";
+import Home from "./components/AllNav/Screens/Home"
 
 export default function App() {
   const config = {
