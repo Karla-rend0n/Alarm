@@ -23,7 +23,7 @@ export default function Home() {
             <Box safeArea p="1" py="8" w="100%" h="91%" maxW="350px">
                 <VStack space={1} justifyContent="center" alignItems="center">
                     <Image width="389" height="138" mt="9"
-                        source={require('../assets/itaa.png')} />
+                        source={require('../assets/itaa.png')} alt="Logo Tec" />
 
                     <Image width="116" height="131" mt="10"
                         source={require('../assets/ita2.png')} />

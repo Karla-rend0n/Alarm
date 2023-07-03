@@ -222,12 +222,12 @@ function R_Navegation() {
 
                     headerTransparent: true
                 }} />
-            <Rstack.Screen
+            {/* <Rstack.Screen
                 name="Home"
                 component={HomeTabs}
                 options={{
                     headerShown: false
-                }} />
+                }} /> */}
 
 
         </Rstack.Navigator>
@@ -255,7 +255,7 @@ export default function Navigate() {
                     }}
                 />
                 <Stack.Screen
-                    name="Home" component={HomeTabs}
+                    name="Home" component={Home}
                     options={{
                         headerShown: false
                     }}

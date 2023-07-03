@@ -1,4 +1,5 @@
 import React from "react";
+import {useEffect} from 'react'
 import { Box, Text, Heading, VStack, FormControl, Input, Link, Button, HStack, Center, Icon, ScrollView, Pressable } from 'native-base'
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -13,9 +14,64 @@ export default function Login() {
     const [errors, setErrors] = React.useState({})
     const [errorEmail, setErrorsEmail] = React.useState({})
     const [errorPass, setErrorPass] = React.useState({})
+    const [isLoading, setIsLoading] = React.useState(true)
+    const [dataProfile, setDataProfile]  = React.useState({})
+    
     var emailVal = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    var dataValid = false
 
+    // useEffect(() => {
+    //     const getData = async () =>{
+    //         let url = 'https://api-alarm.cadsita.net/login?email=' + formData.email + '&password=' + formData.password
+    //         try{
+    //             console.log(url)
+    //             const response = await fetch(url);
+    //             console.log(response.json())
+    //             setDataProfile(await response.json())
+    //             console.log('json', dataProfile)
+    //             //return dataProfile
+    //         }catch (error) {
+    // //         console.error(error);
+    //         }    
+    // }; getData()
+    // }, [isLoading]);
+    
+      
 
+     const login = async () => {
+         try {
+             setIsLoading(true);
+             let url = 'https://api-alarm.cadsita.net/login?email=' + formData.email + '&password=' + formData.password
+             console.log('url', url)
+             const response = await fetch(url)
+             
+             setDataProfile(await response.json())
+             const timeout = setTimeout(() => {
+                console.log('json', dataProfile)
+                return dataProfile
+              }, 3000);
+             
+             //setIsLoading(false);
+             if (Object.keys(dataProfile).length === 0) {
+                 console.log('Object is empty', dataProfile);
+                 setErrorPass({ ...errorPass, password: 'El email o el password no corresponden' })
+                 dataValid = false
+               }
+          
+             if (Object.keys(dataProfile).length > 0) {
+                 console.log('Object is NOT empty', dataProfile);
+                 dataValid = true
+                 navigation.navigate("Home", {data_profile: dataProfile})
+                
+               }
+             console.log('dataValid', dataValid)
+            // clearTimeout(timeout);
+
+             
+         } catch (error) {
+             console.error(error);
+         }
+     }
 
     const validate = () => {
         let isValid = true;
@@ -33,26 +89,55 @@ export default function Login() {
                 isValid = false
             }
         }
-        if (formData.pass === undefined) {
-            setErrorPass({ ...errorPass, pass: 'La contraseña es requerida' })
+        if (formData.password === undefined) {
+            setErrorPass({ ...errorPass, password: 'La contraseña es requerida' })
             isValid = false
-        } else if (!validator.isStrongPassword(formData.pass)) {
-            setErrorPass({ ...errorPass, pass: 'La contraseña no es lo suficientemente segura' })
+        } else if (!validator.isStrongPassword(formData.password)) {
+            setErrorPass({ ...errorPass, password: 'La contraseña no es lo suficientemente segura' })
             isValid = false
 
-        } else if (formData.pass.length < 8) {
-            setErrorPass({ ...errorPass, pass: 'La contraseña es muy pequeña' })
+        } else if (formData.password.length < 8) {
+            setErrorPass({ ...errorPass, password: 'La contraseña es muy pequeña' })
             isValid = false
         }
+    
+        setIsLoading(false)
+        // if (Object.keys(dataProfile).length > 0) {
+        //         console.log('Object is NOT empty', dataProfile);
+        //         dataValid = true
+        //     }
+        // if (login() == true){
+        //     isValid = true
+        // }
+        // else if (login() == false){
+        //     setErrorPass({ ...errorPass, password: 'El email o el password no corresponden' })
+        //     isValid = false
+        // }
 
-        return isValid
+        if (isValid){
+            login()
+        } 
+        
+        // if (Object.keys(dataProfile).length === 0) {
+        //     console.log('Object is empty', dataProfile);
+        //     dataValid = false
+        //     isValid = false
+        //   }
+     
+        // if (Object.keys(dataProfile).length > 0) {
+        //     console.log('Object is NOT empty', dataProfile);
+        //     dataValid = true
+            
+        //   }
+        // console.log('dataValid', dataValid)
+        
+        // console.log("isValid login", isValid)
+        // return isValid
     };
 
 
-
-
-    const submit = () => { validate() ? navigation.navigate("Home") : console.log('bad', formData) }
-
+    //const submit = () => { validate() ? navigation.navigate("Home", {data_profile: dataProfile}) : console.log('bad', formData) }
+    const submit = () => { validate() }
     return <ScrollView w="100%" h="100%">
 
         <Center w="100%" h="300%" bg={{
@@ -95,18 +180,18 @@ export default function Login() {
 
                     </FormControl>
 
-                    <FormControl isRequired isInvalid={'pass' in errorPass}>
+                    <FormControl isRequired isInvalid={'password' in errorPass}>
                         <FormControl.Label _text={{
                             color: "primary.50",
                             fontWeight: '700',
                             fontSize: 'lg'
                         }}>Contraseña</FormControl.Label>
                         <Input mt="3" placeholder="Contraseña" color="primary.900" type="password"
-                            onChangeText={value => setFormData({ ...formData, pass: value })}
+                            onChangeText={value => setFormData({ ...formData, password: value })}
 
                             fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded"
                             InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />} />
-                        {'pass' in errorPass ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPass.pass}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                        {'password' in errorPass ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPass.password}</FormControl.ErrorMessage> : <FormControl.HelperText>
                             Ingrese letras MAYÚSCULAS o minúsculas, números y caracteres
                         </FormControl.HelperText>}
 

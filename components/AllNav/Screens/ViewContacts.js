@@ -5,8 +5,9 @@ import { useNavigation } from "@react-navigation/native";
 
 
 
-export default function ViewContact() {
+export default function ViewContact({route}) {
     const navigation = useNavigation();
+    const {data_contact, data_register} = route.params
 
     return <ScrollView w='100%' h='100%'>
         <Center w="100%" h="210%" bg={{
@@ -21,15 +22,21 @@ export default function ViewContact() {
                     color: "primary.50",
                     fontWeight: 'bold'
                 }} >
-                    Contactos
+                    Contact
                 </Heading>
 
                 <VStack space={6} mt={8} >
-                    <Button marginLeft='5/6' mt='7' rounded borderRadius="44" width="44" height="44" alignSelf="center" bgColor="primary.200" borderWidth="3" borderColor="primary.200" leftIcon={<Icon as={<AntDesign name="plus" />} />} onPress={() => { navigation.navigate("Contact_R") }}>
-
+                    <Button marginLeft='5/6' mt='7' 
+                        rounded borderRadius="44" 
+                        width="44" 
+                        height="44" 
+                        alignSelf="center" 
+                        bgColor="primary.200" 
+                        borderWidth="3" 
+                        borderColor="primary.200" 
+                        leftIcon={<Icon as={<AntDesign name="plus" />} />} 
+                        onPress={() => { navigation.navigate("Contact_R") }}>
                     </Button>
-
-
 
                     <Box rounded="xl" >
                         <Pressable>
@@ -48,7 +55,9 @@ export default function ViewContact() {
                                             source={require('../../../assets/IconoPerfil.png')} />
 
                                         <Text color='primary.900' mt='3' fontWeight='bold'>
-                                            María Herrera
+                                            {console.log("data_contact", data_contact)}
+                                            {console.log("data_register", data_register)}
+                                           {data_contact.name + " " + data_contact.last_name}
                                         </Text>
                                     </HStack>
 
@@ -64,7 +73,7 @@ export default function ViewContact() {
                             color: "primary.50",
                             fontWeight: "700",
                             fontSize: "lg"
-                        }} onPress={() => { navigation.navigate("Address_R") }}>
+                        }} onPress={() => { navigation.navigate("Address_R", {data_contact: data_contact, data_register: data_register}) }}>
                         Siguiente
 
                     </Button>

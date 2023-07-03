@@ -2,12 +2,12 @@ import React from "react";
 import { Center, Box, Heading, Button, Text, TouchableOpacity, ScrollView, useState, Flex, Stack, VStack } from "native-base"
 import { Linking } from "react-native"
 
-export default function Start() {
+export default function Home({route}) {
     const showMessage = () => Alert.alert('Button clicked !');
-
+    const {data_profile} = route.params
     const [estadoBoton, setEstadoBoton] = React.useState('Apagado');
     const [tiempoInicioPresionado, setTiempoInicioPresionado] = React.useState(0);
-
+   
     const handlePressIn = () => {
         setTiempoInicioPresionado(Date.now());
     };
@@ -33,7 +33,9 @@ export default function Start() {
         if (duracionPresionado >= 2000 && estadoBoton === 'Apagado') {
             sendRequest('onE')
             setEstadoBoton('Encendido');
-            let url = 'whatsapp://send?phone=4494563761&text=Hola';
+            console.log('dataProfile', data_profile[0].profile_contact[0].phone)
+
+            let url = 'whatsapp://send?phone='+data_profile[0].profile_contact[0].phone+'&text=SAFETYNET: Tengo una incidencia';
             Linking.openURL(url).then(() => {
                 console.log('WhatasApp Opened');
             }).catch(() => {

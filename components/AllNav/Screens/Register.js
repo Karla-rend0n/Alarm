@@ -61,21 +61,21 @@ export default function Register() {
                 }
             }
         }
-        if (formData.lastName === undefined) {
-            setErrorLastname({ ...errorLastname, lastName: 'Los Apellidos son requeridos' })
+        if (formData.last_name === undefined) {
+            setErrorLastname({ ...errorLastname, last_name: 'Los Apellidos son requeridos' })
             isValid = false
         } else {
-            if (formData.lastName.length <= 3) {
+            if (formData.last_name.length <= 3) {
                 setErrorLastname({
                     ...errorLastname,
-                    lastName: 'El apellido es muy corto'
+                    last_name: 'El apellido es muy corto'
                 })
                 console.log('valida')
             } else {
-                if (!namVal.test(formData.lastName)) {
+                if (!namVal.test(formData.last_name)) {
                     setErrorLastname({
                         ...errorLastname,
-                        lastName: 'Ingrese letras'
+                        last_name: 'Ingrese letras'
                     })
                 }
             }
@@ -102,15 +102,15 @@ export default function Register() {
             setErrorPhone({ ...errorPhone, phone: 'El numero necesita ser de 10 digitos' })
             isValid = false
         }
-        if (formData.pass === undefined) {
-            setErrorPass({ ...errorPass, pass: 'La contraseña es requerida' })
+        if (formData.password === undefined) {
+            setErrorPass({ ...errorPass, password: 'La contraseña es requerida' })
             isValid = false
-        } else if (!validator.isStrongPassword(formData.pass)) {
-            setErrorPass({ ...errorPass, pass: 'La contraseña no es lo suficientemente segura' })
+        } else if (!validator.isStrongPassword(formData.password)) {
+            setErrorPass({ ...errorPass, password: 'La contraseña no es lo suficientemente segura' })
             isValid = false
 
-        } else if (formData.pass.length < 8) {
-            setErrorPass({ ...errorPass, pass: 'La contraseña es muy pequeña' })
+        } else if (formData.password.length < 8) {
+            setErrorPass({ ...errorPass, password: 'La contraseña es muy pequeña' })
             isValid = false
         }
 
@@ -120,7 +120,7 @@ export default function Register() {
 
 
 
-    const submit = () => { validate() ? navigation.navigate("Contact_R") : console.log('bad', formData) }
+    const submit = () => { validate() ? navigation.navigate("Contact_R", {data_register: formData}) : console.log('bad', formData) }
 
 
 
@@ -172,7 +172,7 @@ export default function Register() {
 
 
 
-                    <FormControl isRequired isInvalid={'lastName' in errorLastname} >
+                    <FormControl isRequired isInvalid={'last_name' in errorLastname} >
 
                         <FormControl.Label _text={{
                             color: 'primary.50',
@@ -185,11 +185,11 @@ export default function Register() {
                         <Input w={{
 
                         }} InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />}
-                            onChangeText={value => setFormData({ ...formData, lastName: value })}
+                            onChangeText={value => setFormData({ ...formData, last_name: value })}
                             mt="3" placeholder="Ingrese su apellido" color="primary.900"
                             fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
 
-                        {'lastName' in errorLastname ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorLastname.lastName}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                        {'last_name' in errorLastname ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorLastname.last_name}</FormControl.ErrorMessage> : <FormControl.HelperText>
                             Ingrese solos sus apellidos
                         </FormControl.HelperText>
                         }
@@ -279,7 +279,7 @@ export default function Register() {
 
 
 
-                    <FormControl isRequired isInvalid={'pass' in errorPass}>
+                    <FormControl isRequired isInvalid={'password' in errorPass}>
 
                         <FormControl.Label _text={{
                             color: 'primary.50',
@@ -291,12 +291,12 @@ export default function Register() {
                         </FormControl.Label>
 
                         <Input mt="3" placeholder="Contraseña" color="primary.900" type="password"
-                            onChangeText={value => setFormData({ ...formData, pass: value })}
+                            onChangeText={value => setFormData({ ...formData, password: value })}
 
                             fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded"
                             InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />} />
 
-                        {'pass' in errorPass ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPass.pass}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                        {'password' in errorPass ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPass.password}</FormControl.ErrorMessage> : <FormControl.HelperText>
                             Ingrese letras MAYÚSCULAS o minúsculas, números y caracteres
                         </FormControl.HelperText>}
 

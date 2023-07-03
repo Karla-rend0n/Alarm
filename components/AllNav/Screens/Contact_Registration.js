@@ -15,16 +15,21 @@ import {
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-export default function Contact_Registration() {
+export default function Contact_Registration({route}) {
+  const [formDataRegister, setFormDataRegister] =  React.useState({})
   const navigation = useNavigation();
+  const [arrayContact, setArrayContact] = React.useState([]);
   const [formData, setFormData] = React.useState({});
   const [errors, setErrors] = React.useState({});
   const [errorkinship, setErrorkinship] = React.useState({});
   const [errorLastname, setErrorLastname] = React.useState({});
   const [errorPhone, setErrorPhone] = React.useState({});
+  const {data_register} = route.params
+
   var namVal = /^[A-Za-z]+$/i;
   var number = /^\+?(52\s?)?1?\d{3}\s?\d{3}\s?\d{4}$/
 
+  
   const validate = () => {
     let isValid = true;
     setErrorkinship({});
@@ -73,21 +78,21 @@ export default function Contact_Registration() {
       }
     }
 
-    if (formData.lastName === undefined) {
-      setErrorLastname({ ...errorLastname, lastName: "El apellido es requerido" });
+    if (formData.last_name === undefined) {
+      setErrorLastname({ ...errorLastname, last_name: "El apellido es requerido" });
       isValid = false;
     } else {
-      if (formData.lastName.length <= 3) {
+      if (formData.last_name.length <= 3) {
         setErrorLastname({
           ...errorLastname,
-          lastName: "El apellido es muy corto",
+          last_name: "El apellido es muy corto",
         });
         console.log("valida");
       } else {
-        if (!namVal.test(formData.lastName)) {
+        if (!namVal.test(formData.last_name)) {
           setErrorLastname({
             ...errorLastname,
-            lastName: "Ingrese solo letras",
+            last_name: "Ingrese solo letras",
           });
         }
       }
@@ -104,8 +109,9 @@ export default function Contact_Registration() {
     return isValid;
   };
 
-  const submit = () => {
-    validate() ? navigation.navigate("ViewContact") : console.log("bad", formData);
+  const submit = () => {    
+    console.log("formDataRegister",data_register)
+    validate() ? navigation.navigate("ViewContact", {data_contact:formData, data_register: data_register}) : console.log("bad", formData);
   };
 
   return (
@@ -161,9 +167,6 @@ export default function Contact_Registration() {
           </FormControl>
 
 
-
-
-
           <FormControl isRequired isInvalid={"name" in errors}>
             <FormControl.Label
               _text={{
@@ -193,7 +196,7 @@ export default function Contact_Registration() {
 
 
 
-          <FormControl isRequired isInvalid={"lastName" in errorLastname}>
+          <FormControl isRequired isInvalid={"last_name" in errorLastname}>
             <FormControl.Label
               _text={{
                 color: "primary.50",
@@ -206,13 +209,13 @@ export default function Contact_Registration() {
             <Input w={{
 
             }} InputLeftElement={<Icon as={<MaterialIcons name="person" />} size={5} ml="2" color="primary.200" />}
-              onChangeText={(value) => setFormData({ ...formData, lastName: value })}
+              onChangeText={(value) => setFormData({ ...formData, last_name: value })}
               mt="3" placeholder="Ingrese su apellido" color="primary.900"
               fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
 
-            {"lastName" in errorLastname ? (
+            {"last_name" in errorLastname ? (
               <FormControl.ErrorMessage _text={{ color: "primary.700" }}>
-                {errorLastname.lastName}
+                {errorLastname.last_name}
               </FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText>Solo ingrese sus apellidos</FormControl.HelperText>
