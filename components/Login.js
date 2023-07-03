@@ -202,7 +202,7 @@ export default function Login() {
                             fontSize: "sm",
                             fontWeight: "700",
                             color: "primary.50",
-                        }} mt="4" alignSelf="flex-end"> Forget Password?
+                        }} mt="4" > Forget Password?
                         </Link>
                     </FormControl>
 
@@ -216,7 +216,7 @@ export default function Login() {
                         Inciar sesión
                     </Button>
 
-                    <HStack color="primary.50" alignItems='center' alignSelf={'Center'} fontWeight="normal">
+                    <HStack color="primary.50" alignItems='center'  fontWeight="normal">
                         <Text fontSize="sm" >
                             ¿No dispones de una cuenta? {" "}
                         </Text>

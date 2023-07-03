@@ -102,11 +102,11 @@ export default function Home({route}) {
                     <VStack space={10} mt={10}>
 
 
-                        <Button mt='3' rounded borderRadius="200" width="200" height="200" alignSelf="center" bgColor="primary.300" borderWidth="3" borderColor="primary.900" onPressIn={handlePressIn} onPressOut={handlePressOut}>
-                            <Button rounded borderRadius="170" width="170" height="170" alignSelf="center" bgColor="primary.500" borderWidth="4" borderColor="primary.1000" onPressIn={handlePressIn} onPressOut={handlePressOut}>
+                        <Button mt='3' rounded borderRadius="200" width="200" height="200"  bgColor="primary.300" borderWidth="3" borderColor="primary.900" onPressIn={handlePressIn} onPressOut={handlePressOut}>
+                            <Button rounded borderRadius="170" width="170" height="170" bgColor="primary.500" borderWidth="4" borderColor="primary.1000" onPressIn={handlePressIn} onPressOut={handlePressOut}>
                                 <Text>{estadoBoton}</Text>
 
-                                <Text alignSelf="center" fontWeight="700">Alarma</Text>
+                                <Text fontWeight="700">Alarma</Text>
 
                             </Button>
                         </Button>
@@ -118,11 +118,11 @@ export default function Home({route}) {
                             </Heading>
                         </Flex>
 
-                        <Button mt='3' rounded borderRadius="200" width="200" height="200" alignSelf="center" bgColor="primary.300" borderWidth="3" borderColor="primary.900" onPressIn={handlePressInicio} onPressOut={handlePressApagado}>
-                            <Button rounded borderRadius="170" width="170" height="170" alignSelf="center" bgColor="primary.600" borderWidth="4" borderColor="primary.1001" onPressIn={handlePressInicio} onPressOut={handlePressApagado}>
+                        <Button mt='3' rounded borderRadius="200" width="200" height="200"  bgColor="primary.300" borderWidth="3" borderColor="primary.900" onPressIn={handlePressInicio} onPressOut={handlePressApagado}>
+                            <Button rounded borderRadius="170" width="170" height="170"  bgColor="primary.600" borderWidth="4" borderColor="primary.1001" onPressIn={handlePressInicio} onPressOut={handlePressApagado}>
                                 <Text>{estadoBotonE}</Text>
 
-                                <Text alignSelf="center" fontWeight="700">Emergencia</Text>
+                                <Text  fontWeight="700">Emergencia</Text>
 
                             </Button>
 

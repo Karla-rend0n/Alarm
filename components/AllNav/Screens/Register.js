@@ -313,7 +313,7 @@ export default function Register() {
 
 
 
-                    <HStack color="primary.50" alignItems='center' alignSelf={'Center'} fontWeight="normal">
+                    <HStack color="primary.50" alignItems='center'  fontWeight="normal">
                         <Text fontSize="sm" >
                             ¿Ya tienes una cuenta? {" "}
                         </Text>
@@ -328,7 +328,7 @@ export default function Register() {
 
 
                 </VStack>
-                <HStack space={3} marginTop='8' alignSelf="center">
+                <HStack space={3} marginTop='8'>
                     <Circle size="10px" bg="primary.50" ></Circle>
                     <Circle size="10px" bg="primary.200" ></Circle>
                     <Circle size="10px" bg="primary.200"></Circle>

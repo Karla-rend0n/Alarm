@@ -254,7 +254,7 @@ export default function Contact_Registration({route}) {
 
 
 
-          <HStack space={20} alignSelf="center" marginLeft="4">
+          <HStack space={20} marginLeft="4">
 
             <Button
               marginTop={15}
@@ -289,7 +289,7 @@ export default function Contact_Registration({route}) {
                         <Button size='lg' bg='primary.200' borderWidth="2" borderColor="primary.200" onPress={() => {navigation.navigate("ViewContact")}}>Guardar</Button>
                     </HStack> */}
         </VStack>
-        <HStack space={3} marginTop="8" alignSelf="center">
+        <HStack space={3} marginTop="8">
           <Circle size="10px" bg="primary.200"></Circle>
           <Circle size="10px" bg="primary.50"></Circle>
           <Circle size="10px" bg="primary.200"></Circle>
