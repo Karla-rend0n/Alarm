@@ -36,7 +36,7 @@ export default function Home() {
                         fontWeight: "700",
                         fontSize: "lg"
                     }}>
-                        Inciar sesión
+                        Iniciar sesión
                     </Button>
 
                     <Button background="primary.50" borderWidth="2" borderColor="primary.50" mt="14" rounded={10} onPress={() => { navigation.navigate("Register") }} _text={{

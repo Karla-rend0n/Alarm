@@ -1,13 +1,21 @@
 import React from "react";
 import { Center, Box, Heading, Button, Text, TouchableOpacity, ScrollView, useState, Flex, Stack, VStack } from "native-base"
 import { Linking } from "react-native"
+//import { snsClient } from "../../libs/snsClient";
+import { IoTClient, AcceptCertificateTransferCommand } from "@aws-sdk/client-iot";
 
-export default function Home({route}) {
+
+
+export default function Home() {
+//export default function Home({route}) {
+
     const showMessage = () => Alert.alert('Button clicked !');
-    const {data_profile} = route.params
+    //const {data_profile} = route.params
     const [estadoBoton, setEstadoBoton] = React.useState('Apagado');
     const [tiempoInicioPresionado, setTiempoInicioPresionado] = React.useState(0);
-   
+    
+
+
     const handlePressIn = () => {
         setTiempoInicioPresionado(Date.now());
     };

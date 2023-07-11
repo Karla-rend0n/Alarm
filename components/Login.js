@@ -46,24 +46,24 @@ export default function Login() {
              const response = await fetch(url)
              
              setDataProfile(await response.json())
-             const timeout = setTimeout(() => {
-                console.log('json', dataProfile)
-                return dataProfile
-              }, 3000);
+            //  const timeout = setTimeout(() => {
+            //     console.log('json', dataProfile)
+            //     return dataProfile
+            //   }, 3000);
              
              //setIsLoading(false);
-             if (Object.keys(dataProfile).length === 0) {
-                 console.log('Object is empty', dataProfile);
-                 setErrorPass({ ...errorPass, password: 'El email o el password no corresponden' })
-                 dataValid = false
-               }
+            //  if (Object.keys(dataProfile).length === 0) {
+            //      console.log('Object is empty', dataProfile);
+            //      setErrorPass({ ...errorPass, password: 'El email o el password no corresponden' })
+            //      dataValid = false
+            //    }
           
-             if (Object.keys(dataProfile).length > 0) {
-                 console.log('Object is NOT empty', dataProfile);
-                 dataValid = true
-                 navigation.navigate("Home", {data_profile: dataProfile})
+            //  if (Object.keys(dataProfile).length > 0) {
+            //      console.log('Object is NOT empty', dataProfile);
+            //      dataValid = true
+            //      navigation.navigate("Home", {data_profile: dataProfile})
                 
-               }
+            //    }
              console.log('dataValid', dataValid)
             // clearTimeout(timeout);
 
@@ -118,17 +118,18 @@ export default function Login() {
             login()
         } 
         
-        // if (Object.keys(dataProfile).length === 0) {
-        //     console.log('Object is empty', dataProfile);
-        //     dataValid = false
-        //     isValid = false
-        //   }
+        if (Object.keys(dataProfile).length === 0) {
+            console.log('Object is empty', dataProfile);
+            setErrorPass({ ...errorPass, password: 'El email o el password no corresponden' })
+            dataValid = false
+          }
      
-        // if (Object.keys(dataProfile).length > 0) {
-        //     console.log('Object is NOT empty', dataProfile);
-        //     dataValid = true
-            
-        //   }
+        if (Object.keys(dataProfile).length > 0) {
+            console.log('Object is NOT empty', dataProfile);
+            dataValid = true
+            navigation.navigate("Home", {data_profile: dataProfile})
+           
+          }
         // console.log('dataValid', dataValid)
         
         // console.log("isValid login", isValid)
@@ -202,7 +203,7 @@ export default function Login() {
                             fontSize: "sm",
                             fontWeight: "700",
                             color: "primary.50",
-                        }} mt="4" alignSelf="flex-end"> Forget Password?
+                        }} mt="4"> Forget Password?
                         </Link>
                     </FormControl>
 
@@ -213,7 +214,7 @@ export default function Login() {
                             fontWeight: "700",
                             fontSize: "lg"
                         }} onPress={submit}>
-                        Inciar sesión
+                        Iniciar sesión
                     </Button>
 
                     <HStack color="primary.50" alignItems='center' alignSelf={'Center'} fontWeight="normal">
