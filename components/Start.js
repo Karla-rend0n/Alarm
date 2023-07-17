@@ -7,12 +7,10 @@ import { useNavigation } from "@react-navigation/native";
 
 
 
-export default function Home() {
+export default function Start() {
     const navigation = useNavigation();
 
-    return <ScrollView w="100%" h="100%">
-
-        <Center w="100%" h="300%" bg={{
+    return <Center w="100%" h="300%" bg={{
             linearGradient: {
                 colors: ['primary.400', 'primary.800'],
                 start: [1, 0],
@@ -20,9 +18,9 @@ export default function Home() {
 
             }
         }}>
-            <Box safeArea p="1" py="8" w="100%" h="91%" maxW="350px">
+            <Box safeArea p="1" w="100%" h="95%" maxW="350px">
                 <VStack space={1} justifyContent="center" alignItems="center">
-                    <Image width="389" height="138" mt="9"
+                    <Image width="389" height="138" 
                         source={require('../assets/itaa.png')} alt="Logo Tec" />
 
                     <Image width="116" height="131" mt="10"
@@ -51,7 +49,7 @@ export default function Home() {
 
             </Box>
         </Center>
-    </ScrollView>
+    
 }
 
 

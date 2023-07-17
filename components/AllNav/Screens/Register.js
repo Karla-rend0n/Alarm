@@ -13,6 +13,7 @@ export default function Register() {
     const [errorLastname, setErrorLastname] = React.useState({})
     const [errorAge, setErrorAge] = React.useState({})
     const [errorPass, setErrorPass] = React.useState({})
+    const [errorConfirm, setErrorConfirm] = React.useState({})
     const [errorPhone, setErrorPhone] = React.useState({})
     var emailVal = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     var namVal = /^[A-Za-z]+$/i;
@@ -112,6 +113,13 @@ export default function Register() {
         } else if (formData.password.length < 8) {
             setErrorPass({ ...errorPass, password: 'La contraseña es muy pequeña' })
             isValid = false
+        }
+        if(formData.confPass === undefined){
+            setErrorConfirm({ ...errorConfirm, confPass: 'La contraseña es requerida' })
+            isValid= false
+        }else if(formData.password !== formData.confPass){
+            setErrorConfirm({...errorConfirm, confPass: 'Las contraseñas no coinciden'})
+            isValid= false
         }
 
         return isValid
@@ -301,6 +309,30 @@ export default function Register() {
                         </FormControl.HelperText>}
 
                     </FormControl>
+
+                    <FormControl isRequired isInvalid={'confPass' in errorConfirm}>
+
+                        <FormControl.Label _text={{
+                            color: 'primary.50',
+                            fontWeight: 'bold',
+                            fontSize: 'lg'
+
+                        }}>
+                            Confirmar Contraseña
+                        </FormControl.Label>
+
+                        <Input mt="3" placeholder="Contraseña" color="primary.900" type="password"
+                            onChangeText={value => setFormData({ ...formData, confPass: value })}
+
+                            fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded"
+                            InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />} />
+
+                        {'confPass' in errorConfirm ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorConfirm.confpass}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                            Ingrese la misma contraseña
+                        </FormControl.HelperText>}
+
+                    </FormControl>
+                    
 
                     <Button
                         background="primary.200" borderWidth="2" borderColor="primary.200" mt="5" rounded={10} _text={{
