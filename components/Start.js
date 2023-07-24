@@ -1,58 +1,81 @@
 import React from "react";
 import { Box, Button, Center, Image, VStack, ScrollView } from 'native-base'
 import { useNavigation } from "@react-navigation/native";
+import { Dimensions } from 'react-native';
 
-
-
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 
 
 export default function Start() {
     const navigation = useNavigation();
 
-    return <Center w="100%" h="300%" bg={{
+
+    // Relación de aspecto original de la imagen ita2.png
+    const ita2ImageWidth = 80;
+    const ita2ImageHeight = 131;
+
+    // Ajustamos la altura proporcionalmente al ancho de la pantalla
+    const ita2ImageHeightAdjusted = (windowWidth * 0.25 * ita2ImageHeight) / ita2ImageWidth;
+
+    return (
+        <Box flex={1} bg={{ // Utilizamos flex para ocupar todo el espacio disponible
             linearGradient: {
                 colors: ['primary.400', 'primary.800'],
                 start: [1, 0],
                 end: [0, 0]
-
             }
         }}>
-            <Box safeArea p="1" w="100%" h="95%" maxW="350px">
-                <VStack space={1} justifyContent="center" alignItems="center">
-                    <Image width="389" height="138" 
-                        source={require('../assets/itaa.png')} alt="Logo Tec" />
 
-                    <Image width="116" height="131" mt="10"
-                        source={require('../assets/ita2.png')} />
-                </VStack>
+            <ScrollView flex={1} contentContainerStyle={{ flexGrow: 1 }}> {/* Utilizamos ScrollView para que el contenido sea desplazable */}
+                <Center flex={1}>
 
-                <VStack space={10} mt="47">
+                    <Box safeArea p="5%" w="100%" maxWidth="350px"> {/* Ajustamos los valores de padding y utilizamos porcentajes */}
 
-                    <Button background="primary.50" borderWidth="2" borderColor="primary.50" mt="15" rounded={10} onPress={() => { navigation.navigate("Login") }} _text={{
-                        color: "primary.900",
-                        fontWeight: "700",
-                        fontSize: "lg"
-                    }}>
-                        Inciar sesión
-                    </Button>
+                        <VStack space={windowHeight * 0.02} justifyContent="center" alignItems="center">
 
-                    <Button background="primary.50" borderWidth="2" borderColor="primary.50" mt="14" rounded={10} onPress={() => { navigation.navigate("Register") }} _text={{
-                        color: "primary.900",
-                        fontWeight: "700",
-                        fontSize: "lg"
-                    }}>
-                        Crear una cuenta
-                    </Button>
 
-                </VStack>
+                            <Image
+                                width={windowWidth * 0.9}
+                                height={ita2ImageHeightAdjusted}
+                                resizeMode="contain"
+                                source={require('../assets/itaa.png')}
+                                alt="Logo Tec"
+                            />
 
-            </Box>
-        </Center>
-    
+                            <Image
+                                width={windowWidth * 0.30}
+                                height={ita2ImageHeightAdjusted}
+                                mt={windowHeight * 0.02}
+                                source={require('../assets/ita2.png')}
+                            />
+                        </VStack>
+
+
+                        <VStack space={windowHeight * 0.07} mt={windowHeight * 0.05}> {/* Ajustamos el espacio entre los botones */}
+                            <Button background="primary.50" borderWidth="2" borderColor="primary.50" rounded={10} onPress={() => { navigation.navigate("Login") }} _text={{
+                                color: "primary.900",
+                                fontWeight: "700",
+                                fontSize: "lg"
+                            }}>
+                                Iniciar sesión
+                            </Button>
+
+                            <Button background="primary.50" borderWidth="2" borderColor="primary.50" rounded={10} onPress={() => { navigation.navigate("Register") }} _text={{
+                                color: "primary.900",
+                                fontWeight: "700",
+                                fontSize: "lg"
+                            }}>
+                                Crear una cuenta
+                            </Button>
+                        </VStack>
+
+                    </Box>
+                </Center>
+            </ScrollView>
+        </Box>
+    );
 }
-
-
-
 
 
