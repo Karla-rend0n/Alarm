@@ -161,7 +161,7 @@ export default function Login() {
                     <Heading size="xl" color="Black" _dark={{
                         color: "primary.50",
                         fontWeight: 'bold'
-                    }} >
+                    }}>
                         Inicio de sesión
                     </Heading>
                     <Heading mt="3" color="primary.50" fontWeight='medium' size='xs'>
@@ -230,7 +230,7 @@ export default function Login() {
 
 
                         <Button
-                            background="primary.200" borderWidth="2" borderColor="primary.200" rounded={10} _text={{
+                            background="primary.200" borderWidth="2" borderColor="primary.200" mt="3" rounded={10} _text={{
                                 color: "primary.50",
                                 fontWeight: "700",
                                 fontSize: "lg"

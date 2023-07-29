@@ -371,7 +371,7 @@ export default function Register() {
 
 
                         <Button
-                            background="primary.200" borderWidth="2" borderColor="primary.200" rounded={10} _text={{
+                            background="primary.200" borderWidth="2" borderColor="primary.200" mt="3" rounded={10} _text={{
                                 color: "primary.50",
                                 fontWeight: "700",
                                 fontSize: "lg"

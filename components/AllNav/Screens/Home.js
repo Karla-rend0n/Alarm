@@ -2,12 +2,12 @@ import React from "react";
 import { Center, Box, Heading, Button, Text, TouchableOpacity, ScrollView, useState, Flex, Stack, VStack } from "native-base"
 import { Linking } from "react-native"
 
-export default function Home({route}) {
+export default function Home({ route }) {
     const showMessage = () => Alert.alert('Button clicked !');
-    const {data_profile} = route.params
+    // const {data_profile} = route.params
     const [estadoBoton, setEstadoBoton] = React.useState('Apagado');
     const [tiempoInicioPresionado, setTiempoInicioPresionado] = React.useState(0);
-   
+
     const handlePressIn = () => {
         setTiempoInicioPresionado(Date.now());
     };
@@ -35,7 +35,7 @@ export default function Home({route}) {
             setEstadoBoton('Encendido');
             console.log('dataProfile', data_profile[0].profile_contact[0].phone)
 
-            let url = 'whatsapp://send?phone='+data_profile[0].profile_contact[0].phone+'&text=SAFETYNET: Tengo una incidencia';
+            let url = 'whatsapp://send?phone=' + data_profile[0].profile_contact[0].phone + '&text=SAFETYNET: Tengo una incidencia';
             Linking.openURL(url).then(() => {
                 console.log('WhatasApp Opened');
             }).catch(() => {
@@ -102,7 +102,7 @@ export default function Home({route}) {
                     <VStack space={10} mt={10}>
 
 
-                        <Button mt='3' rounded borderRadius="200" width="200" height="200"  bgColor="primary.300" borderWidth="3" borderColor="primary.900" onPressIn={handlePressIn} onPressOut={handlePressOut}>
+                        <Button mt='3' rounded borderRadius="200" width="200" height="200" bgColor="primary.300" borderWidth="3" borderColor="primary.900" onPressIn={handlePressIn} onPressOut={handlePressOut}>
                             <Button rounded borderRadius="170" width="170" height="170" bgColor="primary.500" borderWidth="4" borderColor="primary.1000" onPressIn={handlePressIn} onPressOut={handlePressOut}>
                                 <Text>{estadoBoton}</Text>
 
@@ -118,11 +118,11 @@ export default function Home({route}) {
                             </Heading>
                         </Flex>
 
-                        <Button mt='3' rounded borderRadius="200" width="200" height="200"  bgColor="primary.300" borderWidth="3" borderColor="primary.900" onPressIn={handlePressInicio} onPressOut={handlePressApagado}>
-                            <Button rounded borderRadius="170" width="170" height="170"  bgColor="primary.600" borderWidth="4" borderColor="primary.1001" onPressIn={handlePressInicio} onPressOut={handlePressApagado}>
+                        <Button mt='3' rounded borderRadius="200" width="200" height="200" bgColor="primary.300" borderWidth="3" borderColor="primary.900" onPressIn={handlePressInicio} onPressOut={handlePressApagado}>
+                            <Button rounded borderRadius="170" width="170" height="170" bgColor="primary.600" borderWidth="4" borderColor="primary.1001" onPressIn={handlePressInicio} onPressOut={handlePressApagado}>
                                 <Text>{estadoBotonE}</Text>
 
-                                <Text  fontWeight="700">Emergencia</Text>
+                                <Text fontWeight="700">Emergencia</Text>
 
                             </Button>
 
