@@ -149,8 +149,8 @@ export default function ViewContact({ route }) {
 
 
                     <HStack space={3} marginTop='8' alignSelf="center">
-                        <Circle size="10px" bg="primary.50" ></Circle>
                         <Circle size="10px" bg="primary.200" ></Circle>
+                        <Circle size="10px" bg="primary.50" ></Circle>
                         <Circle size="10px" bg="primary.200"></Circle>
 
                     </HStack>
