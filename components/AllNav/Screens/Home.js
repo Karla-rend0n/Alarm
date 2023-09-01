@@ -1,28 +1,45 @@
 import React from "react";
 import { Center, Box, Heading, Button, Text, TouchableOpacity, ScrollView, useState, Flex, Stack, VStack } from "native-base"
 import { Linking } from "react-native"
-//import { snsClient } from "../../libs/snsClient";
-import { IoTClient, AcceptCertificateTransferCommand } from "@aws-sdk/client-iot";
 
 
-
-export default function Home() {
-//export default function Home({route}) {
+//export default function Home() {
+export default function Home({route}) {
 
     const showMessage = () => Alert.alert('Button clicked !');
-    //const {data_profile} = route.params
+    const {data_profile} = route.params
     const [estadoBoton, setEstadoBoton] = React.useState('Apagado');
     const [tiempoInicioPresionado, setTiempoInicioPresionado] = React.useState(0);
     
-
-
     const handlePressIn = () => {
         setTiempoInicioPresionado(Date.now());
     };
 
-    const sendRequest = (button) => {
-        console.log('Hola', 'http://192.168.1.200/?status=' + button)
-        fetch('http://192.168.1.200/?status=' + button)
+    const sendRequest = (status) => {
+        console.log('Status', status)
+        let profile_contact = data_profile[0].profile_contact
+        let contact_phone = '+52' + profile_contact[0].phone
+        let contact_name =  profile_contact[0].name + ' ' + profile_contact[0].last_name
+
+        let profile_name = data_profile[0].name + ' ' + data_profile[0].last_name
+        console.log('data_profile', profile_name)
+        console.log('data_contact', contact_name, contact_phone)
+
+
+        fetch('https://8hado3nks6.execute-api.us-east-1.amazonaws.com/default/Send-Mqtt-SNS', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                message: 'SafetyNet', status: status,
+                contactNumber: contact_phone,
+                contactName: contact_name,
+                profileName: profile_name
+            }),
+
+        })
             .then(response => response.json())
             .then(json => {
                 console.log('Hola', json)
@@ -39,18 +56,10 @@ export default function Home() {
         const duracionPresionado = tiempoFinPresionado - tiempoInicioPresionado;
 
         if (duracionPresionado >= 2000 && estadoBoton === 'Apagado') {
-            sendRequest('onE')
+            sendRequest('1')
             setEstadoBoton('Encendido');
-            console.log('dataProfile', data_profile[0].profile_contact[0].phone)
-
-            let url = 'whatsapp://send?phone='+data_profile[0].profile_contact[0].phone+'&text=SAFETYNET: Tengo una incidencia';
-            Linking.openURL(url).then(() => {
-                console.log('WhatasApp Opened');
-            }).catch(() => {
-                alert('Make Sure whatsapp is installed on your device');
-            });
         } else if (duracionPresionado >= 0 && estadoBoton === 'Encendido') {
-            sendRequest('offE')
+            sendRequest('2')
             setEstadoBoton('Apagado');
         }
     };
@@ -68,10 +77,10 @@ export default function Home() {
         const duracionPresionado = tiempoFinPresionado - tiempoInicioPresionadoE;
 
         if (duracionPresionado >= 2000 && estadoBotonE === 'Apagado') {
-            sendRequest('onA')
+            sendRequest('3')
             setEstadoBotonE('Encendido');
         } else if (duracionPresionado >= 0 && estadoBotonE === 'Encendido') {
-            sendRequest('offA')
+            sendRequest('4')
             setEstadoBotonE('Apagado');
         }
     };

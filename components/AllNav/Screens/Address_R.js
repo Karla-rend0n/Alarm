@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 export default function Address_R({route}) {
 
     const navigation = useNavigation();
-    const [formData, setFormData] = React.useState({})
+    const [formData, setFormData] = React.useState({'apartment_number':''})
     const [errorCity, setErrorCity] = React.useState({})
     const [errorStreet, setErrorStreet] = React.useState({})
     const [errorNumE, setErrorNumE] = React.useState({})
@@ -17,6 +17,7 @@ export default function Address_R({route}) {
     const [errormunicipality, setErrormunicipality] = React.useState({})
     const [jsonZipCode, setJsonZipCode] = React.useState({})
     const {data_contact, data_register} = route.params
+    let row_zip_code
 
     const get_zip_code = async () => {
         try {
@@ -42,7 +43,8 @@ export default function Address_R({route}) {
             "profile_address": [formData],
             "profile_contact":[data_contact]
         }
-        console.log('json_result',json_result)
+        console.log('profile_address', formData)
+        console.log('json_result', json_result)
         
         try{
             fetch('https://api-alarm.cadsita.net/profile/', {
@@ -319,7 +321,7 @@ export default function Address_R({route}) {
                                 <Select.Item label="" value="" />
                                 :
                                 jsonZipCode.map((ngbh) =>
-                                    <Select.Item label={ngbh.neighborhood} value={ngbh.neighborhood} />
+                                    <Select.Item label={ngbh.neighborhood} value={ngbh.id} key={ngbh.id} />
                                 )
                             }
                         </Select>
@@ -336,13 +338,21 @@ export default function Address_R({route}) {
                             fontSize: 'lg'
                         }}>Ciudad
                         </FormControl.Label>
-                        <Input w={{
-
-                        }} InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="3" color='primary.200' />}
+                        {JSON.stringify(jsonZipCode) === '{}' ?
+                            <Input w={{}} 
+                            InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="3" color='primary.200' />}
                             onChangeText={value => setFormData({ ...formData, city: value})}
-                            mt="3" placeholder="Ingrese su ciudad" color="primary.900"
+                            value = ""
+                            mt="3" placeholder="Ingrese su ciud" color="primary.900"
                             fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
-
+                        :
+                        <Input w={{}} 
+                            InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="3" color='primary.200' />}
+                            onChangeText={value => setFormData({ ...formData, city: value})}
+                            value = {jsonZipCode.filter((zipcode)=> zipcode ==formData.neighborhood )}
+                            mt="3" placeholder="Ingrese su ciud" color="primary.900"
+                            fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
+                        }
                         {'Ciudad' in errorCity ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorCity.City}</FormControl.ErrorMessage> : <FormControl.HelperText>
                             Ingrese su ciudad
                         </FormControl.HelperText>

@@ -31,11 +31,6 @@ import { Ionicons } from '@expo/vector-icons';
 
 
 
-
-
-
-
-
 const Stack = createNativeStackNavigator()
 const Rstack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator();
@@ -187,8 +182,6 @@ function Contact_Screen() {
         </CNavigation.Navigator>
     )
 }
-
-
 
 
 

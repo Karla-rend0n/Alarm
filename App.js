@@ -43,8 +43,8 @@ export default function App() {
 
   return (
     <NativeBaseProvider theme={theme} config={config}>
-      <Home />
-      {/* <Navigate /> */}
+      {/* <Home /> */}
+      <Navigate />
     </NativeBaseProvider>
   );
 }

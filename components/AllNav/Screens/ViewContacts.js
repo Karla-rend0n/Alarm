@@ -52,7 +52,7 @@ export default function ViewContact({route}) {
                                     <HStack alignItems="center">
                                         <Image width="50" height="50"
                                             mt="5" mb='5' ml='5' mr='5'
-                                            source={require('../../../assets/IconoPerfil.png')} />
+                                            source={require('../../../assets/IconoPerfil.png')} alt="logo"/>
 
                                         <Text color='primary.900' mt='3' fontWeight='bold'>
                                             {console.log("data_contact", data_contact)}
