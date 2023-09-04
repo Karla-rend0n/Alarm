@@ -119,7 +119,7 @@ export default function C_Information() {
                 }}
               </Pressable>
 
-              <HStack mt="3/4" space={20} alignSelf="center" marginLeft="4">
+              <HStack mt="3/4" space={20}  marginLeft="4">
                 <Button
                   backgroundColor="primary.200"
                   size="lg"

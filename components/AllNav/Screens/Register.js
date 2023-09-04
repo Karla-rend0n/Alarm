@@ -3,7 +3,10 @@ import { Box, Center, Heading, VStack, FormControl, Input, Icon, ScrollView, But
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import validator from 'validator';
+import { Dimensions } from "react-native";
 
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export default function Register() {
     const navigation = useNavigation();
@@ -13,6 +16,7 @@ export default function Register() {
     const [errorLastname, setErrorLastname] = React.useState({})
     const [errorAge, setErrorAge] = React.useState({})
     const [errorPass, setErrorPass] = React.useState({})
+    const [errorConfirm, setErrorConfirm] = React.useState({})
     const [errorPhone, setErrorPhone] = React.useState({})
     var emailVal = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     var namVal = /^[A-Za-z]+$/i;
@@ -113,6 +117,13 @@ export default function Register() {
             setErrorPass({ ...errorPass, password: 'La contraseña es muy pequeña' })
             isValid = false
         }
+        if(formData.confPass === undefined){
+            setErrorConfirm({ ...errorConfirm, confPass: 'La contraseña es requerida' })
+            isValid= false
+        }else if(formData.password !== formData.confPass){
+            setErrorConfirm({...errorConfirm, confPass: 'Las contraseñas no coinciden'})
+            isValid= false
+        }
 
         return isValid
     };
@@ -124,196 +135,254 @@ export default function Register() {
 
 
 
-    return <ScrollView w="100%" h="100%">
-        <Center w="100%" h="130%" bg={{
-            linearGradient: {
-                colors: ['primary.400', 'primary.800'],
-                start: [1, 0],
-                end: [0, 0]
 
-            }
-        }}>
+    return (
+        <ScrollView flex={1} contentContainerStyle={{ flexGrow: 1 }}>
+            <Center flex={1} bg={{
+                linearGradient: {
+                    colors: ['primary.400', 'primary.800'],
+                    start: [1, 0],
+                    end: [0, 0]
+                }
+            }}>
 
-            <Box safeArea p="2" py="8" w="100%" h="92%" maxW="350px" >
+                <Box safeArea p="2" py="8" width="100%" maxWidth="350px">
 
-                <Heading size="xl" fontWeight="600" color="Black" _dark={{
-                    color: "primary.50",
-                    fontWeight: 'bold'
-                }} >
-                    Registro
-                </Heading>
-                <Heading mt="3" color="primary.50" fontWeight='medium' size='xs'>
-                    Completa los siguientes campos.
-                </Heading>
+                    <Heading size="xl" color="Black" _dark={{
+                        color: "primary.50",
+                        fontWeight: 'bold'
+                    }} >
+                        Registro
+                    </Heading>
+                    <Heading mt="3" color="primary.50" fontWeight='medium' size='xs'>
+                        Completa los siguientes campos.
+                    </Heading>
 
-                <VStack space={6} mt={8}>
-                    <FormControl isRequired isInvalid={'name' in errors} >
+                    <VStack space={windowHeight * 0.05} mt={windowHeight * 0.05}>
+                        <FormControl isRequired isInvalid={'name' in errors} >
 
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold',
-                            fontSize: 'lg'
+                            <FormControl.Label _text={{
+                                color: 'primary.50',
+                                fontWeight: '700',
+                                fontSize: 'lg'
 
-                        }}>Nombre
-                        </FormControl.Label>
+                            }}>Nombre</FormControl.Label>
 
-                        <Input w={{
-
-                        }} InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="3" color='primary.200' />}
-                            onChangeText={value => setFormData({ ...formData, name: value })}
-                            mt="3" placeholder="Ingrese su nombre" color="primary.900"
-                            fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
-
-                        {'name' in errors ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errors.name}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                            Ingrese su nombre sin apellidos
-                        </FormControl.HelperText>
-                        }
-                    </FormControl>
-
+                            <Input
+                                width="100%"
+                                InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="3" color='primary.200' />}
+                                onChangeText={value => setFormData({ ...formData, name: value })}
+                                mt="3"
+                                placeholder="Ingrese su nombre"
+                                color="primary.900"
+                                fontSize="sm"
+                                fontWeight="bold"
+                                backgroundColor="primary.100"
+                                variant="rounded"
+                            />
 
 
-                    <FormControl isRequired isInvalid={'last_name' in errorLastname} >
-
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold',
-                            fontSize: 'lg'
-
-                        }}>
-                            Apellido
-                        </FormControl.Label>
-                        <Input w={{
-
-                        }} InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />}
-                            onChangeText={value => setFormData({ ...formData, last_name: value })}
-                            mt="3" placeholder="Ingrese su apellido" color="primary.900"
-                            fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
-
-                        {'last_name' in errorLastname ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorLastname.last_name}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                            Ingrese solos sus apellidos
-                        </FormControl.HelperText>
-                        }
-
-                    </FormControl>
+                            {'name' in errors ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errors.name}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                                Ingrese su nombre sin apellidos
+                            </FormControl.HelperText>
+                            }
+                        </FormControl>
 
 
 
+                        <FormControl isRequired isInvalid={'last_name' in errorLastname} >
 
-                    <FormControl isRequired isInvalid={'age' in errorAge} >
+                            <FormControl.Label _text={{
+                                color: 'primary.50',
+                                fontWeight: '700',
+                                fontSize: 'lg'
 
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold',
-                            fontSize: 'lg'
+                            }}>Apellido</FormControl.Label>
 
-                        }}>
-                            Edad
-                        </FormControl.Label>
+                            <Input
+                                width="100%"
+                                InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />}
+                                onChangeText={value => setFormData({ ...formData, last_name: value })}
+                                mt="3"
+                                placeholder="Ingrese su apellido"
+                                color="primary.900"
+                                fontSize="sm"
+                                fontWeight="bold"
+                                backgroundColor="primary.100"
+                                variant="rounded"
+                            />
 
-                        <Input w={{
+                            {'last_name' in errorLastname ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorLastname.last_name}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                                Ingrese solos sus apellidos
+                            </FormControl.HelperText>
+                            }
 
-                        }} type='number'
-                            InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />}
-                            onChangeText={value => setFormData({ ...formData, age: value })}
-                            mt="3" placeholder="Ingrese su edad" color="primary.900"
-                            fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
-
-                        {'age' in errorAge ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorAge.age}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                            Ingrese su edad
-                        </FormControl.HelperText>
-                        }
-
-                    </FormControl>
-
-
-
-                    <FormControl isRequired isInvalid={'phone' in errorPhone}>
-
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold',
-                            fontSize: 'lg'
-
-                        }} >
-                            Teléfono
-                        </FormControl.Label>
-
-                        <Input w={{
-
-                        }} InputLeftElement={<Icon as={<MaterialIcons name='phone' />} size={5} ml="2" color='primary.200' />}
-                            onChangeText={value => setFormData({ ...formData, phone: value })}
-                            mt="3" placeholder="+52" color="primary.900"
-                            fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
-
-                        {'phone' in errorPhone ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPhone.phone}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                            Ingrese su número de teléfono
-                        </FormControl.HelperText>}
-
-
-                    </FormControl>
+                        </FormControl>
 
 
 
-                    <FormControl isRequired isInvalid={'email' in errorEmail}>
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold',
-                            fontSize: 'lg'
 
-                        }}>
-                            Email
-                        </FormControl.Label>
+                        <FormControl isRequired isInvalid={'age' in errorAge} >
 
-                        <Input w={{
+                            <FormControl.Label _text={{
+                                color: 'primary.50',
+                                fontWeight: '700',
+                                fontSize: 'lg'
 
-                        }} InputLeftElement={<Icon as={<MaterialIcons name='email' />} size={5} ml="2" color='primary.200' />}
-                            onChangeText={value => setFormData({ ...formData, email: value })}
-                            mt="3" placeholder="Correo electrónico" color="primary.900"
-                            fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
-
-                        {'email' in errorEmail ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorEmail.email}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                            Ingresa un correo electrónico
-                        </FormControl.HelperText>
-                        }
-                    </FormControl>
+                            }}>Edad</FormControl.Label>
 
 
+                            <Input
+                                type='number'
+                                width="100%"
+                                InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />}
+                                onChangeText={value => setFormData({ ...formData, age: value })}
+                                mt="3"
+                                placeholder="Ingrese su edad"
+                                color="primary.900"
+                                fontSize="sm"
+                                fontWeight="bold"
+                                backgroundColor="primary.100"
+                                variant="rounded"
+                            />
 
-                    <FormControl isRequired isInvalid={'password' in errorPass}>
+                            {'age' in errorAge ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorAge.age}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                                Ingrese su edad
+                            </FormControl.HelperText>
+                            }
 
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold',
-                            fontSize: 'lg'
-
-                        }}>
-                            Contraseña
-                        </FormControl.Label>
-
-                        <Input mt="3" placeholder="Contraseña" color="primary.900" type="password"
-                            onChangeText={value => setFormData({ ...formData, password: value })}
-
-                            fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded"
-                            InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />} />
-
-                        {'password' in errorPass ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPass.password}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                            Ingrese letras MAYÚSCULAS o minúsculas, números y caracteres
-                        </FormControl.HelperText>}
-
-                    </FormControl>
-
-                    <Button
-                        background="primary.200" borderWidth="2" borderColor="primary.200" mt="5" rounded={10} _text={{
-                            color: "primary.50",
-                            fontWeight: "700",
-                            fontSize: "lg"
-                        }} onPress={submit}>
-                        Guardar
-                    </Button>
+                        </FormControl>
 
 
 
-                    <HStack color="primary.50" alignItems='center' alignSelf={'Center'} fontWeight="normal">
+                        <FormControl isRequired isInvalid={'phone' in errorPhone}>
+
+                            <FormControl.Label _text={{
+                                color: 'primary.50',
+                                fontWeight: '700',
+                                fontSize: 'lg'
+
+                            }}>Teléfono</FormControl.Label>
+
+                            <Input
+                                width="100%"
+                                InputLeftElement={<Icon as={<MaterialIcons name='phone' />} size={5} ml="2" color='primary.200' />}
+                                onChangeText={value => setFormData({ ...formData, phone: value })}
+                                mt="3"
+                                placeholder="+52"
+                                color="primary.900"
+                                fontSize="sm"
+                                fontWeight="bold"
+                                backgroundColor="primary.100"
+                                variant="rounded"
+                            />
+                            {'phone' in errorPhone ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPhone.phone}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                                Ingrese su número de teléfono
+                            </FormControl.HelperText>}
+
+                        </FormControl>
+
+
+
+                        <FormControl isRequired isInvalid={'email' in errorEmail}>
+                            <FormControl.Label _text={{
+                                color: "primary.50",
+                                fontWeight: '700',
+                                fontSize: 'lg'
+                            }}>Email</FormControl.Label>
+                            <Input
+                                width="100%"
+                                InputLeftElement={<Icon as={<MaterialIcons name="email" />} size={5} ml="3" color="primary.200" />}
+                                onChangeText={value => setFormData({ ...formData, email: value })}
+                                mt="3"
+                                placeholder="Correo electrónico"
+                                color="primary.900"
+                                fontSize="sm"
+                                fontWeight="bold"
+                                backgroundColor="primary.100"
+                                variant="rounded"
+                            />
+
+                            {'email' in errorEmail ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorEmail.email}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                                Ingresa un correo electronico
+                            </FormControl.HelperText>
+                            }
+                        </FormControl>
+
+
+
+                        <FormControl isRequired isInvalid={'password' in errorPass}>
+                            <FormControl.Label _text={{
+                                color: "primary.50",
+                                fontWeight: '700',
+                                fontSize: 'lg'
+                            }}>Contraseña</FormControl.Label>
+                            <Input
+                                mt="3"
+                                width="100%"
+                                placeholder="Contraseña"
+                                color="primary.900"
+                                type="password"
+                                onChangeText={value => setFormData({ ...formData, password: value })}
+                                fontSize="sm"
+                                fontWeight="bold"
+                                backgroundColor="primary.100"
+                                variant="rounded"
+                                InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />}
+                            />
+                            {'password' in errorPass ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPass.password}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                                Ingrese letras MAYÚSCULAS o minúsculas, números y caracteres
+                            </FormControl.HelperText>}
+
+                        </FormControl>
+
+
+
+
+                        <FormControl isRequired isInvalid={'confPass' in errorConfirm}>
+
+                            <FormControl.Label _text={{
+                                color: "primary.50",
+                                fontWeight: '700',
+                                fontSize: 'lg'
+
+                            }}>Confirmar Contraseña</FormControl.Label>
+
+
+                            <Input
+                                mt="3"
+                                width="100%"
+                                placeholder="Contraseña"
+                                color="primary.900"
+                                type="password"
+                                onChangeText={value => setFormData({ ...formData, confPass: value })}
+                                fontSize="sm"
+                                fontWeight="bold"
+                                backgroundColor="primary.100"
+                                variant="rounded"
+                                InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />}
+                            />
+
+                            {'confPass' in errorConfirm ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorConfirm.confpass}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                                Ingrese la misma contraseña
+                            </FormControl.HelperText>}
+
+                        </FormControl>
+
+
+                        <Button
+                            background="primary.200" borderWidth="2" borderColor="primary.200" mt="3" rounded={10} _text={{
+                                color: "primary.50",
+                                fontWeight: "700",
+                                fontSize: "lg"
+                            }} onPress={submit}>
+                            Guardar
+                        </Button>
+                    </VStack>
+
+
+
+                    <HStack mt="5" color="primary.50" alignItems='center' alignSelf='center' fontWeight="normal">
                         <Text fontSize="sm" >
                             ¿Ya tienes una cuenta? {" "}
                         </Text>
@@ -327,15 +396,257 @@ export default function Register() {
                     </HStack>
 
 
-                </VStack>
-                <HStack space={3} marginTop='8' alignSelf="center">
-                    <Circle size="10px" bg="primary.50" ></Circle>
-                    <Circle size="10px" bg="primary.200" ></Circle>
-                    <Circle size="10px" bg="primary.200"></Circle>
+                    <HStack space={3} marginTop='8' alignSelf="center">
+                        <Circle size="10px" bg="primary.50" ></Circle>
+                        <Circle size="10px" bg="primary.200" ></Circle>
+                        <Circle size="10px" bg="primary.200"></Circle>
 
-                </HStack>
-            </Box>
+                    </HStack>
+                </Box>
 
-        </Center>
-    </ScrollView >
+            </Center>
+        </ScrollView >
+    );
 }
+
+
+//ESTO ES EL CODIGO ORIGINAL
+//     return <ScrollView w="100%" h="100%">
+//         <Center w="100%" h="130%" bg={{
+//             linearGradient: {
+//                 colors: ['primary.400', 'primary.800'],
+//                 start: [1, 0],
+//                 end: [0, 0]
+
+//             }
+//         }}>
+
+//             <Box safeArea p="2" py="8" w="100%" h="92%" maxW="350px" >
+
+//                 <Heading size="xl" fontWeight="600" color="Black" _dark={{
+//                     color: "primary.50",
+//                     fontWeight: 'bold'
+//                 }} >
+//                     Registro
+//                 </Heading>
+//                 <Heading mt="3" color="primary.50" fontWeight='medium' size='xs'>
+//                     Completa los siguientes campos.
+//                 </Heading>
+
+//                 <VStack space={6} mt={8}>
+//                     <FormControl isRequired isInvalid={'name' in errors} >
+
+//                         <FormControl.Label _text={{
+//                             color: 'primary.50',
+//                             fontWeight: 'bold',
+//                             fontSize: 'lg'
+
+//                         }}>Nombre
+//                         </FormControl.Label>
+
+//                         <Input w={{
+
+//                         }} InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="3" color='primary.200' />}
+//                             onChangeText={value => setFormData({ ...formData, name: value })}
+//                             mt="3" placeholder="Ingrese su nombre" color="primary.900"
+//                             fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
+
+//                         {'name' in errors ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errors.name}</FormControl.ErrorMessage> : <FormControl.HelperText>
+//                             Ingrese su nombre sin apellidos
+//                         </FormControl.HelperText>
+//                         }
+//                     </FormControl>
+
+
+
+//                     <FormControl isRequired isInvalid={'last_name' in errorLastname} >
+
+//                         <FormControl.Label _text={{
+//                             color: 'primary.50',
+//                             fontWeight: 'bold',
+//                             fontSize: 'lg'
+
+//                         }}>
+//                             Apellido
+//                         </FormControl.Label>
+//                         <Input w={{
+
+//                         }} InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />}
+//                             onChangeText={value => setFormData({ ...formData, last_name: value })}
+//                             mt="3" placeholder="Ingrese su apellido" color="primary.900"
+//                             fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
+
+//                         {'last_name' in errorLastname ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorLastname.last_name}</FormControl.ErrorMessage> : <FormControl.HelperText>
+//                             Ingrese solos sus apellidos
+//                         </FormControl.HelperText>
+//                         }
+
+//                     </FormControl>
+
+
+
+
+//                     <FormControl isRequired isInvalid={'age' in errorAge} >
+
+//                         <FormControl.Label _text={{
+//                             color: 'primary.50',
+//                             fontWeight: 'bold',
+//                             fontSize: 'lg'
+
+//                         }}>
+//                             Edad
+//                         </FormControl.Label>
+
+//                         <Input w={{
+
+//                         }} type='number'
+//                             InputLeftElement={<Icon as={<MaterialIcons name='person' />} size={5} ml="2" color='primary.200' />}
+//                             onChangeText={value => setFormData({ ...formData, age: value })}
+//                             mt="3" placeholder="Ingrese su edad" color="primary.900"
+//                             fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
+
+//                         {'age' in errorAge ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorAge.age}</FormControl.ErrorMessage> : <FormControl.HelperText>
+//                             Ingrese su edad
+//                         </FormControl.HelperText>
+//                         }
+
+//                     </FormControl>
+
+
+
+//                     <FormControl isRequired isInvalid={'phone' in errorPhone}>
+
+//                         <FormControl.Label _text={{
+//                             color: 'primary.50',
+//                             fontWeight: 'bold',
+//                             fontSize: 'lg'
+
+//                         }} >
+//                             Teléfono
+//                         </FormControl.Label>
+
+//                         <Input w={{
+
+//                         }} InputLeftElement={<Icon as={<MaterialIcons name='phone' />} size={5} ml="2" color='primary.200' />}
+//                             onChangeText={value => setFormData({ ...formData, phone: value })}
+//                             mt="3" placeholder="+52" color="primary.900"
+//                             fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
+
+//                         {'phone' in errorPhone ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPhone.phone}</FormControl.ErrorMessage> : <FormControl.HelperText>
+//                             Ingrese su número de teléfono
+//                         </FormControl.HelperText>}
+
+
+//                     </FormControl>
+
+
+
+//                     <FormControl isRequired isInvalid={'email' in errorEmail}>
+//                         <FormControl.Label _text={{
+//                             color: 'primary.50',
+//                             fontWeight: 'bold',
+//                             fontSize: 'lg'
+
+//                         }}>
+//                             Email
+//                         </FormControl.Label>
+
+//                         <Input w={{
+
+//                         }} InputLeftElement={<Icon as={<MaterialIcons name='email' />} size={5} ml="2" color='primary.200' />}
+//                             onChangeText={value => setFormData({ ...formData, email: value })}
+//                             mt="3" placeholder="Correo electrónico" color="primary.900"
+//                             fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
+
+//                         {'email' in errorEmail ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorEmail.email}</FormControl.ErrorMessage> : <FormControl.HelperText>
+//                             Ingresa un correo electrónico
+//                         </FormControl.HelperText>
+//                         }
+//                     </FormControl>
+
+
+
+//                     <FormControl isRequired isInvalid={'password' in errorPass}>
+
+//                         <FormControl.Label _text={{
+//                             color: 'primary.50',
+//                             fontWeight: 'bold',
+//                             fontSize: 'lg'
+
+//                         }}>
+//                             Contraseña
+//                         </FormControl.Label>
+
+//                         <Input mt="3" placeholder="Contraseña" color="primary.900" type="password"
+//                             onChangeText={value => setFormData({ ...formData, password: value })}
+
+//                             fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded"
+//                             InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />} />
+
+//                         {'password' in errorPass ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPass.password}</FormControl.ErrorMessage> : <FormControl.HelperText>
+//                             Ingrese letras MAYÚSCULAS o minúsculas, números y caracteres
+//                         </FormControl.HelperText>}
+
+//                     </FormControl>
+
+//                     <FormControl isRequired isInvalid={'confPass' in errorConfirm}>
+
+//                         <FormControl.Label _text={{
+//                             color: 'primary.50',
+//                             fontWeight: 'bold',
+//                             fontSize: 'lg'
+
+//                         }}>
+//                             Confirmar Contraseña
+//                         </FormControl.Label>
+
+//                         <Input mt="3" placeholder="Contraseña" color="primary.900" type="password"
+//                             onChangeText={value => setFormData({ ...formData, confPass: value })}
+
+//                             fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded"
+//                             InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />} />
+
+//                         {'confPass' in errorConfirm ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorConfirm.confpass}</FormControl.ErrorMessage> : <FormControl.HelperText>
+//                             Ingrese la misma contraseña
+//                         </FormControl.HelperText>}
+
+//                     </FormControl>
+                    
+
+//                     <Button
+//                         background="primary.200" borderWidth="2" borderColor="primary.200" mt="5" rounded={10} _text={{
+//                             color: "primary.50",
+//                             fontWeight: "700",
+//                             fontSize: "lg"
+//                         }} onPress={submit}>
+//                         Guardar
+//                     </Button>
+
+
+
+//                     <HStack color="primary.50" alignItems='center'  fontWeight="normal">
+//                         <Text fontSize="sm" >
+//                             ¿Ya tienes una cuenta? {" "}
+//                         </Text>
+//                         <Link onPress={() => { navigation.navigate("Login") }} _text={{
+//                             color: "primary.50",
+//                             fontWeight: "bold",
+//                             fontSize: "sm"
+//                         }} href="#">
+//                             Inicia Sesión.
+//                         </Link>
+//                     </HStack>
+
+
+//                 </VStack>
+//                 <HStack space={3} marginTop='8'>
+//                     <Circle size="10px" bg="primary.50" ></Circle>
+//                     <Circle size="10px" bg="primary.200" ></Circle>
+//                     <Circle size="10px" bg="primary.200"></Circle>
+
+//                 </HStack>
+//             </Box>
+
+//         </Center>
+//     </ScrollView >
+// }
