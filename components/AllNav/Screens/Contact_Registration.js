@@ -222,7 +222,7 @@ export default function Contact_Registration({ route }) {
                   fontSize: 'lg'
 
                 }}>
-                Apellido
+                Apellidos
               </FormControl.Label>
 
               <Input
@@ -230,7 +230,7 @@ export default function Contact_Registration({ route }) {
                 InputLeftElement={<Icon as={<MaterialIcons name="person" />} size={5} ml="2" color="primary.200" />}
                 onChangeText={(value) => setFormData({ ...formData, last_name: value })}
                 mt="3"
-                placeholder="Ingrese su apellido"
+                placeholder="Ingrese sus apellidos"
                 color="primary.900"
                 fontSize="sm"
                 fontWeight="bold"

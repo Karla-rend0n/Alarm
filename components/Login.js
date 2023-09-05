@@ -55,21 +55,21 @@ export default function Login() {
             //   }, 3000);
              
              //setIsLoading(false);
-            //  if (Object.keys(dataProfile).length === 0) {
-            //      console.log('Object is empty', dataProfile);
-            //      setErrorPass({ ...errorPass, password: 'El email o el password no corresponden' })
-            //      dataValid = false
-            //    }
+             if (Object.keys(dataProfile).length === 0) {
+                 console.log('Object is empty', dataProfile);
+                 setErrorPass({ ...errorPass, password: 'El email o el password no corresponden' })
+                 dataValid = false
+               }
           
-            //  if (Object.keys(dataProfile).length > 0) {
-            //      console.log('Object is NOT empty', dataProfile);
-            //      dataValid = true
-            //      navigation.navigate("Home", {data_profile: dataProfile})
+             if (Object.keys(dataProfile).length > 0) {
+                 console.log('Object is NOT empty', dataProfile);
+                 dataValid = true
+                 navigation.navigate("Home", {data_profile: dataProfile})
                 
-            //    }
-             console.log('dataValid', dataValid)
+               }
+             console.log('dataValid return', dataValid)
             // clearTimeout(timeout);
-
+             return dataValid;
 
         } catch (error) {
             console.error(error);
@@ -118,7 +118,16 @@ export default function Login() {
         // }
 
         if (isValid) {
-            login()
+            console.log('isValid', isValid)
+            if (login() == true ){
+                console.log('dataValid', true)
+                return true;
+            }
+            else {
+                console.log('dataValid', false)
+                return false;
+            }
+
         } 
         
         // if (Object.keys(dataProfile).length === 0) {
@@ -143,8 +152,8 @@ export default function Login() {
 
 
 
-    //const submit = () => { validate() ? navigation.navigate("Home", {data_profile: dataProfile}) : console.log('bad', formData) }
-    const submit = () => { validate() }
+    const submit = () => { validate() ? navigation.navigate("Home", {data_profile: dataProfile}) : console.log('bad', formData) }
+    //const submit = () => { validate() }
 
 
     return (
