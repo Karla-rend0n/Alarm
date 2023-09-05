@@ -67,7 +67,7 @@ export default function Address_R({route}) {
         }
     }
 
-    var namVal = /^[A-Za-z]+$/i;
+    var namVal = /^[A-Za-záéíóúüÜÁÉÍÓÚ\s.]+$/i;
     var number = /^[0-9]+$/i
 
 
@@ -98,26 +98,27 @@ export default function Address_R({route}) {
         }
 
 
-        if (formData.street === undefined) {
-            setErrorStreet({ ...errorStreet, street: 'La calle es requerida' })
+       
+        if (formData.Street === undefined) {
+            setErrorStreet({ ...errorStreet, Street: 'La calle es requerida' })
             isValid = false
         } else {
-            if (formData.street.length <= 3) {
+            if (formData.Street.length <= 3) {
                 setErrorStreet({
                     ...errorStreet,
-                    street: 'La calle es muy corta'
+                    Street: 'La calle es muy corta'
                 })
                 console.log('valida')
             } else {
-                if (!namVal.test(formData.street)) {
+                if (!namVal.test(formData.Street)) {
                     setErrorStreet({
                         ...errorStreet,
-                        street: 'Ingrese letras'
+                        Street: 'Ingrese solo letras'
                     })
                 }
             }
-
         }
+
 
         if (formData.building_number === undefined) {
             setErrorNumE({ ...errorNumE, building_number: 'El número exterior es requerido' });
@@ -209,7 +210,7 @@ export default function Address_R({route}) {
 
                     <VStack space={windowHeight * 0.05} mt={windowHeight * 0.05}>
 
-                        <FormControl isRequired isInvalid={'street' in errorStreet}>
+                        <FormControl isRequired isInvalid={'Street' in errorStreet}>
 
                             <FormControl.Label _text={{
                                 color: 'primary.50',
@@ -221,7 +222,7 @@ export default function Address_R({route}) {
                             <Input
                                 width="100%"
                                 InputLeftElement={<Icon as={<Entypo name='address' />} size={5} ml="2" color='primary.200' />}
-                                onChangeText={value => setFormData({ ...formData, street: value })}
+                                onChangeText={value => setFormData({ ...formData, Street: value })}
                                 mt="3"
                                 placeholder="Ingrese su calle"
                                 color="primary.900"
@@ -230,11 +231,12 @@ export default function Address_R({route}) {
                                 backgroundColor="primary.100"
                                 variant="rounded"
                             />
+                            
+                            {'Street' in errorStreet ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorStreet.Street}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                            Ingrese su calle
+                        </FormControl.HelperText>
 
-                            {'street' in errorStreet ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorStreet.street}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                                Ingrese su calle
-                            </FormControl.HelperText>
-                            }
+}
                         </FormControl>
 
 
