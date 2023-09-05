@@ -197,7 +197,7 @@ export default function Register() {
                                 fontWeight: '700',
                                 fontSize: 'lg'
 
-                            }}>Apellido</FormControl.Label>
+                            }}>Apellidos</FormControl.Label>
 
                             <Input
                                 width="100%"
