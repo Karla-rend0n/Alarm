@@ -12,7 +12,7 @@ const windowHeight = Dimensions.get('window').height;
 export default function Address_R({route}) {
 
     const navigation = useNavigation();
-    const [formData, setFormData] = React.useState({'apartment_number':''})
+    const [formData, setFormData] = React.useState({})
     const [errorCity, setErrorCity] = React.useState({})
     const [errorStreet, setErrorStreet] = React.useState({})
     const [errorNumE, setErrorNumE] = React.useState({})
@@ -119,24 +119,21 @@ export default function Address_R({route}) {
             }
         }
 
-
-        if (formData.building_number === undefined) {
+        if (formData.building_number === undefined || formData.building_number.trim() === '') {
             setErrorNumE({ ...errorNumE, building_number: 'El número exterior es requerido' });
-            isValid = false
+            isValid = false;
         } else if (!number.test(formData.building_number)) {
-
             setErrorNumE({ ...errorNumE, building_number: 'Solo ingrese números' });
-            isValid = false
-        } else if (formData.building_number < 2) {
+            isValid = false;
+        } else if (formData.building_number.length < 2) {
             setErrorNumE({ ...errorNumE, building_number: 'Tienen que ser más de 2 dígitos' });
-            isValid = false
+            isValid = false;
+        } else {
+            setErrorNumE({ ...errorNumE, building_number: null }); // Limpia el error si la validación es exitosa
         }
 
-        if (formData.apartment_number < 2) {
-            setErrorNumI({ ...errorNumI, apartment_number: 'Tienen que ser más de 2 dígitos' });
-            isValid = false
-        }
 
+  
 
         if (formData.neighborhood === undefined) {
             setErrorcologne({ ...errorcologne, neighborhood: 'La colonia es requerida' })
@@ -266,7 +263,7 @@ export default function Address_R({route}) {
                                 variant="rounded"
                             />
 
-                            {'building_number' in errorNumE ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorNumE.building_number}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                            {'building_number' in errorNumE  && errorNumE.building_number? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorNumE.building_number}</FormControl.ErrorMessage> : <FormControl.HelperText>
                                 Ingrese su número exterior
                             </FormControl.HelperText>
                             }
@@ -277,7 +274,7 @@ export default function Address_R({route}) {
 
 
 
-                        <FormControl isInvalid={'apartment_number' in errorNumI}>
+                        <FormControl isInvalid={'NumI' in errorNumI}>
 
                             <FormControl.Label _text={{
                                 color: 'primary.50',
@@ -289,7 +286,15 @@ export default function Address_R({route}) {
                             <Input
                                 width="100%"
                                 InputLeftElement={<Icon as={<MaterialCommunityIcons name='home-import-outline' />} size={5} ml="2" color='primary.200' />}
-                                onChangeText={value => setFormData({ ...formData, apartment_number: value })}
+                                onChangeText={value => {
+                                    setFormData({ ...formData, NumI: value });
+                                    // Verifica la longitud del valor para eliminar el error si es válido
+                                    if (!value || value.length >= 2) {
+                                        setErrorNumI({ ...errorNumI, NumI: null });
+                                    } else {
+                                        setErrorNumI({ ...errorNumI, NumI: 'Tienen que ser más de 2 dígitos' });
+                                    }
+                                }}                                
                                 mt="3"
                                 placeholder="Opcional"
                                 color="primary.900"
@@ -299,10 +304,11 @@ export default function Address_R({route}) {
                                 variant="rounded"
                             />
 
-                            {'apartment_number' in errorNumI ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorNumI.apartment_number}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                            {'NumI' in errorNumI ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorNumI.NumI}</FormControl.ErrorMessage> : null}
+                            <FormControl.HelperText>
                                 Ingrese su número interior OPCIONAL
                             </FormControl.HelperText>
-                            }
+                            
                         </FormControl>
 
 
