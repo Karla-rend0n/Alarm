@@ -99,18 +99,18 @@ export default function Address_R({route}) {
 
 
        
-        if (formData.Street === undefined) {
+        if (formData.street === undefined) {
             setErrorStreet({ ...errorStreet, Street: 'La calle es requerida' })
             isValid = false
         } else {
-            if (formData.Street.length <= 3) {
+            if (formData.street.length <= 3) {
                 setErrorStreet({
                     ...errorStreet,
                     Street: 'La calle es muy corta'
                 })
                 console.log('valida')
             } else {
-                if (!namVal.test(formData.Street)) {
+                if (!namVal.test(formData.street)) {
                     setErrorStreet({
                         ...errorStreet,
                         Street: 'Ingrese solo letras'
@@ -219,7 +219,7 @@ export default function Address_R({route}) {
                             <Input
                                 width="100%"
                                 InputLeftElement={<Icon as={<Entypo name='address' />} size={5} ml="2" color='primary.200' />}
-                                onChangeText={value => setFormData({ ...formData, Street: value })}
+                                onChangeText={value => setFormData({ ...formData, street: value })}
                                 mt="3"
                                 placeholder="Ingrese su calle"
                                 color="primary.900"
