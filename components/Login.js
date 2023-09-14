@@ -171,7 +171,7 @@ export default function Login() {
                     <Heading size="xl" color="Black" _dark={{
                         color: "primary.50",
                         fontWeight: 'bold'
-                    }}>
+                    }}mt={windowHeight * 0.05}>
                         Inicio de sesión
                     </Heading>
                     <Heading mt="3" color="primary.50" fontWeight='medium' size='xs'>
@@ -248,7 +248,7 @@ export default function Login() {
                         Iniciar sesión
                     </Button>
 
-                    <HStack mt="5" color="primary.50" alignItems='center' alignSelf='center' fontWeight="normal">
+                    <HStack mt="3" color="primary.50" alignItems='center' alignSelf='center' fontWeight="normal">
                         <Text fontSize="sm" >
                             ¿No dispones de una cuenta? {" "}
                         </Text>

@@ -194,26 +194,31 @@ function R_Navegation() {
                 name="Register"
                 component={Register}
                 options={{
-                    headerShown: false
+                    headerTransparent: true,
+                    title: "", //Establece el titulo en una cadena vacia para ocultarlo
+
                 }} />
             <Rstack.Screen
                 name="Contact_R"
                 component={Contact_Registration}
                 options={{
-                    headerTransparent: true
+                    headerTransparent: true,
+                    title: "",
                 }} />
             <Rstack.Screen
                 name="ViewContact"
                 component={ViewContact}
                 options={{
-                    headerTransparent: true
+                    headerTransparent: true,
+                    title: "",
                 }} />
             <Rstack.Screen
                 name="Address_R"
                 component={Address_R}
                 options={{
 
-                    headerTransparent: true
+                    headerTransparent: true,
+                    title: "",
                 }} />
             {/* <Rstack.Screen
                 name="Home"
@@ -233,7 +238,8 @@ export default function Navigate() {
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen
-                    name="Start" component={Start}
+                    name="Start"
+                    component={Start}
                     options={{
                         headerShown: false,
 
@@ -241,10 +247,11 @@ export default function Navigate() {
                 />
 
                 <Stack.Screen
-                    name="Login" component={Login}
+                    name="Login"
+                    component={Login}
                     options={{
-                        headerShown: false
-
+                        headerTransparent: true,
+                        title: "",
                     }}
                 />
                 <Stack.Screen
@@ -253,7 +260,6 @@ export default function Navigate() {
                         headerShown: false
                     }}
                 />
-
 
                 <Stack.Screen
                     name="Register" component={R_Navegation}

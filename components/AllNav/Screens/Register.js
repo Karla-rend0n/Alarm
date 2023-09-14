@@ -151,7 +151,7 @@ export default function Register() {
                     <Heading size="xl" color="Black" _dark={{
                         color: "primary.50",
                         fontWeight: 'bold'
-                    }} >
+                    }} mt={windowHeight * 0.05}>
                         Registro
                     </Heading>
                     <Heading mt="3" color="primary.50" fontWeight='medium' size='xs'>
