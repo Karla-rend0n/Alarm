@@ -164,7 +164,7 @@ export default function Login() {
                     start: [1, 0],
                     end: [0, 0]
                 }
-            }}>
+            }} mt={windowHeight * 0.05}>
 
                 <Box safeArea p="2" py="8" w="100%" maxWidth="350px">
 

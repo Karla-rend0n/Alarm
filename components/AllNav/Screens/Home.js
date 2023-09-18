@@ -13,7 +13,8 @@ const windowHeight = Dimensions.get('window').height;
 export default function Home({ route }) {
 
     const showMessage = () => Alert.alert('Button clicked !');
-    const { data_profile } = route.params
+    const { data_profile } = route.params || {}; // Asegúrate de que data_profile sea un objeto vacío si no está presente
+    // const { data_profile } = route.params
     const [estadoBoton, setEstadoBoton] = React.useState('Apagado');
     const [tiempoInicioPresionado, setTiempoInicioPresionado] = React.useState(0);
 
