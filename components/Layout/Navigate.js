@@ -196,6 +196,8 @@ function R_Navegation() {
                 options={{
                     headerTransparent: true,
                     title: "", //Establece el titulo en una cadena vacia para ocultarlo
+                    headerTintColor: '#ffff', // Cambia 'color_de_flecha' al color que desees
+
                 }} />
             <Rstack.Screen
                 name="Contact_R"
@@ -203,6 +205,8 @@ function R_Navegation() {
                 options={{
                     headerTransparent: true,
                     title: "",
+                    headerTintColor: '#ffff', // Cambia 'color_de_flecha' al color que desees
+
                 }} />
             <Rstack.Screen
                 name="ViewContact"
@@ -210,6 +214,8 @@ function R_Navegation() {
                 options={{
                     headerTransparent: true,
                     title: "",
+                    headerTintColor: '#ffff', // Cambia 'color_de_flecha' al color que desees
+
                 }} />
             <Rstack.Screen
                 name="Address_R"
@@ -218,6 +224,8 @@ function R_Navegation() {
 
                     headerTransparent: true,
                     title: "",
+                    headerTintColor: '#ffff', // Cambia 'color_de_flecha' al color que desees
+
                 }} />
             {/* <Rstack.Screen
                 name="Home"
@@ -249,6 +257,7 @@ export default function Navigate() {
                     options={{
                         headerTransparent: true,
                         title: "",
+                        headerTintColor: '#ffff', // Cambia 'color_de_flecha' al color que desees
 
                     }}
                 />

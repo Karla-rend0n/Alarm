@@ -389,7 +389,7 @@ export default function Address_R({route}) {
                             InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="3" color='primary.200' />}
                             onChangeText={value => setFormData({ ...formData, city: value})}
                             value = ""
-                            mt="3" placeholder="Ingrese su ciud" color="primary.900"
+                            mt="3" placeholder="Ingrese su ciudad" color="primary.900"
                             fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
                         :
                         <Input w={{}} 

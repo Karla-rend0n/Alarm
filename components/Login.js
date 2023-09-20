@@ -248,7 +248,7 @@ export default function Login() {
                         Iniciar sesión
                     </Button>
 
-                    <HStack mt="5" color="primary.50" alignItems='center' alignSelf='center' fontWeight="normal">
+                    <HStack color="primary.50" alignItems='center' alignSelf='center' fontWeight="normal">
                         <Text fontSize="sm" >
                             ¿No dispones de una cuenta? {" "}
                         </Text>
