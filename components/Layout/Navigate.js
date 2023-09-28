@@ -248,7 +248,7 @@ export default function Navigate() {
                     }}
                 />
                 <Stack.Screen
-                    name="Home" component={Home}
+                    name="Home" component={HomeTabs}
                     options={{
                         headerShown: false
                     }}

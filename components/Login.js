@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect } from 'react'
+import React, {useEffect} from "react";
 import { Box, Text, Heading, VStack, FormControl, Input, Link, Button, HStack, Center, Icon, ScrollView, Pressable } from 'native-base'
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -14,146 +13,74 @@ export default function Login() {
 
     const navigation = useNavigation();
     const [formData, setFormData] = React.useState({})
-    const [errors, setErrors] = React.useState({})
     const [errorEmail, setErrorsEmail] = React.useState({})
     const [errorPass, setErrorPass] = React.useState({})
-    const [isLoading, setIsLoading] = React.useState(true)
+    const [isLoading, setIsLoading] = React.useState(false)
     const [dataProfile, setDataProfile] = React.useState({})
 
     var emailVal = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    var dataValid = false
-
-    // useEffect(() => {
-    //     const getData = async () =>{
-    //         let url = 'https://api-alarm.cadsita.net/login?email=' + formData.email + '&password=' + formData.password
-    //         try{
-    //             console.log(url)
-    //             const response = await fetch(url);
-    //             console.log(response.json())
-    //             setDataProfile(await response.json())
-    //             console.log('json', dataProfile)
-    //             //return dataProfile
-    //         }catch (error) {
-    // //         console.error(error);
-    //         }    
-    // }; getData()
-    // }, [isLoading]);
 
 
 
-     const login = async () => {
+    useEffect(() => {
+        const login = async () => {
+
          try {
              setIsLoading(true);
              let url = 'https://api-alarm.cadsita.net/login?email=' + formData.email + '&password=' + formData.password
-             console.log('url', url)
-             const response = await fetch(url)
+             const response = await fetch(url);
+             const dataProfile = await response.json();
              
-             setDataProfile(await response.json())
-            //  const timeout = setTimeout(() => {
-            //     console.log('json', dataProfile)
-            //     return dataProfile
-            //   }, 3000);
-             
-             //setIsLoading(false);
              if (Object.keys(dataProfile).length === 0) {
-                 console.log('Object is empty', dataProfile);
-                 setErrorPass({ ...errorPass, password: 'El email o el password no corresponden' })
-                 dataValid = false
-               }
-          
-             if (Object.keys(dataProfile).length > 0) {
-                 console.log('Object is NOT empty', dataProfile);
-                 dataValid = true
-                 navigation.navigate("Home", {data_profile: dataProfile})
-                
-               }
-             console.log('dataValid return', dataValid)
-            // clearTimeout(timeout);
-             return dataValid;
-
+                setErrorPass({ password: 'El email o el password no corresponden' });
+            } else {
+                navigation.navigate("Home", { data_profile: dataProfile });
+            }
         } catch (error) {
             console.error(error);
+        } finally {
+            setIsLoading(false); // Independientemente del resultado, establece isLoading en false
         }
-    }
+    };
+    if (isLoading) {
+        login();
+      }
+    }, [isLoading, formData.email, formData.password, navigation]);
 
     const validate = () => {
         let isValid = true;
-        setErrors({})
         setErrorsEmail({})
         setErrorPass({})
+        
 
         if (formData.email === undefined) {
-            setErrorsEmail({ ...errorEmail, email: 'El email es requerido' });
+            setErrorsEmail({ ...errorEmail, email: 'El correo es requerido' });
             isValid = false
-        } else {
-            if (!emailVal.test(formData.email)) {
-
-                setErrorsEmail({ ...errorEmail, email: 'No es valido' });
-                isValid = false
-            }
-        }
-        if (formData.password === undefined) {
-            setErrorPass({ ...errorPass, password: 'La contraseña es requerida' })
+        } else if (!formData.email || !emailVal.test(formData.email)) {
+            setErrorsEmail({ ...errorEmail, email: 'Ingresa un correo electrónico válido' });
             isValid = false
-        } else if (!validator.isStrongPassword(formData.password)) {
-            setErrorPass({ ...errorPass, password: 'La contraseña no es lo suficientemente segura' })
-            isValid = false
-
-        } else if (formData.password.length < 8) {
-            setErrorPass({ ...errorPass, password: 'La contraseña es muy pequeña' })
-            isValid = false
-        }
-
-        setIsLoading(false)
-        // if (Object.keys(dataProfile).length > 0) {
-        //         console.log('Object is NOT empty', dataProfile);
-        //         dataValid = true
-        //     }
-        // if (login() == true){
-        //     isValid = true
-        // }
-        // else if (login() == false){
-        //     setErrorPass({ ...errorPass, password: 'El email o el password no corresponden' })
-        //     isValid = false
-        // }
-
-        if (isValid) {
-            console.log('isValid', isValid)
-            if (login() == true ){
-                console.log('dataValid', true)
-                return true;
-            }
-            else {
-                console.log('dataValid', false)
-                return false;
-            }
-
-        } 
+    }
         
-        // if (Object.keys(dataProfile).length === 0) {
-        //     console.log('Object is empty', dataProfile);
-        //     setErrorPass({ ...errorPass, password: 'El email o el password no corresponden' })
-        //     dataValid = false
-        //   }
-     
-        // if (Object.keys(dataProfile).length > 0) {
-        //     console.log('Object is NOT empty', dataProfile);
-        //     dataValid = true
-        //     navigation.navigate("Home", {data_profile: dataProfile})
-           
-        //   }
-        // console.log('dataValid', dataValid)
 
-        // console.log("isValid login", isValid)
-        // return isValid
+        
+        if (formData.password === undefined || formData.password.length < 8) {
+            setErrorPass({password: 'La contraseña es requerida y debe tener al menos 8 caracteres' })
+            isValid = false
+        } 
+
+        return isValid;
+    };
+
+    const submit = () => {
+        if (validate()) {
+            setIsLoading(true);
+
+        }
     };
 
 
+    
 
-
-
-    const submit = () => { validate() ? navigation.navigate("Home", {data_profile: dataProfile}) : console.log('bad', formData) }
-    //const submit = () => { validate() }
 
 
     return (
@@ -200,10 +127,10 @@ export default function Login() {
                                 variant="rounded"
                             />
 
-                            {'email' in errorEmail ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorEmail.email}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                            {'email' in errorEmail ? (<FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorEmail.email}</FormControl.ErrorMessage> ): (<FormControl.HelperText>
                                 Ingresa un correo electronico
                             </FormControl.HelperText>
-                            }
+                            )}
                         </FormControl>
 
                         <FormControl isRequired isInvalid={'password' in errorPass}>
@@ -225,9 +152,10 @@ export default function Login() {
                                 variant="rounded"
                                 InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />}
                             />
-                            {'password' in errorPass ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPass.password}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                            {'password' in errorPass ? (<FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPass.password}</FormControl.ErrorMessage>) : (<FormControl.HelperText>
                                 Ingrese letras MAYÚSCULAS o minúsculas, números y caracteres
-                            </FormControl.HelperText>}
+                            </FormControl.HelperText>
+                            )}
 
 
                             <Link _text={{
@@ -244,7 +172,7 @@ export default function Login() {
                             color: "primary.50",
                             fontWeight: "700",
                             fontSize: "lg"
-                        }} onPress={submit}>
+                        }}  onPress={isLoading ? null : submit} disabled={isLoading}>
                         Iniciar sesión
                     </Button>
 
@@ -267,7 +195,6 @@ export default function Login() {
     );
 }
 
-//borderWidth="2" borderColor="primary.200"
 
 
 
