@@ -22,40 +22,40 @@ export default function Home({ route }) {
         setTiempoInicioPresionado(Date.now());
     };
 
-    const sendRequest = (status) => {
-        console.log('Status', status)
-        let profile_contact = data_profile[0].profile_contact
-        let contact_phone = '+52' + profile_contact[0].phone
-        let contact_name = profile_contact[0].name + ' ' + profile_contact[0].last_name
+    const sendRequest = async (status) => {
+        try {
+            console.log('Status', status)
+            let profile_contact = data_profile[0].profile_contact
+            let contact_phone = '+52' + profile_contact[0].phone
+            let contact_name = profile_contact[0].name + ' ' + profile_contact[0].last_name
 
-        let profile_name = data_profile[0].name + ' ' + data_profile[0].last_name
-        console.log('data_profile', profile_name)
-        console.log('data_contact', contact_name, contact_phone)
+            let profile_name = data_profile[0].name + ' ' + data_profile[0].last_name
+            console.log('data_profile', profile_name)
+            console.log('data_contact', contact_name, contact_phone)
 
 
-        fetch('https://8hado3nks6.execute-api.us-east-1.amazonaws.com/default/Send-Mqtt-SNS', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                message: 'SafetyNet', status: status,
-                contactNumber: contact_phone,
-                contactName: contact_name,
-                profileName: profile_name
-            }),
+            fetch('https://8hado3nks6.execute-api.us-east-1.amazonaws.com/default/Send-Mqtt-SNS', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    message: 'SafetyNet', status: status,
+                    contactNumber: contact_phone,
+                    contactName: contact_name,
+                    profileName: profile_name
+                }),
 
-        })
-            .then(response => response.json())
-            .then(json => {
-                console.log('Hola', json)
             })
-            .catch(error => {
-                console.error(error);
-            });
+                .then(response => response.json())
+                .then(json => {
+                    console.log('Hola', json)
+                })
+        } catch (error) {
+            console.error(error);
+        }
     };
-
 
 
     const handlePressOut = () => {
@@ -114,7 +114,7 @@ export default function Home({ route }) {
                         Botón de emergencia
                     </Heading>
 
-                    <VStack space={windowHeight * 0.05} mt={windowHeight * 0.05}>
+                    <VStack space={windowHeight * 0.04} mt={windowHeight * 0.04}>
 
 
                         <Heading mt="3" color="primary.50" fontWeight='medium' size='md'>

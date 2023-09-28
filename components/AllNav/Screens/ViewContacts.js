@@ -30,7 +30,7 @@ export default function ViewContact({ route }) {
                         color: "primary.50",
                         fontWeight: 'bold'
                     }} mt={windowHeight * 0.05}>
-                        Contact
+                        Contactos
                     </Heading>
 
 
@@ -103,7 +103,7 @@ export default function ViewContact({ route }) {
                             </Pressable>
                         </Box>
 
-                   {/* <Box rounded="xl" >
+                        {/* <Box rounded="xl" >
                         <Pressable>
                             {({
                                 isHovered,

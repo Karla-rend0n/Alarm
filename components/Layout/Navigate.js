@@ -175,6 +175,8 @@ function Contact_Screen() {
                 name="Añadir Contacto"
                 component={AddContact}
                 options={{
+                    headerTransparent: true,
+                    title: "",
                 }} />
 
 
