@@ -7,13 +7,13 @@ import { useNavigation } from "@react-navigation/native";
 export default function ViewProfile() {
     const navigation = useNavigation();
 
-    return <ScrollView w="100%" h="100%">
-        <Box background="primary.50" w="100%" alignItems='center'>
-            <Flex direction="row" alignItems="center" marginTop='10' marginBottom='1'>
+    return <ScrollView w='100%' h='100%'>
+        <Box background='primary.50' w='100%' alignItems='center'>
+            <Flex direction='row' alignItems='center' marginTop='10' marginBottom='1'>
                 <Avatar size="xl" source={{
                     uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
                 }}
-                    marginTop='10'>
+                    marginTop='70'>
 
 
                 </Avatar>
