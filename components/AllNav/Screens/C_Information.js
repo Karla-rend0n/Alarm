@@ -98,32 +98,32 @@ export default function C_Information() {
           </Button>
         </HStack>
 
-        <AlertDialog  leastDestructiveRef={cancelRef}
-                isOpen={isOpen}
-                onClose={onClose}>
-                  <AlertDialog.Content>
-                  <AlertDialog.CloseButton />
-                  <AlertDialog.Header>Eliminar Contacto</AlertDialog.Header>
-                  <AlertDialog.Body>
-                    ¿Estás seguro de que quieres eliminar este contacto?
-                  </AlertDialog.Body>
-                  <AlertDialog.Footer>
-                    <Button.Group space={2}>
-                      <Button
-                        variant="unstyled"
-                        colorScheme="coolGray"
-                        onPress={onClose}
-                        ref={cancelRef}
-                      >
-                        Cancelar
-                      </Button>
-                      <Button colorScheme="danger" onPress={handleCloseOpen}>
-                        Eliminar
-                      </Button>
-                    </Button.Group>
-                  </AlertDialog.Footer>
-                </AlertDialog.Content>
-     
+        <AlertDialog leastDestructiveRef={cancelRef}
+          isOpen={isOpen}
+          onClose={onClose}>
+          <AlertDialog.Content>
+            <AlertDialog.CloseButton />
+            <AlertDialog.Header>Eliminar Contacto</AlertDialog.Header>
+            <AlertDialog.Body>
+              ¿Estás seguro de que quieres eliminar este contacto?
+            </AlertDialog.Body>
+            <AlertDialog.Footer>
+              <Button.Group space={2}>
+                <Button
+                  variant="unstyled"
+                  colorScheme="coolGray"
+                  onPress={onClose}
+                  ref={cancelRef}
+                >
+                  Cancelar
+                </Button>
+                <Button colorScheme="danger" onPress={handleCloseOpen}>
+                  Eliminar
+                </Button>
+              </Button.Group>
+            </AlertDialog.Footer>
+          </AlertDialog.Content>
+
         </AlertDialog>
       </View>
     </ScrollView>
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#610803", 
+    backgroundColor: "#610803",
   },
   contactContainer: {
     maxWidth: 350,

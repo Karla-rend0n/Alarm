@@ -53,7 +53,8 @@ function ProfileStack() {
                 component={Profile_Edit}
                 options={{
                     headerBackTitleVisible: false,
-                    headerTransparent: true
+                    headerTransparent: true,
+                    title: "",
                 }}
             />
 
@@ -62,7 +63,10 @@ function ProfileStack() {
                 component={Address}
                 options={{
                     headerBackTitleVisible: true,
-                    headerTransparent: true
+                    headerTransparent: true,
+                    title: "",
+
+
                 }}
             />
 
@@ -70,8 +74,9 @@ function ProfileStack() {
                 name="Address_Edit"
                 component={Address_Edit}
                 options={{
-                    headerBackTitleVisible: false,
-                    headerTransparent: true
+                    headerTransparent: true,
+                    title: "",
+                    headerTintColor: '#ffff', // Cambia 'color_de_flecha' al color que desees
                 }}
             />
 
@@ -80,7 +85,8 @@ function ProfileStack() {
                 component={ViewProfile}
                 options={{
                     headerBackTitleVisible: false,
-                    headerTransparent: true
+                    headerTransparent: true,
+                    title: "",
                 }}
             />
 
@@ -172,6 +178,9 @@ function Contact_Screen() {
                 name="ViewD"
                 component={C_Information}
                 options={{
+                    headerTransparent: true,
+                    title: "",
+                    headerTintColor: '#ffff', // Cambia 'color_de_flecha' al color que desees
                 }} />
 
             <CNavigation.Screen

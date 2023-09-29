@@ -4,6 +4,13 @@ import { Ionicons, MaterialIcons, Entypo, FontAwesome, MaterialCommunityIcons } 
 import { useNavigation } from '@react-navigation/native';
 import validator from 'validator';
 
+import { Dimensions } from "react-native";
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
+
+
 
 export default function Address_Edit() {
 
@@ -137,272 +144,267 @@ export default function Address_Edit() {
 
 
 
-    return <ScrollView w="100%" h="100%">
-        <Box background='primary.50' w="100%" alignItems='center'>
-            <Flex direction="row" alignItems="center" marginTop='10' marginBottom='1'>
+    return (
 
-                <Heading size="lg" fontWeight="600" color="Black" _dark={{
-                    color: "primary.900",
-                    fontWeight: 'bold'
-                }} marginTop='50'
-                    marginBottom='50'>
-                    Dirección
-                </Heading>
-            </Flex>
+        <ScrollView flex={1} contentContainerStyle={{ flexGrow: 1 }}>
+            <Center flex={1} bg={{
+                linearGradient: {
+                    colors: ['primary.400', 'primary.800'],
+                    start: [1, 0],
+                    end: [0, 0]
+                }
+            }}>
 
-        </Box>
+                <Box safeArea p="2" py="8" width="100%" maxWidth="350px">
 
 
-        <Center w="100%" h="100%" alignItems="center" bg={{
-            linearGradient: {
-                colors: ['primary.400', 'primary.800'],
-                start: [1, 0],
-                end: [0, 0]
+                    <Heading size="xl" color="Black" _dark={{
+                        color: "primary.50",
+                        fontWeight: 'bold'
+                    }} mt={windowHeight * 0.05}>
+                        Editar Dirección
+                    </Heading>
 
-            }
-        }}>
+                    <VStack space={windowHeight * 0.05} mt={windowHeight * 0.05}>
 
-            <Box safeArea p="2" py="8" w="100%" h="100%" maxW="350px">
 
-                <VStack space={6} mt={8}>
+                        <FormControl isRequired isInvalid={'Address' in errorAddress} >
 
+                            <FormControl.Label _text={{
+                                color: 'primary.50',
+                                fontWeight: 'bold',
+                                fontSize: 'lg'
 
-                    <FormControl isRequired isInvalid={'Address' in errorAddress} >
+                            }}>Dirección
+                            </FormControl.Label>
 
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold',
-                            fontSize: 'lg'
+                            <Input w={{
 
-                        }}>Dirección
-                        </FormControl.Label>
+                            }} InputLeftElement={<Icon as={<FontAwesome name='address-book-o' />} size={5} ml="3" color='primary.200' />}
+                                onChangeText={value => setFormData({ ...formData, Address: value })}
+                                mt="3" placeholder="Ingrese su dirección" color="primary.900"
+                                fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
 
-                        <Input w={{
+                            {'Address' in errorAddress ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorAddress.Address}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                                Ingrese su dirección: Calle, Número y colonia
+                            </FormControl.HelperText>
+                            }
 
-                        }} InputLeftElement={<Icon as={<FontAwesome name='address-book-o' />} size={5} ml="3" color='primary.200' />}
-                            onChangeText={value => setFormData({ ...formData, Address: value })}
-                            mt="3" placeholder="Ingrese su dirección" color="primary.900"
-                            fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
+                        </FormControl>
 
-                        {'Address' in errorAddress ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorAddress.Address}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                            Ingrese su dirección: Calle, Número y colonia
-                        </FormControl.HelperText>
-                        }
 
-                    </FormControl>
 
+                        <FormControl isRequired isInvalid={'Street' in errorStreet}>
 
+                            <FormControl.Label _text={{
+                                color: 'primary.50',
+                                fontWeight: 'bold',
+                                fontSize: 'lg'
 
-                    <FormControl isRequired isInvalid={'Street' in errorStreet}>
+                            }}>Calle
+                            </FormControl.Label>
 
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold',
-                            fontSize: 'lg'
+                            <Input w={{
 
-                        }}>Calle
-                        </FormControl.Label>
+                            }} InputLeftElement={<Icon as={<Entypo name='address' />} size={5} ml="2" color='primary.200' />}
+                                onChangeText={value => setFormData({ ...formData, Street: value })}
+                                mt="3" placeholder="Ingrese su calle" color="primary.900"
+                                fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
 
-                        <Input w={{
+                            {'Street' in errorStreet ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorStreet.Street}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                                Ingrese su calle
+                            </FormControl.HelperText>
+                            }
+                        </FormControl>
 
-                        }} InputLeftElement={<Icon as={<Entypo name='address' />} size={5} ml="2" color='primary.200' />}
-                            onChangeText={value => setFormData({ ...formData, Street: value })}
-                            mt="3" placeholder="Ingrese su calle" color="primary.900"
-                            fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
 
-                        {'Street' in errorStreet ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorStreet.Street}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                            Ingrese su calle
-                        </FormControl.HelperText>
-                        }
-                    </FormControl>
 
+                        <FormControl isRequired isInvalid={'NumE' in errorNumE}>
 
+                            <FormControl.Label _text={{
+                                color: 'primary.50',
+                                fontWeight: 'bold',
+                                fontSize: 'lg'
 
-                    <FormControl isRequired isInvalid={'NumE' in errorNumE}>
+                            }}>
+                                Numero Exterior
+                            </FormControl.Label>
 
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold',
-                            fontSize: 'lg'
+                            <Input w={{
 
-                        }}>
-                            Numero Exterior
-                        </FormControl.Label>
+                            }} InputLeftElement={<Icon as={<MaterialCommunityIcons name='home-group' />} size={5} ml="2" color='primary.200' />}
+                                onChangeText={value => setFormData({ ...formData, NumE: value })}
+                                mt="3" placeholder="Ingrese el número exterior" color="primary.900"
+                                fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
 
-                        <Input w={{
+                            {'NumE' in errorNumE ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorNumE.NumE}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                                Ingrese su número exterior
+                            </FormControl.HelperText>
+                            }
+                        </FormControl>
 
-                        }} InputLeftElement={<Icon as={<MaterialCommunityIcons name='home-group' />} size={5} ml="2" color='primary.200' />}
-                            onChangeText={value => setFormData({ ...formData, NumE: value })}
-                            mt="3" placeholder="Ingrese el número exterior" color="primary.900"
-                            fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
 
-                        {'NumE' in errorNumE ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorNumE.NumE}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                            Ingrese su número exterior
-                        </FormControl.HelperText>
-                        }
-                    </FormControl>
 
 
+                        <FormControl isInvalid={'NumI' in errorNumI}>
 
+                            <FormControl.Label _text={{
+                                color: 'primary.50',
+                                fontWeight: 'bold',
+                                fontSize: 'lg'
 
-                    <FormControl isInvalid={'NumI' in errorNumI}>
+                            }}>
+                                Numero Interior
+                            </FormControl.Label>
+                            <Input w={{
 
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold',
-                            fontSize: 'lg'
+                            }} InputLeftElement={<Icon as={<MaterialCommunityIcons name='home-import-outline' />} size={5} ml="2" color='primary.200' />}
+                                onChangeText={value => setFormData({ ...formData, NumI: value })}
+                                mt="3" placeholder="Opcional" color="primary.900"
+                                fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
 
-                        }}>
-                            Numero Interior
-                        </FormControl.Label>
-                        <Input w={{
+                            {'NumI' in errorNumI ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorNumI.NumI}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                                Ingrese su número interior OPCIONAL
+                            </FormControl.HelperText>
+                            }
+                        </FormControl>
 
-                        }} InputLeftElement={<Icon as={<MaterialCommunityIcons name='home-import-outline' />} size={5} ml="2" color='primary.200' />}
-                            onChangeText={value => setFormData({ ...formData, NumI: value })}
-                            mt="3" placeholder="Opcional" color="primary.900"
-                            fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
 
-                        {'NumI' in errorNumI ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorNumI.NumI}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                            Ingrese su número interior OPCIONAL
-                        </FormControl.HelperText>
-                        }
-                    </FormControl>
 
+                        <FormControl isRequired isInvalid={'CP' in errorCP}>
 
+                            <FormControl.Label _text={{
+                                color: 'primary.50',
+                                fontWeight: 'bold',
+                                fontSize: 'lg'
+
+                            }}>
+                                Codigo Postal
+                            </FormControl.Label>
+
+                            <Input w={{
+
+                            }} InputLeftElement={<Icon as={<Entypo name='location' />} size={5} ml="2" color='primary.200' />}
+                                onChangeText={value => setFormData({ ...formData, CP: value })}
+                                mt="3" placeholder="Ingrese el Código postal" color="primary.900"
+                                fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
+
+                            {'CP' in errorCP ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorCP.CP}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                                Ingrese el Código postal
+                            </FormControl.HelperText>
+                            }
+                        </FormControl>
+
+
+
+
 
-                    <FormControl isRequired isInvalid={'CP' in errorCP}>
 
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold',
-                            fontSize: 'lg'
+                        <FormControl isRequired isInvalid={'cologne' in errorcologne}>
 
-                        }}>
-                            Codigo Postal
-                        </FormControl.Label>
-
-                        <Input w={{
-
-                        }} InputLeftElement={<Icon as={<Entypo name='location' />} size={5} ml="2" color='primary.200' />}
-                            onChangeText={value => setFormData({ ...formData, CP: value })}
-                            mt="3" placeholder="Ingrese el Código postal" color="primary.900"
-                            fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
-
-                        {'CP' in errorCP ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorCP.CP}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                            Ingrese el Código postal
-                        </FormControl.HelperText>
-                        }
-                    </FormControl>
-
-
-
+                            <FormControl.Label _text={{
+                                color: 'primary.50',
+                                fontWeight: 'bold',
+                                fontSize: 'lg'
 
+                            }}>
+                                Colonia
+                            </FormControl.Label>
+                            <Select selectedValue={formData.cologne} minWidth="200" placeholder="Seleccione su colonia" backgroundColor="primary.100"
+                                color="primary.900"
+                                fontWeight="bold" InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" mt="3" color='primary.200' />}
+                                onValueChange={itemValue => setFormData({ ...formData, cologne: itemValue })}>
+                                <Select.Item label="colonia 1" value="col1" />
+                                <Select.Item label="colonia 2" value="col2" />
+                                <Select.Item label="colonia 3" value="col3" />
 
+                            </Select>
+                            {'cologne' in errorcologne ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorcologne.cologne}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                                Ingrese su colonia
+                            </FormControl.HelperText>
+                            }
 
-                    <FormControl isRequired isInvalid={'cologne' in errorcologne}>
 
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold',
-                            fontSize: 'lg'
+                        </FormControl>
 
-                        }}>
-                            Colonia
-                        </FormControl.Label>
-                        <Select selectedValue={formData.cologne} minWidth="200" placeholder="Seleccione su colonia" backgroundColor="primary.100"
-                            color="primary.900"
-                            fontWeight="bold" InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" mt="3" color='primary.200' />}
-                            onValueChange={itemValue => setFormData({ ...formData, cologne: itemValue })}>
-                            <Select.Item label="colonia 1" value="col1" />
-                            <Select.Item label="colonia 2" value="col2" />
-                            <Select.Item label="colonia 3" value="col3" />
+                        <FormControl isRequired isInvalid={'state' in errorstate}>
 
-                        </Select>
-                        {'cologne' in errorcologne ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorcologne.cologne}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                            Ingrese su colonia
-                        </FormControl.HelperText>
-                        }
+                            <FormControl.Label _text={{
+                                color: 'primary.50',
+                                fontWeight: 'bold',
+                                fontSize: 'lg'
 
+                            }}>
+                                Estado
+                            </FormControl.Label>
+                            <Select selectedValue={formData.state} minWidth="200" placeholder="Seleccione su estado" backgroundColor="primary.100"
+                                color="primary.900"
+                                fontWeight="bold" InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" mt="3" color='primary.200' />}
+                                onValueChange={itemValue => setFormData({ ...formData, state: itemValue })}>
+                                <Select.Item label="Aguascalientes" value="Ags" />
+                                <Select.Item label="Zacatecas" value="Zacatecas" />
+                                <Select.Item label="Jalisco" value="Jalisco" />
 
-                    </FormControl>
+                            </Select>
+                            {'state' in errorstate ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorstate.state}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                                Ingrese su estado
+                            </FormControl.HelperText>
+                            }
+                        </FormControl>
 
-                    <FormControl isRequired isInvalid={'state' in errorstate}>
 
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold',
-                            fontSize: 'lg'
+                        <FormControl isRequired isInvalid={'municipality' in errormunicipality}>
 
-                        }}>
-                            Estado
-                        </FormControl.Label>
-                        <Select selectedValue={formData.state} minWidth="200" placeholder="Seleccione su estado" backgroundColor="primary.100"
-                            color="primary.900"
-                            fontWeight="bold" InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" mt="3" color='primary.200' />}
-                            onValueChange={itemValue => setFormData({ ...formData, state: itemValue })}>
-                            <Select.Item label="Aguascalientes" value="Ags" />
-                            <Select.Item label="Zacatecas" value="Zacatecas" />
-                            <Select.Item label="Jalisco" value="Jalisco" />
+                            <FormControl.Label _text={{
+                                color: 'primary.50',
+                                fontWeight: 'bold',
+                                fontSize: 'lg'
 
-                        </Select>
-                        {'state' in errorstate ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorstate.state}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                            Ingrese su estado
-                        </FormControl.HelperText>
-                        }
-                    </FormControl>
+                            }} >
+                                Municipio
+                            </FormControl.Label>
+                            <Select selectedValue={formData.municipality} minWidth="200" placeholder="Seleccione su Municipio" backgroundColor="primary.100"
+                                color="primary.900"
+                                fontWeight="bold" InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" mt="3" color='primary.200' />}
+                                onValueChange={itemValue => setFormData({ ...formData, municipality: itemValue })}>
+                                <Select.Item label="Aguascalientes" value="Aguascalientes" />
+                                <Select.Item label="Asientos" value="Asientos" />
+                                <Select.Item label="Calvillo" value="Calvillo" />
+                                <Select.Item label="Cosío" value="Cosío" />
+                                <Select.Item label="Jesús María" value="Jesús María" />
+                                <Select.Item label="Pabellón de Arteaga" value="Pabellón de Arteaga" />
+                                <Select.Item label="Rincón de Romos" value="Rincón de Romos" />
+                                <Select.Item label="San José de Gracia" value="San José de Gracia" />
+                                <Select.Item label="Tepezalá" value="Tepezalá" />
+                                <Select.Item label="El Llano" value="El Llano" />
+                                <Select.Item label="San Francisco de los Romo" value="San Francisco de los Romo" />
+                            </Select>
+                            {'municipality' in errormunicipality ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errormunicipality.municipality}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                                Ingrese su municipio
+                            </FormControl.HelperText>
+                            }
 
+                        </FormControl>
 
-                    <FormControl isRequired isInvalid={'municipality' in errormunicipality}>
+                        <Button
+                            background="primary.200" borderWidth="2" borderColor="primary.200" mt="5" rounded={10} _text={{
+                                color: "primary.50",
+                                fontWeight: "700",
+                                fontSize: "lg"
+                            }} onPress={submit}>
+                            Guardar
+                        </Button>
 
-                        <FormControl.Label _text={{
-                            color: 'primary.50',
-                            fontWeight: 'bold',
-                            fontSize: 'lg'
 
-                        }} >
-                            Municipio
-                        </FormControl.Label>
-                        <Select selectedValue={formData.municipality} minWidth="200" placeholder="Seleccione su Municipio" backgroundColor="primary.100"
-                            color="primary.900"
-                            fontWeight="bold" InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="2" mt="3" color='primary.200' />}
-                            onValueChange={itemValue => setFormData({ ...formData, municipality: itemValue })}>
-                            <Select.Item label="Aguascalientes" value="Aguascalientes" />
-                            <Select.Item label="Asientos" value="Asientos" />
-                            <Select.Item label="Calvillo" value="Calvillo" />
-                            <Select.Item label="Cosío" value="Cosío" />
-                            <Select.Item label="Jesús María" value="Jesús María" />
-                            <Select.Item label="Pabellón de Arteaga" value="Pabellón de Arteaga" />
-                            <Select.Item label="Rincón de Romos" value="Rincón de Romos" />
-                            <Select.Item label="San José de Gracia" value="San José de Gracia" />
-                            <Select.Item label="Tepezalá" value="Tepezalá" />
-                            <Select.Item label="El Llano" value="El Llano" />
-                            <Select.Item label="San Francisco de los Romo" value="San Francisco de los Romo" />
-                        </Select>
-                        {'municipality' in errormunicipality ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errormunicipality.municipality}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                            Ingrese su municipio
-                        </FormControl.HelperText>
-                        }
 
-                    </FormControl>
 
-                    <Button
-                        background="primary.200" borderWidth="2" borderColor="primary.200" mt="5" rounded={10} _text={{
-                            color: "primary.50",
-                            fontWeight: "700",
-                            fontSize: "lg"
-                        }} onPress={submit}>
-                        Guardar
-                    </Button>
+                    </VStack>
+                </Box>
 
+            </Center>
 
 
-
-                </VStack>
-            </Box>
-
-        </Center>
-
-
-    </ScrollView >
+        </ScrollView >
+    );
 
 }
