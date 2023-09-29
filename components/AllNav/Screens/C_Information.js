@@ -1,157 +1,4 @@
-import React from "react";
-import { ScrollView, View, Text, StyleSheet, useWindowDimensions } from "react-native";
-import { Button, AlertDialog, Image, HStack, VStack, Box, Pressable } from "native-base";
-import { AntDesign } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-
-export default function C_Information() {
-  const navigation = useNavigation();
-  const windowDimensions = useWindowDimensions();
-
-  const [formData, setFormData] = React.useState({});
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  const validate = () => {
-    let isValid = true;
-    return isValid;
-  };
-
-  const submit = () => {
-    validate() ? setIsOpen(!isOpen) : console.log("bad", formData);
-  };
-
-  const onClose = () => setIsOpen(false);
-  const cancelRef = React.useRef(null);
-
-  const handleCloseOpen = () => {
-    setIsOpen(false);
-    navigation.navigate("Contacts");
-  };
-
-  const isLandscape = windowDimensions.width > windowDimensions.height;
-
-  return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.contactContainer}>
-        <Pressable>
-          {({ isHovered, isPressed }) => (
-            <Box
-              bg={isPressed ? "primary.100" : isHovered ? "primary.100" : "primary.300"}
-              style={{
-                transform: [
-                  {
-                    scale: isPressed ? 0.96 : 1,
-                  },
-                ],
-              }}
-              p={isLandscape ? "2%" : "5%"}
-              rounded="lg"
-              shadow={3}
-              borderWidth="3"
-              borderColor="primary.200"
-            >
-              <VStack space={3} alignItems="center">
-                <Image
-                  width="50"
-                  height="50"
-                  source={require("../../../assets/IconoPerfil.png")}
-                />
-                <HStack alignItems="center" space={10}>
-                  <Text color="primary.900" mt="1" fontWeight="bold">
-                    Mamá
-                  </Text>
-                  <Text color="primary.900" mt="1" fontWeight="bold">
-                    María
-                  </Text>
-                  <Text color="primary.900" mt="1" fontWeight="bold">
-                    Herrera
-                  </Text>
-                </HStack>
-                <Text color="primary.900" mt="1" fontWeight="bold">
-                  449-456-98-78
-                </Text>
-              </VStack>
-            </Box>
-          )}
-        </Pressable>
-
-        <HStack mt={isLandscape ? 10 : "3/4"} space={20} marginLeft={4}>
-          <Button
-            backgroundColor="primary.200"
-            size="lg"
-            borderWidth="2"
-            borderColor="primary.200"
-            onPress={() => {
-              navigation.navigate("Edit");
-            }}
-          >
-            Editar
-          </Button>
-          <Button
-            backgroundColor="primary.200"
-            size="lg"
-            borderWidth="2"
-            borderColor="primary.200"
-            onPress={() => setIsOpen(!isOpen)}
-          >
-            Eliminar
-          </Button>
-        </HStack>
-
-        <AlertDialog leastDestructiveRef={cancelRef}
-          isOpen={isOpen}
-          onClose={onClose}>
-          <AlertDialog.Content>
-            <AlertDialog.CloseButton />
-            <AlertDialog.Header>Eliminar Contacto</AlertDialog.Header>
-            <AlertDialog.Body>
-              ¿Estás seguro de que quieres eliminar este contacto?
-            </AlertDialog.Body>
-            <AlertDialog.Footer>
-              <Button.Group space={2}>
-                <Button
-                  variant="unstyled"
-                  colorScheme="coolGray"
-                  onPress={onClose}
-                  ref={cancelRef}
-                >
-                  Cancelar
-                </Button>
-                <Button colorScheme="danger" onPress={handleCloseOpen}>
-                  Eliminar
-                </Button>
-              </Button.Group>
-            </AlertDialog.Footer>
-          </AlertDialog.Content>
-
-        </AlertDialog>
-      </View>
-    </ScrollView>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#610803",
-  },
-  contactContainer: {
-    maxWidth: 350,
-  },
-});
-
-
-
-
-
-
-
-
-
-/*import * as React from "react";
-import { Dimensions } from "react-native";
+import * as React from "react";
 import {
   Box,
   Center,
@@ -169,9 +16,12 @@ import {
 } from "native-base";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { Dimensions } from "react-native";
+
 
 const windowWidth = Dimensions.get('window').width;
-//const windowHeight = Dimensions.get('window').height;
+const windowHeight = Dimensions.get('window').height;
+
 
 export default function C_Information() {
   const navigation = useNavigation();
@@ -209,21 +59,18 @@ export default function C_Information() {
 
 
   return (
-    <ScrollView w="100%" h="100%">
-      <Center
-        w="100%"
-        h="300%"
-        bg={{
-          linearGradient: {
-            colors: ["primary.400", "primary.800"],
-            start: [1, 0],
-            end: [0, 0],
-          },
-        }}
-      >
-        <Box safeArea p="2" py="8" w="100%" h="100%" maxW="350px" >
-          <VStack space={6} mt={8}>
-            <Box rounded="3xl">
+    <ScrollView flex={1} contentContainerStyle={{ flexGrow: 1 }}>
+      <Center flex={1} bg={{
+        linearGradient: {
+          colors: ['primary.400', 'primary.800'],
+          start: [1, 0],
+          end: [0, 0]
+        }
+      }}>
+        <Box safeArea p="2" py="8" width="100%" maxWidth="350px">
+          <VStack space={windowHeight * 0.05} mt={windowHeight * 0.05}>
+
+            <Box rounded="xl">
               <Pressable>
                 {({ isHovered, isPressed }) => {
                   return (
@@ -275,7 +122,7 @@ export default function C_Information() {
                 }}
               </Pressable>
 
-              <HStack mt="3/4" space={20}  marginLeft="4">
+              <HStack mt={windowHeight * 0.1} space={20} justifyContent="center" alignItems="center">
                 <Button
                   backgroundColor="primary.200"
                   size="lg"
@@ -326,6 +173,11 @@ export default function C_Information() {
                   </AlertDialog.Footer>
                 </AlertDialog.Content>
               </AlertDialog>
+
+              {/* <HStack mt='3/4' space={20} marginLeft='4'>
+                        <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("Edit")}}>Editar</Button>
+                        <Button size='lg' bg='primary.200'>Eliminar</Button>
+                    </HStack> */}
             </Box>
           </VStack>
         </Box>
@@ -333,4 +185,4 @@ export default function C_Information() {
     </ScrollView>
 
   );
-} */
+}
