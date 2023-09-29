@@ -163,6 +163,9 @@ function Contact_Screen() {
                 name="Edit"
                 component={Edit_Contacts}
                 options={{
+                    headerTransparent: true,
+                    title: "",
+                    headerTintColor: '#ffff', // Cambia 'color_de_flecha' al color que desees
                 }} />
 
             <CNavigation.Screen
@@ -177,6 +180,7 @@ function Contact_Screen() {
                 options={{
                     headerTransparent: true,
                     title: "",
+                    headerTintColor: '#ffff', // Cambia 'color_de_flecha' al color que desees
                 }} />
 
 
@@ -196,26 +200,34 @@ function R_Navegation() {
                 name="Register"
                 component={Register}
                 options={{
-                    headerShown: false
+                    headerTransparent: true,
+                    title: "", //Establece el titulo en una cadena vacia para ocultarlo
+                    headerTintColor: '#ffff', // Cambia 'color_de_flecha' al color que desees
                 }} />
             <Rstack.Screen
                 name="Contact_R"
                 component={Contact_Registration}
                 options={{
-                    headerTransparent: true
+                    headerTransparent: true,
+                    title: "",
+                    headerTintColor: '#ffff', // Cambia 'color_de_flecha' al color que desees
                 }} />
             <Rstack.Screen
                 name="ViewContact"
                 component={ViewContact}
                 options={{
-                    headerTransparent: true
+                    headerTransparent: true,
+                    title: "",
+                    headerTintColor: '#ffff', // Cambia 'color_de_flecha' al color que desees
                 }} />
             <Rstack.Screen
                 name="Address_R"
                 component={Address_R}
                 options={{
 
-                    headerTransparent: true
+                    headerTransparent: true,
+                    title: "",
+                    headerTintColor: '#ffff', // Cambia 'color_de_flecha' al color que desees
                 }} />
             {/* <Rstack.Screen
                 name="Home"
@@ -245,7 +257,9 @@ export default function Navigate() {
                 <Stack.Screen
                     name="Login" component={Login}
                     options={{
-                        headerShown: false
+                        headerTransparent: true,
+                        title: "",
+                        headerTintColor: '#ffff', // Cambia 'color_de_flecha' al color que desees
 
                     }}
                 />

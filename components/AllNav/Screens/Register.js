@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Box, Center, Heading, VStack, FormControl, Input, Icon, ScrollView, Button, HStack, Text, Link, Circle } from 'native-base'
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
@@ -65,6 +65,7 @@ export default function Register() {
                 }
             }
         }
+        
         if (formData.last_name === undefined) {
             setErrorLastname({ ...errorLastname, last_name: 'Los Apellidos son requeridos' })
             isValid = false
@@ -85,6 +86,7 @@ export default function Register() {
             }
 
         }
+        
         if (formData.age === undefined) {
             setErrorAge({ ...errorAge, age: 'La edad es requerida' });
             isValid = false
@@ -99,6 +101,9 @@ export default function Register() {
             setErrorAge({ ...errorAge, age: 'Tiene que ser mayor de 16 años' });
             isValid = false
         }
+
+
+        
         if (formData.phone === undefined) {
             setErrorPhone({ ...errorPhone, phone: 'El telefono es requerido' })
             isValid = false
