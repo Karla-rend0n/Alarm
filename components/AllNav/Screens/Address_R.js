@@ -428,7 +428,7 @@ export default function Address_R({ route }) {
                                 variant="rounded"
                             />
 
-                            {'Municipio' in errorCity ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errormunicipality.municipality}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                            {'Municipio' in errormunicipality ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errormunicipality.municipality}</FormControl.ErrorMessage> : <FormControl.HelperText>
                                 Ingrese su municipio
                             </FormControl.HelperText>
                             }
@@ -458,7 +458,7 @@ export default function Address_R({ route }) {
                             />
 
 
-                            {'Estado' in errorCity ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorstate.state}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                            {'Estado' in errorstate ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorstate.state}</FormControl.ErrorMessage> : <FormControl.HelperText>
                                 Ingrese su estado
                             </FormControl.HelperText>
                             }
