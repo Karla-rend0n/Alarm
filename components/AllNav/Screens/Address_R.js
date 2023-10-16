@@ -30,13 +30,27 @@ export default function Address_R({ route }) {
             let url = 'https://api-alarm.cadsita.net/zip_code/' + formData.zip_code + '/get_zip_code/'
             console.log('url', url)
             const response = await fetch(url)
-            setJsonZipCode(await response.json())
+            const zipCodeData = await response.json();
             console.log('json', jsonZipCode)
-            return jsonZipCode
+            setJsonZipCode(zipCodeData);
+
+            const foundCity = zipCodeData.filter(data => data.city)[0];
+            if (foundCity) {
+                setFormData(prevData => ({
+                    ...prevData,
+                    city: foundCity.city,
+                    state: foundCity.state,
+                    municipality: foundCity.municipality,
+                }));
+            }
+            return zipCodeData;
+
         } catch (error) {
             console.error(error);
         }
     }
+
+
 
 
     const handlerSave = async () => {
@@ -384,26 +398,22 @@ export default function Address_R({ route }) {
                                 fontSize: 'lg'
                             }}>Ciudad
                             </FormControl.Label>
-                            {JSON.stringify(jsonZipCode) === '{}' ?
-                                <Input w={{}}
-                                    InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="3" color='primary.200' />}
-                                    onChangeText={value => setFormData({ ...formData, city: value })}
-                                    value=""
-                                    mt="3" placeholder="Ingrese su ciudad" color="primary.900"
-                                    fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
-                                :
-                                <Input w={{}}
-                                    InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="3" color='primary.200' />}
-                                    onChangeText={value => setFormData({ ...formData, city: value })}
-                                    value={jsonZipCode.filter((zipcode) => zipcode == formData.neighborhood)}
-                                    mt="3" placeholder="Ingrese su ciudad" color="primary.900"
-                                    fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded" />
-                            }
+                            <Input w={{}}
+                                InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="3" color='primary.200' />}
+                                onChangeText={value => setFormData({ ...formData, city: value })}
+                                value={formData.city} // Establece el valor de formData.city
+                                mt="3"
+                                placeholder="Ingrese su ciudad"
+                                color="primary.900"
+                                fontSize="sm"
+                                fontWeight="bold"
+                                backgroundColor="primary.100"
+                                variant="rounded" />
+
                             {'Ciudad' in errorCity ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorCity.City}</FormControl.ErrorMessage> : <FormControl.HelperText>
                                 Ingrese su ciudad
                             </FormControl.HelperText>
                             }
-
                         </FormControl>
 
 
@@ -419,6 +429,7 @@ export default function Address_R({ route }) {
                                 width="100%"
                                 InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="3" color='primary.200' />}
                                 onChangeText={value => setFormData({ ...formData, municipality: value })}
+                                value={formData.municipality} // Establece el valor de formData.municipality
                                 mt="3"
                                 placeholder="Ingrese su municipio"
                                 color="primary.900"
@@ -428,7 +439,7 @@ export default function Address_R({ route }) {
                                 variant="rounded"
                             />
 
-                            {'Municipio' in errorCity ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errormunicipality.municipality}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                            {'Municipio' in errormunicipality ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errormunicipality.municipality}</FormControl.ErrorMessage> : <FormControl.HelperText>
                                 Ingrese su municipio
                             </FormControl.HelperText>
                             }
@@ -448,6 +459,7 @@ export default function Address_R({ route }) {
                                 width="100%"
                                 InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="3" color='primary.200' />}
                                 onChangeText={value => setFormData({ ...formData, state: value })}
+                                value={formData.state} // Establece el valor de formData.state
                                 mt="3"
                                 placeholder="Ingrese su estado"
                                 color="primary.900"
@@ -458,7 +470,7 @@ export default function Address_R({ route }) {
                             />
 
 
-                            {'Estado' in errorCity ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorstate.state}</FormControl.ErrorMessage> : <FormControl.HelperText>
+                            {'Estado' in errorstate ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorstate.state}</FormControl.ErrorMessage> : <FormControl.HelperText>
                                 Ingrese su estado
                             </FormControl.HelperText>
                             }
