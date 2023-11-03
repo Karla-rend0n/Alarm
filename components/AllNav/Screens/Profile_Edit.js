@@ -137,7 +137,7 @@ export default function Profile_Edit() {
 
 
 
-    const submit = () => { validate() ? navigation.navigate("Profile") : console.log('bad', formData) }
+    const submit = () => { validate() ? navigation.navigate("ViewProfile") : console.log('bad', formData) }
 
 
     return (
@@ -146,10 +146,14 @@ export default function Profile_Edit() {
             <Box background="primary.50" w="100%" alignItems='center'>
                 <Flex direction="column" alignItems="center" marginTop={20} marginBottom={10}>
 
-                    <Avatar size="xl" source={{
+                    {/* <Avatar size="xl" source={{
                         uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
                     }}>
-                    </Avatar>
+                    </Avatar> */}
+
+                    <Heading color='primary.900' marginTop='60' marginLeft='3'>
+                        Editar Información
+                    </Heading>
                 </Flex>
             </Box>
 
