@@ -21,26 +21,23 @@ const windowHeight = Dimensions.get('window').height;
 
 
 export default function Contact_Registration({ route }) {
-  const [formDataRegister, setFormDataRegister] = React.useState({})
-  const navigation = useNavigation();
-  const [arrayContact, setArrayContact] = React.useState([]);
   const [formData, setFormData] = React.useState({});
   const [errors, setErrors] = React.useState({});
   const [errorkinship, setErrorkinship] = React.useState({});
   const [errorLastname, setErrorLastname] = React.useState({});
   const [errorPhone, setErrorPhone] = React.useState({});
-  const { data_register } = route.params
+  const { data_register } = route.params;
+  const navigation = useNavigation();
 
   var namVal = /^[A-Za-z]+$/i;
-  var number = /^\+?(52\s?)?1?\d{3}\s?\d{3}\s?\d{4}$/
-
+  var number = /^\+?(52\s?)?1?\d{3}\s?\d{3}\s?\d{4}$/;
 
   const validate = () => {
-    let isValid = true;
-    setErrorkinship({});
-    setErrors({});
-    setErrorPhone({});
-    setErrorLastname({});
+      let isValid = true;
+      setErrorkinship({});
+      setErrors({});
+      setErrorPhone({});
+      setErrorLastname({});
 
     if (formData.kinship === undefined) {
       setErrorkinship({ ...errorkinship, kinship: "El parentesco es necesario" });
