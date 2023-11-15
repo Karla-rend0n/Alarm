@@ -12,6 +12,10 @@ export default function ViewContact({ route }) {
   const { data_register, data_contact } = route.params;
 
   const [contacts, setContacts] = useState([]);
+  const resetForm = () => {
+    setContacts((prevContacts) => [...prevContacts, data_contact]);
+  };
+
 
   // useEffect para actualizar la lista de contactos cuando se agrega uno nuevo
   useEffect(() => {
@@ -38,6 +42,7 @@ export default function ViewContact({ route }) {
           </Heading>
 
           <VStack space={windowHeight * 0.05} mt={windowHeight * 0.05}>
+            {/* Botón para agregar un nuevo contacto */}
             <Button
               alignSelf="flex-end"
               marginLeft="auto"
@@ -49,28 +54,25 @@ export default function ViewContact({ route }) {
               borderColor="primary.200"
               rounded="full"
               leftIcon={<Icon as={AntDesign} name="plus" />}
-              onPress={() => { navigation.navigate('Contact_R', { data_register }); }}
+              onPress={() => {
+                navigation.navigate('Contact_R', { data_register, resetForm });
+                resetForm(); // Aquí puedes llamar resetForm después de navegar
+              }}
             />
 
-            {contacts.map((contact) => (
-              <Pressable
-                key={contact.id}
-                onPress={() => {
-                  // Handle contact press as needed
-                }}
+            {/* Lista de contactos agregados */}
+            {contacts.map((contact, index) => (
+              <Box
+                key={index}
+                bg="primary.300"
+                p={windowWidth * 0.05}
+                rounded="8"
+                shadow={3}
+                borderWidth="3"
+                borderColor="primary.200"
               >
-                {({ isHovered, isPressed }) => (
-                  <Box
-                    bg={isPressed ? 'primary.100' : isHovered ? 'primary.100' : 'primary.300'}
-                    style={{ transform: [{ scale: isPressed ? 0.96 : 1 }] }}
-                    p={windowWidth * 0.05}
-                    rounded="8"
-                    shadow={3}
-                    borderWidth="3"
-                    borderColor="primary.200"
-                  >
-                    <HStack alignItems="center">
-                      <Image
+                <HStack alignItems="center">
+                  <Image
                         width={windowWidth * 0.16}
                         height={windowWidth * 0.16}
                         mt={windowHeight * 0.05}
@@ -79,14 +81,11 @@ export default function ViewContact({ route }) {
                         mr={windowWidth * 0.05}
                         source={require('../../../assets/IconoPerfil.png')}
                       />
-
-                      <Text color="primary.900" mt={windowHeight * 0.03} fontWeight="bold">
-                        {contact.name} {contact.last_name}
-                      </Text>
-                    </HStack>
-                  </Box>
-                )}
-              </Pressable>
+                  <Text color="primary.900" mt={windowHeight * 0.03} fontWeight="bold">
+                    {contact.name} {contact.last_name}
+                  </Text>
+                </HStack>
+              </Box>
             ))}
 
             <Button
@@ -100,12 +99,15 @@ export default function ViewContact({ route }) {
                 fontWeight: '700',
                 fontSize: 'lg',
               }}
-              onPress={() => { navigation.navigate('Address_R', { data_contact: contacts, data_register }); }}
+              onPress={() => {
+                navigation.navigate('Address_R', { data_contact: contacts, data_register });
+              }}
             >
               Siguiente
             </Button>
           </VStack>
 
+          {/* Indicadores de página */}
           <HStack space={3} marginTop="8" alignSelf="center">
             <Circle size="10px" bg="primary.200"></Circle>
             <Circle size="10px" bg="primary.50"></Circle>

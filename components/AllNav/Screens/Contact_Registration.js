@@ -29,6 +29,15 @@ export default function Contact_Registration({ route }) {
   const { data_register } = route.params;
   const navigation = useNavigation();
 
+   // Restablecer el estado cuando el componente se monta
+   React.useEffect(() => {
+    setFormData({});
+    setErrors({});
+    setErrorkinship({});
+    setErrorLastname({});
+    setErrorPhone({});
+  }, []);
+
   var namVal = /^[A-Za-z]+$/i;
   var number = /^\+?(52\s?)?1?\d{3}\s?\d{3}\s?\d{4}$/;
 
@@ -112,15 +121,18 @@ export default function Contact_Registration({ route }) {
   };
 
   const submit = () => {
-    console.log("formDataRegister", data_register)
-    validate() ? navigation.navigate("ViewContact", { data_contact: formData, data_register: data_register }) : console.log("bad", formData);
+    console.log("formDataRegister", data_register);
+    if (validate()) {
+      navigation.navigate("ViewContact", { data_contact: formData, data_register });
+    } else {
+      console.log("bad", formData);
+    }
   };
-
 
   const press = () => {
     console.log("formDataRegister", data_register);
-    navigation.navigate("Address_R", { data_contact: formData, data_register: data_register });
-};
+    navigation.navigate("Address_R", { data_contact: formData, data_register });
+  };
 
   return (
     <ScrollView flex={1} contentContainerStyle={{ flexGrow: 1 }}>
