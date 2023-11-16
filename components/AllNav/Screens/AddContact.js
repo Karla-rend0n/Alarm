@@ -16,9 +16,43 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 import { Dimensions } from "react-native";
+import { useUser } from "../../store/user";
+
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+
+
+
+function componenteEdit_Contact(kinship, name, last_name, phone, user) {
+  console.log(kinship)
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  var raw = JSON.stringify({
+    "kinship": kinship,
+    "name": name,
+    "last_name": last_name,
+    "phone": phone,
+    "user": user
+  });
+
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+
+  fetch("https://api-alarm.cadsita.net/contact/", requestOptions)
+    .then(response => console.log(response.status))
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+
+}
+
+
+
 
 export default function AddContact() {
   const navigation = useNavigation();
@@ -29,6 +63,10 @@ export default function AddContact() {
   const [errorPhone, setErrorPhone] = React.useState({});
   var namVal = /^[A-Za-z]+$/i;
   var number = /^\+?(52\s?)?1?\d{3}\s?\d{3}\s?\d{4}$/
+
+  const { user } = useUser(state => state)
+  const info = user[0];
+  console.log(user)
 
   const validate = () => {
     let isValid = true;
@@ -109,8 +147,20 @@ export default function AddContact() {
   };
 
   const submit = () => {
-    validate() ? navigation.navigate("Contacts") : console.log("bad", formData);
+    if (validate()) {
+      // Realizar la actualización o guardar los datos
+      console.log('data', formData);
+      componenteEdit_Contact(formData.kinship, formData.name, formData.last_name, formData.phone, info.id)
+
+      navigation.navigate('Contacts', { refresh: true });
+    } else {
+      console.log('Datos no válidos', formData);
+    }
+
+
   };
+
+
 
   return (
     <ScrollView flex={1} contentContainerStyle={{ flexGrow: 1 }}>
@@ -127,7 +177,7 @@ export default function AddContact() {
             color: "primary.50",
             fontWeight: 'bold'
           }} mt={windowHeight * 0.05}>
-            Completa los siguientes campos.
+            Completa los siguientes campos
           </Heading>
 
 

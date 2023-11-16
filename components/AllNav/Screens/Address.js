@@ -4,6 +4,8 @@ import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 import { Dimensions } from "react-native";
+import { useUser } from "../../store/user";
+
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -11,6 +13,10 @@ const windowHeight = Dimensions.get('window').height;
 
 export default function Address() {
     const navigation = useNavigation();
+    const { user } = useUser(state => state)
+    const { profile_address } = user[0];
+    const info = profile_address[0];
+
 
 
     return (
@@ -46,7 +52,7 @@ export default function Address() {
                             Dirección
                         </Heading>
                         <Text fontWeight='normal' fontSize='md' mx={10}>
-                            Av. Adolfo
+                            {info.street} {info.building_number}
                         </Text>
                         <Divider mx={1} background='primary.50' />
 
@@ -55,7 +61,7 @@ export default function Address() {
                             Calle
                         </Heading>
                         <Text fontWeight='normal' fontSize='md' mx={10}>
-                            Los pinos
+                            {info.street}
                         </Text>
                         <Divider mx={1} background='primary.50' />
 
@@ -64,7 +70,7 @@ export default function Address() {
                             Número exterior
                         </Heading>
                         <Text fontWeight='normal' fontSize='md' mx={10}>
-                            34
+                            {info.building_number}
                         </Text>
                         <Divider mx={1} background='primary.50' />
 
@@ -73,7 +79,7 @@ export default function Address() {
                             Número interior
                         </Heading>
                         <Text fontWeight='normal' fontSize='md' mx={10}>
-                            5
+                            {info.apartment_number ? info.apartment_number : "No existe un número de interior"}
                         </Text>
                         <Divider mx={1} background='primary.50' />
 
@@ -82,7 +88,7 @@ export default function Address() {
                             Código Postal
                         </Heading>
                         <Text fontWeight='normal' fontSize='md' mx={10}>
-                            58794
+                            {info.zip_code}
                         </Text>
                         <Divider mx={1} background='primary.50' />
 
@@ -91,7 +97,7 @@ export default function Address() {
                             Colonia
                         </Heading>
                         <Text fontWeight='normal' fontSize='md' mx={10}>
-                            Industrial
+                            {info.city}
                         </Text>
                         <Divider mx={1} background='primary.50' />
 
@@ -100,7 +106,7 @@ export default function Address() {
                             Estado
                         </Heading>
                         <Text fontWeight='normal' fontSize='md' mx={10}>
-                            Aguascalientes
+                            {info.state}
                         </Text>
                         <Divider mx={1} background='primary.50' />
 
@@ -109,7 +115,8 @@ export default function Address() {
                             Municipio
                         </Heading>
                         <Text fontWeight='normal' fontSize='md' mx={10}>
-                            Aguascalientes
+                            {info.municipality}
+
                         </Text>
                         <Divider mx={1} background='primary.50' />
 

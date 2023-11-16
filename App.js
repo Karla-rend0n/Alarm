@@ -1,6 +1,7 @@
 import React from "react";
 import { Center, NativeBaseProvider, extendTheme } from "native-base";
 
+
 import { LinearGradient } from "expo-linear-gradient";
 
 import Navigate from "./components/Layout/Navigate";

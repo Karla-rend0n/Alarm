@@ -1,17 +1,56 @@
-import * as React from 'react'
+import React, { useEffect } from 'react'
 import { Box, Center, Heading, ScrollView, VStack, FormControl, Input, Icon, HStack, Button, Circle } from 'native-base'
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 
 import { Dimensions } from "react-native";
 
+// import { useUser } from '../../store/user';
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 
-export default function Edit_Contacts() {
+
+function componenteEdit_Contact(kinship, name, last_name, phone, user, id) {
+  console.log(kinship)
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  var raw = JSON.stringify({
+    "kinship": kinship,
+    "name": name,
+    "last_name": last_name,
+    "phone": phone,
+    "user": user
+  });
+
+  var requestOptions = {
+    method: 'PUT',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+
+  fetch("https://api-alarm.cadsita.net/contact/" + id + "/", requestOptions)
+    .then(response => console.log(response.status))
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+
+}
+
+
+
+
+export default function Edit_Contacts(useNavigationParam) {
+
+  // const { user } = useUser((state) => state);
+  console.log("gg", useNavigationParam.route.params);
+  var datos = useNavigationParam.route.params;
+
 
   const navigation = useNavigation();
+
   const [formData, setFormData] = React.useState({});
   const [errors, setErrors] = React.useState({});
   const [errorkinship, setErrorkinship] = React.useState({});
@@ -21,6 +60,22 @@ export default function Edit_Contacts() {
   var number = /^\+?(52\s?)?1?\d{3}\s?\d{3}\s?\d{4}$/
 
 
+  // useEffect(() => {
+  //   console.log(user[0].profile_contact)
+  // }, [user])
+
+  useEffect(() => {
+    const item = {
+      name: datos.informacion.contact.name,
+      kinship: datos.informacion.contact.kinship,
+      last_name: datos.informacion.contact.last_name,
+      phone: datos.informacion.contact.phone,
+      id: datos.informacion.contact.id,
+
+    };
+
+    setFormData((prevFormData) => ({ ...prevFormData, ...item }));
+  }, [datos]);
 
 
   const validate = () => {
@@ -101,7 +156,17 @@ export default function Edit_Contacts() {
     return isValid;
   };
 
-  const submit = () => { validate() ? navigation.navigate("Contacts") : console.log('bad', formData) }
+  const submit = () => {
+    if (validate()) {
+      // Realizar la actualización o guardar los datos
+      console.log('data', formData);
+      componenteEdit_Contact(formData.kinship, formData.name, formData.last_name, formData.phone, formData.user, formData.id)
+
+      navigation.navigate('Contacts', { refresh: true });
+    } else {
+      console.log('Datos no válidos', formData);
+    }
+  };
 
   return (
 
@@ -146,7 +211,8 @@ export default function Edit_Contacts() {
                 fontWeight="bold"
                 backgroundColor="primary.100"
                 variant="rounded"
-                value='Madre'
+                value={formData.kinship}
+
               />
 
               {"kinship" in errorkinship ? (
@@ -181,7 +247,7 @@ export default function Edit_Contacts() {
                 fontWeight="bold"
                 backgroundColor="primary.100"
                 variant="rounded"
-                value='María'
+                value={formData.name}
               />
 
 
@@ -218,7 +284,7 @@ export default function Edit_Contacts() {
                 fontWeight="bold"
                 backgroundColor="primary.100"
                 variant="rounded"
-                value='Herrera'
+                value={formData.last_name}
               />
 
 
@@ -256,7 +322,7 @@ export default function Edit_Contacts() {
                 fontWeight="bold"
                 backgroundColor="primary.100"
                 variant="rounded"
-                value='4495876978'
+                value={formData.phone}
               />
 
               {"phone" in errorPhone ? (

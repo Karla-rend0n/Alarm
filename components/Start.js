@@ -30,13 +30,13 @@ export default function Start() {
 
             <VStack space={10} mt="47">
 
-                    <Button background="primary.50" borderWidth="2" borderColor="primary.50" mt="15" rounded={10} onPress={() => { navigation.navigate("Login") }} _text={{
-                        color: "primary.900",
-                        fontWeight: "700",
-                        fontSize: "lg"
-                    }}>
-                        Iniciar sesión
-                    </Button>
+                <Button background="primary.50" borderWidth="2" borderColor="primary.50" mt="15" rounded={10} onPress={() => { navigation.navigate("Login") }} _text={{
+                    color: "primary.900",
+                    fontWeight: "700",
+                    fontSize: "lg"
+                }}>
+                    Iniciar sesión
+                </Button>
 
                 <Button background="primary.50" borderWidth="2" borderColor="primary.50" mt="14" rounded={10} onPress={() => { navigation.navigate("Register") }} _text={{
                     color: "primary.900",

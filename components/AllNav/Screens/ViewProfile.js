@@ -2,8 +2,9 @@ import React from "react";
 import { Center, Box, Avatar, Icon, Input, FormControl, Button, Stack, ScrollView, Heading, HStack, Container, Divider, Text, VStack, Flex } from "native-base"
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
-
 import { Dimensions } from "react-native";
+import { useUser } from "../../store/user";
+
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -11,6 +12,11 @@ const windowHeight = Dimensions.get('window').height;
 
 export default function ViewProfile() {
     const navigation = useNavigation();
+    const { user } = useUser(state => state)
+    const info = user[0];
+    console.log(user)
+
+
 
     return (
 
@@ -47,7 +53,7 @@ export default function ViewProfile() {
                             Nombre
                         </Heading>
                         <Text fontWeight='normal' fontSize='md' mx={10}>
-                            Karla
+                            {info.name}
                         </Text>
                         <Divider mx={1} background='primary.50' />
 
@@ -56,7 +62,7 @@ export default function ViewProfile() {
                             Apellidos
                         </Heading>
                         <Text fontWeight='normal' fontSize='md' mx={10}>
-                            Rodríguez
+                            {info.last_name}
                         </Text>
                         <Divider mx={1} background='primary.50' />
 
@@ -65,7 +71,7 @@ export default function ViewProfile() {
                             Email
                         </Heading>
                         <Text fontWeight='normal' fontSize='md' mx={10}>
-                            karla@gmail.com
+                            {info.email}
                         </Text>
                         <Divider mx={1} background='primary.50' />
 
@@ -75,7 +81,7 @@ export default function ViewProfile() {
                             Contraseña
                         </Heading>
                         <Text fontWeight='normal' fontSize='md' mx={10}>
-                            **********
+                            {info.password}
                         </Text>
                         <Divider mx={1} background='primary.50' />
 
@@ -84,7 +90,7 @@ export default function ViewProfile() {
                             Teléfono
                         </Heading>
                         <Text fontWeight='normal' fontSize='md' mx={10}>
-                            449-567-0098
+                            {info.phone}
                         </Text>
                         <Divider mx={1} background='primary.50' />
 
@@ -93,7 +99,7 @@ export default function ViewProfile() {
                             Edad
                         </Heading>
                         <Text fontWeight='normal' fontSize='md' mx={10}>
-                            25
+                            {info.age}
                         </Text>
                         <Divider mx={1} background='primary.50' />
 

@@ -4,6 +4,8 @@ import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import validator from 'validator';
 import { Dimensions } from "react-native";
+import { useUser } from "../../store/user";
+
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -13,13 +15,26 @@ const windowHeight = Dimensions.get('window').height;
 
 export default function Profile_Edit() {
     const navigation = useNavigation();
-    const [formData, setFormData] = React.useState({})
     const [errors, setErrors] = React.useState({})
     const [errorEmail, setErrorsEmail] = React.useState({})
     const [errorLastname, setErrorLastname] = React.useState({})
     const [errorAge, setErrorAge] = React.useState({})
     const [errorPass, setErrorPass] = React.useState({})
     const [errorPhone, setErrorPhone] = React.useState({})
+
+    const { user, edit_info } = useUser(state => state)
+    const info = user[0];
+    const [formData, setFormData] = React.useState({
+        name: info.name,
+        last_name: info.last_name,
+        email: info.email,
+        password: info.password,
+        phone: info.phone,
+        age: info.age
+    })
+
+
+
     var emailVal = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     var namVal = /^[A-Za-z]+$/i;
     var number = /^[0-9]+$/i
@@ -137,8 +152,48 @@ export default function Profile_Edit() {
 
 
 
-    const submit = () => { validate() ? navigation.navigate("ViewProfile") : console.log('bad', formData) }
+    // const submit = () => { validate() ? navigation.navigate("ViewProfile") : console.log('bad', formData) }
+    const submit = () => {
+        if (validate()) {
+            console.log(formData)
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
 
+            var raw = JSON.stringify({
+                "age": formData.age,
+                "name": formData.name,
+                "last_name": formData.last_name,
+                "phone": formData.phone,
+                "email": formData.email,
+                "password": formData.password,
+            });
+
+            var requestOptions = {
+                method: 'PATCH',
+                headers: myHeaders,
+                body: raw,
+            };
+
+            fetch(`https://api-alarm.cadsita.net/profile/${info.id}/`, requestOptions)
+                .then(response => console.log(response.status))
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
+
+
+            fetch(`https://api-alarm.cadsita.net/profile/${info.id}/`, {
+                headers: {
+                    method: 'GET',
+
+                }
+            }).then((res) => res.json()).then((result) => edit_info([result]))
+
+
+            navigation.navigate("ViewProfile")
+
+        } else {
+            console.log('bad', formData)
+        }
+    }
 
     return (
         <ScrollView flex={1} contentContainerStyle={{ flexGrow: 1 }}>
@@ -190,6 +245,7 @@ export default function Profile_Edit() {
                                 fontWeight="bold"
                                 backgroundColor="primary.100"
                                 variant="rounded"
+                                defaultValue={info.name}
                             />
 
 
@@ -222,6 +278,8 @@ export default function Profile_Edit() {
                                 fontWeight="bold"
                                 backgroundColor="primary.100"
                                 variant="rounded"
+                                defaultValue={info.last_name}
+
                             />
 
                             {'last_name' in errorLastname ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorLastname.last_name}</FormControl.ErrorMessage> : <FormControl.HelperText>
@@ -251,6 +309,8 @@ export default function Profile_Edit() {
                                 fontWeight="bold"
                                 backgroundColor="primary.100"
                                 variant="rounded"
+                                defaultValue={info.email}
+
                             />
 
                             {'email' in errorEmail ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorEmail.email}</FormControl.ErrorMessage> : <FormControl.HelperText>
@@ -279,6 +339,7 @@ export default function Profile_Edit() {
                                 fontWeight="bold"
                                 backgroundColor="primary.100"
                                 variant="rounded"
+                                defaultValue={info.password} s
                                 InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />}
                             />
                             {'password' in errorPass ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPass.password}</FormControl.ErrorMessage> : <FormControl.HelperText>
@@ -309,6 +370,8 @@ export default function Profile_Edit() {
                                 fontWeight="bold"
                                 backgroundColor="primary.100"
                                 variant="rounded"
+                                defaultValue={info.phone}
+
                             />
                             {'phone' in errorPhone ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPhone.phone}</FormControl.ErrorMessage> : <FormControl.HelperText>
                                 Ingrese su número de teléfono
@@ -340,6 +403,8 @@ export default function Profile_Edit() {
                                 fontWeight="bold"
                                 backgroundColor="primary.100"
                                 variant="rounded"
+                                defaultValue={"" + info.age}
+
                             />
 
                             {'age' in errorAge ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorAge.age}</FormControl.ErrorMessage> : <FormControl.HelperText>

@@ -1,16 +1,74 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box, Center, HStack, Heading, Image, ScrollView, VStack, Text, Circle, Pressable, Button, Icon } from 'native-base';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import { Dimensions } from "react-native";
+import { useState } from 'react';
+import { useUser } from "../../store/user";
 
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 
-export default function Contacts() {
+
+
+function ComponenteContact({ isHovered, isPressed, informacion }) {
+    return (
+        <Box
+            bg={isPressed ? "primary.100" : isHovered ? "primary.100" : "primary.300"}
+            style={{ transform: [{ scale: isPressed ? 0.96 : 1 }] }}
+            p={windowWidth * 0.05}
+            rounded="8"
+            shadow={3}
+            borderWidth="3"
+            borderColor="primary.200"
+            mb={windowHeight * 0.05} // Espacio entre cajas de contacto
+
+        >
+
+            <HStack alignItems="center">
+                <Image
+                    width={windowWidth * 0.12}
+                    height={windowWidth * 0.12}
+                    mt={windowHeight * 0.05}
+                    mb={windowHeight * 0.05}
+                    ml={windowWidth * 0.05}
+                    mr={windowWidth * 0.05}
+                    source={require('../../../assets/IconoPerfil.png')}
+                />
+
+                <Text color='primary.900' mt={windowHeight * 0.01} fontWeight='bold'>
+                    {informacion.name} {informacion.last_name}
+
+
+                </Text>
+            </HStack>
+        </Box>)
+}
+
+
+export default function Contacts(refresh = false) {
     const navigation = useNavigation();
+    const [contacts, setContacts] = useState([]);
+    const { user } = useUser(state => state)
+    const info = user[0];
+
+    var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+    };
+
+
+    useEffect(() => {
+        fetch(`https://api-alarm.cadsita.net/contact/?user=${info.id}`, requestOptions)
+            .then(response => response.json())
+            .then((result) => setContacts(result))
+            .catch(error => console.log('error', error))
+    }, [refresh]);
+
+    console.log(contacts)
+
 
     return (
         <ScrollView flex={1} contentContainerStyle={{ flexGrow: 1 }}>
@@ -25,7 +83,7 @@ export default function Contacts() {
                     <Heading size="xl" fontWeight="600" color="Black" _dark={{
                         color: "primary.50",
                         fontWeight: 'bold'
-                    }} mt={windowHeight * 0.01}>
+                    }} mt={windowHeight * 0.05}>
                         Contactos
                     </Heading>
 
@@ -46,54 +104,28 @@ export default function Contacts() {
                         />
 
 
-
-
-
-                        <Box rounded="xl" width="100%" >
-                            <Pressable onPress={() => { navigation.navigate("ViewD") }}>
-                                {({
-
-                                    isHovered,
-                                    isPressed
-                                }) => {
-                                    return (
-                                        <Box
-                                            bg={isPressed ? "primary.100" : isHovered ? "primary.100" : "primary.300"}
-                                            style={{ transform: [{ scale: isPressed ? 0.96 : 1 }] }}
-                                            p={windowWidth * 0.05}
-                                            rounded="8"
-                                            shadow={3}
-                                            borderWidth="3"
-                                            borderColor="primary.200"
-                                        >
-                                            <HStack alignItems="center">
-                                                <Image
-                                                    width={windowWidth * 0.12}
-                                                    height={windowWidth * 0.12}
-                                                    mt={windowHeight * 0.05}
-                                                    mb={windowHeight * 0.05}
-                                                    ml={windowWidth * 0.05}
-                                                    mr={windowWidth * 0.05}
-                                                    source={require('../../../assets/IconoPerfil.png')}
-                                                />
-
-                                                <Text color='primary.900' mt={windowHeight * 0.01} fontWeight='bold'>
-                                                    María Herrera
-
-                                                </Text>
-                                            </HStack>
-                                        </Box>
-                                    );
-                                }}
-                            </Pressable>
+                        <Box rounded="xl" width="100%">
+                            {contacts.map((contact, index) => (
+                                <Pressable
+                                    key={index}
+                                    onPress={() => {
+                                        navigation.navigate('ViewD', { contact });
+                                    }}
+                                >
+                                    {({ isHovered, isPressed }) => (
+                                        <ComponenteContact
+                                            key={index}
+                                            isHovered={isHovered}
+                                            isPressed={isPressed}
+                                            informacion={contact}
+                                        />
+                                    )}
+                                </Pressable>
+                            ))}
                         </Box>
 
 
                     </VStack>
-
-
-
-
                 </Box>
             </Center>
         </ScrollView>

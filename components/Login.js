@@ -4,6 +4,7 @@ import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import validator from 'validator';
 import { Dimensions } from "react-native";
+import {useUser} from './store/user'
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -11,6 +12,7 @@ const windowHeight = Dimensions.get('window').height;
 
 export default function Login() {
 
+    const user = useUser((state)=>state);
     const navigation = useNavigation();
     const [formData, setFormData] = React.useState({})
     const [errorEmail, setErrorsEmail] = React.useState({})
@@ -34,6 +36,9 @@ export default function Login() {
              if (Object.keys(dataProfile).length === 0) {
                 setErrorPass({ password: 'El email o el password no corresponden' });
             } else {
+                // Cambiar el estado
+                user.login(dataProfile);
+
                 navigation.navigate("Home", { data_profile: dataProfile });
             }
         } catch (error) {
@@ -43,6 +48,7 @@ export default function Login() {
         }
     };
     if (isLoading) {
+
         login();
       }
     }, [isLoading, formData.email, formData.password, navigation]);

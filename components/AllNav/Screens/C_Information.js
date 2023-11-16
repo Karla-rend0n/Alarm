@@ -23,8 +23,11 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 
-export default function C_Information() {
+export default function C_Information(useNavigationParam) {
   const navigation = useNavigation();
+  console.log("fd", useNavigationParam.route.params);
+
+  var informacion = useNavigationParam.route.params;
 
   const [formData, setFormData] = React.useState({})
 
@@ -46,7 +49,16 @@ export default function C_Information() {
 
   const handleCloseOpen = () => {
     setIsOpen(false);
-    navigation.navigate("Contacts")
+    console.log(informacion.contact)
+    fetch(`https://api-alarm.cadsita.net/contact/${informacion.contact.id}/`, {
+      method: "DELETE",
+    }).then(
+      () => {
+        console.log("Contacto eliminado")
+      }
+    )
+    navigation.navigate("Contacts", { refresh: true });
+
   }
 
 
@@ -103,18 +115,18 @@ export default function C_Information() {
                         />
                         <HStack alignItems="center" space={10}>
                           <Text color="primary.900" mt="1" fontWeight="bold">
-                            Mamá
+                            {informacion.contact.kinship}
                           </Text>
                           <Text color="primary.900" mt="1" fontWeight="bold">
-                            María
+                            {informacion.contact.name}
                           </Text>
 
                           <Text color="primary.900" mt="1" fontWeight="bold">
-                            Herrera
+                            {informacion.contact.last_name}
                           </Text>
                         </HStack>
                         <Text color="primary.900" mt="1" fontWeight="bold">
-                          449-456-98-78
+                          {informacion.contact.phone}
                         </Text>
                       </VStack>
                     </Box>
@@ -129,7 +141,7 @@ export default function C_Information() {
                   borderWidth="2"
                   borderColor="primary.200"
                   onPress={() => {
-                    navigation.navigate("Edit");
+                    navigation.navigate("Edit", { informacion });
                   }}
                 >
                   Editar
