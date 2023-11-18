@@ -357,8 +357,6 @@ export default function Address_Edit() {
                                 backgroundColor="primary.100"
                                 variant="rounded"
                                 onBlur={get_zip_code}
-                                defaultValue={info.zip_code}
-
                             />
                             {'CP' in errorCP ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorCP.CP}</FormControl.ErrorMessage> : <FormControl.HelperText>
                                 Ingrese el Código postal
@@ -421,7 +419,6 @@ export default function Address_Edit() {
                                 fontWeight="bold"
                                 backgroundColor="primary.100"
                                 variant="rounded"
-                                defaultValue={info.city}
                             />
 
                             {'Ciudad' in errorCity ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorCity.City}</FormControl.ErrorMessage> : <FormControl.HelperText>
@@ -451,7 +448,6 @@ export default function Address_Edit() {
                                 fontWeight="bold"
                                 backgroundColor="primary.100"
                                 variant="rounded"
-                                defaultValue={info.municipality}
 
                             />
 
@@ -483,7 +479,6 @@ export default function Address_Edit() {
                                 fontWeight="bold"
                                 backgroundColor="primary.100"
                                 variant="rounded"
-                                defaultValue={info.state}
 
                             />
 
