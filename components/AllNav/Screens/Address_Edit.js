@@ -1,8 +1,7 @@
-import * as React from 'react'
-import { Box, Center, Heading, VStack, FormControl, Input, Icon, ScrollView, Button, Circle, HStack, Select, Flex, Stack } from 'native-base'
-import { Ionicons, MaterialIcons, Entypo, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import validator from 'validator';
+import { Box, Button, Center, FormControl, Heading, Icon, Input, ScrollView, Select, VStack } from 'native-base';
+import * as React from 'react';
 
 
 import { Dimensions } from "react-native";
@@ -18,7 +17,6 @@ const windowHeight = Dimensions.get('window').height;
 export default function Address_Edit() {
 
     const navigation = useNavigation();
-    const [formData, setFormData] = React.useState({})
     const [errorCity, setErrorCity] = React.useState({})
     const [errorStreet, setErrorStreet] = React.useState({})
     const [errorNumE, setErrorNumE] = React.useState({})
@@ -33,6 +31,10 @@ export default function Address_Edit() {
     const { user, edit_address } = useUser(state => state)
     const { profile_address } = user[0];
     const info = profile_address[0];
+    const [formData, setFormData] = React.useState({
+        street: info.street,
+        building_number: info.building_number
+    })
 
     var namVal = /^[A-Za-záéíóúüÜÁÉÍÓÚ\s.]+$/i;
     var number = /^[0-9]+$/i
@@ -204,7 +206,8 @@ export default function Address_Edit() {
 
 
 
-            navigation.navigate("Address", { refresh: true })
+            // navigation.navigate("Address", { refresh: true })
+            navigation.navigate("Profile", { refresh: true })
 
         } else {
             console.log('bad', formData)

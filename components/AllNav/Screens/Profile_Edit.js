@@ -1,9 +1,9 @@
-import React from "react";
-import { Center, Box, Avatar, Icon, Input, FormControl, Button, Stack, ScrollView, Heading, Flex, VStack } from "native-base"
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
-import validator from 'validator';
+import { Box, Button, Center, Flex, FormControl, Heading, Icon, Input, ScrollView, VStack } from "native-base";
+import React from "react";
 import { Dimensions } from "react-native";
+import validator from 'validator';
 import { useUser } from "../../store/user";
 
 
@@ -188,7 +188,8 @@ export default function Profile_Edit() {
             }).then((res) => res.json()).then((result) => edit_info([result]))
 
 
-            navigation.navigate("ViewProfile")
+            // navigation.navigate("ViewProfile")
+            navigation.navigate("Profile")
 
         } else {
             console.log('bad', formData)
