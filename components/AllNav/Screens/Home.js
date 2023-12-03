@@ -1,24 +1,15 @@
+import { Box, Button, Center, Flex, Heading, ScrollView, Text, VStack } from "native-base";
 import React from "react";
-import { Center, Box, Heading, Button, Text, TouchableOpacity, ScrollView, useState, Flex, Stack, VStack } from "native-base"
-import { Linking } from "react-native"
 import { Dimensions } from "react-native";
 import { useUser } from "../../store/user";
-
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-
-
 export default function Home({ route }) {
-
-    const showMessage = () => Alert.alert('Button clicked !');
-
     const user = useUser((state) => state);
-
     const { data_profile } = route.params || {}; // Asegúrate de que data_profile sea un objeto vacío si no está presente
 
-    // const { data_profile } = route.params
     const [estadoBoton, setEstadoBoton] = React.useState('Apagado');
     const [tiempoInicioPresionado, setTiempoInicioPresionado] = React.useState(0);
 
@@ -27,17 +18,13 @@ export default function Home({ route }) {
     };
 
     const sendRequest = (status) => {
-        // console.log(user.user[0].profile_contact[0].phone)
-
-        console.log('Status', status)
         let profile_contact = user.user[0].profile_contact
         let contact_phone = '+52' + profile_contact[0].phone
         let contact_name = profile_contact[0].name + ' ' + profile_contact[0].last_name
-
         let profile_name = user.user[0].name + ' ' + user.user[0].last_name
+
         console.log('data_profile', profile_name)
         console.log('data_contact', contact_name, contact_phone)
-
 
         fetch('https://8hado3nks6.execute-api.us-east-1.amazonaws.com/default/Send-Mqtt-SNS', {
             method: 'POST',
@@ -51,7 +38,6 @@ export default function Home({ route }) {
                 contactName: contact_name,
                 profileName: profile_name
             }),
-
         })
             .then(response => response.json())
             .then(json => {
@@ -61,8 +47,6 @@ export default function Home({ route }) {
                 console.error(error);
             });
     };
-
-
 
     const handlePressOut = () => {
         const tiempoFinPresionado = Date.now();
@@ -76,7 +60,6 @@ export default function Home({ route }) {
             setEstadoBoton('Apagado');
         }
     };
-
 
     const [estadoBotonE, setEstadoBotonE] = React.useState('Apagado');
     const [tiempoInicioPresionadoE, setTiempoInicioPresionadoE] = React.useState(0);
@@ -98,10 +81,6 @@ export default function Home({ route }) {
         }
     };
 
-
-
-
-
     return (
         <ScrollView flex={1} contentContainerStyle={{ flexGrow: 1 }}>
             <Center flex={1} bg={{ // Utilizamos flex para ocupar todo el espacio disponible
@@ -112,7 +91,6 @@ export default function Home({ route }) {
                 }
             }}>
                 <Box safeArea p="2" py="8" w="100%" maxWidth={windowWidth * 0.8} >
-
                     <Heading size="xl" color="Black" _dark={{
                         color: "primary.50",
                         fontWeight: 'bold'
@@ -121,25 +99,18 @@ export default function Home({ route }) {
                     </Heading>
 
                     <VStack space={windowHeight * 0.05} mt={windowHeight * 0.05}>
-
-
                         <Heading mt="3" color="primary.50" fontWeight='medium' size='md'>
                             Si vez algo sospechoso presiona el botón.
                         </Heading>
 
-
-
                         <Button mt='3' rounded borderRadius="200" width="200" height="200" bgColor="primary.300" borderWidth="3" borderColor="primary.900" onPressIn={handlePressIn} onPressOut={handlePressOut} alignItems={'center'} alignSelf={'center'}>
                             <Button rounded borderRadius="170" width="170" height="170" bgColor="primary.500" borderWidth="4" borderColor="primary.1000" onPressIn={handlePressIn} onPressOut={handlePressOut} alignItems={'center'} alignSelf={'center'}>
                                 <Text alignItems={'center'} alignSelf={'center'}>{estadoBoton}</Text>
-
                                 <Text fontWeight="700">Alarma</Text>
-
                             </Button>
                         </Button>
 
                         <Flex direction="row" alignItems="center" >
-
                             <Heading mt={windowHeight * 0.03} color="primary.50" fontWeight='medium' size='md' >
                                 En caso de emergencia presione el botón.
                             </Heading>
@@ -148,21 +119,13 @@ export default function Home({ route }) {
                         <Button mt='3' rounded borderRadius="200" width="200" height="200" bgColor="primary.300" borderWidth="3" borderColor="primary.900" onPressIn={handlePressInicio} onPressOut={handlePressApagado} alignItems={'center'} alignSelf={'center'}>
                             <Button rounded borderRadius="170" width="170" height="170" bgColor="primary.600" borderWidth="4" borderColor="primary.1001" onPressIn={handlePressInicio} onPressOut={handlePressApagado} alignItems={'center'} alignSelf={'center'}>
                                 <Text alignItems={'center'} alignSelf={'center'}>{estadoBotonE}</Text>
-
                                 <Text fontWeight="700">Emergencia</Text>
-
                             </Button>
-
                         </Button>
-
                     </VStack>
-
                 </Box>
-
-
             </Center>
         </ScrollView>
-
     );
 }
 

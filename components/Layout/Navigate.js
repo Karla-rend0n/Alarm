@@ -1,35 +1,31 @@
-import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from "react";
 
 
-import Start from "../Start";
 import Login from "../Login";
+import Start from "../Start";
 
-import Register from "../AllNav/Screens/Register";
-import Contact_Registration from "../AllNav/Screens/Contact_Registration";
-import ViewContact from "../AllNav/Screens/ViewContacts";
 import Address_R from "../AllNav/Screens/Address_R";
+import Contact_Registration from "../AllNav/Screens/Contact_Registration";
+import Register from "../AllNav/Screens/Register";
+import ViewContact from "../AllNav/Screens/ViewContacts";
 
-import Home from "../AllNav/Screens/Home";
-import Contacts from "../AllNav/Screens/Contacts";
 import AddContact from "../AllNav/Screens/AddContact";
-import Edit_Contacts from "../AllNav/Screens/Edit_Contacts";
 import C_Information from "../AllNav/Screens/C_Information";
+import Contacts from "../AllNav/Screens/Contacts";
+import Edit_Contacts from "../AllNav/Screens/Edit_Contacts";
+import Home from "../AllNav/Screens/Home";
 
-import Profile from "../AllNav/Screens/Profile";
-import Profile_Edit from "../AllNav/Screens/Profile_Edit";
 import Address from "../AllNav/Screens/Address";
 import Address_Edit from "../AllNav/Screens/Address_Edit";
+import Profile from "../AllNav/Screens/Profile";
+import Profile_Edit from "../AllNav/Screens/Profile_Edit";
 
 import ViewProfile from "../AllNav/Screens/ViewProfile";
 
-import { FontAwesome } from '@expo/vector-icons';
-import { SimpleLineIcons } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
-
-
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
 const Stack = createNativeStackNavigator()
 const Rstack = createNativeStackNavigator()
@@ -65,8 +61,6 @@ function ProfileStack() {
                     headerBackTitleVisible: true,
                     headerTransparent: true,
                     title: "",
-
-
                 }}
             />
 
@@ -89,9 +83,7 @@ function ProfileStack() {
                     title: "",
                 }}
             />
-
         </ProfileStackNavigator.Navigator>
-
     )
 }
 
@@ -102,9 +94,6 @@ function HomeTabs() {
             screenOptions={{
                 tabBarActiveTintColor: "#BD8A3E",
             }}
-
-        //#31607D
-        //#527F9B
         >
             <Tab.Screen
                 name="Home"
@@ -114,10 +103,8 @@ function HomeTabs() {
                         <FontAwesome name="home" size={27} color={color} />
                     ),
                     headerShown: false
-
                 }}
             />
-
 
             <Tab.Screen
                 name="Agregar Contacto"
@@ -128,12 +115,8 @@ function HomeTabs() {
                     ),
                     headerShown: false,
                     unmountOnBlur: true,
-
-
-
                 }}
             />
-
 
             <Tab.Screen
                 name="Profile"
@@ -144,14 +127,9 @@ function HomeTabs() {
                     ),
                     headerShown: false,
                     unmountOnBlur: true,
-
                 }}
             />
-
-
-
         </Tab.Navigator>
-
     );
 }
 
@@ -163,7 +141,8 @@ function Contact_Screen() {
                 component={Contacts}
                 options={{
                     headerShown: false
-                }} />
+                }}
+            />
 
             <CNavigation.Screen
                 name="Edit"
@@ -172,7 +151,8 @@ function Contact_Screen() {
                     headerTransparent: true,
                     title: "",
                     headerTintColor: '#ffff', // Cambia 'color_de_flecha' al color que desees
-                }} />
+                }}
+            />
 
             <CNavigation.Screen
                 name="ViewD"
@@ -181,7 +161,8 @@ function Contact_Screen() {
                     headerTransparent: true,
                     title: "",
                     headerTintColor: '#ffff', // Cambia 'color_de_flecha' al color que desees
-                }} />
+                }}
+            />
 
             <CNavigation.Screen
                 name="Añadir Contacto"
@@ -190,17 +171,11 @@ function Contact_Screen() {
                     headerTransparent: true,
                     title: "",
                     headerTintColor: '#ffff', // Cambia 'color_de_flecha' al color que desees
-                }} />
-
-
-
+                }}
+            />
         </CNavigation.Navigator>
     )
 }
-
-
-
-
 
 function R_Navegation() {
     return (
@@ -212,7 +187,9 @@ function R_Navegation() {
                     headerTransparent: true,
                     title: "", //Establece el titulo en una cadena vacia para ocultarlo
                     headerTintColor: '#ffff', // Cambia 'color_de_flecha' al color que desees
-                }} />
+                }}
+            />
+
             <Rstack.Screen
                 name="Contact_R"
                 component={Contact_Registration}
@@ -220,7 +197,9 @@ function R_Navegation() {
                     headerTransparent: true,
                     title: "",
                     headerTintColor: '#ffff', // Cambia 'color_de_flecha' al color que desees
-                }} />
+                }}
+            />
+
             <Rstack.Screen
                 name="ViewContact"
                 component={ViewContact}
@@ -228,7 +207,9 @@ function R_Navegation() {
                     headerTransparent: true,
                     title: "",
                     headerTintColor: '#ffff', // Cambia 'color_de_flecha' al color que desees
-                }} />
+                }}
+            />
+
             <Rstack.Screen
                 name="Address_R"
                 component={Address_R}
@@ -237,21 +218,13 @@ function R_Navegation() {
                     headerTransparent: true,
                     title: "",
                     headerTintColor: '#ffff', // Cambia 'color_de_flecha' al color que desees
-                }} />
-            {/* <Rstack.Screen
-                name="Home"
-                component={HomeTabs}
-                options={{
-                    headerShown: false
-                }} /> */}
-
-
+                }}
+            />
         </Rstack.Navigator>
     )
 }
 
 export default function Navigate() {
-
     return (
         <NavigationContainer>
             <Stack.Navigator>
@@ -259,7 +232,6 @@ export default function Navigate() {
                     name="Start" component={Start}
                     options={{
                         headerShown: false,
-
                     }}
                 />
 
@@ -269,16 +241,15 @@ export default function Navigate() {
                         headerTransparent: true,
                         title: "",
                         headerTintColor: '#ffff', // Cambia 'color_de_flecha' al color que desees
-
                     }}
                 />
+
                 <Stack.Screen
                     name="Home" component={HomeTabs}
                     options={{
                         headerShown: false
                     }}
                 />
-
 
                 <Stack.Screen
                     name="Register" component={R_Navegation}
@@ -287,14 +258,7 @@ export default function Navigate() {
                         headerShown: false
                     }}
                 />
-
-
-
-
-
             </Stack.Navigator>
         </NavigationContainer>
-
     )
-
 }

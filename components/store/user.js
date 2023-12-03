@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 
-
 export const useUser = create((set) => ({
     user: null,
     login: (user) => set((state) => ({
@@ -11,12 +10,9 @@ export const useUser = create((set) => ({
             user
         }
     )),
-
     edit_address: (user) => set((state) => (
         {
             user
         }
     ))
 }))
-
-

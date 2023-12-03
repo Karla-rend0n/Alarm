@@ -1,12 +1,6 @@
-
-import React from "react";
-import { Box, Button, Center, Image, VStack, ScrollView } from 'native-base'
 import { useNavigation } from "@react-navigation/native";
-
-
-
-
-
+import { Box, Button, Center, Image, VStack } from 'native-base';
+import React from "react";
 
 export default function Start() {
     const navigation = useNavigation();
@@ -21,15 +15,22 @@ export default function Start() {
     }}>
         <Box safeArea p="1" w="100%" h="95%" maxW="350px">
             <VStack space={1} justifyContent="center" alignItems="center">
-                <Image width="389" height="138"
-                    source={require('../assets/itaa.png')} alt="Logo Tec" />
+                <Image
+                    width="389"
+                    height="138"
+                    source={require('../assets/itaa.png')}
+                    alt="Logo Tec"
+                />
 
-                <Image width="116" height="131" mt="10"
-                    source={require('../assets/ita2.png')} />
+                <Image
+                    width="116"
+                    height="131"
+                    mt="10"
+                    source={require('../assets/ita2.png')}
+                />
             </VStack>
 
             <VStack space={10} mt="47">
-
                 <Button background="primary.50" borderWidth="2" borderColor="primary.50" mt="15" rounded={10} onPress={() => { navigation.navigate("Login") }} _text={{
                     color: "primary.900",
                     fontWeight: "700",
@@ -45,15 +46,7 @@ export default function Start() {
                 }}>
                     Crear una cuenta
                 </Button>
-
             </VStack>
-
         </Box>
     </Center>
-
 }
-
-
-
-
-

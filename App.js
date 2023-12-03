@@ -1,11 +1,8 @@
-import React from "react";
-import { Center, NativeBaseProvider, extendTheme } from "native-base";
-
-
 import { LinearGradient } from "expo-linear-gradient";
+import { NativeBaseProvider, extendTheme } from "native-base";
+import React from "react";
 
 import Navigate from "./components/Layout/Navigate";
-import Home from "./components/AllNav/Screens/Home"
 
 export default function App() {
   const config = {
@@ -13,6 +10,7 @@ export default function App() {
       "linear-gradient": LinearGradient,
     },
   };
+
   const theme = extendTheme({
     colors: {
       // Add new color

@@ -4,14 +4,11 @@ import { Box, Button, Center, Flex, FormControl, Heading, Icon, Input, ScrollVie
 import React from "react";
 import { Dimensions } from "react-native";
 import validator from 'validator';
-import { useUser } from "../../store/user";
 
+import { useUser } from "../../store/user";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-
-
-
 
 export default function Profile_Edit() {
     const navigation = useNavigation();
@@ -24,6 +21,7 @@ export default function Profile_Edit() {
 
     const { user, edit_info } = useUser(state => state)
     const info = user[0];
+
     const [formData, setFormData] = React.useState({
         name: info.name,
         last_name: info.last_name,
@@ -33,13 +31,10 @@ export default function Profile_Edit() {
         age: info.age
     })
 
-
-
     var emailVal = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     var namVal = /^[A-Za-z]+$/i;
     var number = /^[0-9]+$/i
     var phoneNum = /^\+?(52\s?)?1?\d{3}\s?\d{3}\s?\d{4}$/;
-
 
     const validate = () => {
         let isValid = true;
@@ -49,7 +44,6 @@ export default function Profile_Edit() {
         setErrorAge({})
         setErrorPhone({})
         setErrorLastname({})
-
 
         if (formData.email === undefined) {
             setErrorsEmail({ ...errorEmail, email: 'El email es requerido' });
@@ -62,8 +56,6 @@ export default function Profile_Edit() {
             }
         }
 
-
-
         if (formData.name === undefined) {
             setErrors({ ...errors, name: 'El nombre es requerido' })
             isValid = false
@@ -73,6 +65,7 @@ export default function Profile_Edit() {
                     ...errors,
                     name: 'El nombre es muy corto'
                 });
+
                 isValid = false
                 console.log('valida')
             } else {
@@ -84,7 +77,6 @@ export default function Profile_Edit() {
                 }
             }
         }
-
 
         if (formData.last_name === undefined) {
             setErrorLastname({ ...errorLastname, last_name: 'Los Apellidos son requeridos' })
@@ -104,17 +96,12 @@ export default function Profile_Edit() {
                     })
                 }
             }
-
         }
-
-
-
 
         if (formData.age === undefined) {
             setErrorAge({ ...errorAge, age: 'La edad es requerida' });
             isValid = false
         } else if (!number.test(formData.age)) {
-
             setErrorAge({ ...errorAge, age: 'Solo ingrese números' });
             isValid = false
         } else if (formData.age.length > 2) {
@@ -125,8 +112,6 @@ export default function Profile_Edit() {
             isValid = false
         }
 
-
-
         if (formData.phone === undefined) {
             setErrorPhone({ ...errorPhone, phone: 'El telefono es requerido' })
             isValid = false
@@ -134,13 +119,13 @@ export default function Profile_Edit() {
             setErrorPhone({ ...errorPhone, phone: 'El numero necesita ser de 10 digitos' })
             isValid = false
         }
+
         if (formData.password === undefined) {
             setErrorPass({ ...errorPass, password: 'La contraseña es requerida' })
             isValid = false
         } else if (!validator.isStrongPassword(formData.password)) {
             setErrorPass({ ...errorPass, password: 'La contraseña no es lo suficientemente segura' })
             isValid = false
-
         } else if (formData.password.length < 8) {
             setErrorPass({ ...errorPass, password: 'La contraseña es muy pequeña' })
             isValid = false
@@ -148,9 +133,6 @@ export default function Profile_Edit() {
 
         return isValid
     };
-
-
-
 
     // const submit = () => { validate() ? navigation.navigate("ViewProfile") : console.log('bad', formData) }
     const submit = () => {
@@ -179,7 +161,6 @@ export default function Profile_Edit() {
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
 
-
             fetch(`https://api-alarm.cadsita.net/profile/${info.id}/`, {
                 headers: {
                     method: 'GET',
@@ -187,10 +168,8 @@ export default function Profile_Edit() {
                 }
             }).then((res) => res.json()).then((result) => edit_info([result]))
 
-
             // navigation.navigate("ViewProfile")
             navigation.navigate("Profile")
-
         } else {
             console.log('bad', formData)
         }
@@ -198,10 +177,8 @@ export default function Profile_Edit() {
 
     return (
         <ScrollView flex={1} contentContainerStyle={{ flexGrow: 1 }}>
-
             <Box background="primary.50" w="100%" alignItems='center'>
                 <Flex direction="column" alignItems="center" marginTop={20} marginBottom={10}>
-
                     {/* <Avatar size="xl" source={{
                         uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
                     }}>
@@ -220,20 +197,17 @@ export default function Profile_Edit() {
                     end: [0, 0]
                 }
             }}>
-
                 <Box safeArea p="2" width="100%" maxWidth="350px" >
-
                     <VStack space={windowHeight * 0.05} mt={windowHeight * 0.0}>
-
-
                         <FormControl isRequired isInvalid={'name' in errors} >
-
                             <FormControl.Label _text={{
                                 color: 'primary.50',
                                 fontWeight: '700',
                                 fontSize: 'lg'
 
-                            }}>Nombre</FormControl.Label>
+                            }}>
+                                Nombre
+                            </FormControl.Label>
 
                             <Input
                                 width="100%"
@@ -249,24 +223,25 @@ export default function Profile_Edit() {
                                 defaultValue={info.name}
                             />
 
-
-                            {'name' in errors ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errors.name}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                                Ingrese su nombre sin apellidos
-                            </FormControl.HelperText>
+                            {'name' in errors
+                                ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>
+                                    {errors.name}
+                                </FormControl.ErrorMessage>
+                                : <FormControl.HelperText>
+                                    Ingrese su nombre sin apellidos
+                                </FormControl.HelperText>
                             }
                         </FormControl>
 
-
-
-
                         <FormControl isRequired isInvalid={'last_name' in errorLastname} >
-
                             <FormControl.Label _text={{
                                 color: 'primary.50',
                                 fontWeight: '700',
                                 fontSize: 'lg'
 
-                            }}>Apellidos</FormControl.Label>
+                            }}>
+                                Apellidos
+                            </FormControl.Label>
 
                             <Input
                                 width="100%"
@@ -280,25 +255,27 @@ export default function Profile_Edit() {
                                 backgroundColor="primary.100"
                                 variant="rounded"
                                 defaultValue={info.last_name}
-
                             />
 
-                            {'last_name' in errorLastname ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorLastname.last_name}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                                Ingrese solos sus apellidos
-                            </FormControl.HelperText>
+                            {'last_name' in errorLastname
+                                ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>
+                                    {errorLastname.last_name}
+                                </FormControl.ErrorMessage>
+                                : <FormControl.HelperText>
+                                    Ingrese solos sus apellidos
+                                </FormControl.HelperText>
                             }
-
                         </FormControl>
-
-
-
 
                         <FormControl isRequired isInvalid={'email' in errorEmail}>
                             <FormControl.Label _text={{
                                 color: "primary.50",
                                 fontWeight: '700',
                                 fontSize: 'lg'
-                            }}>Email</FormControl.Label>
+                            }}>
+                                Email
+                            </FormControl.Label>
+
                             <Input
                                 width="100%"
                                 InputLeftElement={<Icon as={<MaterialIcons name="email" />} size={5} ml="3" color="primary.200" />}
@@ -311,24 +288,27 @@ export default function Profile_Edit() {
                                 backgroundColor="primary.100"
                                 variant="rounded"
                                 defaultValue={info.email}
-
                             />
 
-                            {'email' in errorEmail ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorEmail.email}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                                Ingresa un correo electronico
-                            </FormControl.HelperText>
+                            {'email' in errorEmail
+                                ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>
+                                    {errorEmail.email}
+                                </FormControl.ErrorMessage>
+                                : <FormControl.HelperText>
+                                    Ingresa un correo electronico
+                                </FormControl.HelperText>
                             }
                         </FormControl>
-
-
-
 
                         <FormControl isRequired isInvalid={'password' in errorPass}>
                             <FormControl.Label _text={{
                                 color: "primary.50",
                                 fontWeight: '700',
                                 fontSize: 'lg'
-                            }}>Contraseña</FormControl.Label>
+                            }}>
+                                Contraseña
+                            </FormControl.Label>
+
                             <Input
                                 mt="3"
                                 width="100%"
@@ -343,22 +323,25 @@ export default function Profile_Edit() {
                                 defaultValue={info.password} s
                                 InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />}
                             />
-                            {'password' in errorPass ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPass.password}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                                Ingrese letras MAYÚSCULAS o minúsculas, números y caracteres
-                            </FormControl.HelperText>}
 
+                            {'password' in errorPass
+                                ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>
+                                    {errorPass.password}
+                                </FormControl.ErrorMessage>
+                                : <FormControl.HelperText>
+                                    Ingrese letras MAYÚSCULAS o minúsculas, números y caracteres
+                                </FormControl.HelperText>}
                         </FormControl>
 
-
-
                         <FormControl isRequired isInvalid={'phone' in errorPhone}>
-
                             <FormControl.Label _text={{
                                 color: 'primary.50',
                                 fontWeight: '700',
                                 fontSize: 'lg'
 
-                            }}>Teléfono</FormControl.Label>
+                            }}>
+                                Teléfono
+                            </FormControl.Label>
 
                             <Input
                                 width="100%"
@@ -374,23 +357,25 @@ export default function Profile_Edit() {
                                 defaultValue={info.phone}
 
                             />
-                            {'phone' in errorPhone ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPhone.phone}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                                Ingrese su número de teléfono
-                            </FormControl.HelperText>}
 
+                            {'phone' in errorPhone
+                                ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>
+                                    {errorPhone.phone}
+                                </FormControl.ErrorMessage>
+                                : <FormControl.HelperText>
+                                    Ingrese su número de teléfono
+                                </FormControl.HelperText>}
                         </FormControl>
 
-
-
                         <FormControl isRequired isInvalid={'age' in errorAge} >
-
                             <FormControl.Label _text={{
                                 color: 'primary.50',
                                 fontWeight: '700',
                                 fontSize: 'lg'
 
-                            }}>Edad</FormControl.Label>
-
+                            }}>
+                                Edad
+                            </FormControl.Label>
 
                             <Input
                                 type='number'
@@ -405,14 +390,16 @@ export default function Profile_Edit() {
                                 backgroundColor="primary.100"
                                 variant="rounded"
                                 defaultValue={"" + info.age}
-
                             />
 
-                            {'age' in errorAge ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorAge.age}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                                Ingrese su edad
-                            </FormControl.HelperText>
+                            {'age' in errorAge
+                                ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>
+                                    {errorAge.age}
+                                </FormControl.ErrorMessage>
+                                : <FormControl.HelperText>
+                                    Ingrese su edad
+                                </FormControl.HelperText>
                             }
-
                         </FormControl>
 
                         <Button
@@ -420,14 +407,13 @@ export default function Profile_Edit() {
                                 color: "primary.50",
                                 fontWeight: "700",
                                 fontSize: "lg"
-                            }} onPress={submit}>
+                            }} onPress={submit}
+                        >
                             Guardar
                         </Button>
                     </VStack>
                 </Box>
             </Center>
         </ScrollView >
-
     );
-
 }

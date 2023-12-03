@@ -1,29 +1,20 @@
-import * as React from 'react'
-import { Box, Center, HStack, Heading, Image, ScrollView, VStack, Text, Circle, Pressable, Button, Icon, Stack, AlertDialog } from 'native-base';
-import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
-
-
+import { AlertDialog, Box, Button, Center, Heading, VStack } from 'native-base';
+import * as React from 'react';
 
 export default function Profile() {
     const navigation = useNavigation();
     const [formData, setFormData] = React.useState({})
-
+    const [isOpen, setIsOpen] = React.useState(false);
+    const cancelRef = React.useRef(null);
 
     const validate = () => {
         let isValid = true;
-
         return isValid
     };
 
-
     const submit = () => { validate() ? setIsOpen(!isOpen) : console.log('bad', formData) }
-
-    const [isOpen, setIsOpen] = React.useState(false);
-
     const onClose = () => setIsOpen(false);
-
-    const cancelRef = React.useRef(null);
 
     const handleCloseOpen = () => {
         setIsOpen(false);
@@ -46,8 +37,6 @@ export default function Profile() {
             </Heading>
 
             <VStack space={3} mt={5}>
-
-
                 <Button background="primary.300" mt="6" borderWidth="3" borderColor="primary.200" onPress={() => navigation.navigate("ViewProfile")} _text={{
                     color: "primary.900",
                     fontWeight: "700",
@@ -56,7 +45,6 @@ export default function Profile() {
                     Ver Perfil
                 </Button>
 
-
                 <Button background="primary.300" mt="6" borderWidth="3" borderColor="primary.200" onPress={() => navigation.navigate("Edit_P")} _text={{
                     color: "primary.900",
                     fontWeight: "700",
@@ -64,8 +52,6 @@ export default function Profile() {
                 }} rounded='full'>
                     Editar Perfil
                 </Button>
-
-
 
                 <Button background="primary.300" mt="6" borderWidth="3" borderColor="primary.200" onPress={() => navigation.navigate("Address")} _text={{
                     color: "primary.900",
@@ -83,8 +69,6 @@ export default function Profile() {
                     Cerrar Sesión
                 </Button>
 
-
-
                 <AlertDialog
                     leastDestructiveRef={cancelRef}
                     isOpen={isOpen}
@@ -93,9 +77,11 @@ export default function Profile() {
                     <AlertDialog.Content>
                         <AlertDialog.CloseButton />
                         <AlertDialog.Header>Cerrar Sesión</AlertDialog.Header>
+
                         <AlertDialog.Body>
                             ¿Estás seguro de que quieres cerrar la sesión?
                         </AlertDialog.Body>
+
                         <AlertDialog.Footer>
                             <Button.Group space={2}>
                                 <Button
@@ -106,6 +92,7 @@ export default function Profile() {
                                 >
                                     Cancelar
                                 </Button>
+
                                 <Button colorScheme="danger" onPress={handleCloseOpen}>
                                     Salir
                                 </Button>
@@ -113,13 +100,7 @@ export default function Profile() {
                         </AlertDialog.Footer>
                     </AlertDialog.Content>
                 </AlertDialog>
-
-
-
-
             </VStack>
-
         </Box>
     </Center>
-
 };

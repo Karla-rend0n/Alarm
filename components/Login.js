@@ -1,19 +1,17 @@
-import React, {useEffect} from "react";
-import { Box, Text, Heading, VStack, FormControl, Input, Link, Button, HStack, Center, Icon, ScrollView, Pressable } from 'native-base'
-import { MaterialIcons, Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import validator from 'validator';
+import { Box, Button, Center, FormControl, HStack, Heading, Icon, Input, Link, ScrollView, Text, VStack } from 'native-base';
+import React, { useEffect } from "react";
 import { Dimensions } from "react-native";
-import {useUser} from './store/user'
+import { useUser } from './store/user';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-
 export default function Login() {
-
-    const user = useUser((state)=>state);
+    const user = useUser((state) => state);
     const navigation = useNavigation();
+
     const [formData, setFormData] = React.useState({})
     const [errorEmail, setErrorsEmail] = React.useState({})
     const [errorPass, setErrorPass] = React.useState({})
@@ -22,42 +20,38 @@ export default function Login() {
 
     var emailVal = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
-
-
     useEffect(() => {
         const login = async () => {
+            try {
+                setIsLoading(true);
+                let url = 'https://api-alarm.cadsita.net/login?email=' + formData.email + '&password=' + formData.password
+                const response = await fetch(url);
+                const dataProfile = await response.json();
+                
+                if (Object.keys(dataProfile).length === 0) {
+                    setErrorPass({ password: 'El email o el password no corresponden' });
+                } else {
+                    // Cambiar el estado
+                    user.login(dataProfile);
 
-         try {
-             setIsLoading(true);
-             let url = 'https://api-alarm.cadsita.net/login?email=' + formData.email + '&password=' + formData.password
-             const response = await fetch(url);
-             const dataProfile = await response.json();
-             
-             if (Object.keys(dataProfile).length === 0) {
-                setErrorPass({ password: 'El email o el password no corresponden' });
-            } else {
-                // Cambiar el estado
-                user.login(dataProfile);
-
-                navigation.navigate("Home", { data_profile: dataProfile });
+                    navigation.navigate("Home", { data_profile: dataProfile });
+                }
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setIsLoading(false); // Independientemente del resultado, establece isLoading en false
             }
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setIsLoading(false); // Independientemente del resultado, establece isLoading en false
-        }
-    };
-    if (isLoading) {
+        };
 
-        login();
-      }
+        if (isLoading) {
+            login();
+        }
     }, [isLoading, formData.email, formData.password, navigation]);
 
     const validate = () => {
         let isValid = true;
         setErrorsEmail({})
         setErrorPass({})
-        
 
         if (formData.email === undefined) {
             setErrorsEmail({ ...errorEmail, email: 'El correo es requerido' });
@@ -65,9 +59,7 @@ export default function Login() {
         } else if (!formData.email || !emailVal.test(formData.email)) {
             setErrorsEmail({ ...errorEmail, email: 'Ingresa un correo electrónico válido' });
             isValid = false
-    }
-        
-
+        }
         
         if (formData.password === undefined || formData.password.length < 8) {
             setErrorPass({password: 'La contraseña es requerida y debe tener al menos 8 caracteres' })
@@ -80,14 +72,8 @@ export default function Login() {
     const submit = () => {
         if (validate()) {
             setIsLoading(true);
-
         }
     };
-
-
-    
-
-
 
     return (
         <ScrollView flex={1} contentContainerStyle={{ flexGrow: 1 }}>
@@ -98,20 +84,17 @@ export default function Login() {
                     end: [0, 0]
                 }
             }}>
-
                 <Box safeArea p="2" py="8" w="100%" maxWidth="350px">
-
                     <Heading size="xl" color="Black" _dark={{
                         color: "primary.50",
                         fontWeight: 'bold'
                     }}>
                         Inicio de sesión
                     </Heading>
+
                     <Heading mt="3" color="primary.50" fontWeight='medium' size='xs'>
                         Inicia sesión con tu cuenta.
                     </Heading>
-
-
 
                     <VStack space={windowHeight * 0.05} mt={windowHeight * 0.05}>
                         <FormControl isRequired isInvalid={'email' in errorEmail}>
@@ -119,7 +102,10 @@ export default function Login() {
                                 color: "primary.50",
                                 fontWeight: '700',
                                 fontSize: 'lg'
-                            }}>Email</FormControl.Label>
+                            }}>
+                                Email
+                            </FormControl.Label>
+
                             <Input
                                 width="100%"
                                 InputLeftElement={<Icon as={<MaterialIcons name="email" />} size={5} ml="3" color="primary.200" />}
@@ -133,9 +119,14 @@ export default function Login() {
                                 variant="rounded"
                             />
 
-                            {'email' in errorEmail ? (<FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorEmail.email}</FormControl.ErrorMessage> ): (<FormControl.HelperText>
-                                Ingresa un correo electronico
-                            </FormControl.HelperText>
+                            {'email' in errorEmail ? (
+                                <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>
+                                    {errorEmail.email}
+                                </FormControl.ErrorMessage>
+                            ): (
+                                <FormControl.HelperText>
+                                    Ingresa un correo electrónico
+                                </FormControl.HelperText>
                             )}
                         </FormControl>
 
@@ -144,7 +135,10 @@ export default function Login() {
                                 color: "primary.50",
                                 fontWeight: '700',
                                 fontSize: 'lg'
-                            }}>Contraseña</FormControl.Label>
+                            }}>
+                                Contraseña
+                            </FormControl.Label>
+
                             <Input
                                 width="100%"
                                 mt="3"
@@ -158,42 +152,60 @@ export default function Login() {
                                 variant="rounded"
                                 InputLeftElement={<Icon as={<Ionicons name='lock-closed' />} size={5} ml="2" color='primary.200' />}
                             />
-                            {'password' in errorPass ? (<FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorPass.password}</FormControl.ErrorMessage>) : (<FormControl.HelperText>
-                                Ingrese letras MAYÚSCULAS o minúsculas, números y caracteres
-                            </FormControl.HelperText>
-                            )}
 
+                            {'password' in errorPass ? (
+                                <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>
+                                    {errorPass.password}
+                                </FormControl.ErrorMessage>
+                            ) : (
+                                <FormControl.HelperText>
+                                    Ingrese letras MAYÚSCULAS o minúsculas, números y caracteres
+                                </FormControl.HelperText>
+                            )}
 
                             <Link _text={{
                                 fontSize: "sm",
                                 fontWeight: "700",
                                 color: "primary.50",
-                            }} mt="4" alignSelf="flex-end" > Forget Password?
+                            }} mt="4" alignSelf="flex-end">
+                                Forget Password?
                             </Link>
                         </FormControl>
 
+                        <Button
+                            background="primary.200" 
+                            borderWidth="2" 
+                            borderColor="primary.200" 
+                            mt="5" 
+                            rounded={10} 
+                            _text={{
+                                color: "primary.50",
+                                fontWeight: "700",
+                                fontSize: "lg"
+                            }} 
+                            onPress={isLoading ? null : submit} 
+                            disabled={isLoading}
+                        >
+                            Iniciar sesión
+                        </Button>
 
-                    <Button
-                        background="primary.200" borderWidth="2" borderColor="primary.200" mt="5" rounded={10} _text={{
-                            color: "primary.50",
-                            fontWeight: "700",
-                            fontSize: "lg"
-                        }}  onPress={isLoading ? null : submit} disabled={isLoading}>
-                        Iniciar sesión
-                    </Button>
+                        <HStack mt="5" color="primary.50" alignItems='center' alignSelf='center' fontWeight="normal">
+                            <Text fontSize="sm" >
+                                ¿No dispones de una cuenta? {" "}
+                            </Text>
 
-                    <HStack mt="5" color="primary.50" alignItems='center' alignSelf='center' fontWeight="normal">
-                        <Text fontSize="sm" >
-                            ¿No dispones de una cuenta? {" "}
-                        </Text>
-                        <Link onPress={() => { navigation.navigate("Register") }} _text={{
-                            color: "primary.50",
-                            fontWeight: "bold",
-                            fontSize: "sm"
-                        }} href="#">
-                            Registrate.
-                        </Link>
-                    </HStack>
+                            <Link 
+                                onPress={() => { navigation.navigate("Register") }} 
+                                _text={{
+                                    color: "primary.50",
+                                    fontWeight: "bold",
+                                    fontSize: "sm"
+                                }} 
+                                href="#"
+                            >
+                                Regístrate.
+                            </Link>
+                        </HStack>
                     </VStack>
                 </Box>
             </Center>

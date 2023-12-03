@@ -1,55 +1,43 @@
-import * as React from "react";
+import { useNavigation } from "@react-navigation/native";
 import {
+  AlertDialog,
   Box,
+  Button,
   Center,
   HStack,
-  Heading,
   Image,
-  ScrollView,
-  VStack,
-  Text,
-  Circle,
   Pressable,
-  Button,
-  Icon,
-  AlertDialog,
+  ScrollView,
+  Text,
+  VStack
 } from "native-base";
-import { AntDesign } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import * as React from "react";
 import { Dimensions } from "react-native";
-
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-
 export default function C_Information(useNavigationParam) {
   const navigation = useNavigation();
   console.log("fd", useNavigationParam.route.params);
-
   var informacion = useNavigationParam.route.params;
 
   const [formData, setFormData] = React.useState({})
-
+  const [isOpen, setIsOpen] = React.useState(false);
+  const cancelRef = React.useRef(null);
 
   const validate = () => {
     let isValid = true;
-
     return isValid
   };
 
-
   const submit = () => { validate() ? setIsOpen(!isOpen) : console.log('bad', formData) }
-
-  const [isOpen, setIsOpen] = React.useState(false);
-
   const onClose = () => setIsOpen(false);
-
-  const cancelRef = React.useRef(null);
 
   const handleCloseOpen = () => {
     setIsOpen(false);
     console.log(informacion.contact)
+
     fetch(`https://api-alarm.cadsita.net/contact/${informacion.contact.id}/`, {
       method: "DELETE",
     }).then(
@@ -57,18 +45,9 @@ export default function C_Information(useNavigationParam) {
         console.log("Contacto eliminado")
       }
     )
+
     navigation.navigate("Contacts", { refresh: true });
-
   }
-
-
-
-
-
-
-
-
-
 
   return (
     <ScrollView flex={1} contentContainerStyle={{ flexGrow: 1 }}>
@@ -81,7 +60,6 @@ export default function C_Information(useNavigationParam) {
       }}>
         <Box safeArea p="2" py="8" width="100%" maxWidth="350px">
           <VStack space={windowHeight * 0.05} mt={windowHeight * 0.05}>
-
             <Box rounded="xl">
               <Pressable>
                 {({ isHovered, isPressed }) => {
@@ -117,6 +95,7 @@ export default function C_Information(useNavigationParam) {
                           <Text color="primary.900" mt="1" fontWeight="bold">
                             {informacion.contact.kinship}
                           </Text>
+
                           <Text color="primary.900" mt="1" fontWeight="bold">
                             {informacion.contact.name}
                           </Text>
@@ -125,6 +104,7 @@ export default function C_Information(useNavigationParam) {
                             {informacion.contact.last_name}
                           </Text>
                         </HStack>
+
                         <Text color="primary.900" mt="1" fontWeight="bold">
                           {informacion.contact.phone}
                         </Text>
@@ -146,6 +126,7 @@ export default function C_Information(useNavigationParam) {
                 >
                   Editar
                 </Button>
+
                 <Button
                   backgroundColor="primary.200"
                   size="lg"
@@ -165,9 +146,11 @@ export default function C_Information(useNavigationParam) {
                 <AlertDialog.Content>
                   <AlertDialog.CloseButton />
                   <AlertDialog.Header>Eliminar Contacto</AlertDialog.Header>
+
                   <AlertDialog.Body>
                     ¿Estás seguro de que quieres eliminar este contacto?
                   </AlertDialog.Body>
+
                   <AlertDialog.Footer>
                     <Button.Group space={2}>
                       <Button
@@ -178,6 +161,7 @@ export default function C_Information(useNavigationParam) {
                       >
                         Cancelar
                       </Button>
+
                       <Button colorScheme="danger" onPress={handleCloseOpen}>
                         Eliminar
                       </Button>
@@ -185,16 +169,10 @@ export default function C_Information(useNavigationParam) {
                   </AlertDialog.Footer>
                 </AlertDialog.Content>
               </AlertDialog>
-
-              {/* <HStack mt='3/4' space={20} marginLeft='4'>
-                        <Button size='lg' bg='primary.200' onPress={() => {navigation.navigate("Edit")}}>Editar</Button>
-                        <Button size='lg' bg='primary.200'>Eliminar</Button>
-                    </HStack> */}
             </Box>
           </VStack>
         </Box>
       </Center>
     </ScrollView>
-
   );
 }

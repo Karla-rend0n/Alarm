@@ -2,20 +2,13 @@ import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { Box, Button, Center, FormControl, Heading, Icon, Input, ScrollView, Select, VStack } from 'native-base';
 import * as React from 'react';
-
-
 import { Dimensions } from "react-native";
 import { useUser } from "../../store/user";
-
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-
-
-
 export default function Address_Edit() {
-
     const navigation = useNavigation();
     const [errorCity, setErrorCity] = React.useState({})
     const [errorStreet, setErrorStreet] = React.useState({})
@@ -31,6 +24,7 @@ export default function Address_Edit() {
     const { user, edit_address } = useUser(state => state)
     const { profile_address } = user[0];
     const info = profile_address[0];
+
     const [formData, setFormData] = React.useState({
         street: info.street,
         building_number: info.building_number
@@ -43,12 +37,15 @@ export default function Address_Edit() {
         try {
             let url = 'https://api-alarm.cadsita.net/zip_code/' + formData.zip_code + '/get_zip_code/'
             console.log('url', url)
+
             const response = await fetch(url)
             const zipCodeData = await response.json();
             console.log('json', jsonZipCode)
+
             setJsonZipCode(zipCodeData);
 
             const foundCity = zipCodeData.filter(data => data.city)[0];
+
             if (foundCity) {
                 setFormData(prevData => ({
                     ...prevData,
@@ -57,14 +54,12 @@ export default function Address_Edit() {
                     municipality: foundCity.municipality,
                 }));
             }
-            return zipCodeData;
 
+            return zipCodeData;
         } catch (error) {
             console.error(error);
         }
     }
-
-
 
     const validate = () => {
         let isValid = true;
@@ -77,7 +72,6 @@ export default function Address_Edit() {
         setErrorstate({})
         setErrormunicipality({})
 
-
         if (formData.city === undefined) {
             setErrorCity({ ...errorCity, City: 'La ciudad es requerida' })
             isValid = false
@@ -87,11 +81,10 @@ export default function Address_Edit() {
                     ...errorCity,
                     City: 'El nombre de la ciudad es muy corta'
                 })
+
                 console.log('valida')
             }
         }
-
-
 
         if (formData.street === undefined) {
             setErrorStreet({ ...errorStreet, Street: 'La calle es requerida' })
@@ -102,7 +95,6 @@ export default function Address_Edit() {
                     ...errorStreet,
                     Street: 'La calle es muy corta'
                 })
-                console.log('valida')
             } else {
                 if (!namVal.test(formData.street)) {
                     setErrorStreet({
@@ -126,9 +118,6 @@ export default function Address_Edit() {
             setErrorNumE({ ...errorNumE, building_number: null }); // Limpia el error si la validación es exitosa
         }
 
-
-
-
         if (formData.neighborhood === undefined) {
             setErrorcologne({ ...errorcologne, neighborhood: 'La colonia es requerida' })
             isValid = false
@@ -138,14 +127,12 @@ export default function Address_Edit() {
             setErrorCP({ ...errorCP, CP: 'El codigo postal es requerido' });
             isValid = false
         } else if (!number.test(formData.zip_code)) {
-
             setErrorCP({ ...errorCP, CP: 'Solo ingrese números' });
             isValid = false
         } else if (formData.CP < 4) {
             setErrorCP({ ...errorCP, CP: 'Tienen que ser 5 dígitos' });
             isValid = false
         }
-
 
         if (formData.state === undefined) {
             setErrorstate({ ...errorstate, state: 'El estado es requerido' })
@@ -156,12 +143,9 @@ export default function Address_Edit() {
             setErrormunicipality({ ...errormunicipality, municipality: 'El municipio es requerido' })
             isValid = false
         }
+
         return isValid
     };
-
-
-
-
 
     // const submit = () => { validate() ? navigation.navigate("Address") : console.log('bad', formData) }
 
@@ -169,6 +153,7 @@ export default function Address_Edit() {
         if (validate()) {
             console.log(formData)
             console.log(info)
+
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
 
@@ -181,7 +166,6 @@ export default function Address_Edit() {
                 "municipality": formData.municipality,
                 "city": formData.city,
                 "state": formData.state,
-
             }
 
             var raw = JSON.stringify(new_address);
@@ -200,31 +184,17 @@ export default function Address_Edit() {
             fetch(`https://api-alarm.cadsita.net/profile/${user[0].id}/`, {
                 headers: {
                     method: 'GET',
-
                 }
             }).then((res) => res.json()).then((result) => edit_address([result]))
 
-
-
             // navigation.navigate("Address", { refresh: true })
             navigation.navigate("Profile", { refresh: true })
-
         } else {
             console.log('bad', formData)
         }
     }
 
-
-
-
-
-
-
-
-
-
     return (
-
         <ScrollView flex={1} contentContainerStyle={{ flexGrow: 1 }}>
             <Center flex={1} bg={{
                 linearGradient: {
@@ -233,89 +203,102 @@ export default function Address_Edit() {
                     end: [0, 0]
                 }
             }}>
-
                 <Box safeArea p="2" py="8" width="100%" maxWidth="350px">
-
-
-                    <Heading size="xl" color="Black" _dark={{
-                        color: "primary.50",
-                        fontWeight: 'bold'
-                    }} mt={windowHeight * 0.05}>
+                    <Heading
+                        size="xl"
+                        color="Black"
+                        _dark={{
+                            color: "primary.50",
+                            fontWeight: 'bold'
+                        }}
+                        mt={windowHeight * 0.05}
+                    >
                         Editar Dirección
                     </Heading>
 
                     <VStack space={windowHeight * 0.05} mt={windowHeight * 0.05}>
-
-
                         <FormControl isRequired isInvalid={'Street' in errorStreet}>
-
                             <FormControl.Label _text={{
                                 color: 'primary.50',
                                 fontWeight: 'bold',
                                 fontSize: 'lg'
 
-                            }}>Calle
+                            }}>
+                                Calle
                             </FormControl.Label>
 
-                            <Input w={{
-
-                            }} InputLeftElement={<Icon as={<Entypo name='address' />} size={5} ml="2" color='primary.200' />}
+                            <Input
+                                w={{}}
+                                InputLeftElement={
+                                    <Icon as={<Entypo name='address' />}
+                                        size={5}
+                                        ml="2"
+                                        color='primary.200'
+                                    />
+                                }
                                 onChangeText={value => setFormData({ ...formData, street: value })}
                                 mt="3" placeholder="Ingrese su calle" color="primary.900"
                                 fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded"
                                 defaultValue={info.street}
                             />
 
-                            {'Street' in errorStreet ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorStreet.Street}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                                Ingrese su calle
-                            </FormControl.HelperText>
+                            {'Street' in errorStreet
+                                ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>
+                                    {errorStreet.Street}
+                                </FormControl.ErrorMessage>
+                                : <FormControl.HelperText>
+                                    Ingrese su calle
+                                </FormControl.HelperText>
                             }
                         </FormControl>
 
-
-
                         <FormControl isRequired isInvalid={'building_number' in errorNumE}>
-
                             <FormControl.Label _text={{
                                 color: 'primary.50',
                                 fontWeight: 'bold',
                                 fontSize: 'lg'
-
                             }}>
                                 Numero Exterior
                             </FormControl.Label>
 
-                            <Input w={{
-
-                            }} InputLeftElement={<Icon as={<MaterialCommunityIcons name='home-group' />} size={5} ml="2" color='primary.200' />}
+                            <Input
+                                w={{}}
+                                InputLeftElement={
+                                    <Icon
+                                        as={<MaterialCommunityIcons name='home-group' />}
+                                        size={5}
+                                        ml="2"
+                                        color='primary.200'
+                                    />
+                                }
                                 onChangeText={value => setFormData({ ...formData, building_number: value })}
                                 mt="3" placeholder="Ingrese el número exterior" color="primary.900"
                                 fontSize="sm" fontWeight="bold" backgroundColor="primary.100" variant="rounded"
                                 defaultValue={info.building_number}
                             />
 
-                            {'building_number' in errorNumE && errorNumE.building_number ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorNumE.building_number}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                                Ingrese su número exterior
-                            </FormControl.HelperText>
+                            {'building_number' in errorNumE && errorNumE.building_number
+                                ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>
+                                    {errorNumE.building_number}
+                                </FormControl.ErrorMessage>
+                                : <FormControl.HelperText>
+                                    Ingrese su número exterior
+                                </FormControl.HelperText>
                             }
                         </FormControl>
 
-
-
-
                         <FormControl isInvalid={'NumI' in errorNumI}>
-
                             <FormControl.Label _text={{
                                 color: 'primary.50',
                                 fontWeight: 'bold',
                                 fontSize: 'lg'
-
                             }}>
                                 Numero Interior
                             </FormControl.Label>
-                            <Input w={{
 
-                            }} InputLeftElement={<Icon as={<MaterialCommunityIcons name='home-import-outline' />} size={5} ml="2" color='primary.200' />}
+                            <Input
+                                w={{}}
+                                InputLeftElement={<Icon as={<MaterialCommunityIcons name='home-import-outline' />} size={5} ml="2" color='primary.200' />}
                                 onChangeText={value => {
                                     setFormData({ ...formData, NumI: value });
                                     // Verifica la longitud del valor para eliminar el error si es válido
@@ -329,24 +312,26 @@ export default function Address_Edit() {
                                 defaultValue={info.apartment_number}
                             />
 
-                            {'NumI' in errorNumI ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorNumI.NumI}</FormControl.ErrorMessage> : null}
+                            {'NumI' in errorNumI
+                                ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>
+                                    {errorNumI.NumI}
+                                </FormControl.ErrorMessage>
+                                : null
+                            }
+
                             <FormControl.HelperText>
                                 Ingrese su número interior OPCIONAL
                             </FormControl.HelperText>
-
                         </FormControl>
 
-
-
-
-
                         <FormControl isRequired isInvalid={'zip_code' in errorCP}>
-
                             <FormControl.Label _text={{
                                 color: 'primary.50',
                                 fontWeight: 'bold',
                                 fontSize: 'lg'
-                            }}>Codigo Postal</FormControl.Label>
+                            }}>
+                                Código Postal
+                            </FormControl.Label>
 
                             <Input
                                 width="100%"
@@ -361,22 +346,26 @@ export default function Address_Edit() {
                                 variant="rounded"
                                 onBlur={get_zip_code}
                             />
-                            {'CP' in errorCP ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorCP.CP}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                                Ingrese el Código postal
-                            </FormControl.HelperText>
+
+                            {'CP' in errorCP
+                                ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>
+                                    {errorCP.CP}
+                                </FormControl.ErrorMessage>
+                                : <FormControl.HelperText>
+                                    Ingrese el Código postal
+                                </FormControl.HelperText>
                             }
                         </FormControl>
 
-
-
                         <FormControl isRequired isInvalid={'neighborhood' in errorcologne}>
-
                             <FormControl.Label _text={{
                                 color: 'primary.50',
                                 fontWeight: 'bold',
                                 fontSize: 'lg'
 
-                            }}>Colonia</FormControl.Label>
+                            }}>
+                                Colonia
+                            </FormControl.Label>
 
                             <Select
                                 width="100%"
@@ -398,9 +387,14 @@ export default function Address_Edit() {
                                     )
                                 }
                             </Select>
-                            {'neighborhood' in errorcologne ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorcologne.neighborhood}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                                Ingrese su colonia
-                            </FormControl.HelperText>
+
+                            {'neighborhood' in errorcologne
+                                ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>
+                                    {errorcologne.neighborhood}
+                                </FormControl.ErrorMessage>
+                                : <FormControl.HelperText>
+                                    Ingrese su colonia
+                                </FormControl.HelperText>
                             }
                         </FormControl>
 
@@ -409,8 +403,10 @@ export default function Address_Edit() {
                                 color: 'primary.50',
                                 fontWeight: 'bold',
                                 fontSize: 'lg'
-                            }}>Ciudad
+                            }}>
+                                Ciudad
                             </FormControl.Label>
+
                             <Input w={{}}
                                 InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="3" color='primary.200' />}
                                 onChangeText={value => setFormData({ ...formData, city: value })}
@@ -424,20 +420,24 @@ export default function Address_Edit() {
                                 variant="rounded"
                             />
 
-                            {'Ciudad' in errorCity ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorCity.City}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                                Ingrese su ciudad
-                            </FormControl.HelperText>
+                            {'Ciudad' in errorCity
+                                ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>
+                                    {errorCity.City}
+                                </FormControl.ErrorMessage>
+                                : <FormControl.HelperText>
+                                    Ingrese su ciudad
+                                </FormControl.HelperText>
                             }
                         </FormControl>
-
-
 
                         <FormControl isRequired isInvalid={'municipality' in errormunicipality} >
                             <FormControl.Label _text={{
                                 color: 'primary.50',
                                 fontWeight: 'bold',
                                 fontSize: 'lg'
-                            }}>Municipio</FormControl.Label>
+                            }}>
+                                Municipio
+                            </FormControl.Label>
 
                             <Input
                                 width="100%"
@@ -451,24 +451,26 @@ export default function Address_Edit() {
                                 fontWeight="bold"
                                 backgroundColor="primary.100"
                                 variant="rounded"
-
                             />
 
-                            {'Municipio' in errormunicipality ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errormunicipality.municipality}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                                Ingrese su municipio
-                            </FormControl.HelperText>
+                            {'Municipio' in errormunicipality
+                                ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>
+                                    {errormunicipality.municipality}
+                                </FormControl.ErrorMessage>
+                                : <FormControl.HelperText>
+                                    Ingrese su municipio
+                                </FormControl.HelperText>
                             }
-
                         </FormControl>
-
-
 
                         <FormControl isRequired isInvalid={'state' in errorstate} >
                             <FormControl.Label _text={{
                                 color: 'primary.50',
                                 fontWeight: 'bold',
                                 fontSize: 'lg'
-                            }}>Estado</FormControl.Label>
+                            }}>
+                                Estado
+                            </FormControl.Label>
 
                             <Input
                                 width="100%"
@@ -482,37 +484,30 @@ export default function Address_Edit() {
                                 fontWeight="bold"
                                 backgroundColor="primary.100"
                                 variant="rounded"
-
                             />
 
-
-                            {'Estado' in errorstate ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorstate.state}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                                Ingrese su estado
-                            </FormControl.HelperText>
+                            {'Estado' in errorstate
+                                ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>
+                                    {errorstate.state}
+                                </FormControl.ErrorMessage>
+                                : <FormControl.HelperText>
+                                    Ingrese su estado
+                                </FormControl.HelperText>
                             }
-
                         </FormControl>
-
 
                         <Button
                             background="primary.200" borderWidth="2" borderColor="primary.200" mt="5" rounded={10} _text={{
                                 color: "primary.50",
                                 fontWeight: "700",
                                 fontSize: "lg"
-                            }} onPress={submit}>
+                            }} onPress={submit}
+                        >
                             Guardar
                         </Button>
-
-
-
-
                     </VStack>
                 </Box>
-
             </Center>
-
-
         </ScrollView >
     );
-
 }

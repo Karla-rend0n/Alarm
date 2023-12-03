@@ -1,6 +1,7 @@
-import React from "react";
 import { Icon } from "native-base";
+import React from "react";
 import { G, Path } from "react-native-svg";
+
 const NativeBaseIcon = () => {
   return (
     <Icon size="220px" viewBox="0 0 602.339 681.729">
@@ -16,6 +17,7 @@ const NativeBaseIcon = () => {
           transform="translate(-13972.661 -1918.542) rotate(90)"
           fill="#356290"
         />
+
         <Path
           id="Path_252"
           data-name="Path 252"
@@ -23,6 +25,7 @@ const NativeBaseIcon = () => {
           transform="translate(-14016.576 -1865.281) rotate(90)"
           fill="#1784b2"
         />
+
         <Path
           id="Path_251"
           data-name="Path 251"
@@ -30,6 +33,7 @@ const NativeBaseIcon = () => {
           transform="translate(-14058.69 -1820.41) rotate(90)"
           fill="#50bfc3"
         />
+
         <Path
           id="_x3C__x2F__x3E_"
           d="M187.066,335.455V297.993l-65.272-21.949,65.272-22.523V216.059L81,259.5v32.521Zm38.726,29.3L286.123,174H256.7l-60.33,190.759Zm72.052-29.3,106.066-43.783V259.267L297.844,216.059V254.44l59.3,23.328-59.3,19.421Z"

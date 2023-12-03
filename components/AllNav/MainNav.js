@@ -1,29 +1,17 @@
-import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from "react";
 
+import { FontAwesome, Ionicons, SimpleLineIcons } from '@expo/vector-icons';
 
 //Screens
-import Inicio from "../AllNav/Screens/Inicio";
-
-
 import Contacto from "../AllNav/Screens/Contacto";
-
-
-
+import Inicio from "../AllNav/Screens/Inicio";
 import Perfil from "../AllNav/Screens/Perfil";
-import Perfil_Editar from "./Screens/Perfil_Editar";
 import Dirección from "./Screens/Dirección";
 import Dirección_Editar from "./Screens/Dirección_Editar";
-
-
-
-import { FontAwesome } from '@expo/vector-icons';
-import { SimpleLineIcons } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
-
-
+import Perfil_Editar from "./Screens/Perfil_Editar";
 
 //Para la navegación
 const HomeStackNavigator = createNativeStackNavigator();
@@ -63,10 +51,8 @@ function MyStack() {
                 }}
             />
         </HomeStackNavigator.Navigator>
-
     )
 }
-
 
 //Guardar createBottom
 const Tab = createBottomTabNavigator();
@@ -87,10 +73,8 @@ function MyTabs() {
                         <FontAwesome name="home" size={27} color={color} />
                     ),
                     headerShown: false
-
                 }}
             />
-
 
             <Tab.Screen
                 name="Agregar Contacto"
@@ -100,11 +84,8 @@ function MyTabs() {
                         <SimpleLineIcons name="user-follow" size={24} color={color} />
                     ),
                     headerShown: false
-
-
                 }}
             />
-
 
             <Tab.Screen
                 name="Perfil"
@@ -114,14 +95,9 @@ function MyTabs() {
                         <Ionicons name="person-circle-sharp" size={29} color={color} />
                     ),
                     headerShown: false
-
                 }}
             />
-
-
-
         </Tab.Navigator>
-
     );
 }
 
@@ -131,6 +107,5 @@ export default function PlantillaNave() {
         <NavigationContainer>
             <MyTabs />
         </NavigationContainer>
-
     );
 }

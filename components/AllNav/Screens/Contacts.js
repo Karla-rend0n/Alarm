@@ -1,17 +1,12 @@
-import React, { useEffect } from 'react'
-import { Box, Center, HStack, Heading, Image, ScrollView, VStack, Text, Circle, Pressable, Button, Icon } from 'native-base';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
+import { Box, Button, Center, HStack, Heading, Icon, Image, Pressable, ScrollView, Text, VStack } from 'native-base';
+import React, { useEffect, useState } from 'react';
 import { Dimensions } from "react-native";
-import { useState } from 'react';
 import { useUser } from "../../store/user";
-
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-
-
-
 
 function ComponenteContact({ isHovered, isPressed, informacion }) {
     return (
@@ -24,9 +19,7 @@ function ComponenteContact({ isHovered, isPressed, informacion }) {
             borderWidth="3"
             borderColor="primary.200"
             mb={windowHeight * 0.05} // Espacio entre cajas de contacto
-
         >
-
             <HStack alignItems="center">
                 <Image
                     width={windowWidth * 0.12}
@@ -40,13 +33,11 @@ function ComponenteContact({ isHovered, isPressed, informacion }) {
 
                 <Text color='primary.900' mt={windowHeight * 0.01} fontWeight='bold'>
                     {informacion.name} {informacion.last_name}
-
-
                 </Text>
             </HStack>
-        </Box>)
+        </Box>
+    )
 }
-
 
 export default function Contacts(refresh = false) {
     const navigation = useNavigation();
@@ -59,16 +50,12 @@ export default function Contacts(refresh = false) {
         redirect: 'follow'
     };
 
-
     useEffect(() => {
         fetch(`https://api-alarm.cadsita.net/contact/?user=${info.id}`, requestOptions)
             .then(response => response.json())
             .then((result) => setContacts(result))
             .catch(error => console.log('error', error))
     }, [refresh]);
-
-    console.log(contacts)
-
 
     return (
         <ScrollView flex={1} contentContainerStyle={{ flexGrow: 1 }}>
@@ -88,7 +75,6 @@ export default function Contacts(refresh = false) {
                     </Heading>
 
                     <VStack space={windowHeight * 0.05} mt={windowHeight * 0.05}>
-
                         <Button
                             alignSelf="flex-end"
                             marginLeft="auto"
@@ -102,7 +88,6 @@ export default function Contacts(refresh = false) {
                             leftIcon={<Icon as={AntDesign} name="plus" />}
                             onPress={() => { navigation.navigate("Añadir Contacto") }}
                         />
-
 
                         <Box rounded="xl" width="100%">
                             {contacts.map((contact, index) => (
@@ -123,12 +108,9 @@ export default function Contacts(refresh = false) {
                                 </Pressable>
                             ))}
                         </Box>
-
-
                     </VStack>
                 </Box>
             </Center>
         </ScrollView>
-
     );
 }

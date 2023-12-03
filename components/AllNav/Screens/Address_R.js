@@ -1,17 +1,15 @@
-import * as React from 'react'
-import { Box, Center, Heading, VStack, FormControl, Input, Icon, ScrollView, Button, Circle, HStack, AlertDialog, Select } from 'native-base'
-import { Ionicons, MaterialIcons, Entypo, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
-
+import { AlertDialog, Box, Button, Center, Circle, FormControl, HStack, Heading, Icon, Input, ScrollView, Select, VStack } from 'native-base';
+import * as React from 'react';
 import { Dimensions } from "react-native";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-
 export default function Address_R({ route }) {
-
     const navigation = useNavigation();
+
     const [formData, setFormData] = React.useState({})
     const [errorCity, setErrorCity] = React.useState({})
     const [errorStreet, setErrorStreet] = React.useState({})
@@ -43,26 +41,25 @@ export default function Address_R({ route }) {
                     municipality: foundCity.municipality,
                 }));
             }
-            return zipCodeData;
 
+            return zipCodeData;
         } catch (error) {
             console.error(error);
         }
     }
-
-
-
 
     const handlerSave = async () => {
         setIsOpen(!isOpen)
         console.log('data_contact', data_contact)
         console.log('data_register', data_register)
         console.log('formData', formData)
+
         json_result = {
             ...data_register,
             "profile_address": [formData],
             "profile_contact": [data_contact]
         }
+
         console.log('profile_address', formData)
         console.log('json_result', json_result)
 
@@ -84,8 +81,6 @@ export default function Address_R({ route }) {
     var namVal = /^[A-Za-záéíóúüÜÁÉÍÓÚ\s.]+$/i;
     var number = /^[0-9]+$/i
 
-
-
     const validate = () => {
         let isValid = true;
         setErrorCity({})
@@ -97,7 +92,6 @@ export default function Address_R({ route }) {
         setErrorstate({})
         setErrormunicipality({})
 
-
         if (formData.city === undefined) {
             setErrorCity({ ...errorCity, City: 'La ciudad es requerida' })
             isValid = false
@@ -107,11 +101,8 @@ export default function Address_R({ route }) {
                     ...errorCity,
                     City: 'El nombre de la ciudad es muy corta'
                 })
-                console.log('valida')
             }
         }
-
-
 
         if (formData.street === undefined) {
             setErrorStreet({ ...errorStreet, Street: 'La calle es requerida' })
@@ -122,7 +113,6 @@ export default function Address_R({ route }) {
                     ...errorStreet,
                     Street: 'La calle es muy corta'
                 })
-                console.log('valida')
             } else {
                 if (!namVal.test(formData.street)) {
                     setErrorStreet({
@@ -146,9 +136,6 @@ export default function Address_R({ route }) {
             setErrorNumE({ ...errorNumE, building_number: null }); // Limpia el error si la validación es exitosa
         }
 
-
-
-
         if (formData.neighborhood === undefined) {
             setErrorcologne({ ...errorcologne, neighborhood: 'La colonia es requerida' })
             isValid = false
@@ -158,14 +145,12 @@ export default function Address_R({ route }) {
             setErrorCP({ ...errorCP, CP: 'El codigo postal es requerido' });
             isValid = false
         } else if (!number.test(formData.zip_code)) {
-
             setErrorCP({ ...errorCP, CP: 'Solo ingrese números' });
             isValid = false
         } else if (formData.CP < 4) {
             setErrorCP({ ...errorCP, CP: 'Tienen que ser 5 dígitos' });
             isValid = false
         }
-
 
         if (formData.state === undefined) {
             setErrorstate({ ...errorstate, state: 'El estado es requerido' })
@@ -176,24 +161,20 @@ export default function Address_R({ route }) {
             setErrormunicipality({ ...errormunicipality, municipality: 'El municipio es requerido' })
             isValid = false
         }
+
         return isValid
     };
 
-
+    const [isOpen, setIsOpen] = React.useState(false);
+    const cancelRef = React.useRef(null);
 
     const submit = () => { validate() ? handlerSave() : console.log('bad', formData) }
-
-    const [isOpen, setIsOpen] = React.useState(false);
-
     const onClose = () => setIsOpen(false);
-
-    const cancelRef = React.useRef(null);
 
     const handleCloseOpen = () => {
         setIsOpen(false);
         navigation.navigate("Login")
     }
-
 
     return (
         <ScrollView flex={1} contentContainerStyle={{ flexGrow: 1 }}>
@@ -204,31 +185,28 @@ export default function Address_R({ route }) {
                     end: [0, 0]
                 }
             }}>
-
                 <Box safeArea p="2" py="8" width="100%" maxWidth="350px">
-
-
                     <Heading size="xl" color="Black" _dark={{
                         color: "primary.50",
                         fontWeight: 'bold'
                     }} mt={windowHeight * 0.05}>
                         Dirección
                     </Heading>
+
                     <Heading mt="3" color="primary.50" fontWeight='medium' size='xs'>
                         Completa los siguientes campos.
                     </Heading>
 
-
                     <VStack space={windowHeight * 0.05} mt={windowHeight * 0.05}>
-
                         <FormControl isRequired isInvalid={'Street' in errorStreet}>
-
                             <FormControl.Label _text={{
                                 color: 'primary.50',
                                 fontWeight: 'bold',
                                 fontSize: 'lg'
 
-                            }}>Calle</FormControl.Label>
+                            }}>
+                                Calle
+                            </FormControl.Label>
 
                             <Input
                                 width="100%"
@@ -243,26 +221,25 @@ export default function Address_R({ route }) {
                                 variant="rounded"
                             />
 
-                            {'Street' in errorStreet ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorStreet.Street}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                                Ingrese su calle
-                            </FormControl.HelperText>
-
+                            {'Street' in errorStreet
+                                ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>
+                                    {errorStreet.Street}
+                                </FormControl.ErrorMessage>
+                                : <FormControl.HelperText>
+                                    Ingrese su calle
+                                </FormControl.HelperText>
                             }
                         </FormControl>
 
-
-
-
-
                         <FormControl isRequired isInvalid={'building_number' in errorNumE}>
-
                             <FormControl.Label _text={{
                                 color: 'primary.50',
                                 fontWeight: 'bold',
                                 fontSize: 'lg'
 
-                            }}>Numero Exterior</FormControl.Label>
-
+                            }}>
+                                Numero Exterior
+                            </FormControl.Label>
 
                             <Input
                                 width="100%"
@@ -277,25 +254,25 @@ export default function Address_R({ route }) {
                                 variant="rounded"
                             />
 
-                            {'building_number' in errorNumE && errorNumE.building_number ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorNumE.building_number}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                                Ingrese su número exterior
-                            </FormControl.HelperText>
+                            {'building_number' in errorNumE && errorNumE.building_number
+                                ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>
+                                    {errorNumE.building_number}
+                                </FormControl.ErrorMessage>
+                                : <FormControl.HelperText>
+                                    Ingrese su número exterior
+                                </FormControl.HelperText>
                             }
                         </FormControl>
 
-
-
-
-
-
                         <FormControl isInvalid={'NumI' in errorNumI}>
-
                             <FormControl.Label _text={{
                                 color: 'primary.50',
                                 fontWeight: 'bold',
                                 fontSize: 'lg'
 
-                            }}>Numero Interior</FormControl.Label>
+                            }}>
+                                Numero Interior
+                            </FormControl.Label>
 
                             <Input
                                 width="100%"
@@ -319,21 +296,20 @@ export default function Address_R({ route }) {
                             />
 
                             {'NumI' in errorNumI ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorNumI.NumI}</FormControl.ErrorMessage> : null}
+
                             <FormControl.HelperText>
                                 Ingrese su número interior OPCIONAL
                             </FormControl.HelperText>
-
                         </FormControl>
 
-
-
                         <FormControl isRequired isInvalid={'zip_code' in errorCP}>
-
                             <FormControl.Label _text={{
                                 color: 'primary.50',
                                 fontWeight: 'bold',
                                 fontSize: 'lg'
-                            }}>Codigo Postal</FormControl.Label>
+                            }}>
+                                Código Postal
+                            </FormControl.Label>
 
                             <Input
                                 width="100%"
@@ -348,22 +324,26 @@ export default function Address_R({ route }) {
                                 variant="rounded"
                                 onBlur={get_zip_code}
                             />
-                            {'CP' in errorCP ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorCP.CP}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                                Ingrese el Código postal
-                            </FormControl.HelperText>
+
+                            {'CP' in errorCP
+                                ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>
+                                    {errorCP.CP}
+                                </FormControl.ErrorMessage>
+                                : <FormControl.HelperText>
+                                    Ingrese el Código postal
+                                </FormControl.HelperText>
                             }
                         </FormControl>
 
-
-
                         <FormControl isRequired isInvalid={'neighborhood' in errorcologne}>
-
                             <FormControl.Label _text={{
                                 color: 'primary.50',
                                 fontWeight: 'bold',
                                 fontSize: 'lg'
 
-                            }}>Colonia</FormControl.Label>
+                            }}>
+                                Colonia
+                            </FormControl.Label>
 
                             <Select
                                 width="100%"
@@ -385,9 +365,14 @@ export default function Address_R({ route }) {
                                     )
                                 }
                             </Select>
-                            {'neighborhood' in errorcologne ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorcologne.neighborhood}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                                Ingrese su colonia
-                            </FormControl.HelperText>
+
+                            {'neighborhood' in errorcologne
+                                ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>
+                                    {errorcologne.neighborhood}
+                                </FormControl.ErrorMessage>
+                                : <FormControl.HelperText>
+                                    Ingrese su colonia
+                                </FormControl.HelperText>
                             }
                         </FormControl>
 
@@ -396,9 +381,12 @@ export default function Address_R({ route }) {
                                 color: 'primary.50',
                                 fontWeight: 'bold',
                                 fontSize: 'lg'
-                            }}>Ciudad
+                            }}>
+                                Ciudad
                             </FormControl.Label>
-                            <Input w={{}}
+
+                            <Input
+                                w={{}}
                                 InputLeftElement={<Icon as={<MaterialCommunityIcons name='city-variant-outline' />} size={5} ml="3" color='primary.200' />}
                                 onChangeText={value => setFormData({ ...formData, city: value })}
                                 value={formData.city} // Establece el valor de formData.city
@@ -408,22 +396,27 @@ export default function Address_R({ route }) {
                                 fontSize="sm"
                                 fontWeight="bold"
                                 backgroundColor="primary.100"
-                                variant="rounded" />
+                                variant="rounded"
+                            />
 
-                            {'Ciudad' in errorCity ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorCity.City}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                                Ingrese su ciudad
-                            </FormControl.HelperText>
+                            {'Ciudad' in errorCity
+                                ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>
+                                    {errorCity.City}
+                                </FormControl.ErrorMessage>
+                                : <FormControl.HelperText>
+                                    Ingrese su ciudad
+                                </FormControl.HelperText>
                             }
                         </FormControl>
-
-
 
                         <FormControl isRequired isInvalid={'municipality' in errormunicipality} >
                             <FormControl.Label _text={{
                                 color: 'primary.50',
                                 fontWeight: 'bold',
                                 fontSize: 'lg'
-                            }}>Municipio</FormControl.Label>
+                            }}>
+                                Municipio
+                            </FormControl.Label>
 
                             <Input
                                 width="100%"
@@ -439,21 +432,24 @@ export default function Address_R({ route }) {
                                 variant="rounded"
                             />
 
-                            {'Municipio' in errormunicipality ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errormunicipality.municipality}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                                Ingrese su municipio
-                            </FormControl.HelperText>
+                            {'Municipio' in errormunicipality
+                                ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>
+                                    {errormunicipality.municipality}
+                                </FormControl.ErrorMessage>
+                                : <FormControl.HelperText>
+                                    Ingrese su municipio
+                                </FormControl.HelperText>
                             }
-
                         </FormControl>
-
-
 
                         <FormControl isRequired isInvalid={'state' in errorstate} >
                             <FormControl.Label _text={{
                                 color: 'primary.50',
                                 fontWeight: 'bold',
                                 fontSize: 'lg'
-                            }}>Estado</FormControl.Label>
+                            }}>
+                                Estado
+                            </FormControl.Label>
 
                             <Input
                                 width="100%"
@@ -470,30 +466,41 @@ export default function Address_R({ route }) {
                             />
 
 
-                            {'Estado' in errorstate ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>{errorstate.state}</FormControl.ErrorMessage> : <FormControl.HelperText>
-                                Ingrese su estado
-                            </FormControl.HelperText>
+                            {'Estado' in errorstate
+                                ? <FormControl.ErrorMessage _text={{ color: 'primary.700' }}>
+                                    {errorstate.state}
+                                </FormControl.ErrorMessage>
+                                : <FormControl.HelperText>
+                                    Ingrese su estado
+                                </FormControl.HelperText>
                             }
-
                         </FormControl>
 
                         <Button
-                            background="primary.200" borderWidth="2" borderColor="primary.200" mt="3" rounded={10} _text={{
+                            background="primary.200"
+                            borderWidth="2"
+                            borderColor="primary.200"
+                            mt="3"
+                            rounded={10}
+                            _text={{
                                 color: "primary.50",
                                 fontWeight: "700",
                                 fontSize: "lg"
-                            }} onPress={submit}>
+                            }}
+                            onPress={submit}
+                        >
                             Finalizar
                         </Button>
-
 
                         <AlertDialog leastDestructiveRef={cancelRef} isOpen={isOpen} onClose={onClose}>
                             <AlertDialog.Content>
                                 <AlertDialog.CloseButton />
                                 <AlertDialog.Header>Felicidades</AlertDialog.Header>
+
                                 <AlertDialog.Body>
                                     Tus datos se registraron correctamente, da clic en el botón para iniciar sesión.
                                 </AlertDialog.Body>
+
                                 <AlertDialog.Footer>
                                     <Button.Group space={2}>
                                         <Button colorScheme="danger" onPress={handleCloseOpen}>
@@ -503,7 +510,6 @@ export default function Address_R({ route }) {
                                 </AlertDialog.Footer>
                             </AlertDialog.Content>
                         </AlertDialog>
-
                     </VStack>
 
                     <HStack space={3} marginTop='8' alignSelf="center">
@@ -516,4 +522,3 @@ export default function Address_R({ route }) {
         </ScrollView>
     );
 }
-

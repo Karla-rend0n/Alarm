@@ -1,19 +1,13 @@
-import React, { useEffect } from 'react'
-import { Box, Center, Heading, ScrollView, VStack, FormControl, Input, Icon, HStack, Button, Circle } from 'native-base'
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
-
+import { Box, Button, Center, FormControl, Heading, Icon, Input, ScrollView, VStack } from 'native-base';
+import React, { useEffect } from 'react';
 import { Dimensions } from "react-native";
-
-// import { useUser } from '../../store/user';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-
-
 function componenteEdit_Contact(kinship, name, last_name, phone, user, id) {
-  console.log(kinship)
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
@@ -36,18 +30,12 @@ function componenteEdit_Contact(kinship, name, last_name, phone, user, id) {
     .then(response => console.log(response.status))
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
-
 }
 
-
-
-
 export default function Edit_Contacts(useNavigationParam) {
-
   // const { user } = useUser((state) => state);
   console.log("gg", useNavigationParam.route.params);
   var datos = useNavigationParam.route.params;
-
 
   const navigation = useNavigation();
 
@@ -56,13 +44,9 @@ export default function Edit_Contacts(useNavigationParam) {
   const [errorkinship, setErrorkinship] = React.useState({});
   const [errorLastname, setErrorLastname] = React.useState({});
   const [errorPhone, setErrorPhone] = React.useState({});
+
   var namVal = /^[A-Za-z]+$/i;
   var number = /^\+?(52\s?)?1?\d{3}\s?\d{3}\s?\d{4}$/
-
-
-  // useEffect(() => {
-  //   console.log(user[0].profile_contact)
-  // }, [user])
 
   useEffect(() => {
     const item = {
@@ -71,19 +55,19 @@ export default function Edit_Contacts(useNavigationParam) {
       last_name: datos.informacion.contact.last_name,
       phone: datos.informacion.contact.phone,
       id: datos.informacion.contact.id,
-
     };
 
     setFormData((prevFormData) => ({ ...prevFormData, ...item }));
   }, [datos]);
 
-
   const validate = () => {
     let isValid = true;
+
     setErrorkinship({});
     setErrors({});
     setErrorPhone({});
     setErrorLastname({});
+
     if (formData.kinship === undefined) {
       setErrorkinship({ ...errorkinship, kinship: "El parentesco es necesario" });
       isValid = false;
@@ -93,7 +77,6 @@ export default function Edit_Contacts(useNavigationParam) {
           ...errorkinship,
           kinship: "El parentesco es muy corto",
         });
-        console.log("valida");
       } else {
         if (!namVal.test(formData.kinship)) {
           setErrorkinship({
@@ -113,8 +96,8 @@ export default function Edit_Contacts(useNavigationParam) {
           ...errors,
           name: "El nombre es muy corto",
         });
+
         isValid = false;
-        console.log("valida");
       } else {
         if (!namVal.test(formData.name)) {
           setErrors({
@@ -134,7 +117,6 @@ export default function Edit_Contacts(useNavigationParam) {
           ...errorLastname,
           last_name: "El apellido es muy corto",
         });
-        console.log("valida");
       } else {
         if (!namVal.test(formData.last_name)) {
           setErrorLastname({
@@ -169,7 +151,6 @@ export default function Edit_Contacts(useNavigationParam) {
   };
 
   return (
-
     <ScrollView flex={1} contentContainerStyle={{ flexGrow: 1 }}>
       <Center flex={1} bg={{
         linearGradient: {
@@ -179,7 +160,6 @@ export default function Edit_Contacts(useNavigationParam) {
         }
       }}>
         <Box safeArea p="2" py="8" width="100%" maxWidth="350px">
-
           <Heading size="xl" color="Black" _dark={{
             color: "primary.50",
             fontWeight: 'bold'
@@ -188,7 +168,6 @@ export default function Edit_Contacts(useNavigationParam) {
           </Heading>
 
           <VStack space={windowHeight * 0.05} mt={windowHeight * 0.05}>
-
             <FormControl isRequired isInvalid={"kinship" in errorkinship}>
               <FormControl.Label
                 _text={{
@@ -212,7 +191,6 @@ export default function Edit_Contacts(useNavigationParam) {
                 backgroundColor="primary.100"
                 variant="rounded"
                 value={formData.kinship}
-
               />
 
               {"kinship" in errorkinship ? (
@@ -220,10 +198,9 @@ export default function Edit_Contacts(useNavigationParam) {
                   {errorkinship.kinship}
                 </FormControl.ErrorMessage>
               ) : (
-                <FormControl.HelperText>Ingrese que tipo de relacion tiene con la persona</FormControl.HelperText>
+                <FormControl.HelperText>Ingrese que tipo de relación tiene con la persona</FormControl.HelperText>
               )}
             </FormControl>
-
 
             <FormControl isRequired isInvalid={"name" in errors}>
               <FormControl.Label
@@ -250,7 +227,6 @@ export default function Edit_Contacts(useNavigationParam) {
                 value={formData.name}
               />
 
-
               {"name" in errors ? (
                 <FormControl.ErrorMessage _text={{ color: "primary.700" }}>
                   {errors.name}
@@ -259,8 +235,6 @@ export default function Edit_Contacts(useNavigationParam) {
                 <FormControl.HelperText>Ingrese su nombre</FormControl.HelperText>
               )}
             </FormControl>
-
-
 
             <FormControl isRequired isInvalid={"last_name" in errorLastname}>
               <FormControl.Label
@@ -287,8 +261,6 @@ export default function Edit_Contacts(useNavigationParam) {
                 value={formData.last_name}
               />
 
-
-
               {"last_name" in errorLastname ? (
                 <FormControl.ErrorMessage _text={{ color: "primary.700" }}>
                   {errorLastname.last_name}
@@ -297,9 +269,6 @@ export default function Edit_Contacts(useNavigationParam) {
                 <FormControl.HelperText>Solo ingrese sus apellidos</FormControl.HelperText>
               )}
             </FormControl>
-
-
-
 
             <FormControl isRequired isInvalid={"phone" in errorPhone}>
               <FormControl.Label
@@ -334,7 +303,6 @@ export default function Edit_Contacts(useNavigationParam) {
               )}
             </FormControl>
 
-
             <Button
               background="primary.200" borderWidth="2" borderColor="primary.200" mt="5" rounded={10} _text={{
                 color: "primary.50",
@@ -343,18 +311,8 @@ export default function Edit_Contacts(useNavigationParam) {
               }} onPress={submit}>
               Guardar
             </Button>
-
-
-
-            {/* <Button mt= '5' size='lg' bg='primary.200' borderWidth="2" borderColor="primary.200"
-                        onPress={() => {navigation.navigate("Contacts")}}>Guardar</Button> */}
-
-
           </VStack>
-
         </Box>
-
-
       </Center >
     </ScrollView >
   );

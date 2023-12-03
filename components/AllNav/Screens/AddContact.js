@@ -1,28 +1,22 @@
-import React from "react";
-import {
-  Box,
-  Center,
-  Heading,
-  ScrollView,
-  VStack,
-  FormControl,
-  Input,
-  Icon,
-  HStack,
-  Button,
-  Circle,
-} from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-
+import {
+  Box,
+  Button,
+  Center,
+  FormControl,
+  Heading,
+  Icon,
+  Input,
+  ScrollView,
+  VStack
+} from "native-base";
+import React from "react";
 import { Dimensions } from "react-native";
 import { useUser } from "../../store/user";
 
-
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-
-
 
 function componenteEdit_Contact(kinship, name, last_name, phone, user) {
   console.log(kinship)
@@ -48,11 +42,7 @@ function componenteEdit_Contact(kinship, name, last_name, phone, user) {
     .then(response => console.log(response.status))
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
-
 }
-
-
-
 
 export default function AddContact() {
   const navigation = useNavigation();
@@ -61,6 +51,7 @@ export default function AddContact() {
   const [errorkinship, setErrorkinship] = React.useState({});
   const [errorLastname, setErrorLastname] = React.useState({});
   const [errorPhone, setErrorPhone] = React.useState({});
+
   var namVal = /^[A-Za-z]+$/i;
   var number = /^\+?(52\s?)?1?\d{3}\s?\d{3}\s?\d{4}$/
 
@@ -74,6 +65,7 @@ export default function AddContact() {
     setErrors({});
     setErrorPhone({});
     setErrorLastname({});
+
     if (formData.kinship === undefined) {
       setErrorkinship({ ...errorkinship, kinship: "El parentesco es necesario" });
       isValid = false;
@@ -83,7 +75,6 @@ export default function AddContact() {
           ...errorkinship,
           kinship: "El parentesco es muy corto",
         });
-        console.log("valida");
       } else {
         if (!namVal.test(formData.kinship)) {
           setErrorkinship({
@@ -103,8 +94,8 @@ export default function AddContact() {
           ...errors,
           name: "El nombre es muy corto",
         });
+
         isValid = false;
-        console.log("valida");
       } else {
         if (!namVal.test(formData.name)) {
           setErrors({
@@ -124,7 +115,6 @@ export default function AddContact() {
           ...errorLastname,
           last_name: "El apellido es muy corto",
         });
-        console.log("valida");
       } else {
         if (!namVal.test(formData.last_name)) {
           setErrorLastname({
@@ -156,11 +146,7 @@ export default function AddContact() {
     } else {
       console.log('Datos no válidos', formData);
     }
-
-
   };
-
-
 
   return (
     <ScrollView flex={1} contentContainerStyle={{ flexGrow: 1 }}>
@@ -172,14 +158,17 @@ export default function AddContact() {
         }
       }}>
         <Box safeArea p="2" py="8" width="100%" maxWidth="350px">
-
-          <Heading size="xl" color="Black" _dark={{
-            color: "primary.50",
-            fontWeight: 'bold'
-          }} mt={windowHeight * 0.05}>
+          <Heading
+            size="xl"
+            color="Black"
+            _dark={{
+              color: "primary.50",
+              fontWeight: 'bold'
+            }}
+            mt={windowHeight * 0.05}
+          >
             Completa los siguientes campos
           </Heading>
-
 
           <VStack space={windowHeight * 0.05} mt={windowHeight * 0.05}>
             <FormControl isRequired isInvalid={"kinship" in errorkinship}>
@@ -189,7 +178,8 @@ export default function AddContact() {
                   fontWeight: "bold",
                   fontSize: 'lg'
 
-                }}>
+                }}
+              >
                 Parentesco
               </FormControl.Label>
 
@@ -215,7 +205,6 @@ export default function AddContact() {
               )}
             </FormControl>
 
-
             <FormControl isRequired isInvalid={"name" in errors}>
               <FormControl.Label
                 _text={{
@@ -223,7 +212,8 @@ export default function AddContact() {
                   fontWeight: "bold",
                   fontSize: 'lg'
 
-                }}>
+                }}
+              >
                 Nombre
               </FormControl.Label>
 
@@ -240,7 +230,6 @@ export default function AddContact() {
                 variant="rounded"
               />
 
-
               {"name" in errors ? (
                 <FormControl.ErrorMessage _text={{ color: "primary.700" }}>
                   {errors.name}
@@ -250,8 +239,6 @@ export default function AddContact() {
               )}
             </FormControl>
 
-
-
             <FormControl isRequired isInvalid={"last_name" in errorLastname}>
               <FormControl.Label
                 _text={{
@@ -259,7 +246,8 @@ export default function AddContact() {
                   fontWeight: "bold",
                   fontSize: 'lg'
 
-                }}>
+                }}
+              >
                 Apellidos
               </FormControl.Label>
 
@@ -276,8 +264,6 @@ export default function AddContact() {
                 variant="rounded"
               />
 
-
-
               {"last_name" in errorLastname ? (
                 <FormControl.ErrorMessage _text={{ color: "primary.700" }}>
                   {errorLastname.last_name}
@@ -287,16 +273,14 @@ export default function AddContact() {
               )}
             </FormControl>
 
-
-
-
             <FormControl isRequired isInvalid={"phone" in errorPhone}>
               <FormControl.Label
                 _text={{
                   color: "primary.50",
                   fontWeight: "bold",
                   fontSize: 'lg'
-                }}>
+                }}
+              >
                 Teléfono
               </FormControl.Label>
 
@@ -322,19 +306,24 @@ export default function AddContact() {
               )}
             </FormControl>
 
-
             <Button
-              background="primary.200" borderWidth="2" borderColor="primary.200" mt="5" rounded={10} _text={{
+              background="primary.200"
+              borderWidth="2"
+              borderColor="primary.200"
+              mt="5"
+              rounded={10}
+              _text={{
                 color: "primary.50",
                 fontWeight: "700",
                 fontSize: "lg"
-              }} onPress={submit}>
+              }}
+              onPress={submit}
+            >
               Guardar
             </Button>
           </VStack>
         </Box>
       </Center >
     </ScrollView >
-
   );
 }

@@ -1,28 +1,28 @@
-import * as React from "react";
-import {
-  Box,
-  Center,
-  Heading,
-  ScrollView,
-  VStack,
-  FormControl,
-  Input,
-  Icon,
-  HStack,
-  Button,
-  Circle,
-} from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import {
+  Box,
+  Button,
+  Center,
+  Circle,
+  FormControl,
+  HStack,
+  Heading,
+  Icon,
+  Input,
+  ScrollView,
+  VStack,
+} from "native-base";
+import * as React from "react";
 import { Dimensions } from "react-native";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-
 export default function Contact_Registration({ route }) {
-  const [formDataRegister, setFormDataRegister] = React.useState({})
   const navigation = useNavigation();
+
+  const [formDataRegister, setFormDataRegister] = React.useState({})
   const [arrayContact, setArrayContact] = React.useState([]);
   const [formData, setFormData] = React.useState({});
   const [errors, setErrors] = React.useState({});
@@ -33,7 +33,6 @@ export default function Contact_Registration({ route }) {
 
   var namVal = /^[A-Za-z]+$/i;
   var number = /^\+?(52\s?)?1?\d{3}\s?\d{3}\s?\d{4}$/
-
 
   const validate = () => {
     let isValid = true;
@@ -51,7 +50,6 @@ export default function Contact_Registration({ route }) {
           ...errorkinship,
           kinship: "El parentesco es muy corto",
         });
-        console.log("valida");
       } else {
         if (!namVal.test(formData.kinship)) {
           setErrorkinship({
@@ -71,8 +69,8 @@ export default function Contact_Registration({ route }) {
           ...errors,
           name: "El nombre es muy corto",
         });
+
         isValid = false;
-        console.log("valida");
       } else {
         if (!namVal.test(formData.name)) {
           setErrors({
@@ -92,7 +90,6 @@ export default function Contact_Registration({ route }) {
           ...errorLastname,
           last_name: "El apellido es muy corto",
         });
-        console.log("valida");
       } else {
         if (!namVal.test(formData.last_name)) {
           setErrorLastname({
@@ -119,7 +116,6 @@ export default function Contact_Registration({ route }) {
     validate() ? navigation.navigate("ViewContact", { data_contact: formData, data_register: data_register }) : console.log("bad", formData);
   };
 
-
   return (
     <ScrollView flex={1} contentContainerStyle={{ flexGrow: 1 }}>
       <Center flex={1} bg={{
@@ -129,19 +125,17 @@ export default function Contact_Registration({ route }) {
           end: [0, 0]
         }
       }}>
-
         <Box safeArea p="2" py="8" width="100%" maxWidth="350px">
-
           <Heading size="xl" color="Black" _dark={{
             color: "primary.50",
             fontWeight: 'bold'
           }} mt={windowHeight * 0.05}>
             Añadir Contactos
           </Heading>
+
           <Heading mt="3" color="primary.50" fontWeight='medium' size='xs'>
             Completa los siguientes campos.
           </Heading>
-
 
           <VStack space={windowHeight * 0.05} mt={windowHeight * 0.05}>
             <FormControl isRequired isInvalid={"kinship" in errorkinship}>
@@ -177,7 +171,6 @@ export default function Contact_Registration({ route }) {
               )}
             </FormControl>
 
-
             <FormControl isRequired isInvalid={"name" in errors}>
               <FormControl.Label
                 _text={{
@@ -202,7 +195,6 @@ export default function Contact_Registration({ route }) {
                 variant="rounded"
               />
 
-
               {"name" in errors ? (
                 <FormControl.ErrorMessage _text={{ color: "primary.700" }}>
                   {errors.name}
@@ -211,8 +203,6 @@ export default function Contact_Registration({ route }) {
                 <FormControl.HelperText>Ingrese su nombre</FormControl.HelperText>
               )}
             </FormControl>
-
-
 
             <FormControl isRequired isInvalid={"last_name" in errorLastname}>
               <FormControl.Label
@@ -238,8 +228,6 @@ export default function Contact_Registration({ route }) {
                 variant="rounded"
               />
 
-
-
               {"last_name" in errorLastname ? (
                 <FormControl.ErrorMessage _text={{ color: "primary.700" }}>
                   {errorLastname.last_name}
@@ -248,9 +236,6 @@ export default function Contact_Registration({ route }) {
                 <FormControl.HelperText>Solo ingrese sus apellidos</FormControl.HelperText>
               )}
             </FormControl>
-
-
-
 
             <FormControl isRequired isInvalid={"phone" in errorPhone}>
               <FormControl.Label
@@ -284,10 +269,7 @@ export default function Contact_Registration({ route }) {
               )}
             </FormControl>
 
-
-
             <HStack justifyContent="space-between" marginLeft="4" mt="3">
-
               <Button
                 marginTop={15}
                 backgroundColor="primary.200"
@@ -315,12 +297,8 @@ export default function Contact_Registration({ route }) {
                 Agregar
               </Button>
             </HStack>
-
-            {/* <HStack space={10} marginLeft='45'>
-                        <Button size='lg' bg='primary.200' borderWidth="2" borderColor="primary.200" onPress={() => {navigation.navigate("Address_R")}}>Omitir</Button>
-                        <Button size='lg' bg='primary.200' borderWidth="2" borderColor="primary.200" onPress={() => {navigation.navigate("ViewContact")}}>Guardar</Button>
-                    </HStack> */}
           </VStack>
+
           <HStack space={3} marginTop="8" alignSelf="center">
             <Circle size="10px" bg="primary.200"></Circle>
             <Circle size="10px" bg="primary.50"></Circle>
