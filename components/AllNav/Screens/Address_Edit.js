@@ -149,7 +149,7 @@ export default function Address_Edit() {
 
     // const submit = () => { validate() ? navigation.navigate("Address") : console.log('bad', formData) }
 
-    const submit = () => {
+    const submit = async () => {
         if (validate()) {
             console.log(formData)
             console.log(info)
@@ -176,16 +176,26 @@ export default function Address_Edit() {
                 body: raw,
             };
 
-            fetch(`https://api-alarm.cadsita.net/address/${info.id}/`, requestOptions)
-                .then(response => console.log(response.status))
-                .then(result => console.log(result))
-                .catch(error => console.log('error', error));
+            try {
+                const response = await fetch(`https://api-alarm.cadsita.net/address/${info.id}/`, requestOptions);
+                const result = await response.json();
+                console.log(result);
+            } catch (error) {
+                console.log(error);
+            }
 
-            fetch(`https://api-alarm.cadsita.net/profile/${user[0].id}/`, {
-                headers: {
-                    method: 'GET',
-                }
-            }).then((res) => res.json()).then((result) => edit_address([result]))
+            try {
+                const res = await fetch(`https://api-alarm.cadsita.net/profile/${user[0].id}/`, {
+                    headers: {
+                        method: 'GET',
+                    }
+                })
+
+                const newUserAddress = await res.json()
+                edit_address([newUserAddress])
+            } catch (error) {
+                console.log(error);
+            }
 
             // navigation.navigate("Address", { refresh: true })
             navigation.navigate("Profile", { refresh: true })

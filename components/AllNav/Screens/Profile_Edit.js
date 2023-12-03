@@ -135,9 +135,9 @@ export default function Profile_Edit() {
     };
 
     // const submit = () => { validate() ? navigation.navigate("ViewProfile") : console.log('bad', formData) }
-    const submit = () => {
+    const submit = async () => {
         if (validate()) {
-            console.log(formData)
+            // console.log(formData)
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
 
@@ -156,17 +156,29 @@ export default function Profile_Edit() {
                 body: raw,
             };
 
-            fetch(`https://api-alarm.cadsita.net/profile/${info.id}/`, requestOptions)
-                .then(response => console.log(response.status))
-                .then(result => console.log(result))
-                .catch(error => console.log('error', error));
+            try {
+                const response = await fetch(`https://api-alarm.cadsita.net/profile/${info.id}/`, requestOptions)
+                console.log(response.status)
+                const result = await response.json()
+                console.log(result)
+            } catch (error) {
+                console.log(error)
+            }
 
-            fetch(`https://api-alarm.cadsita.net/profile/${info.id}/`, {
-                headers: {
-                    method: 'GET',
+            try {
+                const res = await fetch(`https://api-alarm.cadsita.net/profile/${info.id}/`, {
+                    headers: {
+                        method: 'GET',
+                    }
+                })
 
-                }
-            }).then((res) => res.json()).then((result) => edit_info([result]))
+                const newUserInfo = await res.json()
+
+                console.log(newUserInfo)
+                edit_info([newUserInfo])
+            } catch (error) {
+                console.log(error)
+            }
 
             // navigation.navigate("ViewProfile")
             navigation.navigate("Profile")
