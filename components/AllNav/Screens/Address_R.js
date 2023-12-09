@@ -3,12 +3,15 @@ import { useNavigation } from "@react-navigation/native";
 import { AlertDialog, Box, Button, Center, Circle, FormControl, HStack, Heading, Icon, Input, ScrollView, Select, VStack } from 'native-base';
 import * as React from 'react';
 import { Dimensions } from "react-native";
+import { useContacts } from '../../store/contacts';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 export default function Address_R({ route }) {
     const navigation = useNavigation();
+    const { contacts } = useContacts((state) => state)
+    const { data_contact, data_register } = route.params
 
     const [formData, setFormData] = React.useState({})
     const [errorCity, setErrorCity] = React.useState({})
@@ -20,7 +23,6 @@ export default function Address_R({ route }) {
     const [errorstate, setErrorstate] = React.useState({})
     const [errormunicipality, setErrormunicipality] = React.useState({})
     const [jsonZipCode, setJsonZipCode] = React.useState({})
-    const { data_contact, data_register } = route.params
     let row_zip_code
 
     const get_zip_code = async () => {
@@ -51,13 +53,14 @@ export default function Address_R({ route }) {
     const handlerSave = async () => {
         setIsOpen(!isOpen)
         console.log('data_contact', data_contact)
-        console.log('data_register', data_register)
-        console.log('formData', formData)
+        console.log('contacts', contacts)
+        // console.log('data_register', data_register)
+        // console.log('formData', formData)
 
         json_result = {
             ...data_register,
             "profile_address": [formData],
-            "profile_contact": [data_contact]
+            "profile_contact": [data_contact, ...contacts]
         }
 
         console.log('profile_address', formData)

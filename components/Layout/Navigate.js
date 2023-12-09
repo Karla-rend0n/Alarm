@@ -26,6 +26,7 @@ import Profile_Edit from "../AllNav/Screens/Profile_Edit";
 import ViewProfile from "../AllNav/Screens/ViewProfile";
 
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import RegisterContacts from "../AllNav/Screens/RegisterContacts";
 
 const Stack = createNativeStackNavigator()
 const Rstack = createNativeStackNavigator()
@@ -203,6 +204,16 @@ function R_Navegation() {
             <Rstack.Screen
                 name="ViewContact"
                 component={ViewContact}
+                options={{
+                    headerTransparent: true,
+                    title: "",
+                    headerTintColor: '#ffff', // Cambia 'color_de_flecha' al color que desees
+                }}
+            />
+
+            <Rstack.Screen
+                name="RegisterContacts"
+                component={RegisterContacts}
                 options={{
                     headerTransparent: true,
                     title: "",

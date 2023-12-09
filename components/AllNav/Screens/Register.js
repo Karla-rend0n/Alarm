@@ -1,9 +1,9 @@
-import React from 'react'
-import { Box, Center, Heading, VStack, FormControl, Input, Icon, ScrollView, Button, HStack, Text, Link, Circle } from 'native-base'
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
-import validator from 'validator';
+import { Box, Button, Center, Circle, FormControl, HStack, Heading, Icon, Input, Link, ScrollView, Text, VStack } from 'native-base';
+import React from 'react';
 import { Dimensions } from "react-native";
+import validator from 'validator';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -136,8 +136,14 @@ export default function Register() {
 
 
 
-    const submit = () => { validate() ? navigation.navigate("Contact_R", {data_register: formData}) : console.log('bad', formData) }
-
+    const submit = () => {
+        if (validate()) {
+            console.log(formData)
+            navigation.navigate("Contact_R", {data_register: formData})
+        } else {
+            console.log('bad', formData)
+        }
+    }
 
 
 
